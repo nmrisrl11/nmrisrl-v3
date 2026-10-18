@@ -1,5 +1,5 @@
 ---
-description: Audit and synchronize project docs (docs/ and AGENTS.md) with the current codebase, UI components, design tokens, avatar engine, and rules. Update documentation with newly established conventions. Skip accurate files.
+description: Audit and synchronize project docs (README.md, docs/, and AGENTS.md) with the current codebase, UI components, architecture, design tokens, avatar engine, and rules. Update documentation with newly established conventions. Skip accurate files.
 ---
 
 # Sync Project Documentation & Guidelines
@@ -43,11 +43,27 @@ Inspect the actual source code (`app/`, `components/`, `lib/`, `package.json`, `
 5. **New Agent Rules & Team Agreements**:
    - If user discussions or debugging revealed new constraints (e.g. specific animation timing, hydration handling, icon sizing), record them in [`AGENTS.md`](file:///C:/Users/NOMER%20ISRAEL/OneDrive/Desktop/Projects/nmrisrl-v3/AGENTS.md) and [`docs/08-agent-rules.md`](file:///C:/Users/NOMER%20ISRAEL/OneDrive/Desktop/Projects/nmrisrl-v3/docs/08-agent-rules.md).
 6. **Dependencies & Agent Skills**:
-   - If packages were installed or skills added via `skills add`, record them in [`docs/07-tech-stack-and-tooling.md`](file:///C:/Users/NOMER%20ISRAEL/OneDrive/Desktop/Projects/nmrisrl-v3/docs/07-tech-stack-and-tooling.md).
+   - If packages were installed or skills added via `skills add`, record them in [`docs/07-tech-stack-and-tooling.md`](file:///C:/Users/NOMER%20ISRAEL/OneDrive/Desktop/Projects/nmrisrl-v3/docs/07-tech-stack-and-tooling.md) and update the tech stack table in [`README.md`](file:///C:/Users/NOMER%20ISRAEL/OneDrive/Desktop/Projects/nmrisrl-v3/README.md).
+7. **Root README.md High-Level Overview**:
+   - If features, architecture, directory layout, or developer commands changed, update [`README.md`](file:///C:/Users/NOMER%20ISRAEL/OneDrive/Desktop/Projects/nmrisrl-v3/README.md) to keep the repository's public documentation accurate.
 
 ---
 
-## 3. Strict Rules of Synchronization
+## 3. Root README.md Synchronization Guidelines
+
+`README.md` is the primary public entry point and technical blueprint for the repository. Keep it synchronized whenever the codebase evolves:
+
+- **Tech Stack Table**: Keep package names, versions, and purpose descriptions up to date when `package.json` changes.
+- **Project Directory Tree**: Update the annotated file tree when new directories (e.g. `components/sections/`, `lib/hooks/`, `app/api/`) or key architectural files are added.
+- **Features & Portfolio Sections**: Document newly completed portfolio sections (Hero, About, Projects, Experience, Contact) as they are built.
+- **Avatar Engine Capabilities**: Update interaction states if new avatar animations, sound effects, gaze behaviors, or gesture modes are introduced.
+- **Available Scripts**: Keep the scripts table current if new npm scripts are added (e.g. testing, deployment, bundle analysis).
+- **Canonical Classes Table**: Synchronize with newly added tokens or canonical class pairs from `AGENTS.md`.
+- **Documentation Blueprints Links**: Verify links to `docs/*.md` remain accurate if new chapters or guides are added.
+
+---
+
+## 4. Strict Rules of Synchronization
 
 - ❌ **Do NOT modify application code**: This workflow is strictly for documentation auditing and synchronization.
 - ❌ **Do NOT rewrite accurate documentation**: If a document is already 100% accurate, leave it untouched.
@@ -57,7 +73,7 @@ Inspect the actual source code (`app/`, `components/`, `lib/`, `package.json`, `
 
 ---
 
-## 4. Skip When No Update Is Needed
+## 5. Skip When No Update Is Needed
 
 Do **not** modify every file simply because it was reviewed.
 
@@ -66,7 +82,7 @@ Do **not** modify every file simply because it was reviewed.
 
 ---
 
-## 5. Final Response Format
+## 6. Final Response Format
 
 Conclude the audit with this structured report:
 
