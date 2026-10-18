@@ -86,3 +86,18 @@ npm run build
 # Start production server
 npm run start
 ```
+
+---
+
+## 4. Agent Skills Ecosystem (`skills.sh`)
+
+This repository integrates agent skills managed via the `skills` CLI and versioned in `skills-lock.json` with skill definitions in `.agents/skills/`:
+
+| Skill Name                        | Source                     | Purpose & Scope                                                                                                  |
+| :-------------------------------- | :------------------------- | :--------------------------------------------------------------------------------------------------------------- |
+| **`migrate-radix-to-base`**       | `shadcn-ui/ui`             | Adapts and converts shadcn Radix-based primitives into `@base-ui/react` unstyled components without regressions. |
+| **`shadcn`**                      | `shadcn-ui/ui`             | Component structure, composition, registry patterns, and token styling.                                          |
+| **`vercel-react-best-practices`** | `vercel-labs/agent-skills` | React 19 & Next.js performance optimization, Server Actions, Client Boundaries, and bundle reduction.            |
+| **`web-design-guidelines`**       | `vercel-labs/agent-skills` | Web Interface Guidelines: visual balance, hierarchy, touch targets, and typography rhythm.                       |
+| **`frontend-a11y`**               | `affaan-m/ecc`             | WCAG 2.2 AA compliance, ARIA attributes, keyboard navigation, and focus management.                              |
+| **`frontend-design`**             | `anthropics/skills`        | Distinctive, non-generic creative design execution tailored for our Soft Neubrutalism design system.             |

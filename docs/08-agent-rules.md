@@ -87,3 +87,16 @@ Before concluding any coding turn:
 1. Run `npm run lint` (`oxlint`) to ensure zero static analysis errors.
 2. Run `npm run format` (`oxfmt`) to auto-format syntax and alphabetize Tailwind classes.
 3. Ensure no unused imports or loose console logs remain in production components.
+
+---
+
+## 4. Installed Agent Skills Reference
+
+Agents working on this repository should consult the skills located in `.agents/skills/`:
+
+- `.agents/skills/migrate-radix-to-base/SKILL.md`: Guidance on mapping Radix component primitives to `@base-ui/react`.
+- `.agents/skills/shadcn/SKILL.md`: shadcn patterns and registry best practices.
+- `.agents/skills/vercel-react-best-practices/SKILL.md`: Next.js & React 19 performance guidelines.
+- `.agents/skills/web-design-guidelines/SKILL.md`: Visual hierarchy, spacing, and micro-interaction principles.
+- `.agents/skills/frontend-a11y/SKILL.md`: Accessibility and WCAG compliance.
+- `.agents/skills/frontend-design/SKILL.md`: Distinctive, non-templated frontend visual design direction.
