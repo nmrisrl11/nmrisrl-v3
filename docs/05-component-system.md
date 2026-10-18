@@ -118,3 +118,13 @@ All core components live inside `components/ui/`:
 
 - **Powered by**: `@base-ui/react/tooltip`.
 - **Features**: Native CSS anchor positioning without JavaScript measurement jitter, squircle badge styling.
+
+---
+
+## 5. Layout & Architectural Grid System (`components/page-layout/`)
+
+The layout incorporates a structural grid line system with subtle hairline framing:
+
+- **`PageLayout` (`components/page-layout/page-layout.tsx`)**: Master shell wrapping pages in a continuous central column framed by vertical `border-x border-ink/15` rails that span full height.
+- **`Navbar` (`components/page-layout/navbar.tsx`)**: Sticky top navigation with brand identity on the left, right-aligned navigation links, and a responsive mobile menu.
+- **`GridSection` (`components/page-layout/grid-section.tsx`)**: Reusable section container with `border-b border-ink/15`, numbered section headers, and corner intersection crosshairs (`+`) rendered on the joints.
