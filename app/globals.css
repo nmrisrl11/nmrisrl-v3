@@ -52,6 +52,7 @@
 	--shadow-brutal-xl: 8px 8px 0px 0px #18181b;
 
 	/* Border Widths */
+	--border-width-subtle: 1.5px;
 	--border-width-brutal: 2.5px;
 	--border-width-thick: 3px;
 }

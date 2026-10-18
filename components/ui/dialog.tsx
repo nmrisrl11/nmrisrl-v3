@@ -34,7 +34,7 @@ const DialogContent = React.forwardRef<
 		<BaseDialog.Popup
 			ref={ref}
 			className={cn(
-				"fixed top-1/2 left-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-2xl border-[2.5px] border-ink bg-surface p-6 text-ink shadow-brutal-lg duration-200 corner-squircle focus:outline-none data-[ending-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:opacity-0 supports-[corner-shape:squircle]:rounded-[28px]",
+				"fixed top-1/2 left-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-2xl border-brutal border-ink bg-surface p-6 text-ink shadow-brutal-lg duration-200 corner-squircle focus:outline-none data-[ending-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:opacity-0 supports-[corner-shape:squircle]:rounded-[28px]",
 				className,
 			)}
 			{...props}
@@ -42,7 +42,7 @@ const DialogContent = React.forwardRef<
 			{children}
 			{showCloseButton && (
 				<BaseDialog.Close
-					className="absolute top-4 right-4 rounded-md border-[1.5px] border-ink bg-surface p-1.5 text-ink transition-transform corner-squircle hover:scale-105 focus-visible:ring-2 focus-visible:ring-ink focus-visible:outline-none active:scale-95 supports-[corner-shape:squircle]:rounded-full"
+					className="absolute top-4 right-4 rounded-md border-subtle border-ink bg-surface p-1.5 text-ink transition-transform corner-squircle hover:scale-105 focus-visible:ring-2 focus-visible:ring-ink focus-visible:outline-none active:scale-95 supports-[corner-shape:squircle]:rounded-full"
 					aria-label="Close"
 				>
 					<XIcon className="size-4" />

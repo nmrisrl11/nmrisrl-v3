@@ -50,9 +50,12 @@ flowchart LR
 
 ### Border Widths
 
-- **Card & Container Outlines**: `2.5px solid var(--color-ink)` (`border-[2.5px] border-ink`)
-- **Badges, Buttons, Chips**: `2px solid var(--color-ink)` (`border-2 border-ink`)
-- **Sticky Nav Divider & Section Dividers**: `3px solid var(--color-ink)` (`border-b-[3px] border-ink`)
+| Theme Token             | Canonical Utility                   | Value   | Primary Application                      |
+| ----------------------- | ----------------------------------- | ------- | ---------------------------------------- |
+| `--border-width-subtle` | `border-subtle` / `border-b-subtle` | `1.5px` | Badges, small chips, close buttons       |
+| `default / 2px`         | `border-2` / `border`               | `2px`   | Standard buttons, input outlines         |
+| `--border-width-brutal` | `border-brutal` / `border-b-brutal` | `2.5px` | Cards, showcase containers, modal frames |
+| `--border-width-thick`  | `border-thick` / `border-b-thick`   | `3px`   | Section dividers, sticky nav border      |
 
 ### Zero-Blur Hard Shadow Matrix
 

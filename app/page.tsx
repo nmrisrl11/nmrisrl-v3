@@ -9,7 +9,7 @@ export default function Home() {
 	return (
 		<main className="min-h-screen bg-canvas px-4 py-8 md:px-8 lg:px-16">
 			{/* Header Nav */}
-			<header className="mx-auto flex max-w-6xl items-center justify-between border-b-[2.5px] border-ink pb-6">
+			<header className="mx-auto flex max-w-6xl items-center justify-between border-b-brutal border-ink pb-6">
 				<div className="font-display text-2xl font-extrabold tracking-tight">
 					nmrisrl<span className="text-coral">.dev</span>
 				</div>

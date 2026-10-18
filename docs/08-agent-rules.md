@@ -16,6 +16,7 @@
 3. **Never alter the `--color-canvas` hex value**: The root background MUST remain Sage Mint (`#DEF2E0` / `#E2F2DF`) because all 11 pre-rendered WebM avatar videos in `public/avatar/` were rendered on this exact color. Changing the canvas will reveal visible rectangular video borders.
 4. **Never re-install ESLint or Prettier**: This repository is strictly managed by the Rust-based **OXC** toolchain (`oxlint` + `oxfmt`).
 5. **Never install `@radix-ui/react-*` directly**: This repository exclusively uses `@base-ui/react` headless primitives integrated with `components.json`.
+6. **Never write arbitrary bracket syntax `[...]` when a theme token exists**: The IDE triggers `tailwindcss(suggestCanonicalClasses)` warnings. E.g., never write `border-b-[2.5px]`, write `border-b-brutal`; never write `shadow-[4px_4px_...]`, write `shadow-brutal`.
 
 ### ✅ ALWAYS:
 
@@ -28,6 +29,32 @@
    - Body text & descriptions: `font-body` (`DM Sans`)
    - Tags, badges, code, numbers: `font-mono` (`JetBrains Mono`)
 5. **Always ensure WCAG 2.2 contrast**: Small text must have at least 4.5:1 contrast against its background. Text on pastel accents (`coral`, `yellow`, `mint`) must use either deep ink `#18181B` or white `#FFFFFF` depending on contrast validation.
+6. **Always use canonical classes from the substitution table below**:
+
+#### Canonical Classes Lookup Table
+
+| ❌ NEVER WRITE (Arbitrary)           | ✅ ALWAYS WRITE (Canonical) | CSS Target                    |
+| ------------------------------------ | --------------------------- | ----------------------------- |
+| `border-[2.5px]`                     | `border-brutal`             | `border-width: 2.5px;`        |
+| `border-b-[2.5px]`                   | `border-b-brutal`           | `border-bottom-width: 2.5px;` |
+| `border-t-[2.5px]`                   | `border-t-brutal`           | `border-top-width: 2.5px;`    |
+| `border-[1.5px]`                     | `border-subtle`             | `border-width: 1.5px;`        |
+| `border-b-[1.5px]`                   | `border-b-subtle`           | `border-bottom-width: 1.5px;` |
+| `border-[3px]`                       | `border-thick`              | `border-width: 3px;`          |
+| `border-b-[3px]`                     | `border-b-thick`            | `border-bottom-width: 3px;`   |
+| `shadow-[2px_2px_...]`               | `shadow-brutal-xs`          | `2px 2px 0px 0px #18181B;`    |
+| `shadow-[3px_3px_...]`               | `shadow-brutal-sm`          | `3px 3px 0px 0px #18181B;`    |
+| `shadow-[4px_4px_...]`               | `shadow-brutal`             | `4px 4px 0px 0px #18181B;`    |
+| `shadow-[6px_6px_...]`               | `shadow-brutal-lg`          | `6px 6px 0px 0px #18181B;`    |
+| `shadow-[8px_8px_...]`               | `shadow-brutal-xl`          | `8px 8px 0px 0px #18181B;`    |
+| `bg-[#DEF2E0]`                       | `bg-canvas`                 | Sage Mint Canvas              |
+| `text-[#18181B]`, `border-[#18181B]` | `text-ink`, `border-ink`    | Deep Ink                      |
+| `bg-[#FF6B57]`                       | `bg-coral`                  | Warm Coral                    |
+| `bg-[#FDE047]`                       | `bg-yellow`                 | Buttercup Yellow              |
+| `bg-[#EBE6FF]`                       | `bg-lavender`               | Soft Lavender                 |
+| `bg-[#BAE6FD]`                       | `bg-sky`                    | Sky Mist                      |
+| `bg-[#86EFAC]`                       | `bg-mint`                   | Fresh Mint                    |
+| `rounded-[9999px]`                   | `rounded-full`              | Full radius (squircle target) |
 
 ---
 
