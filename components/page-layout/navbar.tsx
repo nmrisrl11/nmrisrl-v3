@@ -2,9 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowUpRightIcon, MenuIcon, XIcon } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { MenuIcon, XIcon } from "lucide-react";
 import { NAV_ITEMS } from "./nav-items";
 
 export function Navbar() {
@@ -23,8 +21,8 @@ export function Navbar() {
 
 	return (
 		<header className="sticky top-0 z-50 w-full border-b-brutal border-ink bg-canvas/90 backdrop-blur-md">
-			<div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5 md:px-8">
-				{/* Brand Logo */}
+			<div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 md:px-8">
+				{/* Brand Logo (Left) */}
 				<Link
 					href="/"
 					className="group inline-flex items-center gap-1 font-display text-2xl font-extrabold tracking-tight text-ink transition-transform active:scale-95"
@@ -33,7 +31,7 @@ export function Navbar() {
 					<span className="text-coral transition-colors group-hover:text-ink">.dev</span>
 				</Link>
 
-				{/* Center Navigation Links (Desktop) */}
+				{/* Navigation Items (Right - Desktop) */}
 				<nav className="hidden items-center gap-1 md:flex">
 					{NAV_ITEMS.map((item) => (
 						<a
@@ -47,30 +45,16 @@ export function Navbar() {
 					))}
 				</nav>
 
-				{/* Right Actions */}
-				<div className="flex items-center gap-2.5">
-					<Badge variant="default" className="hidden gap-1.5 font-mono text-xs lg:inline-flex">
-						<span className="size-2 animate-pulse rounded-full bg-emerald-500" />
-						Available for work
-					</Badge>
-
-					<Button asChild variant="default" size="sm">
-						<a href="#contact" onClick={(e) => handleScrollTo(e, "#contact")}>
-							Get in touch <ArrowUpRightIcon className="size-4" />
-						</a>
-					</Button>
-
-					{/* Mobile Hamburger Button */}
-					<button
-						type="button"
-						onClick={() => setIsOpen(!isOpen)}
-						aria-label={isOpen ? "Close menu" : "Open menu"}
-						aria-expanded={isOpen}
-						className="inline-flex size-9 items-center justify-center rounded-lg border-subtle border-ink bg-white text-ink transition-transform active:scale-95 md:hidden"
-					>
-						{isOpen ? <XIcon className="size-4" /> : <MenuIcon className="size-4" />}
-					</button>
-				</div>
+				{/* Mobile Hamburger Toggle (Right - Mobile) */}
+				<button
+					type="button"
+					onClick={() => setIsOpen(!isOpen)}
+					aria-label={isOpen ? "Close menu" : "Open menu"}
+					aria-expanded={isOpen}
+					className="inline-flex size-9 items-center justify-center rounded-lg border-subtle border-ink bg-white text-ink transition-transform active:scale-95 md:hidden"
+				>
+					{isOpen ? <XIcon className="size-4" /> : <MenuIcon className="size-4" />}
+				</button>
 			</div>
 
 			{/* Mobile Dropdown Menu */}
@@ -79,7 +63,7 @@ export function Navbar() {
 					aria-label="Mobile navigation"
 					className="border-t-subtle border-ink/20 bg-canvas px-4 py-4 md:hidden"
 				>
-					<ul className="flex flex-col gap-2">
+					<ul className="flex flex-col gap-1.5">
 						{NAV_ITEMS.map((item) => (
 							<li key={item.href}>
 								<a
