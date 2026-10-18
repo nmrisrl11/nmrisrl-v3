@@ -1,1 +1,100 @@
 @import "tailwindcss";
+@plugin "@toolwind/corner-shape";
+
+@theme {
+	/* Font Families */
+	--font-display: var(--font-display), system-ui, sans-serif;
+	--font-heading: var(--font-heading), system-ui, sans-serif;
+	--font-body: var(--font-body), system-ui, sans-serif;
+	--font-mono: var(--font-mono), monospace;
+
+	/* Color Tokens - Soft Neubrutalism */
+	--color-canvas: #def2e0;
+	--color-canvas-subtle: #eaf6ec;
+	--color-surface: #ffffff;
+	--color-surface-muted: #f3f8f5;
+	--color-ink: #18181b;
+	--color-ink-muted: #52525b;
+
+	/* Pastel Accents */
+	--color-coral: #ff6b57;
+	--color-yellow: #fde047;
+	--color-lavender: #ebe6ff;
+	--color-sky: #bae6fd;
+	--color-mint: #86efac;
+
+	/* Zero-Blur Neubrutalist Hard Shadows */
+	--shadow-brutal-xs: 2px 2px 0px 0px #18181b;
+	--shadow-brutal-sm: 3px 3px 0px 0px #18181b;
+	--shadow-brutal: 4px 4px 0px 0px #18181b;
+	--shadow-brutal-lg: 6px 6px 0px 0px #18181b;
+	--shadow-brutal-xl: 8px 8px 0px 0px #18181b;
+
+	/* Border Widths */
+	--border-width-brutal: 2.5px;
+	--border-width-thick: 3px;
+}
+
+@utility squircle-btn {
+	border-radius: 0.5rem;
+	corner-shape: squircle;
+	border: 2px solid var(--color-ink);
+	box-shadow: 3px 3px 0px 0px var(--color-ink);
+	transition:
+		transform 0.1s cubic-bezier(0.2, 0, 0, 1),
+		box-shadow 0.1s cubic-bezier(0.2, 0, 0, 1);
+
+	&:hover {
+		transform: translate(-1px, -1px);
+		box-shadow: 4px 4px 0px 0px var(--color-ink);
+	}
+
+	&:active {
+		transform: translate(2px, 2px);
+		box-shadow: 1px 1px 0px 0px var(--color-ink);
+	}
+
+	@supports (corner-shape: squircle) {
+		border-radius: 9999px;
+	}
+}
+
+@utility squircle-card {
+	border-radius: 1.25rem;
+	corner-shape: squircle;
+	border: 2.5px solid var(--color-ink);
+	box-shadow: 4px 4px 0px 0px var(--color-ink);
+
+	@supports (corner-shape: squircle) {
+		border-radius: 1.75rem;
+	}
+}
+
+@utility squircle-badge {
+	border-radius: 0.375rem;
+	corner-shape: squircle;
+	border: 1.5px solid var(--color-ink);
+	box-shadow: 2px 2px 0px 0px var(--color-ink);
+
+	@supports (corner-shape: squircle) {
+		border-radius: 9999px;
+	}
+}
+
+@layer base {
+	body {
+		background-color: var(--color-canvas);
+		color: var(--color-ink);
+		font-family: var(--font-body);
+		min-height: 100vh;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-family: var(--font-heading);
+	}
+}
