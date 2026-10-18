@@ -1,6 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRightIcon, CodeXmlIcon, SparklesIcon } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 
 export default function Home() {
 	return (
@@ -11,16 +14,15 @@ export default function Home() {
 					nmrisrl<span className="text-coral">.dev</span>
 				</div>
 				<nav className="flex items-center gap-3">
-					<span className="squircle-badge inline-flex items-center gap-1.5 bg-surface px-3 py-1 font-mono text-xs font-semibold text-ink">
-						<span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+					<Badge variant="default" className="gap-1.5 font-mono text-xs">
+						<span className="size-2 animate-pulse rounded-full bg-emerald-500" />
 						Available for work
-					</span>
-					<a
-						href="#contact"
-						className="squircle-btn inline-flex items-center gap-1.5 bg-coral px-4 py-2 text-sm font-bold text-white"
-					>
-						Get in touch <ArrowUpRightIcon className="size-4" />
-					</a>
+					</Badge>
+					<Button asChild variant="default" size="sm">
+						<a href="#contact">
+							Get in touch <ArrowUpRightIcon className="size-4" />
+						</a>
+					</Button>
 				</nav>
 			</header>
 
@@ -29,13 +31,12 @@ export default function Home() {
 				{/* Copy Column */}
 				<div className="flex flex-col gap-6 lg:col-span-7">
 					<div className="flex flex-wrap gap-2">
-						<span className="squircle-badge inline-flex items-center gap-1 bg-yellow px-3 py-1 font-mono text-xs font-bold text-ink">
+						<Badge variant="yellow" className="gap-1">
 							<SparklesIcon className="size-3.5" />
 							Soft Neubrutalism v3
-						</span>
-						<span className="squircle-badge bg-lavender px-3 py-1 font-mono text-xs font-bold text-ink">
-							Base UI + Tailwind v4
-						</span>
+						</Badge>
+						<Badge variant="lavender">shadcn + Base UI</Badge>
+						<Badge variant="sky">Tailwind CSS v4</Badge>
 					</div>
 
 					<h1 className="font-display text-4xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
@@ -48,24 +49,22 @@ export default function Home() {
 					</p>
 
 					<div className="flex flex-wrap items-center gap-3 pt-2">
-						<a
-							href="#projects"
-							className="squircle-btn inline-flex items-center gap-2 bg-coral px-6 py-3.5 text-base font-bold text-white"
-						>
-							View Projects <ArrowUpRightIcon className="size-4" />
-						</a>
-						<Link
-							href="/docs"
-							className="squircle-btn inline-flex items-center gap-2 bg-surface px-6 py-3.5 text-base font-bold text-ink"
-						>
-							<CodeXmlIcon className="size-4" /> Architecture Docs
-						</Link>
+						<Button asChild variant="default" size="lg">
+							<a href="#projects">
+								View Projects <ArrowUpRightIcon className="size-4" />
+							</a>
+						</Button>
+						<Button asChild variant="secondary" size="lg">
+							<Link href="/docs">
+								<CodeXmlIcon className="size-4" /> Architecture Docs
+							</Link>
+						</Button>
 					</div>
 				</div>
 
 				{/* Avatar Visual Column */}
 				<div className="flex justify-center lg:col-span-5">
-					<div className="squircle-card relative aspect-square w-full max-w-sm overflow-hidden bg-canvas">
+					<Card className="relative aspect-square w-full max-w-sm overflow-hidden bg-canvas p-0">
 						<video
 							autoPlay
 							loop
@@ -84,7 +83,7 @@ export default function Home() {
 								className="size-full object-cover"
 							/>
 						</video>
-					</div>
+					</Card>
 				</div>
 			</section>
 		</main>

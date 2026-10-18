@@ -1,121 +1,120 @@
-# 05 — Component System & Base UI Integration
+# 05 — Component System & shadcn + Base UI Architecture
 
-## 1. Why Base UI (`@base-ui/react`)?
+## 1. The shadcn + Base UI Hybrid Architecture
 
-In `nmrisrl-v3`, we replace traditional Radix UI primitives with **Base UI** ([`@base-ui/react`](https://base-ui.com)), developed by the MUI team.
+In `nmrisrl-v3`, we combine **shadcn/ui's component distribution model** with **Base UI's headless primitives** ([`@base-ui/react`](https://base-ui.com)) and our **Soft Neubrutalism design tokens**.
 
-### Advantages for Neubrutalism:
+```mermaid
+flowchart TD
+    subgraph Tooling Layer
+        S["shadcn CLI (components.json)<br/>- Code scaffold generator<br/>- Zero runtime bundle overhead"]
+    end
 
-1. **Zero Redundant Wrappers**: Base UI does not inject arbitrary layout `div` elements, eliminating margin collapse and shadow clipping issues.
-2. **First-Class CSS Anchor Positioning**: Modern popovers, tooltips, and menus use native anchor positioning for high-performance positioning without jitter.
-3. **Purely Unstyled**: Allows applying thick 2.5px borders, custom squircle shapes, and brutalist spring transitions without having to override stubborn library defaults.
+    subgraph Primitive Layer
+        B["@base-ui/react Primitives<br/>- Unstyled headless state<br/>- Accessible keyboard & focus trapping<br/>- Native CSS Anchor Positioning"]
+    end
+
+    subgraph Design System Layer
+        T["Soft Neubrutalism Tokens<br/>- Sage Mint canvas (#DEF2E0)<br/>- Deep Ink borders (#18181B)<br/>- Squircles via @toolwind/corner-shape<br/>- Zero-blur hard shadows"]
+    end
+
+    subgraph Output
+        C["components/ui/*<br/>(Button, Badge, Card, Dialog, Tooltip)"]
+    end
+
+    S --> C
+    B --> C
+    T --> C
+```
 
 ---
 
-## 2. Interactive Micro-Interactions (The Neubrutalist Click)
+## 2. Why There Are Zero Bottlenecks or Conflicts
 
-Neubrutalism mimics physical tactile switches. Buttons have physical depth (`3px 3px 0 0 #18181B`). When pressed:
-
-- The button physically moves down and to the right: `transform: translate(2px, 2px)`
-- The shadow collapses: `box-shadow: 1px 1px 0 0 #18181B`
+1. **No Monolithic Runtime**: `shadcn` is not a library dependency inside `package.json`. It is purely a CLI code generator that places editable TypeScript source files directly into `components/ui/`.
+2. **Headless Base UI**: Unlike UI kits that ship heavy pre-baked CSS styles, `@base-ui/react` has zero default styles and renders zero redundant wrapper divs.
+3. **Token Aliasing**: In `app/globals.css`, shadcn's expected semantic variables are linked directly to your neubrutalist tokens:
 
 ```css
-/* Standard Button Interaction */
-.btn-neubrutal {
-	border: 2px solid var(--color-ink);
-	box-shadow: 3px 3px 0px 0px var(--color-ink);
-	transition:
-		transform 0.1s cubic-bezier(0.2, 0, 0, 1),
-		box-shadow 0.1s cubic-bezier(0.2, 0, 0, 1);
+@theme {
+	/* Semantic shadcn / Base UI Aliases */
+	--color-background: var(--color-canvas); /* #DEF2E0 */
+	--color-foreground: var(--color-ink); /* #18181B */
+	--color-card: var(--color-surface); /* #FFFFFF */
+	--color-card-foreground: var(--color-ink); /* #18181B */
+	--color-primary: var(--color-coral); /* #FF6B57 */
+	--color-primary-foreground: #ffffff;
+	--color-secondary: var(--color-canvas-subtle); /* #EAF6EC */
+	--color-secondary-foreground: var(--color-ink);
+	--color-border: var(--color-ink); /* #18181B */
+	--color-ring: var(--color-ink);
 }
+```
 
-.btn-neubrutal:hover {
-	transform: translate(-1px, -1px);
-	box-shadow: 4px 4px 0px 0px var(--color-ink);
-}
+_When an agent or developer adds a component using shadcn's conventional classes (`bg-primary`, `border-border`, `bg-background`), it automatically inherits your exact palette without manual re-theming._
 
-.btn-neubrutal:active {
-	transform: translate(2px, 2px);
-	box-shadow: 1px 1px 0px 0px var(--color-ink);
+---
+
+## 3. Configuration: `components.json`
+
+Located in the repository root:
+
+```json
+{
+	"$schema": "https://ui.shadcn.com/schema.json",
+	"style": "new-york",
+	"rsc": true,
+	"tsx": true,
+	"tailwind": {
+		"config": "",
+		"css": "app/globals.css",
+		"baseColor": "neutral",
+		"cssVariables": true,
+		"prefix": ""
+	},
+	"iconLibrary": "lucide",
+	"rtl": false,
+	"aliases": {
+		"components": "@/components",
+		"utils": "@/lib/utils",
+		"ui": "@/components/ui",
+		"lib": "@/lib",
+		"hooks": "@/hooks"
+	}
 }
 ```
 
 ---
 
-## 3. Base UI Primitive Examples
+## 4. Core Component Manifest
 
-### A. Accessible Dialog / Modal
+All core components live inside `components/ui/`:
 
-```tsx
-import { Dialog as BaseDialog } from "@base-ui/react/dialog";
-import { cn } from "@/lib/utils";
+### A. Button (`components/ui/button.tsx`)
 
-interface DialogProps {
-	open: boolean;
-	onOpenChange: (open: boolean) => void;
-	title: string;
-	description?: string;
-	children: React.ReactNode;
-}
+- **Behavior**: Interactive tactile click physics (`hover:-translate-x-0.5 hover:-translate-y-0.5`, `active:translate-x-0.5 active:translate-y-0.5` with shadow collapse).
+- **Shape**: Squircle fallback (`rounded-lg corner-squircle supports-[corner-shape:squircle]:rounded-full`).
+- **Variants**: `default` (Coral), `secondary` (Surface White), `yellow`, `lavender`, `sky`, `outline`, `ghost`.
+- **Polymorphism**: Supports `asChild` for seamless `<Link>` or `<a>` nesting without invalid nested button HTML.
 
-export function NeubrutalDialog({ open, onOpenChange, title, description, children }: DialogProps) {
-	return (
-		<BaseDialog.Root open={open} onOpenChange={onOpenChange}>
-			<BaseDialog.Portal>
-				<BaseDialog.Backdrop className="fixed inset-0 z-50 bg-ink/40 backdrop-blur-xs transition-opacity" />
-				<BaseDialog.Popup className="fixed top-1/2 left-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-2xl corner-squircle supports-[corner-shape:squircle]:rounded-[28px] border-[2.5px] border-ink bg-surface p-6 shadow-brutal-lg">
-					<BaseDialog.Title className="font-heading text-2xl font-bold text-ink">
-						{title}
-					</BaseDialog.Title>
-					{description && (
-						<BaseDialog.Description className="mt-1 font-body text-sm text-ink-muted">
-							{description}
-						</BaseDialog.Description>
-					)}
-					<div className="mt-4">{children}</div>
-					<BaseDialog.Close className="squircle-btn mt-6 inline-flex px-4 py-2 font-body text-sm font-bold text-white bg-coral">
-						Close
-					</BaseDialog.Close>
-				</BaseDialog.Popup>
-			</BaseDialog.Portal>
-		</BaseDialog.Root>
-	);
-}
-```
+### B. Badge (`components/ui/badge.tsx`)
 
-### B. Tooltip with Anchor Positioning
+- **Behavior**: Compact pill chip with `border-[1.5px] border-ink` and `shadow-[2px_2px_0px_var(--color-ink)]`.
+- **Variants**: `default`, `coral`, `yellow`, `lavender`, `sky`, `mint`, `outline`.
 
-```tsx
-import { Tooltip as BaseTooltip } from "@base-ui/react/tooltip";
+### C. Card (`components/ui/card.tsx`)
 
-export function NeubrutalTooltip({
-	content,
-	children,
-}: {
-	content: string;
-	children: React.ReactNode;
-}) {
-	return (
-		<BaseTooltip.Root>
-			<BaseTooltip.Trigger>{children}</BaseTooltip.Trigger>
-			<BaseTooltip.Portal>
-				<BaseTooltip.Positioner sideOffset={6}>
-					<BaseTooltip.Popup className="rounded-md corner-squircle supports-[corner-shape:squircle]:rounded-full border-[1.5px] border-ink bg-surface px-2.5 py-1 font-mono text-xs font-semibold text-ink shadow-brutal-xs">
-						{content}
-					</BaseTooltip.Popup>
-				</BaseTooltip.Positioner>
-			</BaseTooltip.Portal>
-		</BaseTooltip.Root>
-	);
-}
-```
+- **Behavior**: Structured floating container with `border-[2.5px] border-ink` and `shadow-brutal`.
+- **Shape**: Continuous squircle curvature (`rounded-2xl corner-squircle supports-[corner-shape:squircle]:rounded-[28px]`).
+- **Subcomponents**: `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, `CardFooter`.
 
----
+### D. Dialog / Modal (`components/ui/dialog.tsx`)
 
-## 4. Accessibility & Focus Rings
+- **Powered by**: `@base-ui/react/dialog`.
+- **Anatomy**: `Dialog`, `DialogTrigger`, `DialogContent`, `DialogHeader`, `DialogTitle`, `DialogDescription`, `DialogClose`.
+- **Features**: Accessible focus lock, Escape key dismissal, backdrop dimming (`bg-ink/40 backdrop-blur-xs`), and `shadow-brutal-lg`.
 
-Always preserve accessibility standards (WCAG 2.2 AA):
+### E. Tooltip (`components/ui/tooltip.tsx`)
 
-- All interactive elements must show a distinct high-contrast focus outline when navigated via keyboard.
-- Focus ring formula: `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-canvas`.
-- Click targets must maintain at least `44px x 44px` minimum hit area even when styled as compact pills.
+- **Powered by**: `@base-ui/react/tooltip`.
+- **Features**: Native CSS anchor positioning without JavaScript measurement jitter, squircle badge styling.

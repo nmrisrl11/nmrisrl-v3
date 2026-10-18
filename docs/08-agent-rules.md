@@ -15,17 +15,19 @@
    `rounded-[fallback] corner-squircle supports-[corner-shape:squircle]:rounded-[target]` or use `@utility squircle-*`.
 3. **Never alter the `--color-canvas` hex value**: The root background MUST remain Sage Mint (`#DEF2E0` / `#E2F2DF`) because all 11 pre-rendered WebM avatar videos in `public/avatar/` were rendered on this exact color. Changing the canvas will reveal visible rectangular video borders.
 4. **Never re-install ESLint or Prettier**: This repository is strictly managed by the Rust-based **OXC** toolchain (`oxlint` + `oxfmt`).
+5. **Never install `@radix-ui/react-*` directly**: This repository exclusively uses `@base-ui/react` headless primitives integrated with `components.json`.
 
 ### ✅ ALWAYS:
 
 1. **Always use Base UI (`@base-ui/react`)**: When building dialogs, tooltips, popovers, tabs, or accordions, use `@base-ui/react` primitives.
-2. **Always include interactive click feedback**: Buttons and interactive controls must translate on active press (`active:translate(2px, 2px)`) with shadow reduction.
-3. **Always use font variables correctly**:
+2. **Always follow `components.json` layout**: Atomic primitives belong in `@/components/ui/*` and use `cn()` class merging.
+3. **Always include interactive click feedback**: Buttons and interactive controls must translate on active press (`active:translate-x-0.5 active:translate-y-0.5`) with shadow reduction.
+4. **Always use font variables correctly**:
    - Hero name & high-impact statements: `font-display` (`Syne`)
    - Headings (`<h2>`, `<h3>`): `font-heading` (`Space Grotesk`)
    - Body text & descriptions: `font-body` (`DM Sans`)
    - Tags, badges, code, numbers: `font-mono` (`JetBrains Mono`)
-4. **Always ensure WCAG 2.2 contrast**: Small text must have at least 4.5:1 contrast against its background. Text on pastel accents (`coral`, `yellow`, `mint`) must use either deep ink `#18181B` or white `#FFFFFF` depending on contrast validation.
+5. **Always ensure WCAG 2.2 contrast**: Small text must have at least 4.5:1 contrast against its background. Text on pastel accents (`coral`, `yellow`, `mint`) must use either deep ink `#18181B` or white `#FFFFFF` depending on contrast validation.
 
 ---
 
