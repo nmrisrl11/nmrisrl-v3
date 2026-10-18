@@ -4,132 +4,96 @@
 
 All avatar assets are stored in `public/avatar/`. They are encoded in **WebM (VP9 codec, CRF 24, `-g 12` mouse-tracking keyframes)** with zero audio overhead, ensuring all files are under 1.4 MB for instantaneous frame playback.
 
-| File Name                     | Purpose                       | Duration / Type              | Trigger Event                           |
-| ----------------------------- | ----------------------------- | ---------------------------- | --------------------------------------- |
-| **`avatar-idle.webm`**        | Base idle loop                | Looping video                | Default on-screen state                 |
-| **`avatar-idle.webp`**        | High-res fallback poster      | Static image                 | Video loading / mobile fallback         |
-| **`avatar-wave.webm`**        | Welcoming wave gesture        | Play once $\rightarrow$ idle | Page initial entrance / Hero card hover |
-| **`look-left.webm`**          | Gaze directed left            | Dynamic scrub / loop         | Cursor in left viewport zone            |
-| **`look-right.webm`**         | Gaze directed right           | Dynamic scrub / loop         | Cursor in right viewport zone           |
-| **`look-up.webm`**            | Gaze directed upwards         | Dynamic scrub / loop         | Cursor in upper viewport zone           |
-| **`look-down.webm`**          | Gaze directed downwards       | Dynamic scrub / loop         | Cursor in lower zone / Marquee inspect  |
-| **`avatar-thinking.webm`**    | Pensive chin tap              | Play once $\rightarrow$ idle | Project card inspection                 |
-| **`avatar-coding-v2.webm`**   | Typing on mechanical keyboard | Play once $\rightarrow$ idle | GitHub button hover / Code tab click    |
-| **`avatar-thumbsup.webm`**    | Confident thumbs up           | Play once $\rightarrow$ idle | Contact form message sent               |
-| **`avatar-fingerheart.webm`** | K-pop finger heart + wink     | Play once $\rightarrow$ idle | Footer / Tip jar Easter egg             |
+| File Name                     | Purpose                       | Duration / Type              | Trigger Event                        |
+| ----------------------------- | ----------------------------- | ---------------------------- | ------------------------------------ |
+| **`avatar-idle.webm`**        | Base idle loop                | Looping video                | Default on-screen state              |
+| **`avatar-idle.webp`**        | High-res fallback poster      | Static image                 | Video loading / mobile fallback      |
+| **`avatar-wave.webm`**        | Welcoming wave gesture        | Play once $\rightarrow$ idle | Page initial entrance greeting       |
+| **`look-left.webm`**          | Gaze directed left            | Spring scrub (2.2s cap)      | Cursor in left viewport zone         |
+| **`look-right.webm`**         | Gaze directed right           | Spring scrub (2.2s cap)      | Cursor over hero headline / content  |
+| **`look-up.webm`**            | Gaze directed upwards         | Spring scrub (2.2s cap)      | Cursor in upper zone / navbar tabs   |
+| **`look-down.webm`**          | Gaze directed downwards       | Spring scrub (3.8s cap)      | Cursor past waist or on marquee fold |
+| **`avatar-thinking.webm`**    | Pensive chin tap              | Play once $\rightarrow$ idle | Project card inspection              |
+| **`avatar-coding.webm`**      | Typing on mechanical keyboard | Play once $\rightarrow$ idle | GitHub button hover / Code tab click |
+| **`avatar-thumbsup.webm`**    | Confident thumbs up           | Play once $\rightarrow$ idle | Contact form message sent            |
+| **`avatar-fingerheart.webm`** | K-pop finger heart + wink     | Play once $\rightarrow$ idle | Footer / Tip jar Easter egg          |
 
 ---
 
-## 2. Interactive State Machine
+## 2. Interactive State Machine & Directional Scrubbing
 
 ```mermaid
 stateDiagram-v2
-    [*] --> Idle: Page Load
-    Idle --> Waving: Hero entrance / hover
-    Waving --> Idle: Animation complete
-    Idle --> Tracking: Mouse moving in tracking container
-    Tracking --> LookLeft: Cursor X < 35%
-    Tracking --> LookRight: Cursor X > 65%
-    Tracking --> LookUp: Cursor Y < 35%
-    Tracking --> LookDown: Cursor Y > 65%
-    Tracking --> Idle: Mouse leaves hero
-    Idle --> Thinking: Hover Project Card
-    Idle --> Coding: Hover GitHub Link
-    Idle --> ThumbsUp: Contact form success
-    Idle --> FingerHeart: Footer heart click
+    [*] --> WaveGreeting: Page Load
+    WaveGreeting --> RestingIdle: Wave finished (dissolves to poster)
+    RestingIdle --> Tracking: Mouse active in viewport
+    Tracking --> LookUp: Cursor Y < -45px (Top Navbar zone)
+    Tracking --> LookRight: Cursor X > 55px (Headline & Content zone)
+    Tracking --> LookLeft: Cursor X < -40px (Left Margin zone)
+    Tracking --> LookDown: Cursor Y > 160px past waist OR at bottom marquee
+    Tracking --> RestingIdle: Cursor idle / face dead-zone / leaves window
 ```
 
 ---
 
-## 3. Mouse Tracking & Spring Physics
+## 3. Mouse Tracking, Spring Physics & Spatial Calibration
 
-To avoid frantic jitter when the user moves the mouse slightly, pointer coordinates are smoothed using a spring-damped tracker (`motion` or damped linear interpolation `lerp`):
+The engine uses a critically-damped harmonic oscillator spring solver (`solveSpring`) in `components/avatar/use-avatar-gaze.ts` to map mouse coordinates into fluid video scrubbing:
 
 ```typescript
-// Smooth spring damping calculation
-const springConfig = { damping: 25, stiffness: 120 };
+// Critically-damped spring oscillator
+const solveSpring = (
+	current: number,
+	velocity: number,
+	target: number,
+	dt: number,
+	omega = 7.0,
+): [number, number] => {
+	const overshoot = target + (target - 0.5) * 2 * 0.08;
+	let newVel = velocity + (omega * omega * (overshoot - current) - 2 * omega * velocity) * dt;
+	newVel = Math.max(-2.8, Math.min(2.8, newVel));
+	let newPos = clamp01(current + newVel * dt);
+	if ((newPos === 0 && newVel < 0) || (newPos === 1 && newVel > 0)) newVel = 0;
+	return [newPos, newVel];
+};
 ```
 
-### Zone Detection Logic:
+### Spatial Zone Calibration:
 
-- **Center / Idle Zone**: $35\% \le X \le 65\%$ and $35\% \le Y \le 65\%$ $\rightarrow$ `avatar-idle.webm`
-- **Left Zone**: $X < 35\%$ $\rightarrow$ `look-left.webm`
-- **Right Zone**: $X > 65\%$ $\rightarrow$ `look-right.webm`
-- **Up Zone**: $Y < 35\%$ $\rightarrow$ `look-up.webm`
-- **Down Zone**: $Y > 65\%$ $\rightarrow$ `look-down.webm`
+- **Dead Zone**: Distance $\le 50\text{px}$ around face center $\rightarrow$ Neutral resting idle pose.
+- **Top Zone (`LOOK_CLIPS[2]`)**: $dy < -45\text{px}$ $\rightarrow$ Look Up (prioritized for navbar, tabs, and top header).
+- **Content Zone (`LOOK_CLIPS[1]`)**: $dx > 55\text{px}$ $\rightarrow$ Look Right (reads statement headline, personalized bio, and CTA buttons).
+- **Left Margin Zone (`LOOK_CLIPS[0]`)**: $dx < -40\text{px}$ $\rightarrow$ Look Left.
+- **Downward Zone (`LOOK_CLIPS[3]`)**:
+  - Vertically below avatar's lower waist: $dx \in [-100, 70]\text{px} \land dy > 160\text{px}$ (prevents premature look down near chin/chest).
+  - Bottom marquee fold: $Y > \text{rect.bottom} - 20\text{px} \land dy > \max(60, |dx| \times 0.7)$.
 
 ---
 
-## 4. Video Transition Strategy
+## 4. Layered Video Architecture & Reversal Transitions
 
-All directional videos are rendered in identical camera positioning and lighting. Crossfading is handled through layered HTML `<video>` elements with absolute positioning:
+All clips share identical camera framing, lighting, and `#DEF2E0` Sage Mint canvas background. Layering and crossfading are coordinated to eliminate visual flashes or blinking:
 
-```tsx
-<div className="relative size-full overflow-hidden bg-canvas">
-	{/* Base Idle Video */}
-	<video
-		src="/avatar/avatar-idle.webm"
-		autoPlay
-		loop
-		muted
-		playsInline
-		className="absolute inset-0 size-full object-cover transition-opacity duration-300"
-		style={{ opacity: currentZone === "idle" ? 1 : 0 }}
-	/>
-
-	{/* Look Left Video */}
-	<video
-		src="/avatar/look-left.webm"
-		autoPlay
-		loop
-		muted
-		playsInline
-		className="absolute inset-0 size-full object-cover transition-opacity duration-200"
-		style={{ opacity: currentZone === "left" ? 1 : 0 }}
-	/>
-
-	{/* Look Right Video */}
-	<video
-		src="/avatar/look-right.webm"
-		autoPlay
-		loop
-		muted
-		playsInline
-		className="absolute inset-0 size-full object-cover transition-opacity duration-200"
-		style={{ opacity: currentZone === "right" ? 1 : 0 }}
-	/>
-</div>
+```text
+Layer 3 (Top):    Initial Welcome Wave Video (/avatar/avatar-wave.webm) [Auto-plays once, dissolves out]
+Layer 2:          Incoming Directional Video (zIndex: 2, fades in 0 -> 1 over 220ms, spring scrubs currentTime)
+Layer 1:          Outgoing Directional Video (zIndex: 1, stays 100% opaque underneath until incoming is solid)
+Layer 0 (Base):   Resting Idle Poster (/avatar/avatar-idle.webp) [Permanent high-res base]
 ```
 
-### Performance & Memory Rules:
+### Transition Mechanics:
 
-1. All video elements **MUST** include `muted`, `playsInline`, and `preload="auto"`.
-2. Directional scrub videos (`look-left`, etc.) pause when offscreen using `IntersectionObserver` to save mobile GPU bandwidth.
-3. Preload the primary idle clip in `app/layout.tsx`:
-   ```html
-   <link rel="preload" href="/avatar/avatar-idle.webm" as="video" type="video/webm" />
-   ```
+1. **Direction Switch Reversal**: When changing directions (e.g., Look Up $\rightarrow$ Look Right), the active video smoothly rewinds toward frame 0 before the incoming clip activates.
+2. **Solid-Layer Crossfade**: The outgoing clip stays at `zIndex: 1` with 100% opacity for 220ms while the incoming clip fades in at `zIndex: 2`. This guarantees no see-through drop to the background.
+3. **Throttled Scrubbing**: `seekVideo` applies a `SEEK_TOLERANCE = 0.02s` threshold to prevent frame-seek thrashing on high refresh-rate monitors (120Hz/144Hz).
 
 ---
 
 ## 5. Hero Integration, Feathering & Marquee Collision
 
-### CSS Mask Feathering (`avatar-blend-mask`)
+### Seamless Background Integration
 
-To eliminate rectangular video bounding boxes and allow the character to sit organically on the `#DEF2E0` canvas without any card container, the `@utility avatar-blend-mask` utility is defined in `app/globals.css`:
-
-```css
-@utility avatar-blend-mask {
-	mask-image:
-		radial-gradient(ellipse 72% 86% at 50% 55%, #000 62%, rgba(0, 0, 0, 0.5) 82%, transparent 100%),
-		linear-gradient(to top, transparent 0%, #000 12%);
-	-webkit-mask-image:
-		radial-gradient(ellipse 72% 86% at 50% 55%, #000 62%, rgba(0, 0, 0, 0.5) 82%, transparent 100%),
-		linear-gradient(to top, transparent 0%, #000 12%);
-	mask-composite: intersect;
-	-webkit-mask-composite: source-in;
-}
-```
+The video and image assets are rendered natively with a solid `#DEF2E0` Sage Mint background matching the page canvas (`bg-canvas`). Rather than applying artificial radial gradient masks (which can feather character edges or cause ghostly see-through transparency during video playback), the character renders with 100% solid opacity and crisp silhouettes, blending natively with the hero section background.
 
 ### Bottom Collision Layout
 

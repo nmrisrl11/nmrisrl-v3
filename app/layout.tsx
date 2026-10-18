@@ -1,5 +1,6 @@
 import { fontBody, fontDisplay, fontHeading, fontMono } from "@/app/fonts";
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -21,6 +22,16 @@ export default function RootLayout({
 			lang="en"
 			className={`${fontDisplay.variable} ${fontHeading.variable} ${fontBody.variable} ${fontMono.variable}`}
 		>
+			<head>
+				{process.env.NODE_ENV === "development" && (
+					<Script
+						src="//unpkg.com/react-scan/dist/auto.global.js"
+						crossOrigin="anonymous"
+						strategy="beforeInteractive"
+					/>
+				)}
+			</head>
+
 			<body className="antialiased selection:bg-yellow selection:text-ink">{children}</body>
 		</html>
 	);

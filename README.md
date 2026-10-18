@@ -29,6 +29,7 @@
 | **Corner Geometry**       | [@toolwind/corner-shape](https://www.npmjs.com/package/@toolwind/corner-shape) | `^0.0.8-3`            | CSS `corner-shape: squircle` utilities and fallback classes                  |
 | **Animations**            | [Motion](https://motion.dev/)                                                  | `^14.3.0`             | Spring physics, layout animations, and gesture tracking                      |
 | **Icons**                 | [Lucide React](https://lucide.dev/)                                            | `^1.59.0`             | Crisp, scalable icon set styled with theme stroke tokens                     |
+| **Diagnostics**           | [React Scan](https://react-scan.com/)                                          | Auto (unpkg)          | Real-time React 19 render & performance profiling (development-only)         |
 | **Linter & Formatter**    | [OXC](https://oxc.rs/) (`oxlint` + `oxfmt`)                                    | `^1.88.0` / `^0.73.0` | Ultra-fast Rust-based static analysis replacing ESLint & Prettier            |
 
 ---
@@ -55,7 +56,7 @@ nmrisrl-v3/
 │   ├── layout.tsx        # Root HTML wrapper, metadata, font variable bindings
 │   └── page.tsx          # Interactive preview: Avatar engine + Base UI components
 ├── components/
-│   ├── avatar/           # Avatar video player & cursor tracking engine
+│   ├── avatar/           # Interactive avatar video player & spring gaze tracker (InteractiveAvatar, useAvatarGaze)
 │   ├── page-layout/      # Architectural grid layout (Navbar, GridSection, PageLayout)
 │   ├── sections/         # Portfolio page sections (Hero with dual-track Marquee, etc.)
 │   └── ui/               # Reusable Base UI atomic primitives (Button, Card, Badge, Dialog, Tooltip)

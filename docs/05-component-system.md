@@ -135,7 +135,7 @@ The layout incorporates a structural grid line system with subtle hairline frami
 
 - **`HeroSection` (`components/sections/hero/hero-section.tsx`)**:
   - Natural content-driven height (`flex flex-col justify-between px-0! py-0`) avoiding excessive vertical empty space while maintaining visual balance.
-  - **2-Column Layout**: Left column features the character avatar with `avatar-blend-mask` edge feathering; right column features the statement headline (`Plus Jakarta Sans`) with neobrutalist yellow highlight box and personalized subhead.
+  - **2-Column Layout**: Left column features the interactive character avatar with seamless canvas background matching; right column features the statement headline (`Plus Jakarta Sans`) with neobrutalist yellow highlight box and personalized subhead.
   - **Zero-Margin Collision**: The avatar's bottom sits flush against the top of the marquee with zero padding and zero margin (`items-end self-end`).
 
 - **`MarqueeTechStack` (`components/sections/hero/marquee-tech-stack.tsx`)**:

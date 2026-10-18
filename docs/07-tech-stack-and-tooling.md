@@ -15,7 +15,17 @@
 
 ---
 
-## 2. OXC Toolchain (Replacing ESLint & Prettier)
+## 2. Development Diagnostics (`react-scan`)
+
+For real-time React component render inspection during development:
+
+- **Source**: `//unpkg.com/react-scan/dist/auto.global.js` loaded via Next.js `<Script strategy="beforeInteractive">` in `app/layout.tsx`.
+- **Environment Gate**: Enclosed in `{process.env.NODE_ENV === "development" && <Script ... />}`, ensuring it runs exclusively in local `next dev` and is eliminated by dead-code elimination from production static bundles.
+- **Capabilities**: Flags unexpected component re-renders, component tree jitter, and layout shifts directly in the browser viewport.
+
+---
+
+## 3. OXC Toolchain (Replacing ESLint & Prettier)
 
 This repository exclusively uses **OXC**, the lightning-fast Rust-based JavaScript/TypeScript linter and formatter. Standard ESLint and Prettier have been removed.
 
@@ -63,7 +73,7 @@ This repository exclusively uses **OXC**, the lightning-fast Rust-based JavaScri
 
 ---
 
-## 3. NPM Scripts Reference
+## 4. NPM Scripts Reference
 
 Run these commands using `npm` (or `npm.cmd` on Windows):
 
@@ -89,7 +99,7 @@ npm run start
 
 ---
 
-## 4. Agent Skills Ecosystem (`skills.sh`)
+## 5. Agent Skills Ecosystem (`skills.sh`)
 
 This repository integrates agent skills managed via the `skills` CLI and versioned in `skills-lock.json` with skill definitions in `.agents/skills/`:
 

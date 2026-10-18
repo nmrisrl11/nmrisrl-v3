@@ -1,4 +1,5 @@
 import { GridSection } from "@/components/page-layout";
+import { InteractiveAvatar } from "@/components/avatar";
 import { MarqueeTechStack } from "./marquee-tech-stack";
 
 export function HeroSection() {
@@ -8,19 +9,7 @@ export function HeroSection() {
 			<div className="grid flex-1 grid-cols-1 items-end gap-8 px-4 pt-8 sm:px-8 md:pt-12 lg:grid-cols-12 lg:gap-12 lg:px-12">
 				{/* Avatar on Left (Touches the bottom marquee directly with zero margin) */}
 				<div className="order-2 flex items-end justify-center self-end lg:order-1 lg:col-span-5">
-					<div className="relative aspect-2/3 w-full max-w-75 sm:max-w-85 md:max-w-95 lg:max-w-100">
-						<video
-							autoPlay
-							loop
-							muted
-							playsInline
-							preload="auto"
-							poster="/avatar/avatar-idle.webp"
-							className="pointer-events-none size-full avatar-blend-mask object-contain object-bottom"
-						>
-							<source src="/avatar/avatar-idle.webm" type="video/webm" />
-						</video>
-					</div>
+					<InteractiveAvatar />
 				</div>
 
 				{/* Contents on Right */}
