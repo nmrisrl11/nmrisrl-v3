@@ -113,7 +113,7 @@
 		background-color: var(--color-canvas);
 		color: var(--color-ink);
 		font-family: var(--font-body);
-		min-height: 100vh;
+		min-height: 100dvh;
 	}
 
 	h1,
@@ -124,4 +124,26 @@
 	h6 {
 		font-family: var(--font-heading);
 	}
+}
+
+@utility avatar-blend-mask {
+	mask-image:
+		radial-gradient(ellipse 72% 86% at 50% 55%, #000 62%, rgba(0, 0, 0, 0.5) 82%, transparent 100%),
+		linear-gradient(to top, transparent 0%, #000 12%);
+	-webkit-mask-image:
+		radial-gradient(ellipse 72% 86% at 50% 55%, #000 62%, rgba(0, 0, 0, 0.5) 82%, transparent 100%),
+		linear-gradient(to top, transparent 0%, #000 12%);
+	mask-composite: intersect;
+	-webkit-mask-composite: source-in;
+}
+
+@utility mask-edge-fade {
+	mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+	-webkit-mask-image: linear-gradient(
+		to right,
+		transparent 0%,
+		#000 8%,
+		#000 92%,
+		transparent 100%
+	);
 }

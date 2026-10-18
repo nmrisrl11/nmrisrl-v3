@@ -1,6 +1,6 @@
-import { DM_Sans, JetBrains_Mono, Space_Grotesk, Syne } from "next/font/google";
+import { DM_Sans, JetBrains_Mono, Plus_Jakarta_Sans, Space_Grotesk } from "next/font/google";
 
-export const fontDisplay = Syne({
+export const fontDisplay = Plus_Jakarta_Sans({
 	subsets: ["latin"],
 	weight: ["700", "800"],
 	variable: "--font-display",

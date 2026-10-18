@@ -50,14 +50,18 @@ nmrisrl-v3/
 │       ├── summarize-git-changes.md      # Commit-ready changelog generator
 │       └── sync-project-documentation.md # Closing feature & doc sync workflow
 ├── app/
-│   ├── fonts.ts          # Syne, Space Grotesk, DM Sans, JetBrains Mono loaders
+│   ├── fonts.ts          # Plus Jakarta Sans, Space Grotesk, DM Sans, JetBrains Mono loaders
 │   ├── globals.css       # Tailwind v4 @theme, squircle @utility, brutal tokens
 │   ├── layout.tsx        # Root HTML wrapper, metadata, font variable bindings
 │   └── page.tsx          # Interactive preview: Avatar engine + Base UI components
 ├── components/
 │   ├── avatar/           # Avatar video player & cursor tracking engine
-│   ├── sections/         # Portfolio page sections (Hero, Projects, Experience, Contact)
+│   ├── page-layout/      # Architectural grid layout (Navbar, GridSection, PageLayout)
+│   ├── sections/         # Portfolio page sections (Hero with dual-track Marquee, etc.)
 │   └── ui/               # Reusable Base UI atomic primitives (Button, Card, Badge, Dialog, Tooltip)
+├── constants/            # Modular personal data & tech stack taxonomies
+│   ├── data.ts           # Bio, social links, and contact info
+│   └── stack-and-skills-data.ts # ProfileCoreTech & StackAndSkillsData
 ├── docs/                 # Modular design system & architecture blueprints (8 chapters)
 │   ├── README.md
 │   ├── 01-brand-and-philosophy.md
@@ -103,7 +107,7 @@ nmrisrl-v3/
 
 ### 3. Typography Hierarchy
 
-- **Display (`font-display`)**: [Syne](https://fonts.google.com/specimen/Syne) — Bold display headlines and hero titles.
+- **Display (`font-display`)**: [Plus Jakarta Sans](https://fonts.google.com/specimen/Plus+Jakarta+Sans) — Bold display headlines and hero titles.
 - **Headings (`font-heading`)**: [Space Grotesk](https://fonts.google.com/specimen/Space+Grotesk) — Section titles and card headers.
 - **Body (`font-body`)**: [DM Sans](https://fonts.google.com/specimen/DM+Sans) — Clean, legible paragraphs and descriptions.
 - **Monospace (`font-mono`)**: [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono) — Tech tags, stats, metadata, code.

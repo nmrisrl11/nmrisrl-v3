@@ -6,7 +6,7 @@ Neubrutalist typography relies on **assertive contrast**: an expressive, bold di
 
 ```mermaid
 flowchart TD
-    D["1. Display: Syne (800)<br/>(Hero statement, Developer Name)"]
+    D["1. Display: Plus Jakarta Sans (800)<br/>(Hero statement, Developer Name)"]
     H["2. Heading: Space Grotesk (700)<br/>(Section titles, Project titles, Modal headers)"]
     B["3. Body: DM Sans (400 / 500)<br/>(Paragraphs, Descriptions, Bio, UI labels)"]
     M["4. Mono: JetBrains Mono (500)<br/>(Code blocks, Badges, Metrics, Status pills)"]
@@ -19,13 +19,13 @@ flowchart TD
 
 ## 2. Role Breakdown & Specifications
 
-### 1. Display — `Syne` (Weights: 700, 800)
+### 1. Display — `Plus Jakarta Sans` (Weights: 700, 800)
 
 - **CSS Variable**: `--font-display`
 - **Tailwind Class**: `font-display`
-- **Characteristics**: Geometric grotesque with wide character proportions and eccentric personality.
+- **Characteristics**: Modern geometric sans-serif with clean proportions, confident structure, and high legibility at large weights.
 - **Usage**:
-  - Large Hero Headline: `"Nomer Israel"`
+  - Large Hero Headline: `"Hey, I'm Nomer"`
   - Logo Text: `"nmrisrl.dev"`
   - High-impact hero pullquotes
 
@@ -63,23 +63,23 @@ flowchart TD
 
 ## 3. Typographic Scale
 
-| Level             | Font Family      | Size (Mobile)      | Size (Desktop)     | Weight | Tracking  |
-| ----------------- | ---------------- | ------------------ | ------------------ | ------ | --------- |
-| **Hero Title**    | `Syne`           | `2.5rem (40px)`    | `4.5rem (72px)`    | 800    | `-0.03em` |
-| **Section H2**    | `Space Grotesk`  | `1.75rem (28px)`   | `2.5rem (40px)`    | 700    | `-0.02em` |
-| **Card H3**       | `Space Grotesk`  | `1.25rem (20px)`   | `1.5rem (24px)`    | 700    | `-0.01em` |
-| **Body Lead**     | `DM Sans`        | `1.125rem (18px)`  | `1.25rem (20px)`   | 400    | `0`       |
-| **Body Base**     | `DM Sans`        | `0.9375rem (15px)` | `1rem (16px)`      | 400    | `0`       |
-| **Badge / Label** | `JetBrains Mono` | `0.75rem (12px)`   | `0.8125rem (13px)` | 500    | `+0.02em` |
+| Level             | Font Family         | Size (Mobile)      | Size (Desktop)     | Weight | Tracking  |
+| ----------------- | ------------------- | ------------------ | ------------------ | ------ | --------- |
+| **Hero Title**    | `Plus Jakarta Sans` | `2.5rem (40px)`    | `4.5rem (72px)`    | 800    | `-0.03em` |
+| **Section H2**    | `Space Grotesk`     | `1.75rem (28px)`   | `2.5rem (40px)`    | 700    | `-0.02em` |
+| **Card H3**       | `Space Grotesk`     | `1.25rem (20px)`   | `1.5rem (24px)`    | 700    | `-0.01em` |
+| **Body Lead**     | `DM Sans`           | `1.125rem (18px)`  | `1.25rem (20px)`   | 400    | `0`       |
+| **Body Base**     | `DM Sans`           | `0.9375rem (15px)` | `1rem (16px)`      | 400    | `0`       |
+| **Badge / Label** | `JetBrains Mono`    | `0.75rem (12px)`   | `0.8125rem (13px)` | 500    | `+0.02em` |
 
 ---
 
 ## 4. Next.js Implementation (`app/fonts.ts`)
 
 ```typescript
-import { Syne, Space_Grotesk, DM_Sans, JetBrains_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, Space_Grotesk, DM_Sans, JetBrains_Mono } from "next/font/google";
 
-export const fontDisplay = Syne({
+export const fontDisplay = Plus_Jakarta_Sans({
 	subsets: ["latin"],
 	weight: ["700", "800"],
 	variable: "--font-display",

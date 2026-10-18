@@ -109,3 +109,31 @@ All directional videos are rendered in identical camera positioning and lighting
    ```html
    <link rel="preload" href="/avatar/avatar-idle.webm" as="video" type="video/webm" />
    ```
+
+---
+
+## 5. Hero Integration, Feathering & Marquee Collision
+
+### CSS Mask Feathering (`avatar-blend-mask`)
+
+To eliminate rectangular video bounding boxes and allow the character to sit organically on the `#DEF2E0` canvas without any card container, the `@utility avatar-blend-mask` utility is defined in `app/globals.css`:
+
+```css
+@utility avatar-blend-mask {
+	mask-image:
+		radial-gradient(ellipse 72% 86% at 50% 55%, #000 62%, rgba(0, 0, 0, 0.5) 82%, transparent 100%),
+		linear-gradient(to top, transparent 0%, #000 12%);
+	-webkit-mask-image:
+		radial-gradient(ellipse 72% 86% at 50% 55%, #000 62%, rgba(0, 0, 0, 0.5) 82%, transparent 100%),
+		linear-gradient(to top, transparent 0%, #000 12%);
+	mask-composite: intersect;
+	-webkit-mask-composite: source-in;
+}
+```
+
+### Bottom Collision Layout
+
+In `components/sections/hero/hero-section.tsx`:
+
+- The avatar column uses `items-end self-end` with `pb-0 mb-0`.
+- The avatar rests directly on top of the `MarqueeTechStack` border with **zero margin and zero padding**, creating a seamless tactile collision where the character emerges directly above the moving tech ticker.

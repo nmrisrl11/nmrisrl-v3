@@ -33,7 +33,7 @@ This repository uses a modular documentation blueprint in [`docs/`](file:///C:/U
 2. **[`docs/README.md`](file:///C:/Users/NOMER%20ISRAEL/OneDrive/Desktop/Projects/nmrisrl-v3/docs/README.md)**: Master index and table of contents of the entire blueprint.
 3. **[`docs/01-brand-and-philosophy.md`](file:///C:/Users/NOMER%20ISRAEL/OneDrive/Desktop/Projects/nmrisrl-v3/docs/01-brand-and-philosophy.md)**: Soft Neubrutalism design philosophy, Sage Mint mood, and personality.
 4. **[`docs/02-design-tokens-and-colors.md`](file:///C:/Users/NOMER%20ISRAEL/OneDrive/Desktop/Projects/nmrisrl-v3/docs/02-design-tokens-and-colors.md)**: Palette definitions, hard zero-blur brutal shadows (`shadow-brutal*`), and brutal borders (`border-brutal*`, `border-subtle*`).
-5. **[`docs/03-typography.md`](file:///C:/Users/NOMER%20ISRAEL/OneDrive/Desktop/Projects/nmrisrl-v3/docs/03-typography.md)**: 4-font hierarchy: Display (`Syne`), Headings (`Space Grotesk`), Body (`DM Sans`), Monospace (`JetBrains Mono`).
+5. **[`docs/03-typography.md`](file:///C:/Users/NOMER%20ISRAEL/OneDrive/Desktop/Projects/nmrisrl-v3/docs/03-typography.md)**: 4-font hierarchy: Display (`Plus Jakarta Sans`), Headings (`Space Grotesk`), Body (`DM Sans`), Monospace (`JetBrains Mono`).
 6. **[`docs/04-squircle-and-shapes.md`](file:///C:/Users/NOMER%20ISRAEL/OneDrive/Desktop/Projects/nmrisrl-v3/docs/04-squircle-and-shapes.md)**: Squircle geometry with `@toolwind/corner-shape` and the 3-layer progressive enhancement fallback pattern.
 7. **[`docs/05-component-system.md`](file:///C:/Users/NOMER%20ISRAEL/OneDrive/Desktop/Projects/nmrisrl-v3/docs/05-component-system.md)**: Component architecture, `@base-ui/react` headless primitives, `@/components/ui/*` placement, and click physics.
 8. **[`docs/06-avatar-interactive-engine.md`](file:///C:/Users/NOMER%20ISRAEL/OneDrive/Desktop/Projects/nmrisrl-v3/docs/06-avatar-interactive-engine.md)**: Interactive 3D avatar engine, 11 pre-rendered WebM video clips, gaze-tracking state machine, and canvas color lock.
@@ -48,15 +48,19 @@ Inspect the current file tree before adding or editing files:
 
 ```text
 app/
-├── fonts.ts              # Syne, Space Grotesk, DM Sans, JetBrains Mono font loader
+├── fonts.ts              # Plus Jakarta Sans, Space Grotesk, DM Sans, JetBrains Mono font loader
 ├── globals.css           # Tailwind v4 @theme, squircle @utility, and shadcn aliases
 ├── layout.tsx            # Root HTML, SEO metadata, font variables
 └── page.tsx              # Homepage composition (Avatar + UI showcase)
 components/
 ├── ui/                   # Atomic Base UI primitives (button, badge, card, dialog, tooltip)
 ├── avatar/               # Avatar video player & pointer tracking controllers
-├── sections/             # Page sections (hero, about, projects, experience, contact)
+├── page-layout/          # Grid layout framework (Navbar, GridSection, PageLayout)
+├── sections/             # Page sections (hero with dual-track marquee, about, etc.)
 └── icons/                # SVG icons and Lucide re-exports
+constants/                # Modular personal data & tech stack taxonomies
+├── data.ts               # Bio, contact, and social links
+└── stack-and-skills-data.ts # ProfileCoreTech & StackAndSkillsData
 docs/                     # Modular design system & architecture blueprints
 lib/
 └── utils.ts              # cn() class merging utility (clsx + tailwind-merge)

@@ -7,7 +7,7 @@ interface PageLayoutProps {
 
 export function PageLayout({ children }: PageLayoutProps) {
 	return (
-		<div className="relative min-h-screen bg-canvas text-ink">
+		<div className="relative min-h-dvh bg-canvas text-ink">
 			{/* Simple & Clean Sticky Top Navbar */}
 			<Navbar />
 

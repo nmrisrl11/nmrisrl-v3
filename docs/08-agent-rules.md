@@ -24,7 +24,7 @@
 2. **Always follow `components.json` layout**: Atomic primitives belong in `@/components/ui/*` and use `cn()` class merging.
 3. **Always include interactive click feedback**: Buttons and interactive controls must translate on active press (`active:translate-x-0.5 active:translate-y-0.5`) with shadow reduction.
 4. **Always use font variables correctly**:
-   - Hero name & high-impact statements: `font-display` (`Syne`)
+   - Hero name & high-impact statements: `font-display` (`Plus Jakarta Sans`)
    - Headings (`<h2>`, `<h3>`): `font-heading` (`Space Grotesk`)
    - Body text & descriptions: `font-body` (`DM Sans`)
    - Tags, badges, code, numbers: `font-mono` (`JetBrains Mono`)
@@ -87,6 +87,7 @@ Before concluding any coding turn:
 1. Run `npm run lint` (`oxlint`) to ensure zero static analysis errors.
 2. Run `npm run format` (`oxfmt`) to auto-format syntax and alphabetize Tailwind classes.
 3. Ensure no unused imports or loose console logs remain in production components.
+4. **NEVER run `git commit` or `git push` autonomously**: Always leave changes uncommitted for user review, and ask or wait for explicit confirmation before committing/pushing.
 
 ---
 

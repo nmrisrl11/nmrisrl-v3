@@ -54,3 +54,4 @@ Or use the pre-built utilities: `squircle-btn`, `squircle-card`, `squircle-badge
 - Always use `@base-ui/react` for headless accessible components. Do NOT install `@radix-ui/*`.
 - Consult installed agent skills in `.agents/skills/` (`migrate-radix-to-base`, `shadcn`, `vercel-react-best-practices`, `web-design-guidelines`, `frontend-a11y`, `frontend-design`).
 - Always run `npm run lint` (`oxlint`) and `npm run format` (`oxfmt`) before ending your turn.
+- **NEVER run `git commit` or `git push` autonomously.** Always wait for explicit user instruction or ask before committing/pushing.

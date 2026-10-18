@@ -128,3 +128,18 @@ The layout incorporates a structural grid line system with subtle hairline frami
 - **`PageLayout` (`components/page-layout/page-layout.tsx`)**: Master shell wrapping pages in a continuous central column framed by vertical `border-x border-ink/15` rails that span full height.
 - **`Navbar` (`components/page-layout/navbar.tsx`)**: Sticky top navigation with brand identity on the left, right-aligned navigation links, and a responsive mobile menu.
 - **`GridSection` (`components/page-layout/grid-section.tsx`)**: Reusable section container with `border-b border-ink/15`, numbered section headers, and corner intersection crosshairs (`+`) rendered on the joints.
+
+---
+
+## 6. Hero Section & Marquee System (`components/sections/hero/`)
+
+- **`HeroSection` (`components/sections/hero/hero-section.tsx`)**:
+  - Natural content-driven height (`flex flex-col justify-between px-0! py-0`) avoiding excessive vertical empty space while maintaining visual balance.
+  - **2-Column Layout**: Left column features the character avatar with `avatar-blend-mask` edge feathering; right column features the statement headline (`Plus Jakarta Sans`) with neobrutalist yellow highlight box and personalized subhead.
+  - **Zero-Margin Collision**: The avatar's bottom sits flush against the top of the marquee with zero padding and zero margin (`items-end self-end`).
+
+- **`MarqueeTechStack` (`components/sections/hero/marquee-tech-stack.tsx`)**:
+  - Dual-track infinite counter-translating marquee powered by `motion/react`.
+  - Top track translates Left; bottom track translates Right (reverse).
+  - Populated strictly from [`ProfileCoreTech`](file:///C:/Users/NOMER%20ISRAEL/OneDrive/Desktop/Projects/nmrisrl-v3/constants/stack-and-skills-data.ts) in `constants/stack-and-skills-data.ts`.
+  - Fully contained inside the grid rails (`w-full`) with refined borders (`border-t border-ink/20`, `border-b border-ink/15`).

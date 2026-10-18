@@ -1,77 +1,12 @@
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowUpRightIcon, CodeXmlIcon, SparklesIcon } from "lucide-react";
 import { GridSection, PageLayout } from "@/components/page-layout";
+import { HeroSection } from "@/components/sections";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 
 export default function Home() {
 	return (
 		<PageLayout>
 			{/* 01 // HERO SECTION */}
-			<GridSection
-				id="hero"
-				className="grid min-h-[calc(100vh-8rem)] items-center gap-12 lg:grid-cols-12"
-			>
-				{/* Copy Column */}
-				<div className="flex flex-col gap-6 lg:col-span-7">
-					<div className="flex flex-wrap gap-2">
-						<Badge variant="yellow" className="gap-1">
-							<SparklesIcon className="size-3.5" />
-							Soft Neubrutalism v3
-						</Badge>
-						<Badge variant="lavender">shadcn + Base UI</Badge>
-						<Badge variant="sky">Tailwind CSS v4</Badge>
-					</div>
-
-					<h1 className="font-display text-4xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
-						Nomer Israel
-					</h1>
-
-					<p className="max-w-xl font-body text-lg leading-relaxed text-ink/80 md:text-xl">
-						Front-end developer crafting tactile, accessible, and high-performance digital
-						experiences. Blending graphic bluntness with friendly interactions.
-					</p>
-
-					<div className="flex flex-wrap items-center gap-3 pt-2">
-						<Button asChild variant="default" size="lg">
-							<a href="#projects">
-								View Projects <ArrowUpRightIcon className="size-4" />
-							</a>
-						</Button>
-						<Button asChild variant="secondary" size="lg">
-							<Link href="/docs">
-								<CodeXmlIcon className="size-4" /> Architecture Docs
-							</Link>
-						</Button>
-					</div>
-				</div>
-
-				{/* Avatar Visual Column */}
-				<div className="flex justify-center lg:col-span-5">
-					<Card className="relative aspect-square w-full max-w-sm overflow-hidden bg-canvas p-0">
-						<video
-							autoPlay
-							loop
-							muted
-							playsInline
-							poster="/avatar/avatar-idle.webp"
-							className="size-full object-cover object-center"
-						>
-							<source src="/avatar/avatar-idle.webm" type="video/webm" />
-							<Image
-								src="/avatar/avatar-idle.webp"
-								alt="Nomer Israel Avatar"
-								width={400}
-								height={400}
-								priority
-								className="size-full object-cover"
-							/>
-						</video>
-					</Card>
-				</div>
-			</GridSection>
+			<HeroSection />
 
 			{/* 02 // ABOUT SECTION */}
 			<GridSection
