@@ -1,7 +1,5 @@
 import type { ReactNode } from "react";
-import { Header } from "./header";
-import { MobileNav } from "./mobile-nav";
-import { SideNav } from "./side-nav";
+import { Navbar } from "./navbar";
 
 interface PageLayoutProps {
 	children: ReactNode;
@@ -10,17 +8,11 @@ interface PageLayoutProps {
 export function PageLayout({ children }: PageLayoutProps) {
 	return (
 		<div className="relative min-h-screen bg-canvas text-ink">
-			{/* Top Sticky Header */}
-			<Header />
+			{/* Simple & Clean Sticky Top Navbar */}
+			<Navbar />
 
-			{/* Desktop Side Navigation Dock (Gutter on xl+ screens) */}
-			<SideNav />
-
-			{/* Mobile Floating Bottom Dock (Screens < xl) */}
-			<MobileNav />
-
-			{/* Main Content Area */}
-			<main className="mx-auto max-w-6xl px-4 py-8 pb-24 md:px-8 xl:pb-12">{children}</main>
+			{/* Main Content Container */}
+			<main className="mx-auto max-w-6xl px-4 py-8 md:px-8">{children}</main>
 		</div>
 	);
 }
