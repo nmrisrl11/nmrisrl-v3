@@ -224,4 +224,3 @@ See [`AGENTS.md`](file:///C:/Users/NOMER%20ISRAEL/OneDrive/Desktop/Projects/nmri
 
 - Website: [nmrisrl.dev](https://www.nmrisrl.dev)
 - GitHub: [@nmrisrl](https://github.com/nmrisrl)
-# nmrisrl-v3

@@ -1,33 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRightIcon, CodeXmlIcon, SparklesIcon } from "lucide-react";
+import { PageLayout } from "@/components/page-layout";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
 export default function Home() {
 	return (
-		<main className="min-h-screen bg-canvas px-4 py-8 md:px-8 lg:px-16">
-			{/* Header Nav */}
-			<header className="mx-auto flex max-w-6xl items-center justify-between border-b-brutal border-ink pb-6">
-				<div className="font-display text-2xl font-extrabold tracking-tight">
-					nmrisrl<span className="text-coral">.dev</span>
-				</div>
-				<nav className="flex items-center gap-3">
-					<Badge variant="default" className="gap-1.5 font-mono text-xs">
-						<span className="size-2 animate-pulse rounded-full bg-emerald-500" />
-						Available for work
-					</Badge>
-					<Button asChild variant="default" size="sm">
-						<a href="#contact">
-							Get in touch <ArrowUpRightIcon className="size-4" />
-						</a>
-					</Button>
-				</nav>
-			</header>
-
-			{/* Hero Preview */}
-			<section className="mx-auto mt-12 grid max-w-6xl items-center gap-12 lg:grid-cols-12">
+		<PageLayout>
+			{/* 01 // HERO SECTION */}
+			<section
+				id="hero"
+				className="grid min-h-[calc(100vh-10rem)] items-center gap-12 pt-6 lg:grid-cols-12"
+			>
 				{/* Copy Column */}
 				<div className="flex flex-col gap-6 lg:col-span-7">
 					<div className="flex flex-wrap gap-2">
@@ -86,6 +72,62 @@ export default function Home() {
 					</Card>
 				</div>
 			</section>
-		</main>
+
+			{/* 02 // ABOUT SECTION PLACEHOLDER */}
+			<section id="about" className="mt-28 border-t-brutal border-ink pt-16">
+				<div className="flex items-center gap-3">
+					<span className="font-mono text-sm font-bold text-coral">02 //</span>
+					<h2 className="font-heading text-3xl font-bold tracking-tight">About Me</h2>
+				</div>
+				<p className="mt-4 max-w-2xl font-body text-base text-ink/80">
+					Passionate about building refined web interfaces, reactive systems, and delightful
+					developer experiences.
+				</p>
+			</section>
+
+			{/* 03 // EXPERIENCE SECTION PLACEHOLDER */}
+			<section id="experience" className="mt-28 border-t-brutal border-ink pt-16">
+				<div className="flex items-center gap-3">
+					<span className="font-mono text-sm font-bold text-coral">03 //</span>
+					<h2 className="font-heading text-3xl font-bold tracking-tight">Work Experience</h2>
+				</div>
+				<p className="mt-4 max-w-2xl font-body text-base text-ink/80">
+					History of roles and impactful products developed across multiple domains.
+				</p>
+			</section>
+
+			{/* 04 // STACK & SKILLS SECTION PLACEHOLDER */}
+			<section id="skills" className="mt-28 border-t-brutal border-ink pt-16">
+				<div className="flex items-center gap-3">
+					<span className="font-mono text-sm font-bold text-coral">04 //</span>
+					<h2 className="font-heading text-3xl font-bold tracking-tight">Tech Stack & Skills</h2>
+				</div>
+				<p className="mt-4 max-w-2xl font-body text-base text-ink/80">
+					Technologies, frameworks, and tools powering production applications.
+				</p>
+			</section>
+
+			{/* 05 // PROJECTS SECTION PLACEHOLDER */}
+			<section id="projects" className="mt-28 border-t-brutal border-ink pt-16">
+				<div className="flex items-center gap-3">
+					<span className="font-mono text-sm font-bold text-coral">05 //</span>
+					<h2 className="font-heading text-3xl font-bold tracking-tight">Highlights of My Work</h2>
+				</div>
+				<p className="mt-4 max-w-2xl font-body text-base text-ink/80">
+					Selected case studies and open-source contributions.
+				</p>
+			</section>
+
+			{/* 06 // CONTACT SECTION PLACEHOLDER */}
+			<section id="contact" className="mt-28 border-t-brutal border-ink pt-16 pb-16">
+				<div className="flex items-center gap-3">
+					<span className="font-mono text-sm font-bold text-coral">06 //</span>
+					<h2 className="font-heading text-3xl font-bold tracking-tight">Get in Touch</h2>
+				</div>
+				<p className="mt-4 max-w-2xl font-body text-base text-ink/80">
+					Available for select consulting, contracts, or full-time opportunities.
+				</p>
+			</section>
+		</PageLayout>
 	);
 }
