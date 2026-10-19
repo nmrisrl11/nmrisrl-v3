@@ -39,14 +39,14 @@ $$\underbrace{\texttt{rounded-[fallback]}}_{\text{Layer 1: Baseline radius}} \qu
 
 ## 3. Component Preset Matrix
 
-| UI Component               | Baseline Fallback    | Target Squircle Radius  | Full Tailwind Class String                                                                                                        |
-| -------------------------- | -------------------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| **Buttons / CTAs**         | `rounded-lg` (8px)   | `rounded-full` (9999px) | `rounded-lg corner-squircle supports-[corner-shape:squircle]:rounded-full border-2 border-ink shadow-brutal-sm`                   |
-| **Tech Badges / Chips**    | `rounded-md` (6px)   | `rounded-full` (9999px) | `rounded-md corner-squircle supports-[corner-shape:squircle]:rounded-full border-[1.5px] border-ink shadow-[2px_2px_0px_#18181B]` |
-| **Category Tags**          | `rounded` (4px)      | `rounded-full` (9999px) | `rounded corner-squircle supports-[corner-shape:squircle]:rounded-full border-[1.5px] border-ink`                                 |
-| **Card Image Windows**     | `rounded-4xl` (24px) | `rounded-[30px]`        | `rounded-4xl corner-squircle supports-[corner-shape:squircle]:rounded-[30px] border-2 border-ink`                                 |
-| **Project Showcase Cards** | `rounded-2xl` (16px) | `rounded-[28px]`        | `rounded-2xl corner-squircle supports-[corner-shape:squircle]:rounded-[28px] border-[2.5px] border-ink shadow-brutal`             |
-| **Avatar & Profile Frame** | `rounded-4xl` (24px) | `rounded-full` (9999px) | `rounded-4xl corner-squircle supports-[corner-shape:squircle]:rounded-full border-[2.5px] border-ink shadow-brutal`               |
+| UI Component               | Baseline Fallback    | Target Squircle Radius  | Full Tailwind Class String                                                                                           |
+| -------------------------- | -------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| **Buttons / CTAs**         | `rounded-lg` (8px)   | `rounded-full` (9999px) | `rounded-lg corner-squircle supports-[corner-shape:squircle]:rounded-full ring-2 ring-ink shadow-brutal`             |
+| **Tech Badges / Chips**    | `rounded-md` (6px)   | `rounded-full` (9999px) | `rounded-md corner-squircle supports-[corner-shape:squircle]:rounded-full border-subtle border-ink shadow-brutal-xs` |
+| **Category Tags**          | `rounded` (4px)      | `rounded-full` (9999px) | `rounded corner-squircle supports-[corner-shape:squircle]:rounded-full border-subtle border-ink`                     |
+| **Card Image Windows**     | `rounded-4xl` (24px) | `rounded-[30px]`        | `rounded-4xl corner-squircle supports-[corner-shape:squircle]:rounded-[30px] border-brutal border-ink`               |
+| **Project Showcase Cards** | `rounded-2xl` (16px) | `rounded-[28px]`        | `rounded-2xl corner-squircle supports-[corner-shape:squircle]:rounded-[28px] border-brutal border-ink shadow-brutal` |
+| **Avatar & Profile Frame** | `rounded-4xl` (24px) | `rounded-full` (9999px) | `rounded-4xl corner-squircle supports-[corner-shape:squircle]:rounded-full border-brutal border-ink shadow-brutal`   |
 
 ---
 
@@ -59,22 +59,29 @@ To prevent repeatedly typing long utility chains, use these custom `@utility` cl
 @plugin "@toolwind/corner-shape";
 
 @utility squircle-btn {
+	--btn-ring: 0 0 0 2px var(--color-ink);
 	border-radius: 0.5rem;
 	corner-shape: squircle;
-	border: 2px solid var(--color-ink);
-	box-shadow: 3px 3px 0px 0px var(--color-ink);
+	border: none;
+	box-shadow:
+		var(--btn-ring),
+		0 4px 0 0 var(--color-ink);
 	transition:
-		transform 0.1s cubic-bezier(0.2, 0, 0, 1),
-		box-shadow 0.1s cubic-bezier(0.2, 0, 0, 1);
+		transform 0.12s cubic-bezier(0.2, 0, 0, 1),
+		box-shadow 0.12s cubic-bezier(0.2, 0, 0, 1);
 
 	&:hover {
-		transform: translate(-1px, -1px);
-		box-shadow: 4px 4px 0px 0px var(--color-ink);
+		transform: translateY(-2px);
+		box-shadow:
+			var(--btn-ring),
+			0 6px 0 0 var(--color-ink);
 	}
 
 	&:active {
-		transform: translate(2px, 2px);
-		box-shadow: 1px 1px 0px 0px var(--color-ink);
+		transform: translateY(2px);
+		box-shadow:
+			var(--btn-ring),
+			0 2px 0 0 var(--color-ink);
 	}
 
 	@supports (corner-shape: squircle) {
@@ -85,8 +92,8 @@ To prevent repeatedly typing long utility chains, use these custom `@utility` cl
 @utility squircle-card {
 	border-radius: 1.25rem;
 	corner-shape: squircle;
-	border: 2.5px solid var(--color-ink);
-	box-shadow: 4px 4px 0px 0px var(--color-ink);
+	border: 2px solid var(--color-ink);
+	box-shadow: 0 4px 0 0 var(--color-ink);
 
 	@supports (corner-shape: squircle) {
 		border-radius: 1.75rem;
@@ -97,7 +104,7 @@ To prevent repeatedly typing long utility chains, use these custom `@utility` cl
 	border-radius: 0.375rem;
 	corner-shape: squircle;
 	border: 1.5px solid var(--color-ink);
-	box-shadow: 2px 2px 0px 0px var(--color-ink);
+	box-shadow: 0 2px 0 0 var(--color-ink);
 
 	@supports (corner-shape: squircle) {
 		border-radius: 9999px;

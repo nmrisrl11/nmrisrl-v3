@@ -1,24 +1,25 @@
-import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
 
 const buttonVariants = cva(
-	"inline-flex items-center justify-center gap-2 whitespace-nowrap font-body font-bold text-sm tracking-wide transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-canvas disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+	"inline-flex items-center justify-center gap-2 whitespace-nowrap font-body font-bold text-sm tracking-wide transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
 	{
 		variants: {
 			variant: {
 				default:
-					"bg-coral text-white border-2 border-ink shadow-brutal-sm hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brutal active:translate-x-0.5 active:translate-y-0.5 active:shadow-brutal-xs",
+					"bg-coral text-white ring-2 ring-ink shadow-brutal hover:-translate-y-0.5 hover:shadow-brutal-lg active:translate-y-0.5 active:shadow-brutal-xs",
 				secondary:
-					"bg-surface text-ink border-2 border-ink shadow-brutal-sm hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brutal active:translate-x-0.5 active:translate-y-0.5 active:shadow-brutal-xs",
+					"bg-surface text-ink ring-2 ring-ink shadow-brutal hover:-translate-y-0.5 hover:shadow-brutal-lg active:translate-y-0.5 active:shadow-brutal-xs",
 				yellow:
-					"bg-yellow text-ink border-2 border-ink shadow-brutal-sm hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brutal active:translate-x-0.5 active:translate-y-0.5 active:shadow-brutal-xs",
+					"bg-yellow text-ink ring-2 ring-ink shadow-brutal hover:-translate-y-0.5 hover:shadow-brutal-lg active:translate-y-0.5 active:shadow-brutal-xs",
 				lavender:
-					"bg-lavender text-ink border-2 border-ink shadow-brutal-sm hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brutal active:translate-x-0.5 active:translate-y-0.5 active:shadow-brutal-xs",
-				sky: "bg-sky text-ink border-2 border-ink shadow-brutal-sm hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brutal active:translate-x-0.5 active:translate-y-0.5 active:shadow-brutal-xs",
+					"bg-lavender text-ink ring-2 ring-ink shadow-brutal hover:-translate-y-0.5 hover:shadow-brutal-lg active:translate-y-0.5 active:shadow-brutal-xs",
+				sky: "bg-sky text-ink ring-2 ring-ink shadow-brutal hover:-translate-y-0.5 hover:shadow-brutal-lg active:translate-y-0.5 active:shadow-brutal-xs",
 				outline:
-					"bg-transparent text-ink border-2 border-ink shadow-brutal-sm hover:bg-surface/50 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brutal active:translate-x-0.5 active:translate-y-0.5 active:shadow-brutal-xs",
-				ghost: "border-transparent text-ink hover:bg-canvas-subtle hover:border-ink/20",
+					"bg-transparent text-ink ring-2 ring-ink shadow-brutal hover:bg-surface/50 hover:-translate-y-0.5 hover:shadow-brutal-lg active:translate-y-0.5 active:shadow-brutal-xs",
+				ghost:
+					"text-ink hover:bg-canvas-subtle hover:ring-2 hover:ring-ink/20 active:translate-y-0.5",
 			},
 			shape: {
 				squircle: "rounded-lg corner-squircle supports-[corner-shape:squircle]:rounded-full",

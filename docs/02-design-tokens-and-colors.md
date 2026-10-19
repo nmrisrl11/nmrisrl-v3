@@ -54,21 +54,21 @@ flowchart LR
 | ----------------------- | ----------------------------------- | ------- | ---------------------------------------- |
 | `--border-width-subtle` | `border-subtle` / `border-b-subtle` | `1.5px` | Badges, small chips, close buttons       |
 | `default / 2px`         | `border-2` / `border`               | `2px`   | Standard buttons, input outlines         |
-| `--border-width-brutal` | `border-brutal` / `border-b-brutal` | `2.5px` | Cards, showcase containers, modal frames |
+| `--border-width-brutal` | `border-brutal` / `border-b-brutal` | `2px`   | Cards, showcase containers, modal frames |
 | `--border-width-thick`  | `border-thick` / `border-b-thick`   | `3px`   | Section dividers, sticky nav border      |
 
-### Zero-Blur Hard Shadow Matrix
+### Zero-Blur Hard Shadow Matrix (3D Vertical Pop)
 
 > [!IMPORTANT]
-> **Strict Neubrutalist Rule**: Never add blur (`blur-radius > 0`) to neubrutalist shadows. Drop shadows must be crisp offsets with solid `#18181B`.
+> **Strict Neubrutalist Rule**: Never add blur (`blur-radius > 0`) to neubrutalist shadows. Drop shadows must be crisp offsets with solid `#18181B`. Shadows use pure-vertical drop offsets (`0px Ypx 0px 0px #18181B`) for balanced, symmetrical 3D elevation.
 
-| Shadow Token         | Tailwind Utility   | CSS Value                 | Use Case                                          |
-| -------------------- | ------------------ | ------------------------- | ------------------------------------------------- |
-| `--shadow-brutal-xs` | `shadow-brutal-xs` | `2px 2px 0px 0px #18181B` | Small badges, active button press state           |
-| `--shadow-brutal-sm` | `shadow-brutal-sm` | `3px 3px 0px 0px #18181B` | Standard buttons, input fields, pill controls     |
-| `--shadow-brutal`    | `shadow-brutal`    | `4px 4px 0px 0px #18181B` | Standard project cards, hero container, modals    |
-| `--shadow-brutal-lg` | `shadow-brutal-lg` | `6px 6px 0px 0px #18181B` | Featured showcase cards, interactive hover states |
-| `--shadow-brutal-xl` | `shadow-brutal-xl` | `8px 8px 0px 0px #18181B` | Hero callouts, elevated overlay dialogs           |
+| Shadow Token         | Tailwind Utility   | CSS Value                 | Use Case                                     |
+| -------------------- | ------------------ | ------------------------- | -------------------------------------------- |
+| `--shadow-brutal-xs` | `shadow-brutal-xs` | `0px 2px 0px 0px #18181B` | Small badges, active button press state      |
+| `--shadow-brutal-sm` | `shadow-brutal-sm` | `0px 3px 0px 0px #18181B` | Badges, secondary pill controls              |
+| `--shadow-brutal`    | `shadow-brutal`    | `0px 4px 0px 0px #18181B` | Standard buttons, project cards, navbar dock |
+| `--shadow-brutal-lg` | `shadow-brutal-lg` | `0px 6px 0px 0px #18181B` | Button hover elevation, modal frames         |
+| `--shadow-brutal-xl` | `shadow-brutal-xl` | `0px 8px 0px 0px #18181B` | Hero callouts, elevated overlay dialogs      |
 
 ---
 
@@ -91,13 +91,14 @@ Defined in `app/globals.css`:
 	--color-sky: #bae6fd;
 	--color-mint: #86efac;
 
-	--shadow-brutal-xs: 2px 2px 0px 0px #18181b;
-	--shadow-brutal-sm: 3px 3px 0px 0px #18181b;
-	--shadow-brutal: 4px 4px 0px 0px #18181b;
-	--shadow-brutal-lg: 6px 6px 0px 0px #18181b;
-	--shadow-brutal-xl: 8px 8px 0px 0px #18181b;
+	--shadow-brutal-xs: 0px 2px 0px 0px #18181b;
+	--shadow-brutal-sm: 0px 3px 0px 0px #18181b;
+	--shadow-brutal: 0px 4px 0px 0px #18181b;
+	--shadow-brutal-lg: 0px 6px 0px 0px #18181b;
+	--shadow-brutal-xl: 0px 8px 0px 0px #18181b;
 
-	--border-width-brutal: 2.5px;
+	--border-width-subtle: 1.5px;
+	--border-width-brutal: 2px;
 	--border-width-thick: 3px;
 }
 ```

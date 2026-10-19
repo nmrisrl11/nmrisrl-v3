@@ -9,7 +9,7 @@
 **nmrisrl-v3** departs from standard, templated tech portfolios in favor of **Soft Neubrutalism** — a playful yet professional aesthetic balancing tactile high-contrast geometry with calm, approachable pastel tones:
 
 - **Canvas Background**: Sage Mint (`#DEF2E0`), synchronized with all 11 pre-rendered 3D WebM avatar video clips for seamless zero-border composition.
-- **Deep Ink Accents**: Sharp `#18181B` typography, brutalist outlines (`2.5px`), and crisp, zero-blur drop shadows (`4px 4px 0 0 #18181B`).
+- **Deep Ink Accents**: Sharp `#18181B` typography, brutalist outlines (`2px`), and crisp, zero-blur 3D vertical drop shadows (`0px 4px 0 0 #18181B`).
 - **Pastel Palette**: Warm Coral, Buttercup Yellow, Soft Lavender, Sky Mist, and Fresh Mint.
 - **Continuous Squircles**: Continuous-curvature corners powered by `@toolwind/corner-shape` (`corner-shape: squircle`) with a reliable 3-layer progressive enhancement fallback for all modern browsers.
 - **Interactive Avatar Engine**: State-driven video player reacting to cursor tracking, viewport gaze, idle intervals, and gesture interactions.
@@ -18,19 +18,21 @@
 
 ## 🚀 Tech Stack
 
-| Layer                     | Technology                                                                     | Version               | Purpose                                                                      |
-| :------------------------ | :----------------------------------------------------------------------------- | :-------------------- | :--------------------------------------------------------------------------- |
-| **Framework**             | [Next.js](https://nextjs.org/) (App Router)                                    | `^16.4.2`             | Turbopack, React Server Components, Partial Prerendering                     |
-| **Runtime**               | [React](https://react.dev/)                                                    | `^19.3.0`             | Actions, Server Components, and native hooks                                 |
-| **Language**              | [TypeScript](https://www.typescriptlang.org/)                                  | `^5.0.0`              | Strict static typing across components, models, and tokens                   |
-| **Styling**               | [Tailwind CSS v4](https://tailwindcss.com/)                                    | `^4.0.0`              | CSS-first `@theme` and `@utility` engine with canonical token enforcement    |
-| **Component Primitives**  | [Base UI](https://base-ui.com/)                                                | `^1.9.0`              | Unstyled headless primitives from MUI (`@base-ui/react`), replacing Radix UI |
-| **Component Scaffolding** | [shadcn/ui](https://ui.shadcn.com/)                                            | Base UI Preset        | Atomic component structure mapped to Base UI (`components.json`)             |
-| **Corner Geometry**       | [@toolwind/corner-shape](https://www.npmjs.com/package/@toolwind/corner-shape) | `^0.0.8-3`            | CSS `corner-shape: squircle` utilities and fallback classes                  |
-| **Animations**            | [Motion](https://motion.dev/)                                                  | `^14.3.0`             | Spring physics, layout animations, and gesture tracking                      |
-| **Icons**                 | [Lucide React](https://lucide.dev/)                                            | `^1.59.0`             | Crisp, scalable icon set styled with theme stroke tokens                     |
-| **Diagnostics**           | [React Scan](https://react-scan.com/)                                          | Auto (unpkg)          | Real-time React 19 render & performance profiling (development-only)         |
-| **Linter & Formatter**    | [OXC](https://oxc.rs/) (`oxlint` + `oxfmt`)                                    | `^1.88.0` / `^0.73.0` | Ultra-fast Rust-based static analysis replacing ESLint & Prettier            |
+| Layer                     | Technology                                                                     | Version               | Purpose                                                                       |
+| :------------------------ | :----------------------------------------------------------------------------- | :-------------------- | :---------------------------------------------------------------------------- |
+| **Framework**             | [Next.js](https://nextjs.org/) (App Router)                                    | `^16.4.2`             | Turbopack, React Server Components, Partial Prerendering                      |
+| **Runtime**               | [React](https://react.dev/)                                                    | `^19.3.0`             | Actions, Server Components, and native hooks                                  |
+| **Language**              | [TypeScript](https://www.typescriptlang.org/)                                  | `^5.0.0`              | Strict static typing across components, models, and tokens                    |
+| **Styling**               | [Tailwind CSS v4](https://tailwindcss.com/)                                    | `^4.0.0`              | CSS-first `@theme` and `@utility` engine with canonical token enforcement     |
+| **PostCSS Plugin**        | [@tailwindcss/postcss](https://www.npmjs.com/package/@tailwindcss/postcss)     | `^4.0.0`              | Standard PostCSS integration via `postcss.config.mjs` for reliable HMR        |
+| **Component Primitives**  | [Base UI](https://base-ui.com/)                                                | `^1.9.0`              | Unstyled headless primitives from MUI (`@base-ui/react`), replacing Radix UI  |
+| **Component Scaffolding** | [shadcn/ui](https://ui.shadcn.com/)                                            | Base UI Preset        | Atomic component structure mapped to Base UI (`components.json`)              |
+| **Corner Geometry**       | [@toolwind/corner-shape](https://www.npmjs.com/package/@toolwind/corner-shape) | `^0.0.8-3`            | CSS `corner-shape: squircle` utilities and fallback classes                   |
+| **Animations**            | [Motion](https://motion.dev/)                                                  | `^14.3.0`             | Spring physics, layout animations, and gesture tracking                       |
+| **Tailwind Merge**        | [tailwind-merge](https://www.npmjs.com/package/tailwind-merge)                 | `^3.0.0`              | Intelligent class merging extended with custom brutal tokens (`lib/utils.ts`) |
+| **Icons**                 | [Lucide React](https://lucide.dev/)                                            | `^1.59.0`             | Crisp, scalable icon set styled with theme stroke tokens                      |
+| **Diagnostics**           | [React Scan](https://react-scan.com/)                                          | Auto (unpkg)          | Real-time React 19 render & performance profiling (development-only)          |
+| **Linter & Formatter**    | [OXC](https://oxc.rs/) (`oxlint` + `oxfmt`)                                    | `^1.88.0` / `^0.73.0` | Ultra-fast Rust-based static analysis replacing ESLint & Prettier             |
 
 ---
 
@@ -98,13 +100,13 @@ nmrisrl-v3/
 - **Sky Mist**: `bg-sky` (`#BAE6FD`)
 - **Fresh Mint**: `bg-mint` (`#86EFAC`)
 
-### 2. Zero-Blur Brutal Shadows
+### 2. Zero-Blur Brutal Shadows (3D Vertical Pop)
 
-- `shadow-brutal-xs` $\rightarrow$ `2px 2px 0 0 #18181B` (Active click state)
-- `shadow-brutal-sm` $\rightarrow$ `3px 3px 0 0 #18181B` (Badges, small tags)
-- `shadow-brutal` $\rightarrow$ `4px 4px 0 0 #18181B` (Buttons, cards default)
-- `shadow-brutal-lg` $\rightarrow$ `6px 6px 0 0 #18181B` (Modals, popovers)
-- `shadow-brutal-xl` $\rightarrow$ `8px 8px 0 0 #18181B` (Hero cards, floating containers)
+- `shadow-brutal-xs` $\rightarrow$ `0px 2px 0 0 #18181B` (Active click state)
+- `shadow-brutal-sm` $\rightarrow$ `0px 3px 0 0 #18181B` (Badges, small tags)
+- `shadow-brutal` $\rightarrow$ `0px 4px 0 0 #18181B` (Buttons, cards default, navbar dock)
+- `shadow-brutal-lg` $\rightarrow$ `0px 6px 0 0 #18181B` (Button hover elevation, modals)
+- `shadow-brutal-xl` $\rightarrow$ `0px 8px 0 0 #18181B` (Hero cards, floating containers)
 
 ### 3. Typography Hierarchy
 
@@ -209,15 +211,15 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 
 When developing in this repository, **always use canonical Tailwind classes** instead of arbitrary bracket syntax:
 
-| ❌ NEVER WRITE (Arbitrary)           | ✅ ALWAYS WRITE (Canonical) | CSS Target                    |
-| :----------------------------------- | :-------------------------- | :---------------------------- |
-| `border-[2.5px]`                     | `border-brutal`             | `border-width: 2.5px;`        |
-| `border-b-[2.5px]`                   | `border-b-brutal`           | `border-bottom-width: 2.5px;` |
-| `border-[1.5px]`                     | `border-subtle`             | `border-width: 1.5px;`        |
-| `shadow-[4px_4px_0_0_#18181B]`       | `shadow-brutal`             | Neubrutalist hard drop shadow |
-| `shadow-[2px_2px_0_0_#18181B]`       | `shadow-brutal-xs`          | Active click shadow           |
-| `bg-[#DEF2E0]`                       | `bg-canvas`                 | Sage Mint canvas background   |
-| `text-[#18181B]`, `border-[#18181B]` | `text-ink`, `border-ink`    | Deep Ink                      |
+| ❌ NEVER WRITE (Arbitrary)           | ✅ ALWAYS WRITE (Canonical) | CSS Target                  |
+| :----------------------------------- | :-------------------------- | :-------------------------- |
+| `border-[2px]`                       | `border-brutal`             | `border-width: 2px;`        |
+| `border-b-[2px]`                     | `border-b-brutal`           | `border-bottom-width: 2px;` |
+| `border-[1.5px]`                     | `border-subtle`             | `border-width: 1.5px;`      |
+| `shadow-[0px_4px_0_0_#18181B]`       | `shadow-brutal`             | Neubrutalist 3D pop shadow  |
+| `shadow-[0px_2px_0_0_#18181B]`       | `shadow-brutal-xs`          | Active click shadow         |
+| `bg-[#DEF2E0]`                       | `bg-canvas`                 | Sage Mint canvas background |
+| `text-[#18181B]`, `border-[#18181B]` | `text-ink`, `border-ink`    | Deep Ink                    |
 
 See [`AGENTS.md`](file:///C:/Users/NOMER%20ISRAEL/OneDrive/Desktop/Projects/nmrisrl-v3/AGENTS.md) for the full lookup table and rules.
 

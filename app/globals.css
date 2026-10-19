@@ -44,16 +44,16 @@
 	--color-input: var(--color-ink);
 	--color-ring: var(--color-ink);
 
-	/* Zero-Blur Neubrutalist Hard Shadows */
-	--shadow-brutal-xs: 2px 2px 0px 0px #18181b;
-	--shadow-brutal-sm: 3px 3px 0px 0px #18181b;
-	--shadow-brutal: 4px 4px 0px 0px #18181b;
-	--shadow-brutal-lg: 6px 6px 0px 0px #18181b;
-	--shadow-brutal-xl: 8px 8px 0px 0px #18181b;
+	/* Zero-Blur Neubrutalist 3D Pop Shadows (Pure-Vertical Offsets) */
+	--shadow-brutal-xs: 0px 2px 0px 0px var(--color-ink);
+	--shadow-brutal-sm: 0px 3px 0px 0px var(--color-ink);
+	--shadow-brutal: 0px 4px 0px 0px var(--color-ink);
+	--shadow-brutal-lg: 0px 6px 0px 0px var(--color-ink);
+	--shadow-brutal-xl: 0px 8px 0px 0px var(--color-ink);
 
 	/* Border Widths */
 	--border-width-subtle: 1.5px;
-	--border-width-brutal: 2.5px;
+	--border-width-brutal: 2px;
 	--border-width-thick: 3px;
 }
 
@@ -63,22 +63,29 @@
 
 /* Neubrutalist Squircle Utilities with Progressive Fallback */
 @utility squircle-btn {
+	--btn-ring: 0 0 0 2px var(--color-ink);
 	border-radius: 0.5rem;
 	corner-shape: squircle;
-	border: 2px solid var(--color-ink);
-	box-shadow: 3px 3px 0px 0px var(--color-ink);
+	border: none;
+	box-shadow:
+		var(--btn-ring),
+		0 4px 0 0 var(--color-ink);
 	transition:
-		transform 0.1s cubic-bezier(0.2, 0, 0, 1),
-		box-shadow 0.1s cubic-bezier(0.2, 0, 0, 1);
+		transform 0.12s cubic-bezier(0.2, 0, 0, 1),
+		box-shadow 0.12s cubic-bezier(0.2, 0, 0, 1);
 
 	&:hover {
-		transform: translate(-1px, -1px);
-		box-shadow: 4px 4px 0px 0px var(--color-ink);
+		transform: translateY(-2px);
+		box-shadow:
+			var(--btn-ring),
+			0 6px 0 0 var(--color-ink);
 	}
 
 	&:active {
-		transform: translate(2px, 2px);
-		box-shadow: 1px 1px 0px 0px var(--color-ink);
+		transform: translateY(2px);
+		box-shadow:
+			var(--btn-ring),
+			0 2px 0 0 var(--color-ink);
 	}
 
 	@supports (corner-shape: squircle) {
@@ -89,8 +96,8 @@
 @utility squircle-card {
 	border-radius: 1.25rem;
 	corner-shape: squircle;
-	border: 2.5px solid var(--color-ink);
-	box-shadow: 4px 4px 0px 0px var(--color-ink);
+	border: 2px solid var(--color-ink);
+	box-shadow: 0 4px 0 0 var(--color-ink);
 
 	@supports (corner-shape: squircle) {
 		border-radius: 1.75rem;
@@ -101,7 +108,7 @@
 	border-radius: 0.375rem;
 	corner-shape: squircle;
 	border: 1.5px solid var(--color-ink);
-	box-shadow: 2px 2px 0px 0px var(--color-ink);
+	box-shadow: 0 2px 0 0 var(--color-ink);
 
 	@supports (corner-shape: squircle) {
 		border-radius: 9999px;
@@ -109,6 +116,14 @@
 }
 
 @layer base {
+	html {
+		scroll-padding-top: 5.5rem;
+
+		@media (prefers-reduced-motion: no-preference) {
+			scroll-behavior: smooth;
+		}
+	}
+
 	body {
 		background-color: var(--color-canvas);
 		color: var(--color-ink);

@@ -1,5 +1,5 @@
-import { GridSection } from "@/components/page-layout";
 import { InteractiveAvatar } from "@/components/avatar";
+import { GridSection } from "@/components/page-layout";
 import { MarqueeTechStack } from "./marquee-tech-stack";
 
 export function HeroSection() {

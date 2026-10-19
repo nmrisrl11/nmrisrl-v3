@@ -12,7 +12,7 @@ Traditional brutalism and early web brutalism (2010s) were intentionally anti-co
 - Assertive typography
 
 However, **nmrisrl.dev (v3)** takes this one evolutionary step further into **Soft Pastel Neubrutalism**:
-We combine the **tactile physical punch** of neubrutalism with the **approachable warmth and organic personality** of a stylized 3D cartoon avatar and pastel palette (inspired by [Taramon.app](https://taramon.app) and [Neubrutalism.com](https://neubrutalism.com)).
+We combine the **tactile physical punch** of neubrutalism with the **approachable warmth and organic personality** of a stylized 3D cartoon avatar and cohesive pastel palette.
 
 ---
 
@@ -23,9 +23,9 @@ We combine the **tactile physical punch** of neubrutalism with the **approachabl
 Modern web applications often blend into identical, generic templates with floaty blurred drop shadows and invisible grey borders.
 In v3:
 
-- Every card, button, and badge has a defined physical boundary (`2px` to `2.5px` solid deep ink).
-- Shadows have **zero blur radius** (`4px 4px 0 0 #18181B`), creating the sensation of paper cutouts, enamel pins, or stamped plastic cards.
-- Interactive controls respond with physical mechanical clicks (`active:translate(2px, 2px)` with shadow collapse).
+- Every card, button, and badge has a defined physical boundary (`2px` solid deep ink or outset ring).
+- Shadows have **zero blur radius with pure-vertical 3D pop elevation** (`0px 4px 0 0 #18181B`), creating the sensation of paper cutouts, enamel pins, or stamped plastic cards.
+- Interactive controls respond with physical mechanical clicks (`active:translate-y-0.5` with vertical shadow compression).
 
 ### Pillar 2: Soothing Pastels Anchored in Avatar Reality
 

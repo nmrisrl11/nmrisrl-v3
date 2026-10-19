@@ -15,7 +15,7 @@ export default function Home() {
 				title="About Me"
 				description="Passionate about building refined web interfaces, reactive systems, and delightful developer experiences."
 			>
-				<div className="squircle-card rounded-2xl border-subtle border-ink bg-white/70 p-6 shadow-brutal-sm">
+				<div className="squircle-card bg-surface p-6">
 					<p className="font-body text-base text-ink/80">
 						Front-end engineer with a strong eye for design systems, accessible UI primitives, and
 						micro-interactions.
@@ -30,7 +30,7 @@ export default function Home() {
 				title="Work Experience"
 				description="History of roles and impactful products developed across multiple domains."
 			>
-				<div className="squircle-card rounded-2xl border-subtle border-ink bg-white/70 p-6 shadow-brutal-sm">
+				<div className="squircle-card bg-surface p-6">
 					<p className="font-body text-base text-ink/80">
 						Track record of delivering scalable web applications and developer tools.
 					</p>
@@ -76,7 +76,7 @@ export default function Home() {
 				title="Highlights of My Work"
 				description="Selected case studies and open-source contributions."
 			>
-				<div className="squircle-card rounded-2xl border-subtle border-ink bg-white/70 p-6 shadow-brutal-sm">
+				<div className="squircle-card bg-surface p-6">
 					<p className="font-body text-base text-ink/80">
 						Featured engineering showcases and real-world implementations.
 					</p>
@@ -92,7 +92,7 @@ export default function Home() {
 				showBottomCrosshairs={false}
 				className="border-b-0 pb-20"
 			>
-				<div className="squircle-card rounded-2xl border-subtle border-ink bg-white/70 p-6 shadow-brutal-sm">
+				<div className="squircle-card bg-surface p-6">
 					<p className="font-body text-base text-ink/80">
 						Let&apos;s build something exceptional together. Reach out via email or social links.
 					</p>

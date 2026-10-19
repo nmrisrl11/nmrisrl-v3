@@ -92,19 +92,21 @@ All core components live inside `components/ui/`:
 
 ### A. Button (`components/ui/button.tsx`)
 
-- **Behavior**: Interactive tactile click physics (`hover:-translate-x-0.5 hover:-translate-y-0.5`, `active:translate-x-0.5 active:translate-y-0.5` with shadow collapse).
+- **Behavior**: Purely vertical 3D tactile click physics (`hover:-translate-y-0.5 hover:shadow-brutal-lg`, `active:translate-y-0.5 active:shadow-brutal-xs`).
+- **Border & Shadow Architecture**: Built on the outset **`ring-2 ring-ink shadow-brutal`** pattern to eliminate sub-pixel anti-aliasing seams and prevent squircle border/shadow divergence.
+- **Accessible Focus**: Styled with `focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink` so focus indicators never overwrite or collide with the 2px ring outline.
 - **Shape**: Squircle fallback (`rounded-lg corner-squircle supports-[corner-shape:squircle]:rounded-full`).
 - **Variants**: `default` (Coral), `secondary` (Surface White), `yellow`, `lavender`, `sky`, `outline`, `ghost`.
 - **Polymorphism**: Supports `asChild` for seamless `<Link>` or `<a>` nesting without invalid nested button HTML.
 
 ### B. Badge (`components/ui/badge.tsx`)
 
-- **Behavior**: Compact pill chip with `border-[1.5px] border-ink` and `shadow-[2px_2px_0px_var(--color-ink)]`.
+- **Behavior**: Compact pill chip with canonical `border-subtle border-ink` and 3D vertical `shadow-brutal-xs`.
 - **Variants**: `default`, `coral`, `yellow`, `lavender`, `sky`, `mint`, `outline`.
 
 ### C. Card (`components/ui/card.tsx`)
 
-- **Behavior**: Structured floating container with `border-[2.5px] border-ink` and `shadow-brutal`.
+- **Behavior**: Structured floating container with canonical `border-brutal border-ink` (2px) and 3D vertical `shadow-brutal`.
 - **Shape**: Continuous squircle curvature (`rounded-2xl corner-squircle supports-[corner-shape:squircle]:rounded-[28px]`).
 - **Subcomponents**: `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, `CardFooter`.
 
@@ -117,7 +119,7 @@ All core components live inside `components/ui/`:
 ### E. Tooltip (`components/ui/tooltip.tsx`)
 
 - **Powered by**: `@base-ui/react/tooltip`.
-- **Features**: Native CSS anchor positioning without JavaScript measurement jitter, squircle badge styling.
+- **Features**: Native CSS anchor positioning without JavaScript measurement jitter, squircle badge styling (`shadow-brutal-xs`).
 
 ---
 
@@ -125,9 +127,12 @@ All core components live inside `components/ui/`:
 
 The layout incorporates a structural grid line system with subtle hairline framing:
 
-- **`PageLayout` (`components/page-layout/page-layout.tsx`)**: Master shell wrapping pages in a continuous central column framed by vertical `border-x border-ink/15` rails that span full height.
-- **`Navbar` (`components/page-layout/navbar.tsx`)**: Sticky top navigation with brand identity on the left, right-aligned navigation links, and a responsive mobile menu.
-- **`GridSection` (`components/page-layout/grid-section.tsx`)**: Reusable section container with `border-b border-ink/15`, numbered section headers, and corner intersection crosshairs (`+`) rendered on the joints.
+- **`PageLayout` (`components/page-layout/page-layout.tsx`)**: Master shell wrapping pages in a continuous central column framed by vertical `border-x border-ink/15` rails that push all the way to the top edge (`top-0`).
+- **`Navbar` (`components/page-layout/navbar.tsx`)**: Sticky centered navigation dock that smoothly morphs on scroll (`scrollY > 20`):
+  - **Unscrolled**: Flush `top-0`, full width (`max-w-6xl`), transparent background, `ring-0 ring-transparent shadow-none`.
+  - **Scrolled**: Morphs via GPU `translate-y` into a compact floating pill dock (`max-w-2xl translate-y-3 sm:translate-y-4`), `bg-surface/95 backdrop-blur-md`, `ring-2 ring-ink shadow-brutal`.
+  - **Mobile Menu**: Responsive squircle dropdown card attached directly under the navbar island.
+- **`GridSection` (`components/page-layout/grid-section.tsx`)**: Reusable section container with `border-b border-ink/15`, numbered section headers, and corner intersection crosshairs (`+`) rendered on the joints (disabled on hero top border).
 
 ---
 

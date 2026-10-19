@@ -7,27 +7,16 @@ interface PageLayoutProps {
 
 export function PageLayout({ children }: PageLayoutProps) {
 	return (
-		<div className="relative min-h-dvh bg-canvas text-ink">
-			{/* Simple & Clean Sticky Top Navbar */}
-			<Navbar />
+		<div className="relative min-h-dvh text-ink">
+			{/* Main Architectural Grid Column (Continuous Vertical Border-X Rails pushing all the way to the top edge) */}
+			<div className="relative mx-auto min-h-dvh max-w-6xl border-x border-ink/15">
+				{/* Sticky Top Navbar */}
+				<Navbar />
 
-			{/* Main Architectural Grid Column (Continuous Vertical Border-X Rails) */}
-			<div className="relative mx-auto max-w-6xl border-x border-ink/15">
-				{/* Top Intersection Corner Crosshairs (At the navbar seam) */}
-				<span
-					aria-hidden="true"
-					className="pointer-events-none absolute -top-2 -left-2 z-10 inline-flex size-4 items-center justify-center font-mono text-xs leading-none font-bold text-ink/40 select-none"
-				>
-					+
-				</span>
-				<span
-					aria-hidden="true"
-					className="pointer-events-none absolute -top-2 -right-2 z-10 inline-flex size-4 items-center justify-center font-mono text-xs leading-none font-bold text-ink/40 select-none"
-				>
-					+
-				</span>
-
-				<main>{children}</main>
+				{/* Border-t on the first section (NO crosshairs) */}
+				<div className="border-t border-ink/15">
+					<main>{children}</main>
+				</div>
 			</div>
 		</div>
 	);
