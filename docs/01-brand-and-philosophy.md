@@ -12,7 +12,7 @@ Traditional brutalism and early web brutalism (2010s) were intentionally anti-co
 - Assertive typography
 
 However, **nmrisrl.dev (v3)** takes this one evolutionary step further into **Soft Pastel Neubrutalism**:
-We combine the **tactile physical punch** of neubrutalism with the **approachable warmth and organic personality** of a stylized 3D cartoon avatar and pastel palette (inspired by [Taramon.app](https://taramon.app) and [Neubrutalism.com](https://neubrutalism.com)).
+We combine the **tactile physical punch** of neubrutalism with the **approachable warmth and organic personality** of a stylized 3D cartoon avatar and cohesive pastel palette.
 
 ---
 

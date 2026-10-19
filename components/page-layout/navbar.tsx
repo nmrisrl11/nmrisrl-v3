@@ -26,7 +26,8 @@ export function Navbar() {
 		const targetId = href.replace("#", "");
 		const element = document.getElementById(targetId);
 		if (element) {
-			element.scrollIntoView({ behavior: "smooth", block: "start" });
+			const isReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+			element.scrollIntoView({ behavior: isReducedMotion ? "auto" : "smooth", block: "start" });
 			window.history.pushState(null, "", href);
 		}
 	};
@@ -36,7 +37,7 @@ export function Navbar() {
 			<div
 				className={cn(
 					"pointer-events-auto relative flex h-14 w-full items-center justify-between sm:h-16",
-					"transition-all duration-300 ease-out",
+					"transition-all duration-300 ease-out motion-reduce:transition-none",
 					isScrolled
 						? "max-w-2xl translate-y-3 rounded-2xl bg-surface/95 px-4 shadow-brutal ring-2 ring-ink backdrop-blur-md corner-squircle supports-[corner-shape:squircle]:rounded-full sm:translate-y-4 sm:px-5"
 						: "max-w-6xl translate-y-0 rounded-none bg-transparent px-4 shadow-none ring-0 ring-transparent backdrop-blur-none sm:px-8",
@@ -71,7 +72,7 @@ export function Navbar() {
 					onClick={() => setIsOpen(!isOpen)}
 					aria-label={isOpen ? "Close menu" : "Open menu"}
 					aria-expanded={isOpen}
-					className="inline-flex size-9 items-center justify-center rounded-lg border-subtle border-ink bg-canvas text-ink shadow-brutal-xs transition-transform corner-squircle active:translate-y-0.5 supports-[corner-shape:squircle]:rounded-full md:hidden"
+					className="inline-flex size-9 items-center justify-center rounded-lg bg-canvas text-ink shadow-brutal-xs ring-2 ring-ink transition-transform corner-squircle focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink focus-visible:outline-none active:translate-y-0.5 supports-[corner-shape:squircle]:rounded-full md:hidden"
 				>
 					{isOpen ? <XIcon className="size-4" /> : <MenuIcon className="size-4" />}
 				</button>

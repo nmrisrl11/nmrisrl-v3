@@ -59,11 +59,12 @@ To prevent repeatedly typing long utility chains, use these custom `@utility` cl
 @plugin "@toolwind/corner-shape";
 
 @utility squircle-btn {
+	--btn-ring: 0 0 0 2px var(--color-ink);
 	border-radius: 0.5rem;
 	corner-shape: squircle;
 	border: none;
 	box-shadow:
-		0 0 0 2px var(--color-ink),
+		var(--btn-ring),
 		0 4px 0 0 var(--color-ink);
 	transition:
 		transform 0.12s cubic-bezier(0.2, 0, 0, 1),
@@ -72,14 +73,14 @@ To prevent repeatedly typing long utility chains, use these custom `@utility` cl
 	&:hover {
 		transform: translateY(-2px);
 		box-shadow:
-			0 0 0 2px var(--color-ink),
+			var(--btn-ring),
 			0 6px 0 0 var(--color-ink);
 	}
 
 	&:active {
 		transform: translateY(2px);
 		box-shadow:
-			0 0 0 2px var(--color-ink),
+			var(--btn-ring),
 			0 2px 0 0 var(--color-ink);
 	}
 

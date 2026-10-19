@@ -2,7 +2,7 @@
 
 ## 1. Type Hierarchy & Roles
 
-Neubrutalist typography relies on **assertive contrast**: an expressive, bold display face paired with a calm, ultra-legible body face. Based on [Neubrutalism.com (Section 03)](https://neubrutalism.com), we implement a 4-tier system:
+Neubrutalist typography relies on **assertive contrast**: an expressive, bold display face paired with a calm, ultra-legible body face. We implement a structured 4-tier system:
 
 ```mermaid
 flowchart TD

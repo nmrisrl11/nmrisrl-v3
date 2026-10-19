@@ -19,7 +19,7 @@ const buttonVariants = cva(
 				outline:
 					"bg-transparent text-ink ring-2 ring-ink shadow-brutal hover:bg-surface/50 hover:-translate-y-0.5 hover:shadow-brutal-lg active:translate-y-0.5 active:shadow-brutal-xs",
 				ghost:
-					"text-ink hover:bg-canvas-subtle hover:ring-1 hover:ring-ink/20 active:translate-y-0.5",
+					"text-ink hover:bg-canvas-subtle hover:ring-2 hover:ring-ink/20 active:translate-y-0.5",
 			},
 			shape: {
 				squircle: "rounded-lg corner-squircle supports-[corner-shape:squircle]:rounded-full",

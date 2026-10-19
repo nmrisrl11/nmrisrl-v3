@@ -10,7 +10,7 @@ This directory contains modular, topic-focused documentation designed to be refe
 
 | Document                                                                | Topic                   | Description & Scope                                                                                                                     |
 | ----------------------------------------------------------------------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| [**01 — Brand & Philosophy**](./01-brand-and-philosophy.md)             | Identity & Ethos        | The principles of Soft Pastel Neubrutalism, inspiration from Taramon.app and Neubrutalism.com, and tactile design guidelines.           |
+| [**01 — Brand & Philosophy**](./01-brand-and-philosophy.md)             | Identity & Ethos        | The principles of Soft Pastel Neubrutalism, tactile physical geometry, and approachable design guidelines.                              |
 | [**02 — Design Tokens & Colors**](./02-design-tokens-and-colors.md)     | Palette & Surfaces      | Sage Mint foundation (`#DEF2E0`), deep ink strokes (`#18181B`), pastel accents, zero-blur hard shadow matrix, and Tailwind v4 `@theme`. |
 | [**03 — Typography System**](./03-typography.md)                        | Font Hierarchy          | 4-tier font pairing (Plus Jakarta Sans, Space Grotesk, DM Sans, JetBrains Mono), Google Fonts loading, and typographic scale.           |
 | [**04 — Squircle & Shapes**](./04-squircle-and-shapes.md)               | Superellipse Geometry   | `@toolwind/corner-shape` setup, the 3-layer progressive fallback pattern, and component radius presets.                                 |

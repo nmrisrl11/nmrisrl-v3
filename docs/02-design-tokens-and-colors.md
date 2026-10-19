@@ -60,7 +60,7 @@ flowchart LR
 ### Zero-Blur Hard Shadow Matrix (3D Vertical Pop)
 
 > [!IMPORTANT]
-> **Strict Neubrutalist Rule**: Never add blur (`blur-radius > 0`) to neubrutalist shadows. Drop shadows must be crisp offsets with solid `#18181B`. Following the Taramon aesthetic, shadows use pure vertical drop offsets (`0px Ypx 0px 0px #18181B`) for balanced, symmetrical 3D elevation.
+> **Strict Neubrutalist Rule**: Never add blur (`blur-radius > 0`) to neubrutalist shadows. Drop shadows must be crisp offsets with solid `#18181B`. Shadows use pure-vertical drop offsets (`0px Ypx 0px 0px #18181B`) for balanced, symmetrical 3D elevation.
 
 | Shadow Token         | Tailwind Utility   | CSS Value                 | Use Case                                     |
 | -------------------- | ------------------ | ------------------------- | -------------------------------------------- |
