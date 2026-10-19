@@ -19,19 +19,19 @@ Writing arbitrary square bracket syntax (e.g. `border-b-[2.5px]`, `shadow-[4px_4
 
 | ❌ NEVER WRITE (Arbitrary) | ✅ ALWAYS WRITE (Canonical) | Underlying CSS / Value        |
 | -------------------------- | --------------------------- | ----------------------------- |
-| `border-[2.5px]`           | `border-brutal`             | `border-width: 2.5px;`        |
-| `border-b-[2.5px]`         | `border-b-brutal`           | `border-bottom-width: 2.5px;` |
-| `border-t-[2.5px]`         | `border-t-brutal`           | `border-top-width: 2.5px;`    |
-| `border-x-[2.5px]`         | `border-x-brutal`           | `border-left/right: 2.5px;`   |
+| `border-[2px]`             | `border-brutal`             | `border-width: 2px;`          |
+| `border-b-[2px]`           | `border-b-brutal`           | `border-bottom-width: 2px;`   |
+| `border-t-[2px]`           | `border-t-brutal`           | `border-top-width: 2px;`      |
+| `border-x-[2px]`           | `border-x-brutal`           | `border-left/right: 2px;`     |
 | `border-[1.5px]`           | `border-subtle`             | `border-width: 1.5px;`        |
 | `border-b-[1.5px]`         | `border-b-subtle`           | `border-bottom-width: 1.5px;` |
 | `border-[3px]`             | `border-thick`              | `border-width: 3px;`          |
 | `border-b-[3px]`           | `border-b-thick`            | `border-bottom-width: 3px;`   |
-| `shadow-[2px_2px_...]`     | `shadow-brutal-xs`          | `2px 2px 0px 0px #18181B;`    |
-| `shadow-[3px_3px_...]`     | `shadow-brutal-sm`          | `3px 3px 0px 0px #18181B;`    |
-| `shadow-[4px_4px_...]`     | `shadow-brutal`             | `4px 4px 0px 0px #18181B;`    |
-| `shadow-[6px_6px_...]`     | `shadow-brutal-lg`          | `6px 6px 0px 0px #18181B;`    |
-| `shadow-[8px_8px_...]`     | `shadow-brutal-xl`          | `8px 8px 0px 0px #18181B;`    |
+| `shadow-[0px_2px_...]`     | `shadow-brutal-xs`          | `0px 2px 0px 0px #18181B;`    |
+| `shadow-[0px_3px_...]`     | `shadow-brutal-sm`          | `0px 3px 0px 0px #18181B;`    |
+| `shadow-[0px_4px_...]`     | `shadow-brutal`             | `0px 4px 0px 0px #18181B;`    |
+| `shadow-[0px_6px_...]`     | `shadow-brutal-lg`          | `0px 6px 0px 0px #18181B;`    |
+| `shadow-[0px_8px_...]`     | `shadow-brutal-xl`          | `0px 8px 0px 0px #18181B;`    |
 | `bg-[#DEF2E0]`             | `bg-canvas`                 | Sage Mint Canvas              |
 | `text-[#18181B]`           | `text-ink`                  | Deep Ink Text                 |
 | `border-[#18181B]`         | `border-ink`                | Deep Ink Border               |
@@ -52,6 +52,9 @@ Or use the pre-built utilities: `squircle-btn`, `squircle-card`, `squircle-badge
 
 - Always place reusable primitives in `@/components/ui/*`.
 - Always use `@base-ui/react` for headless accessible components. Do NOT install `@radix-ui/*`.
+- **Buttons & Floating Elements**: Use outset **`ring-2 ring-ink shadow-brutal`** (not `border-brutal`) to eliminate sub-pixel anti-aliasing gaps and corner-shape desync. Pair with `focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink`.
+- **Structural Dividers & Rails**: Keep standard `border-subtle`, `border-brutal` (2px), and `border-thick` for directional lines (`border-x`, `border-t`, `border-b`).
+- **Tailwind Merge**: All custom brutal tokens are registered in `customTwMerge` via `extendTailwindMerge` in `@/lib/utils`. Never append `!` (e.g. `border-brutal!`) to force class retention.
 - Consult installed agent skills in `.agents/skills/` (`migrate-radix-to-base`, `shadcn`, `vercel-react-best-practices`, `web-design-guidelines`, `frontend-a11y`, `frontend-design`).
 - Always run `npm run lint` (`oxlint`) and `npm run format` (`oxfmt`) before ending your turn.
 - **NEVER run `git commit` or `git push` autonomously.** Always wait for explicit user instruction or ask before committing/pushing.

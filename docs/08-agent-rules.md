@@ -10,43 +10,46 @@
 
 ### ❌ NEVER:
 
-1. **Never use blurred drop shadows**: Neubrutalism requires crisp zero-blur hard offsets (`shadow-brutal` = `4px 4px 0 0 #18181B`). Do not use `shadow-md`, `shadow-lg`, or arbitrary blur radii.
+1. **Never use blurred drop shadows**: Neubrutalism requires crisp zero-blur hard offsets (`shadow-brutal` = `0px 4px 0 0 #18181B`). Do not use `shadow-md`, `shadow-lg`, or arbitrary blur radii.
 2. **Never break the 3-layer squircle fallback**: Never apply `rounded-full` alone on buttons or cards without `@supports (corner-shape: squircle)`. Always follow the pattern:
    `rounded-[fallback] corner-squircle supports-[corner-shape:squircle]:rounded-[target]` or use `@utility squircle-*`.
 3. **Never alter the `--color-canvas` hex value**: The root background MUST remain Sage Mint (`#DEF2E0` / `#E2F2DF`) because all 11 pre-rendered WebM avatar videos in `public/avatar/` were rendered on this exact color. Changing the canvas will reveal visible rectangular video borders.
 4. **Never re-install ESLint or Prettier**: This repository is strictly managed by the Rust-based **OXC** toolchain (`oxlint` + `oxfmt`).
 5. **Never install `@radix-ui/react-*` directly**: This repository exclusively uses `@base-ui/react` headless primitives integrated with `components.json`.
-6. **Never write arbitrary bracket syntax `[...]` when a theme token exists**: The IDE triggers `tailwindcss(suggestCanonicalClasses)` warnings. E.g., never write `border-b-[2.5px]`, write `border-b-brutal`; never write `shadow-[4px_4px_...]`, write `shadow-brutal`.
+6. **Never write arbitrary bracket syntax `[...]` when a theme token exists**: The IDE triggers `tailwindcss(suggestCanonicalClasses)` warnings. E.g., never write `border-b-[2px]`, write `border-b-brutal`; never write `shadow-[0px_4px_...]`, write `shadow-brutal`.
 
 ### ✅ ALWAYS:
 
 1. **Always use Base UI (`@base-ui/react`)**: When building dialogs, tooltips, popovers, tabs, or accordions, use `@base-ui/react` primitives.
 2. **Always follow `components.json` layout**: Atomic primitives belong in `@/components/ui/*` and use `cn()` class merging.
-3. **Always include interactive click feedback**: Buttons and interactive controls must translate on active press (`active:translate-x-0.5 active:translate-y-0.5`) with shadow reduction.
-4. **Always use font variables correctly**:
+3. **Always include interactive click feedback**: Buttons and interactive controls must translate vertically on active press (`active:translate-y-0.5`) with shadow reduction.
+4. **Always use outset ring for clickable buttons and floating pills**: Use `ring-2 ring-ink shadow-brutal` instead of `border-brutal` on buttons and floating navigation docks to eliminate sub-pixel anti-aliasing gaps and corner-shape desync. Pair with `focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink` to avoid focus indicator collisions.
+5. **Always register custom tokens in `extendTailwindMerge`**: When introducing new custom theme tokens used with `cn()`, ensure they are added to `customTwMerge` in `@/lib/utils` so `tailwind-merge` does not drop them. Never use `!` (e.g. `border-brutal!`) to bypass class stripping.
+6. **Always use font variables correctly**:
    - Hero name & high-impact statements: `font-display` (`Plus Jakarta Sans`)
    - Headings (`<h2>`, `<h3>`): `font-heading` (`Space Grotesk`)
    - Body text & descriptions: `font-body` (`DM Sans`)
    - Tags, badges, code, numbers: `font-mono` (`JetBrains Mono`)
-5. **Always ensure WCAG 2.2 contrast**: Small text must have at least 4.5:1 contrast against its background. Text on pastel accents (`coral`, `yellow`, `mint`) must use either deep ink `#18181B` or white `#FFFFFF` depending on contrast validation.
-6. **Always use canonical classes from the substitution table below**:
+7. **Always ensure WCAG 2.2 contrast**: Small text must have at least 4.5:1 contrast against its background. Text on pastel accents (`coral`, `yellow`, `mint`) must use either deep ink `#18181B` or white `#FFFFFF` depending on contrast validation.
+8. **Always use canonical classes from the substitution table below**:
 
 #### Canonical Classes Lookup Table
 
 | ❌ NEVER WRITE (Arbitrary)           | ✅ ALWAYS WRITE (Canonical) | CSS Target                    |
 | ------------------------------------ | --------------------------- | ----------------------------- |
-| `border-[2.5px]`                     | `border-brutal`             | `border-width: 2.5px;`        |
-| `border-b-[2.5px]`                   | `border-b-brutal`           | `border-bottom-width: 2.5px;` |
-| `border-t-[2.5px]`                   | `border-t-brutal`           | `border-top-width: 2.5px;`    |
+| `border-[2px]`                       | `border-brutal`             | `border-width: 2px;`          |
+| `border-b-[2px]`                     | `border-b-brutal`           | `border-bottom-width: 2px;`   |
+| `border-t-[2px]`                     | `border-t-brutal`           | `border-top-width: 2px;`      |
+| `border-x-[2px]`                     | `border-x-brutal`           | `border-left/right: 2px;`     |
 | `border-[1.5px]`                     | `border-subtle`             | `border-width: 1.5px;`        |
 | `border-b-[1.5px]`                   | `border-b-subtle`           | `border-bottom-width: 1.5px;` |
 | `border-[3px]`                       | `border-thick`              | `border-width: 3px;`          |
 | `border-b-[3px]`                     | `border-b-thick`            | `border-bottom-width: 3px;`   |
-| `shadow-[2px_2px_...]`               | `shadow-brutal-xs`          | `2px 2px 0px 0px #18181B;`    |
-| `shadow-[3px_3px_...]`               | `shadow-brutal-sm`          | `3px 3px 0px 0px #18181B;`    |
-| `shadow-[4px_4px_...]`               | `shadow-brutal`             | `4px 4px 0px 0px #18181B;`    |
-| `shadow-[6px_6px_...]`               | `shadow-brutal-lg`          | `6px 6px 0px 0px #18181B;`    |
-| `shadow-[8px_8px_...]`               | `shadow-brutal-xl`          | `8px 8px 0px 0px #18181B;`    |
+| `shadow-[0px_2px_...]`               | `shadow-brutal-xs`          | `0px 2px 0px 0px #18181B;`    |
+| `shadow-[0px_3px_...]`               | `shadow-brutal-sm`          | `0px 3px 0px 0px #18181B;`    |
+| `shadow-[0px_4px_...]`               | `shadow-brutal`             | `0px 4px 0px 0px #18181B;`    |
+| `shadow-[0px_6px_...]`               | `shadow-brutal-lg`          | `0px 6px 0px 0px #18181B;`    |
+| `shadow-[0px_8px_...]`               | `shadow-brutal-xl`          | `0px 8px 0px 0px #18181B;`    |
 | `bg-[#DEF2E0]`                       | `bg-canvas`                 | Sage Mint Canvas              |
 | `text-[#18181B]`, `border-[#18181B]` | `text-ink`, `border-ink`    | Deep Ink                      |
 | `bg-[#FF6B57]`                       | `bg-coral`                  | Warm Coral                    |
