@@ -87,7 +87,7 @@ export function Navbar() {
 						onClick={() => setIsOpen(!isOpen)}
 						aria-label={isOpen ? "Close menu" : "Open menu"}
 						aria-expanded={isOpen}
-						className="inline-flex size-9 items-center justify-center rounded-lg bg-canvas text-ink shadow-brutal-xs ring-2 ring-ink transition-transform corner-squircle focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink focus-visible:outline-none active:translate-y-0.5 supports-[corner-shape:squircle]:rounded-full md:hidden"
+						className="inline-flex size-9 items-center justify-center rounded-lg bg-canvas text-ink shadow-brutal-xs ring-2 ring-ink transition-transform corner-squircle focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink active:translate-y-0.5 supports-[corner-shape:squircle]:rounded-full md:hidden"
 					>
 						{isOpen ? <XIcon className="size-4" /> : <MenuIcon className="size-4" />}
 					</button>

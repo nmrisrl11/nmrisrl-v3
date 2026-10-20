@@ -41,7 +41,7 @@ export function HeroSection() {
 					{/* Pre-Header Kicker Pill */}
 					<div className="flex items-center justify-center lg:justify-start">
 						<div className="inline-flex items-center gap-2 rounded-md border-subtle border-ink bg-surface px-3 py-1 font-mono text-xs font-bold tracking-wide text-ink shadow-brutal-xs corner-squircle supports-[corner-shape:squircle]:rounded-full">
-							<span className="size-2 animate-pulse rounded-full bg-mint ring-1 ring-ink" />
+							<span className="size-2 animate-pulse rounded-full bg-mint ring-1 ring-ink motion-reduce:animate-none" />
 							<span>AVAILABLE FOR WORK</span>
 						</div>
 					</div>

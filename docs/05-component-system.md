@@ -138,7 +138,7 @@ The layout incorporates a 3-column structural grid framework with decorative str
   - **Squircle Card Shell**: Built on `bg-surface/95 shadow-brutal ring-2 ring-ink backdrop-blur-md corner-squircle` with dynamic height scaling (`h-14 max-w-4xl` default, `h-12 max-w-3xl` scrolled).
   - **Brand Badge**: `nmrisrl` logo with a rotated Warm Coral `.dev` squircle chip (`bg-coral text-white border-subtle shadow-brutal-xs`).
   - **Direct Action**: Text-only `Let's Talk` CTA button smoothly scrolling to `#contact`. Redundant "Contact" link removed from navigation items.
-  - **Mobile Dropdown**: Compact floating squircle dropdown card attached beneath the island dock with touch-friendly navigation links and full-width CTA.
+  - **Mobile Dropdown & Accessible Focus**: Compact floating squircle dropdown card attached beneath the island dock with touch-friendly navigation links and full-width CTA. Mobile hamburger toggle enforces visible keyboard focus (`focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink`).
 
 - **`GridSection` (`components/page-layout/grid-section.tsx`)**: Reusable section container with `border-b border-ink/15`, numbered section headers (`02 // About Me`), and corner intersection crosshairs (`+`) rendered on the joints.
 
@@ -149,14 +149,14 @@ The layout incorporates a 3-column structural grid framework with decorative str
 - **`HeroSection` (`components/sections/hero/hero-section.tsx`)**:
   - Natural content-driven height (`flex flex-col justify-between px-0! py-0`) avoiding excessive vertical empty space while maintaining visual balance.
   - **Avatar Stage**: Interactive character avatar positioned with bottom flush to the marquee.
-    - **`RotatingSeal` (`components/sections/hero/rotating-seal.tsx`)**: Circular rotating SVG badge (`Crafted with care • 2026 • Nomer Israel • Frontend •`) with center star chip, positioned at the top-left of the avatar stage.
+    - **`RotatingSeal` (`components/sections/hero/rotating-seal.tsx`)**: Circular rotating SVG badge (`Crafted with care • 2026 • Nomer Israel • Frontend •`) with center star chip, positioned at the top-left of the avatar stage (honors `motion-reduce:animate-none`).
     - **`BauhausAccent` (`components/sections/hero/bauhaus-accent.tsx`)**: Bauhaus geometric accent pill (`● ▲ ■ SYS.V3 // CRAFT`) at the avatar's bottom-left waistline.
   - **Editorial Hero Typography**:
     - **Blueprint Coordinates**: `✦ FIG. 01 // OVERVIEW • 14°35'N 120°58'E • MNL, PH` with responsive wrapping.
-    - **Availability Kicker**: `[ 🟢 AVAILABLE FOR WORK ]` squircle pill with pulsing mint indicator.
+    - **Availability Kicker**: `[ 🟢 AVAILABLE FOR WORK ]` squircle pill with pulsing mint indicator (equipped with `motion-reduce:animate-none`).
     - **Headline**: `Plus Jakarta Sans` headline with responsive sizing (`text-3xl sm:text-5xl`) and yellow highlight box (`beyond the code.`).
     - **Dual Action CTAs**: Clean `[ Explore Projects ]` (default coral) and `[ Get in Touch ]` (secondary white) buttons.
-    - **Relocated Metrics**: Metric cards (`7+ Years`, `20+ Shipped`, `99% Web Performance`) are housed under `02 // About Me` in `app/page.tsx` alongside the personal bio card.
+    - **Relocated Metrics with 200% Zoom Reflow**: Metric cards (`7+ Years`, `20+ Shipped`, `99% Web Performance`) are housed under `02 // About Me` in `app/page.tsx`, utilizing responsive flex stacking (`flex-col md:flex-row md:items-center`) to reflow vertically at narrow widths and prevent text clipping at 200% zoom.
 
 - **`MarqueeTechStack` (`components/sections/hero/marquee-tech-stack.tsx`)**:
   - Dual-track infinite counter-translating marquee powered by `motion/react`.

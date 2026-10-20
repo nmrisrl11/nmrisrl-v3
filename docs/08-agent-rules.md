@@ -23,7 +23,7 @@
 1. **Always use Base UI (`@base-ui/react`)**: When building dialogs, tooltips, popovers, tabs, or accordions, use `@base-ui/react` primitives.
 2. **Always follow `components.json` layout**: Atomic primitives belong in `@/components/ui/*` and use `cn()` class merging.
 3. **Always include interactive click feedback**: Buttons and interactive controls must translate vertically on active press (`active:translate-y-0.5`) with shadow reduction.
-4. **Always use outset ring for clickable buttons and floating pills**: Use `ring-2 ring-ink shadow-brutal` instead of `border-brutal` on buttons and floating navigation docks to eliminate sub-pixel anti-aliasing gaps and corner-shape desync. Pair with `focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink` to avoid focus indicator collisions.
+4. **Always use outset ring for clickable buttons and floating pills**: Use `ring-2 ring-ink shadow-brutal` instead of `border-brutal` on buttons and floating navigation docks to eliminate sub-pixel anti-aliasing gaps and corner-shape desync. Pair with `focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink`. Never combine with `focus-visible:outline-none`, which suppresses keyboard focus rings.
 5. **Always register custom tokens in `extendTailwindMerge`**: When introducing new custom theme tokens used with `cn()`, ensure they are added to `customTwMerge` in `@/lib/utils` so `tailwind-merge` does not drop them. Never use `!` (e.g. `border-brutal!`) to bypass class stripping.
 6. **Always use font variables correctly**:
    - Hero name & high-impact statements: `font-display` (`Plus Jakarta Sans`)
@@ -62,6 +62,8 @@
 
 9. **Always use the 3-column architectural framework with striped rails**: Wrap page content using the 3-column architectural grid with flanking vertical striped rails (`bg-striped-rail border-x border-ink/15 hidden md:block`).
 10. **Always verify mobile responsiveness and prevent horizontal scroll**: Enforce `w-full overflow-x-clip` on root wrappers, specify explicit `grid-cols-1` on mobile grid containers, and ensure child columns use `min-w-0 w-full` to avoid unintended horizontal scrollbars.
+11. **Always provide motion-reduction variants on animations**: All CSS keyframe animations (such as `animate-spin`, `animate-pulse`) MUST include `motion-reduce:animate-none` to honor `prefers-reduced-motion` preferences (WCAG 2.2.2 / 2.3.3).
+12. **Always support 200% zoom reflow on multi-column card metrics**: Metric stat cards must use responsive flex stacking (`flex-col items-start gap-1.5 md:flex-row md:items-center md:gap-4`) to stack vertically on narrow widths, preventing text clipping and horizontal truncation during high zoom (WCAG 1.4.4 / 1.4.10).
 
 ---
 

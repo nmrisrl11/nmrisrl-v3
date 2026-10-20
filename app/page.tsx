@@ -28,7 +28,7 @@ export default function Home() {
 					{/* 3 Metric Cards */}
 					<div className="grid grid-cols-1 gap-3 sm:grid-cols-3 lg:col-span-5 lg:grid-cols-1">
 						{/* Metric 1 */}
-						<div className="flex items-center gap-4 squircle-card bg-surface p-4 transition-transform hover:-translate-y-0.5">
+						<div className="flex flex-col items-start gap-1.5 squircle-card bg-surface p-4 transition-transform hover:-translate-y-0.5 md:flex-row md:items-center md:gap-4">
 							<span className="font-display text-3xl font-black tracking-tight text-ink">
 								7<span className="text-coral">+</span>
 							</span>
@@ -40,7 +40,7 @@ export default function Home() {
 						</div>
 
 						{/* Metric 2 */}
-						<div className="flex items-center gap-4 squircle-card bg-surface p-4 transition-transform hover:-translate-y-0.5">
+						<div className="flex flex-col items-start gap-1.5 squircle-card bg-surface p-4 transition-transform hover:-translate-y-0.5 md:flex-row md:items-center md:gap-4">
 							<span className="font-display text-3xl font-black tracking-tight text-ink">
 								20<span className="text-coral">+</span>
 							</span>
@@ -52,7 +52,7 @@ export default function Home() {
 						</div>
 
 						{/* Metric 3 */}
-						<div className="flex items-center gap-4 squircle-card bg-surface p-4 transition-transform hover:-translate-y-0.5">
+						<div className="flex flex-col items-start gap-1.5 squircle-card bg-surface p-4 transition-transform hover:-translate-y-0.5 md:flex-row md:items-center md:gap-4">
 							<span className="font-display text-3xl font-black tracking-tight text-ink">
 								99<span className="text-coral">%</span>
 							</span>
