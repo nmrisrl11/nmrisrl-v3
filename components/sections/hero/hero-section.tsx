@@ -2,7 +2,9 @@ import { InteractiveAvatar } from "@/components/avatar";
 import { GridSection } from "@/components/page-layout";
 import { Button } from "@/components/ui/button";
 import { BauhausAccent } from "./bauhaus-accent";
+import { GitCommandBadge } from "./git-command-badge";
 import { MarqueeTechStack } from "./marquee-tech-stack";
+import { NpmDevBadge } from "./npm-dev-badge";
 import { RotatingSeal } from "./rotating-seal";
 
 export function HeroSection() {
@@ -11,19 +13,32 @@ export function HeroSection() {
 			{/* Top Area: Avatar on Left, Contents on Right */}
 			<div className="grid flex-1 grid-cols-1 items-end gap-8 px-4 pt-6 sm:px-8 md:pt-10 lg:grid-cols-12 lg:gap-12 lg:px-12">
 				{/* Avatar on Left with Graphic Geometry Accents (Touches bottom marquee directly with zero margin) */}
-				<div className="relative order-2 flex items-end justify-center self-end lg:order-1 lg:col-span-5">
-					{/* Rotating Neubrutalist Seal Stamp (Top-Left / Framing the Avatar) */}
-					<div className="absolute -top-6 left-0 z-20 hidden sm:flex lg:-top-8 lg:-left-6">
-						<RotatingSeal />
-					</div>
+				<div className="order-2 flex items-end justify-center self-end lg:order-1 lg:col-span-5">
+					{/* Inner Avatar Stage: Hugs the avatar body so badges stay properly anchored at all viewports */}
+					<div className="relative w-full max-w-65 sm:max-w-85 md:max-w-95 lg:max-w-100">
+						{/* Rotating Neubrutalist Seal Stamp (Top-Left / Framing the Avatar) */}
+						<div className="absolute -top-6 -left-3 z-20 hidden sm:flex lg:-top-8 lg:-left-6">
+							<RotatingSeal />
+						</div>
 
-					{/* Isometric / Bauhaus Geometric Accent Pill (Bottom-Left / Waist of Avatar) */}
-					<div className="absolute bottom-16 -left-2 z-20 hidden sm:inline-flex lg:bottom-20 lg:-left-4">
-						<BauhausAccent />
-					</div>
+						{/* Isometric / Bauhaus Geometric Accent Pill (Bottom-Left / Waist of Avatar) */}
+						<div className="absolute bottom-20 -left-3 z-20 hidden sm:inline-flex lg:bottom-24 lg:-left-4">
+							<BauhausAccent />
+						</div>
 
-					{/* Interactive 3D Avatar Engine */}
-					<InteractiveAvatar />
+						{/* Common Git Command Badge (Lower Waist of Avatar) */}
+						<div className="absolute bottom-6 left-2 z-20 hidden sm:inline-flex lg:bottom-8 lg:left-4">
+							<GitCommandBadge />
+						</div>
+
+						{/* Npm Dev Command Badge (Bottom-Right / Wrist of Avatar) */}
+						<div className="absolute -right-2 bottom-12 z-20 hidden sm:inline-flex lg:-right-3 lg:bottom-14">
+							<NpmDevBadge />
+						</div>
+
+						{/* Interactive 3D Avatar Engine */}
+						<InteractiveAvatar />
+					</div>
 				</div>
 
 				{/* Contents on Right */}
