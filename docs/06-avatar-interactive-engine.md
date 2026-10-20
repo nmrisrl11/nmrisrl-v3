@@ -95,9 +95,11 @@ Layer 0 (Base):   Resting Idle Poster (/avatar/avatar-idle.webp) [Permanent high
 
 The video and image assets are rendered natively with a solid `#DEF2E0` Sage Mint background matching the page canvas (`bg-canvas`). Rather than applying artificial radial gradient masks (which can feather character edges or cause ghostly see-through transparency during video playback), the character renders with 100% solid opacity and crisp silhouettes, blending natively with the hero section background.
 
-### Bottom Collision Layout
+### Bottom Collision & Inner Stage Wrapper Layout
 
 In `components/sections/hero/hero-section.tsx`:
 
 - The avatar column uses `items-end self-end` with `pb-0 mb-0`.
 - The avatar rests directly on top of the `MarqueeTechStack` border with **zero margin and zero padding**, creating a seamless tactile collision where the character emerges directly above the moving tech ticker.
+- **Stage Framing**: The avatar is wrapped with its surrounding floating badges in an inner stage container (`relative w-full max-w-65 sm:max-w-85 md:max-w-95 lg:max-w-100`). This ensures all absolute coordinates (`-left-3`, `-right-3`, `bottom-12`) anchor directly to the avatar's silhouette across all viewports, preventing floating badges from drifting away on tablet/mobile screens.
+- **Responsive Image Sizes**: The resting base poster (`Image`) specifies `sizes="(max-width: 640px) 260px, (max-width: 768px) 340px, (max-width: 1024px) 380px, 400px"` to optimize asset decoding and eliminate layout shift warnings.

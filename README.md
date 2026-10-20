@@ -61,7 +61,7 @@ nmrisrl-v3/
 ├── components/
 │   ├── avatar/           # Interactive avatar video player & spring gaze tracker (InteractiveAvatar, useAvatarGaze)
 │   ├── page-layout/      # Architectural 3-column grid layout (Navbar, GridSection, PageLayout)
-│   ├── sections/         # Portfolio sections (Hero with RotatingSeal, BauhausAccent, dual-track Marquee)
+│   ├── sections/         # Portfolio sections (Hero with RotatingSeal, BauhausAccent, NpmDevBadge, GitCommandBadge, dual-track Marquee)
 │   └── ui/               # Reusable Base UI atomic primitives (Button, Card, Badge, Dialog, Tooltip)
 ├── constants/            # Modular personal data & tech stack taxonomies
 │   ├── data.ts           # Bio, social links, and contact info

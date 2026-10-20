@@ -36,6 +36,7 @@ export function InteractiveAvatar({ className }: InteractiveAvatarProps) {
 				alt="Nomer Israel Avatar Character"
 				fill
 				priority
+				sizes="(max-width: 640px) 260px, (max-width: 768px) 340px, (max-width: 1024px) 380px, 400px"
 				className="pointer-events-none z-0 size-full object-contain object-bottom"
 			/>
 

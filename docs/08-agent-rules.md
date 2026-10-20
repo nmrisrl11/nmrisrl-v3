@@ -64,6 +64,7 @@
 10. **Always verify mobile responsiveness and prevent horizontal scroll**: Enforce `w-full overflow-x-clip` on root wrappers, specify explicit `grid-cols-1` on mobile grid containers, and ensure child columns use `min-w-0 w-full` to avoid unintended horizontal scrollbars.
 11. **Always provide motion-reduction variants on animations**: All CSS keyframe animations (such as `animate-spin`, `animate-pulse`) MUST include `motion-reduce:animate-none` to honor `prefers-reduced-motion` preferences (WCAG 2.2.2 / 2.3.3).
 12. **Always support 200% zoom reflow on multi-column card metrics**: Metric stat cards must use responsive flex stacking (`flex-col items-start gap-1.5 md:flex-row md:items-center md:gap-4`) to stack vertically on narrow widths, preventing text clipping and horizontal truncation during high zoom (WCAG 1.4.4 / 1.4.10).
+13. **Always anchor avatar floating badges to an inner stage wrapper**: When anchoring floating badges or visual accents around the avatar, wrap the avatar and badges in a tight inner stage wrapper (`relative w-full max-w-65 sm:max-w-85 md:max-w-95 lg:max-w-100`) rather than the outer layout column. This guarantees absolute coordinates anchor directly to the avatar silhouette across all viewports (desktop, tablet, mobile) and prevents badges from drifting across full-width columns.
 
 ---
 
