@@ -15,11 +15,54 @@ export default function Home() {
 				title="About Me"
 				description="Passionate about building refined web interfaces, reactive systems, and delightful developer experiences."
 			>
-				<div className="squircle-card bg-surface p-6">
-					<p className="font-body text-base text-ink/80">
-						Front-end engineer with a strong eye for design systems, accessible UI primitives, and
-						micro-interactions.
-					</p>
+				<div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
+					{/* Bio Narrative Card */}
+					<div className="flex flex-col justify-between squircle-card bg-surface p-6 sm:p-8 lg:col-span-7">
+						<p className="font-body text-base leading-relaxed text-ink/80 sm:text-lg">
+							Front-end engineer with a strong eye for design systems, accessible UI primitives, and
+							micro-interactions. Combining deep React expertise with craft-focused web design to
+							deliver scalable, fast web applications.
+						</p>
+					</div>
+
+					{/* 3 Metric Cards */}
+					<div className="grid grid-cols-1 gap-3 sm:grid-cols-3 lg:col-span-5 lg:grid-cols-1">
+						{/* Metric 1 */}
+						<div className="flex flex-col items-start gap-1.5 squircle-card bg-surface p-4 transition-transform hover:-translate-y-0.5 md:flex-row md:items-center md:gap-4">
+							<span className="font-display text-3xl font-black tracking-tight text-ink">
+								7<span className="text-coral">+</span>
+							</span>
+							<span className="font-mono text-xs leading-tight font-bold text-ink-muted uppercase">
+								Years
+								<br />
+								Crafting
+							</span>
+						</div>
+
+						{/* Metric 2 */}
+						<div className="flex flex-col items-start gap-1.5 squircle-card bg-surface p-4 transition-transform hover:-translate-y-0.5 md:flex-row md:items-center md:gap-4">
+							<span className="font-display text-3xl font-black tracking-tight text-ink">
+								20<span className="text-coral">+</span>
+							</span>
+							<span className="font-mono text-xs leading-tight font-bold text-ink-muted uppercase">
+								Shipped
+								<br />
+								Products
+							</span>
+						</div>
+
+						{/* Metric 3 */}
+						<div className="flex flex-col items-start gap-1.5 squircle-card bg-surface p-4 transition-transform hover:-translate-y-0.5 md:flex-row md:items-center md:gap-4">
+							<span className="font-display text-3xl font-black tracking-tight text-ink">
+								99<span className="text-coral">%</span>
+							</span>
+							<span className="font-mono text-xs leading-tight font-bold text-ink-muted uppercase">
+								Web
+								<br />
+								Performance
+							</span>
+						</div>
+					</div>
 				</div>
 			</GridSection>
 

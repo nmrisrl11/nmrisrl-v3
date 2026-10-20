@@ -26,7 +26,7 @@ export function InteractiveAvatar({ className }: InteractiveAvatarProps) {
 		<div
 			ref={stageRef}
 			className={cn(
-				"relative aspect-2/3 w-full max-w-75 select-none sm:max-w-85 md:max-w-95 lg:max-w-100",
+				"relative aspect-2/3 w-full max-w-65 select-none sm:max-w-85 md:max-w-95 lg:max-w-100",
 				className,
 			)}
 		>

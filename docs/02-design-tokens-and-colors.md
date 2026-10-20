@@ -102,3 +102,46 @@ Defined in `app/globals.css`:
 	--border-width-thick: 3px;
 }
 ```
+
+---
+
+## 5. Architectural Utilities & Visual Patterns
+
+Defined in `app/globals.css`:
+
+### A. Decorative Diagonal Striped Rail (`bg-striped-rail`)
+
+Inspired by `tailwindcss.com`, this utility generates a viewport-locked 315° diagonal hatching pattern using `repeating-linear-gradient` with `background-attachment: fixed`:
+
+```css
+@utility bg-striped-rail {
+	--pattern-fg: color-mix(in srgb, var(--color-ink) 9%, transparent);
+	background-image: repeating-linear-gradient(
+		315deg,
+		var(--pattern-fg) 0,
+		var(--pattern-fg) 1px,
+		transparent 0,
+		transparent 50%
+	);
+	background-size: 10px 10px;
+	background-attachment: fixed;
+}
+```
+
+- **Viewport Locking (`fixed`)**: Prevents visual crawling during scroll and ensures that vertical side rails and any horizontal hatched bands share the identical coordinate grid with zero seam offset.
+- **Applications**: Vertical architectural gutter rails (`PageLayout`), horizontal divider ribbons, card hatching.
+
+### B. Alpha Gradient Edge Mask (`mask-edge-fade`)
+
+```css
+@utility mask-edge-fade {
+	mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+	-webkit-mask-image: linear-gradient(
+		to right,
+		transparent 0%,
+		#000 8%,
+		#000 92%,
+		transparent 100%
+	);
+}
+```

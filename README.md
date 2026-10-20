@@ -9,6 +9,7 @@
 **nmrisrl-v3** departs from standard, templated tech portfolios in favor of **Soft Neubrutalism** — a playful yet professional aesthetic balancing tactile high-contrast geometry with calm, approachable pastel tones:
 
 - **Canvas Background**: Sage Mint (`#DEF2E0`), synchronized with all 11 pre-rendered 3D WebM avatar video clips for seamless zero-border composition.
+- **Architectural Grid Rails**: 3-column architectural framework with viewport-locked diagonal striped gutter rails (`bg-striped-rail`) inspired by `tailwindcss.com`.
 - **Deep Ink Accents**: Sharp `#18181B` typography, brutalist outlines (`2px`), and crisp, zero-blur 3D vertical drop shadows (`0px 4px 0 0 #18181B`).
 - **Pastel Palette**: Warm Coral, Buttercup Yellow, Soft Lavender, Sky Mist, and Fresh Mint.
 - **Continuous Squircles**: Continuous-curvature corners powered by `@toolwind/corner-shape` (`corner-shape: squircle`) with a reliable 3-layer progressive enhancement fallback for all modern browsers.
@@ -59,8 +60,8 @@ nmrisrl-v3/
 │   └── page.tsx          # Interactive preview: Avatar engine + Base UI components
 ├── components/
 │   ├── avatar/           # Interactive avatar video player & spring gaze tracker (InteractiveAvatar, useAvatarGaze)
-│   ├── page-layout/      # Architectural grid layout (Navbar, GridSection, PageLayout)
-│   ├── sections/         # Portfolio page sections (Hero with dual-track Marquee, etc.)
+│   ├── page-layout/      # Architectural 3-column grid layout (Navbar, GridSection, PageLayout)
+│   ├── sections/         # Portfolio sections (Hero with RotatingSeal, BauhausAccent, dual-track Marquee)
 │   └── ui/               # Reusable Base UI atomic primitives (Button, Card, Badge, Dialog, Tooltip)
 ├── constants/            # Modular personal data & tech stack taxonomies
 │   ├── data.ts           # Bio, social links, and contact info
@@ -220,6 +221,7 @@ When developing in this repository, **always use canonical Tailwind classes** in
 | `shadow-[0px_2px_0_0_#18181B]`       | `shadow-brutal-xs`          | Active click shadow         |
 | `bg-[#DEF2E0]`                       | `bg-canvas`                 | Sage Mint canvas background |
 | `text-[#18181B]`, `border-[#18181B]` | `text-ink`, `border-ink`    | Deep Ink                    |
+| `bg-[repeating-linear...]`           | `bg-striped-rail`           | 315° diagonal hatching rail |
 
 See [`AGENTS.md`](file:///C:/Users/NOMER%20ISRAEL/OneDrive/Desktop/Projects/nmrisrl-v3/AGENTS.md) for the full lookup table and rules.
 
