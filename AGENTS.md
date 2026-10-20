@@ -41,6 +41,7 @@ Writing arbitrary square bracket syntax (e.g. `border-b-[2.5px]`, `shadow-[4px_4
 | `bg-[#BAE6FD]`             | `bg-sky`                    | Sky Mist                      |
 | `bg-[#86EFAC]`             | `bg-mint`                   | Fresh Mint                    |
 | `rounded-[9999px]`         | `rounded-full`              | Full radius (squircle target) |
+| `bg-[repeating-linear...]` | `bg-striped-rail`           | 315° diagonal hatching rail   |
 
 ### 📌 Squircle Class Pattern
 
@@ -54,6 +55,8 @@ Or use the pre-built utilities: `squircle-btn`, `squircle-card`, `squircle-badge
 - Always use `@base-ui/react` for headless accessible components. Do NOT install `@radix-ui/*`.
 - **Buttons & Floating Elements**: Use outset **`ring-2 ring-ink shadow-brutal`** (not `border-brutal`) to eliminate sub-pixel anti-aliasing gaps and corner-shape desync. Pair with `focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink`.
 - **Structural Dividers & Rails**: Keep standard `border-subtle`, `border-brutal` (2px), and `border-thick` for directional lines (`border-x`, `border-t`, `border-b`).
+- **3-Column Architectural Grid**: Wrap main content with flanking vertical striped rails (`bg-striped-rail border-x border-ink/15`). Keep rails `hidden md:block` so mobile viewports have full width.
+- **Mobile Responsiveness & Overflow Prevention**: Always enforce `w-full overflow-x-clip` on root wrappers, specify explicit `grid-cols-1` on mobile grid containers, and ensure child columns use `min-w-0 w-full` to avoid unintended horizontal scrollbars.
 - **Tailwind Merge**: All custom brutal tokens are registered in `customTwMerge` via `extendTailwindMerge` in `@/lib/utils`. Never append `!` (e.g. `border-brutal!`) to force class retention.
 - Consult installed agent skills in `.agents/skills/` (`migrate-radix-to-base`, `shadcn`, `vercel-react-best-practices`, `web-design-guidelines`, `frontend-a11y`, `frontend-design`).
 - Always run `npm run lint` (`oxlint`) and `npm run format` (`oxfmt`) before ending your turn.

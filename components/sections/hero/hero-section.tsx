@@ -1,30 +1,89 @@
 import { InteractiveAvatar } from "@/components/avatar";
 import { GridSection } from "@/components/page-layout";
+import { Button } from "@/components/ui/button";
+import { BauhausAccent } from "./bauhaus-accent";
 import { MarqueeTechStack } from "./marquee-tech-stack";
+import { RotatingSeal } from "./rotating-seal";
 
 export function HeroSection() {
 	return (
 		<GridSection id="hero" className="flex flex-col justify-between px-0! py-0">
 			{/* Top Area: Avatar on Left, Contents on Right */}
-			<div className="grid flex-1 grid-cols-1 items-end gap-8 px-4 pt-8 sm:px-8 md:pt-12 lg:grid-cols-12 lg:gap-12 lg:px-12">
-				{/* Avatar on Left (Touches the bottom marquee directly with zero margin) */}
-				<div className="order-2 flex items-end justify-center self-end lg:order-1 lg:col-span-5">
+			<div className="grid flex-1 grid-cols-1 items-end gap-8 px-4 pt-6 sm:px-8 md:pt-10 lg:grid-cols-12 lg:gap-12 lg:px-12">
+				{/* Avatar on Left with Graphic Geometry Accents (Touches bottom marquee directly with zero margin) */}
+				<div className="relative order-2 flex items-end justify-center self-end lg:order-1 lg:col-span-5">
+					{/* Rotating Neubrutalist Seal Stamp (Top-Left / Framing the Avatar) */}
+					<div className="absolute -top-6 left-0 z-20 hidden sm:flex lg:-top-8 lg:-left-6">
+						<RotatingSeal />
+					</div>
+
+					{/* Isometric / Bauhaus Geometric Accent Pill (Bottom-Left / Waist of Avatar) */}
+					<div className="absolute bottom-16 -left-2 z-20 hidden sm:inline-flex lg:bottom-20 lg:-left-4">
+						<BauhausAccent />
+					</div>
+
+					{/* Interactive 3D Avatar Engine */}
 					<InteractiveAvatar />
 				</div>
 
 				{/* Contents on Right */}
 				<div className="order-1 my-auto flex flex-col justify-center gap-5 py-6 text-center lg:order-2 lg:col-span-7 lg:py-10 lg:text-left">
-					<h1 className="font-display text-4xl leading-[1.12] font-black tracking-tight text-ink sm:text-5xl lg:text-[48px] xl:text-[56px]">
+					{/* Architectural Grid Coordinates & Blueprint Markers */}
+					<div className="flex flex-wrap items-center justify-center gap-1.5 font-mono text-[10px] font-bold tracking-wider text-ink/60 uppercase select-none sm:gap-2 sm:text-[11px] sm:tracking-widest lg:justify-start">
+						<span className="text-coral">✦</span>
+						<span>FIG. 01 // OVERVIEW</span>
+						<span className="text-ink/25">•</span>
+						<span>14°35&apos;N 120°58&apos;E</span>
+						<span className="text-ink/25">•</span>
+						<span>MNL, PH</span>
+					</div>
+
+					{/* Pre-Header Kicker Pill */}
+					<div className="flex items-center justify-center lg:justify-start">
+						<div className="inline-flex items-center gap-2 rounded-md border-subtle border-ink bg-surface px-3 py-1 font-mono text-xs font-bold tracking-wide text-ink shadow-brutal-xs corner-squircle supports-[corner-shape:squircle]:rounded-full">
+							<span className="size-2 animate-pulse rounded-full bg-mint ring-1 ring-ink" />
+							<span>AVAILABLE FOR WORK</span>
+						</div>
+					</div>
+
+					{/* Main Headline */}
+					<h1 className="font-display text-3xl leading-[1.15] font-black tracking-tight text-ink sm:text-5xl lg:text-5xl xl:text-6xl">
 						I build software that works{" "}
-						<span className="inline-block -rotate-1 border-brutal border-ink bg-yellow px-3 py-0.5 text-ink shadow-brutal">
+						<span className="inline-block -rotate-1 bg-yellow px-2 py-0.5 text-ink shadow-brutal ring-2 ring-ink sm:px-3 sm:shadow-brutal-lg">
 							beyond the code.
 						</span>
 					</h1>
 
+					{/* Narrative Subtitle */}
 					<p className="max-w-xl font-body text-base leading-relaxed font-medium text-balance text-ink/80 sm:text-lg">
 						Hi, I&apos;m Nomer — a front-end developer and engineer turning complex ideas into fast,
 						accessible, and delightful web applications.
 					</p>
+
+					{/* Action Buttons (Dual CTAs) */}
+					<div className="flex flex-wrap items-center justify-center gap-3.5 pt-1 lg:justify-start">
+						<Button
+							variant="default"
+							size="default"
+							shape="squircle"
+							asChild
+							className="shadow-brutal hover:shadow-brutal-lg"
+						>
+							<a href="#projects">Explore Projects</a>
+						</Button>
+
+						<Button
+							variant="secondary"
+							size="default"
+							shape="squircle"
+							asChild
+							className="shadow-brutal hover:shadow-brutal-lg"
+						>
+							<a href="#contact">
+								<span>Get in Touch</span>
+							</a>
+						</Button>
+					</div>
 				</div>
 			</div>
 

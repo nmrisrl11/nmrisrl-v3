@@ -58,6 +58,10 @@
 | `bg-[#BAE6FD]`                       | `bg-sky`                    | Sky Mist                      |
 | `bg-[#86EFAC]`                       | `bg-mint`                   | Fresh Mint                    |
 | `rounded-[9999px]`                   | `rounded-full`              | Full radius (squircle target) |
+| `bg-[repeating-linear...]`           | `bg-striped-rail`           | 315° diagonal hatching rail   |
+
+9. **Always use the 3-column architectural framework with striped rails**: Wrap page content using the 3-column architectural grid with flanking vertical striped rails (`bg-striped-rail border-x border-ink/15 hidden md:block`).
+10. **Always verify mobile responsiveness and prevent horizontal scroll**: Enforce `w-full overflow-x-clip` on root wrappers, specify explicit `grid-cols-1` on mobile grid containers, and ensure child columns use `min-w-0 w-full` to avoid unintended horizontal scrollbars.
 
 ---
 

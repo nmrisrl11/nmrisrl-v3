@@ -1,9 +1,9 @@
 "use client";
 
-import type { ReactNode } from "react";
-import Image from "next/image";
-import { motion } from "motion/react";
 import { ProfileCoreTech } from "@/constants/stack-and-skills-data";
+import { motion } from "motion/react";
+import Image from "next/image";
+import type { ReactNode } from "react";
 
 interface TechItemProps {
 	label: string;
@@ -62,7 +62,7 @@ export function MarqueeTechStack() {
 	return (
 		<div
 			aria-hidden="true"
-			className="relative w-full border-t border-ink/20 bg-surface select-none"
+			className="relative w-full overflow-hidden border-t border-ink/20 bg-surface select-none"
 		>
 			{/* Left & Right Soft Edge Gradient Masks */}
 			<div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-linear-to-r from-surface to-transparent md:w-20" />
