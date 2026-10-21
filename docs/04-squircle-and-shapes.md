@@ -39,15 +39,15 @@ $$\underbrace{\texttt{rounded-[fallback]}}_{\text{Layer 1: Baseline radius}} \qu
 
 ## 3. Component Preset Matrix
 
-| UI Component               | Baseline Fallback    | Target Squircle Radius  | Full Tailwind Class String                                                                                                           |
-| -------------------------- | -------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| **Buttons / CTAs**         | `rounded-lg` (8px)   | `rounded-full` (9999px) | `rounded-lg corner-squircle supports-[corner-shape:squircle]:rounded-full ring-2 ring-ink shadow-brutal`                             |
-| **Tech Badges / Chips**    | `rounded-md` (6px)   | `rounded-full` (9999px) | `rounded-md corner-squircle supports-[corner-shape:squircle]:rounded-full border-subtle border-ink shadow-brutal-xs`                 |
-| **Grid Line Markers**      | `rounded-xs` (2px)   | `rounded-full` (9999px) | `size-2.5 rounded-xs corner-squircle supports-[corner-shape:squircle]:rounded-full border border-ink/40 bg-surface shadow-brutal-xs` |
-| **Category Tags**          | `rounded` (4px)      | `rounded-full` (9999px) | `rounded corner-squircle supports-[corner-shape:squircle]:rounded-full border-subtle border-ink`                                     |
-| **Card Image Windows**     | `rounded-4xl` (24px) | `rounded-[30px]`        | `rounded-4xl corner-squircle supports-[corner-shape:squircle]:rounded-[30px] border-brutal border-ink`                               |
-| **Project Showcase Cards** | `rounded-2xl` (16px) | `rounded-[28px]`        | `rounded-2xl corner-squircle supports-[corner-shape:squircle]:rounded-[28px] border-brutal border-ink shadow-brutal`                 |
-| **Avatar & Profile Frame** | `rounded-4xl` (24px) | `rounded-full` (9999px) | `rounded-4xl corner-squircle supports-[corner-shape:squircle]:rounded-full border-brutal border-ink shadow-brutal`                   |
+| UI Component               | Baseline Fallback    | Target Squircle Radius  | Full Tailwind Class String                                                                                           |
+| -------------------------- | -------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| **Buttons / CTAs**         | `rounded-lg` (8px)   | `rounded-full` (9999px) | `rounded-lg corner-squircle supports-[corner-shape:squircle]:rounded-full ring-2 ring-ink shadow-brutal`             |
+| **Tech Badges / Chips**    | `rounded-md` (6px)   | `rounded-full` (9999px) | `rounded-md corner-squircle supports-[corner-shape:squircle]:rounded-full border-subtle border-ink shadow-brutal-xs` |
+| **Grid Line Markers**      | `rounded-xs` (2px)   | `rounded-full` (9999px) | `size-2.5 rounded-xs corner-squircle supports-[corner-shape:squircle]:rounded-full border border-ink/40 bg-surface`  |
+| **Category Tags**          | `rounded` (4px)      | `rounded-full` (9999px) | `rounded corner-squircle supports-[corner-shape:squircle]:rounded-full border-subtle border-ink`                     |
+| **Card Image Windows**     | `rounded-4xl` (24px) | `rounded-[30px]`        | `rounded-4xl corner-squircle supports-[corner-shape:squircle]:rounded-[30px] border-brutal border-ink`               |
+| **Project Showcase Cards** | `rounded-2xl` (16px) | `rounded-[28px]`        | `rounded-2xl corner-squircle supports-[corner-shape:squircle]:rounded-[28px] border-brutal border-ink shadow-brutal` |
+| **Avatar & Profile Frame** | `rounded-4xl` (24px) | `rounded-full` (9999px) | `rounded-4xl corner-squircle supports-[corner-shape:squircle]:rounded-full border-brutal border-ink shadow-brutal`   |
 
 ---
 
