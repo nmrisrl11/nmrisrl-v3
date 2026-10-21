@@ -32,7 +32,7 @@
 | **Corner Geometry**       | [@toolwind/corner-shape](https://www.npmjs.com/package/@toolwind/corner-shape) | `^0.0.8-3`            | CSS `corner-shape: squircle` utilities and fallback classes                   |
 | **Animations**            | [Motion](https://motion.dev/)                                                  | `^14.3.0`             | Spring physics, layout animations, and gesture tracking                       |
 | **Tailwind Merge**        | [tailwind-merge](https://www.npmjs.com/package/tailwind-merge)                 | `^3.0.0`              | Intelligent class merging extended with custom brutal tokens (`lib/utils.ts`) |
-| **Icons**                 | [Lucide React](https://lucide.dev/)                                            | `^1.59.0`             | Crisp, scalable icon set styled with theme stroke tokens                      |
+| **Icons**                 | [Lucide React](https://lucide.dev/) + [Neu Icons](./components/neu-icons)      | `^1.59.0` / Local     | Crisp UI icons (`lucide-react`) + 10 bespoke Soft Neubrutalism SVG accents    |
 | **Diagnostics**           | [React Scan](https://react-scan.com/)                                          | Auto (unpkg)          | Real-time React 19 render & performance profiling (development-only)          |
 | **Linter & Formatter**    | [OXC](https://oxc.rs/) (`oxlint` + `oxfmt`)                                    | `^1.88.0` / `^0.73.0` | Ultra-fast Rust-based static analysis replacing ESLint & Prettier             |
 
@@ -62,6 +62,7 @@ nmrisrl-v3/
 ├── components/
 │   ├── avatar/           # Interactive avatar video player & spring gaze tracker (InteractiveAvatar, useAvatarGaze)
 │   ├── custom/           # App-specific interactive features (CustomCursor, Click effect)
+│   ├── neu-icons/        # 10 bespoke Soft Neubrutalism SVG accent icons (PropellerStar, RoundedCross, etc.)
 │   ├── page-layout/      # Architectural 3-column grid layout (Navbar, GridSection, PageLayout)
 │   ├── sections/         # Portfolio sections (Hero with RotatingSeal, BauhausAccent, NpmDevBadge, GitCommandBadge, dual-track Marquee)
 │   └── ui/               # Registry-backed Base UI primitives and styled wrappers (Button, Card, Badge, Dialog, Tooltip)
@@ -231,6 +232,7 @@ See [`AGENTS.md`](./AGENTS.md) for the full lookup table and rules.
 
 - **`@/components/ui/*` Pristine Registry Boundary**: Strictly reserved for registry-backed primitives and their local styled wrappers installed or scaffolded from Base UI and shadcn registries (`button`, `badge`, `card`, `dialog`, `tooltip`). Never place bespoke app code in this directory.
 - **`@/components/custom/*` for Bespoke Interactive Features**: Decouple and place custom experience primitives (`CustomCursor`, `Click` effect, future audio SFX managers) in this dedicated folder.
+- **`@/components/neu-icons/*` for Bespoke Neubrutalist SVG Accents**: Dedicated collection of 10 handcrafted Soft Neubrutalism SVG accent icons with shared `NeuIconProps`, size/fill cascade, and accessible defaults. Supports both direct module imports and explicit named exports via `index.ts`.
 - **Strict Anti-Barrel Policy (Direct Module Imports)**: Always import directly from individual component files (e.g. `import { CustomCursor } from "@/components/custom/cursor";`, `import { HeroSection } from "@/components/sections/hero/hero-section";`). Avoid intermediate `index.ts` barrel files to eliminate circular dependency hazards, prevent bundle bloat, and maximize Turbopack HMR compilation speeds.
 
 ---

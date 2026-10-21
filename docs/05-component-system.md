@@ -195,3 +195,57 @@ The layout incorporates a 3-column structural grid framework with decorative str
   - Top track translates Left; bottom track translates Right (reverse).
   - Populated strictly from [`ProfileCoreTech`](file:///C:/Users/NOMER%20ISRAEL/OneDrive/Desktop/Projects/nmrisrl-v3/constants/stack-and-skills-data.ts) in `constants/stack-and-skills-data.ts`.
   - Contained inside the grid rails (`w-full overflow-hidden`) with refined borders (`border-t border-ink/20`, `border-b border-ink/15`) and edge fade masks (`bg-linear-to-r`).
+
+---
+
+## 8. Neubrutalist Accent Icon Library (`components/neu-icons/`)
+
+A dedicated set of 10 bespoke Soft Neubrutalism SVG accent icons designed to be used purposefully across cards, badges, section headers, and micro-accents without visual overuse.
+
+### A. Shared Interface & Props Architecture (`types.ts`)
+
+All icons share the lightweight `NeuIconProps` interface:
+
+```tsx
+import type { ComponentProps } from "react";
+
+export interface NeuIconProps extends ComponentProps<"svg"> {
+	/**
+	 * Explicit square dimension helper (applies to width & height).
+	 * Defaults to 24 (paired with the `size-6` class).
+	 */
+	size?: number | string;
+}
+```
+
+- **Default Styling**: Applies `className={cn("inline-block shrink-0 select-none", fill === "currentColor" && "fill-current", size === 24 && !width && !height && "size-6", className)}`.
+- **Color Inheritance**: Built with `fill="currentColor"` by default, conditionally injecting `fill-current` so icons automatically inherit active text colors (`text-ink`, `text-coral`, `text-yellow`) while allowing non-current fill values (`fill="none"`, `fill="#FF6B57"`) to pass through without CSS class collisions. Explicit Tailwind utility overrides (`fill-coral`, `stroke-ink`) on `className` remain fully functional.
+- **Flexible Sizing**: Sizing can be controlled via the `size` prop (`size={32}`), HTML attributes (`width`, `height`), or standard Tailwind size classes (`className="size-8"`).
+- **Accessibility Safeguard**: Automatically assigns `aria-hidden="true"` by default for purely decorative accents, or dynamically switches to `role="img"` if `aria-label` or `aria-labelledby` is passed.
+
+### B. Complete Icon Manifest
+
+| Component Name       | File Path                                  | Shape Description                                 |
+| :------------------- | :----------------------------------------- | :------------------------------------------------ |
+| `PropellerStarIcon`  | `components/neu-icons/propeller-star.tsx`  | 4-blade curved propeller star / astroid clover    |
+| `RoundedCrossIcon`   | `components/neu-icons/rounded-cross.tsx`   | Rounded Greek plus / Swiss cross with pill arms   |
+| `SlantedLoopIcon`    | `components/neu-icons/slanted-loop.tsx`    | Diagonal tilted infinity loop / peanut silhouette |
+| `DoubleCapsuleIcon`  | `components/neu-icons/double-capsule.tsx`  | Vertical dual capsule / cassette pill pair        |
+| `TrefoilCloudIcon`   | `components/neu-icons/trefoil-cloud.tsx`   | 3-bubble trefoil cloud cluster                    |
+| `ScallopRosetteIcon` | `components/neu-icons/scallop-rosette.tsx` | 4-corner scalloped rosette / flower badge         |
+| `DonutRingIcon`      | `components/neu-icons/donut-ring.tsx`      | Circular donut ring / target torus                |
+| `DiamondStarIcon`    | `components/neu-icons/diamond-star.tsx`    | 8-point faceted diamond sparkle star              |
+| `CrossStarIcon`      | `components/neu-icons/cross-star.tsx`      | 4-point rounded cross star / flare                |
+| `SunburstFlowerIcon` | `components/neu-icons/sunburst-flower.tsx` | 8-petal blooming sunburst daisy flower            |
+
+### C. Import Patterns
+
+Both direct module imports and explicit package imports are supported:
+
+```tsx
+// Direct module import (fastest Turbopack HMR compilation)
+import { DiamondStarIcon } from "@/components/neu-icons/diamond-star";
+
+// Package import (explicit named exports from components/neu-icons/index.ts)
+import { DiamondStarIcon, PropellerStarIcon } from "@/components/neu-icons";
+```
