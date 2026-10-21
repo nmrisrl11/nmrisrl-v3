@@ -1,9 +1,11 @@
-import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import type { ReactNode } from "react";
 
 interface GridSectionProps {
 	id?: string;
 	number?: string;
+	figure?: string;
+	figureMeta?: string | string[];
 	title?: string;
 	description?: string;
 	children: ReactNode;
@@ -15,6 +17,8 @@ interface GridSectionProps {
 export function GridSection({
 	id,
 	number,
+	figure,
+	figureMeta,
 	title,
 	description,
 	children,
@@ -45,9 +49,32 @@ export function GridSection({
 				</>
 			)}
 
-			{/* Section Header (if title or number provided) */}
-			{(title || number) && (
+			{/* Section Header (if title, number, or figure provided) */}
+			{(title || number || figure) && (
 				<header className="mb-8">
+					{figure && (
+						<div className="mb-2 flex flex-wrap items-center gap-1.5 font-mono text-[10px] font-bold tracking-wider text-ink/60 uppercase select-none sm:gap-2 sm:text-[11px] sm:tracking-widest">
+							<span className="text-coral">✦</span>
+							<span>{figure}</span>
+							{figureMeta &&
+								(Array.isArray(figureMeta) ? (
+									figureMeta.map((item, idx) => (
+										<span
+											key={`${item}-${idx}`}
+											className="inline-flex items-center gap-1.5 sm:gap-2"
+										>
+											<span className="text-ink/25">•</span>
+											<span>{item}</span>
+										</span>
+									))
+								) : (
+									<span className="inline-flex items-center gap-1.5 sm:gap-2">
+										<span className="text-ink/25">•</span>
+										<span>{figureMeta}</span>
+									</span>
+								))}
+						</div>
+					)}
 					<div className="flex items-center gap-2.5">
 						{number && (
 							<span className="font-mono text-sm font-bold tracking-tight text-coral">
