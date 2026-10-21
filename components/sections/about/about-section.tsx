@@ -41,7 +41,7 @@ function SpecializationCard() {
 		<div className="relative flex flex-col justify-between overflow-hidden squircle-card bg-surface p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-brutal-lg sm:p-7 md:col-span-2 lg:col-span-7">
 			{/* Blueprint Header */}
 			<div className="flex items-center justify-between gap-2 border-b border-ink/10 pb-4">
-				<div className="inline-flex items-center gap-2 font-mono text-xs font-bold tracking-wide text-coral uppercase">
+				<div className="inline-flex items-center gap-2 font-mono text-xs font-bold tracking-wide text-ink uppercase">
 					<span>01 // SPECIALIZATION</span>
 				</div>
 				<span className="font-mono text-[10px] font-bold tracking-wider text-ink/40">
@@ -114,7 +114,7 @@ function ExperienceCard() {
 		<div className="relative flex flex-col justify-between overflow-hidden squircle-card bg-surface p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-brutal-lg sm:p-7 md:col-span-2 lg:col-span-5">
 			{/* Header */}
 			<div className="flex items-center justify-between gap-2 border-b border-ink/10 pb-4">
-				<div className="inline-flex items-center gap-2 font-mono text-xs font-bold tracking-wide text-coral uppercase">
+				<div className="inline-flex items-center gap-2 font-mono text-xs font-bold tracking-wide text-ink uppercase">
 					<span>02 // EXPERIENCE</span>
 				</div>
 				<span className="font-mono text-[10px] font-bold tracking-wider text-ink/40">
@@ -162,7 +162,7 @@ function ArchitectureCard() {
 		<div className="relative flex flex-col justify-between overflow-hidden squircle-card bg-surface p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-brutal-lg sm:p-7 md:col-span-1 lg:col-span-6">
 			{/* Header */}
 			<div className="flex items-center justify-between gap-2 border-b border-ink/10 pb-4">
-				<div className="inline-flex items-center gap-2 font-mono text-xs font-bold tracking-wide text-coral uppercase">
+				<div className="inline-flex items-center gap-2 font-mono text-xs font-bold tracking-wide text-ink uppercase">
 					<span>03 // ARCHITECTURE</span>
 				</div>
 				<DoubleCapsuleIcon className="size-5 text-ink/70" />
@@ -204,7 +204,7 @@ function InnovationCard() {
 		<div className="relative flex flex-col justify-between overflow-hidden squircle-card bg-surface p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-brutal-lg sm:p-7 md:col-span-1 lg:col-span-6">
 			{/* Header */}
 			<div className="flex items-center justify-between gap-2 border-b border-ink/10 pb-4">
-				<div className="inline-flex items-center gap-2 font-mono text-xs font-bold tracking-wide text-coral uppercase">
+				<div className="inline-flex items-center gap-2 font-mono text-xs font-bold tracking-wide text-ink uppercase">
 					<span>04 // INNOVATION</span>
 				</div>
 				<div className="inline-flex items-center gap-2 rounded-full border-subtle border-ink bg-mint/40 px-2.5 py-0.5 font-mono text-[10px] font-bold text-ink">
@@ -256,7 +256,7 @@ function NorthStarCard() {
 		<div className="relative flex flex-col justify-between overflow-hidden squircle-card bg-surface p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-brutal-lg sm:p-7 md:col-span-2 lg:col-span-5">
 			{/* Header */}
 			<div className="flex items-center justify-between gap-2 border-b border-ink/10 pb-4">
-				<div className="inline-flex items-center gap-2 font-mono text-xs font-bold tracking-wide text-coral uppercase">
+				<div className="inline-flex items-center gap-2 font-mono text-xs font-bold tracking-wide text-ink uppercase">
 					<span>05 // THE NORTH STAR</span>
 				</div>
 				<PropellerStarIcon className="size-5 animate-spin text-ink [animation-duration:16s] motion-reduce:animate-none" />
@@ -290,7 +290,7 @@ function InterestsCard() {
 		<div className="relative flex flex-col justify-between overflow-hidden squircle-card bg-surface p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-brutal-lg sm:p-7 md:col-span-2 lg:col-span-7">
 			{/* Header */}
 			<div className="flex items-center justify-between gap-2 border-b border-ink/10 pb-4">
-				<div className="inline-flex items-center gap-2 font-mono text-xs font-bold tracking-wide text-coral uppercase">
+				<div className="inline-flex items-center gap-2 font-mono text-xs font-bold tracking-wide text-ink uppercase">
 					<span>06 // OFF-DUTY & INTERESTS</span>
 				</div>
 				<TrefoilCloudIcon className="size-5 fill-lavender text-ink/70" />

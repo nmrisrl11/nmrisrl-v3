@@ -205,12 +205,12 @@ The About section showcases professional identity, core specialization, engineer
   - **Blueprint Header**: Rendered with `figure="FIG. 02 // IDENTITY & BACKGROUND"` and `figureMeta={["SPECIALIZATION", "CRAFT & SYSTEMS"]}`.
   - **12-Column Responsive Bento Layout**: `grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-12`.
   - **Code-Split Modular Subcomponents**: Subdivided into 6 focused card components for maintainability:
-    1. **`SpecializationCard` (`lg:col-span-7`)**: Large anchor card highlighting React ecosystem expertise, type safety, and micro-interactions. Features 4 branded tech pills (`React`, `Next.js`, `TypeScript`, `Tailwind CSS`) powered by official Simple Icons.
-    2. **`ExperienceCard` (`lg:col-span-5`)**: High-contrast engineering metrics (`7+ Years Crafting`, `20+ Shipped Products`, `99% Web Performance`) with 200% zoom reflow protection (`flex-col md:flex-row md:items-center`), interactive hover lifts, and Warm Coral accents.
-    3. **`ArchitectureCard` (`lg:col-span-4`)**: Architectural methodologies (Design Systems, Micro-Frontends, Clean Architecture, Domain-Driven Design) accented with `SlantedLoopIcon`.
-    4. **`InnovationCard` (`lg:col-span-4`)**: Active radar tracking modern frontend advancements (Next.js App Router, React Server Components, Modern Web APIs, AI Tooling) accented with `DiamondStarIcon`.
-    5. **`NorthStarCard` (`lg:col-span-4`)**: Engineering standards (Pixel Precision, WCAG 2.2 AA Accessibility, Core Web Vitals) accented with `DoubleCapsuleIcon`.
-    6. **`InterestsCard` (`lg:col-span-12`)**: Personal pursuits (Distance Running & Half-Marathon routine, Game Development curiosity, 2D Character Art admiration) with Lucide icons (`Footprints`, `Gamepad2`, `Palette`) and bespoke `neu-icons` badges.
+    1. **`SpecializationCard` (`md:col-span-2 lg:col-span-7`)**: Large anchor card highlighting React ecosystem expertise, type safety, and micro-interactions. Features 4 branded tech pills (`React`, `Next.js`, `TypeScript`, `Tailwind CSS`) powered by official Simple Icons.
+    2. **`ExperienceCard` (`md:col-span-2 lg:col-span-5`)**: High-contrast engineering metric (`7+ Years Crafting UI`), designer-intuition narrative, interactive hover lift, and a Scallop Rosette seal stamp chip.
+    3. **`ArchitectureCard` (`md:col-span-1 lg:col-span-6`)**: Architectural methodologies (Feature-Sliced Design, Clean Architecture, Domain-Driven Design) accented with `DoubleCapsuleIcon`.
+    4. **`InnovationCard` (`md:col-span-1 lg:col-span-6`)**: Active radar tracking modern frontend advancements (Web Standards, Modern Tooling, Emerging Trends) with a pulsing trend indicator and `SlantedLoopIcon`.
+    5. **`NorthStarCard` (`md:col-span-2 lg:col-span-5`)**: Engineering standards and core values (Purpose, Mastery, Freedom) accented with `PropellerStarIcon`.
+    6. **`InterestsCard` (`md:col-span-2 lg:col-span-7`)**: Personal pursuits (Distance Running routine, Game Development interest, 2D Character Art admiration) with Lucide icons (`Footprints`, `Gamepad2`, `Palette`) and `TrefoilCloudIcon`.
 
 - **`AboutIcons` (`components/sections/about/about-icons.tsx`)**:
   - Official brand SVG icons (`ReactIcon`, `NextjsIcon`, `TypeScriptIcon`, `TailwindIcon`) sourced directly from Simple Icons (`simpleicons.org`).
