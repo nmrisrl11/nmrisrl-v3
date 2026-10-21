@@ -35,30 +35,34 @@
 
 #### Canonical Classes Lookup Table
 
-| ❌ NEVER WRITE (Arbitrary)           | ✅ ALWAYS WRITE (Canonical) | CSS Target                    |
-| ------------------------------------ | --------------------------- | ----------------------------- |
-| `border-[2px]`                       | `border-brutal`             | `border-width: 2px;`          |
-| `border-b-[2px]`                     | `border-b-brutal`           | `border-bottom-width: 2px;`   |
-| `border-t-[2px]`                     | `border-t-brutal`           | `border-top-width: 2px;`      |
-| `border-x-[2px]`                     | `border-x-brutal`           | `border-left/right: 2px;`     |
-| `border-[1.5px]`                     | `border-subtle`             | `border-width: 1.5px;`        |
-| `border-b-[1.5px]`                   | `border-b-subtle`           | `border-bottom-width: 1.5px;` |
-| `border-[3px]`                       | `border-thick`              | `border-width: 3px;`          |
-| `border-b-[3px]`                     | `border-b-thick`            | `border-bottom-width: 3px;`   |
-| `shadow-[0px_2px_...]`               | `shadow-brutal-xs`          | `0px 2px 0px 0px #18181B;`    |
-| `shadow-[0px_3px_...]`               | `shadow-brutal-sm`          | `0px 3px 0px 0px #18181B;`    |
-| `shadow-[0px_4px_...]`               | `shadow-brutal`             | `0px 4px 0px 0px #18181B;`    |
-| `shadow-[0px_6px_...]`               | `shadow-brutal-lg`          | `0px 6px 0px 0px #18181B;`    |
-| `shadow-[0px_8px_...]`               | `shadow-brutal-xl`          | `0px 8px 0px 0px #18181B;`    |
-| `bg-[#DEF2E0]`                       | `bg-canvas`                 | Sage Mint Canvas              |
-| `text-[#18181B]`, `border-[#18181B]` | `text-ink`, `border-ink`    | Deep Ink                      |
-| `bg-[#FF6B57]`                       | `bg-coral`                  | Warm Coral                    |
-| `bg-[#FDE047]`                       | `bg-yellow`                 | Buttercup Yellow              |
-| `bg-[#EBE6FF]`                       | `bg-lavender`               | Soft Lavender                 |
-| `bg-[#BAE6FD]`                       | `bg-sky`                    | Sky Mist                      |
-| `bg-[#86EFAC]`                       | `bg-mint`                   | Fresh Mint                    |
-| `rounded-[9999px]`                   | `rounded-full`              | Full radius (squircle target) |
-| `bg-[repeating-linear...]`           | `bg-striped-rail`           | 315° diagonal hatching rail   |
+| ❌ NEVER WRITE (Arbitrary)           | ✅ ALWAYS WRITE (Canonical) | CSS Target                                |
+| ------------------------------------ | --------------------------- | ----------------------------------------- |
+| `border-[2px]`                       | `border-brutal`             | `border-width: 2px;`                      |
+| `border-b-[2px]`                     | `border-b-brutal`           | `border-bottom-width: 2px;`               |
+| `border-t-[2px]`                     | `border-t-brutal`           | `border-top-width: 2px;`                  |
+| `border-x-[2px]`                     | `border-x-brutal`           | `border-left/right: 2px;`                 |
+| `border-[1.5px]`                     | `border-subtle`             | `border-width: 1.5px;`                    |
+| `border-b-[1.5px]`                   | `border-b-subtle`           | `border-bottom-width: 1.5px;`             |
+| `border-[3px]`                       | `border-thick`              | `border-width: 3px;`                      |
+| `border-b-[3px]`                     | `border-b-thick`            | `border-bottom-width: 3px;`               |
+| `shadow-[0px_2px_...]`               | `shadow-brutal-xs`          | `0px 2px 0px 0px #18181B;`                |
+| `shadow-[0px_3px_...]`               | `shadow-brutal-sm`          | `0px 3px 0px 0px #18181B;`                |
+| `shadow-[0px_4px_...]`               | `shadow-brutal`             | `0px 4px 0px 0px #18181B;`                |
+| `shadow-[0px_6px_...]`               | `shadow-brutal-lg`          | `0px 6px 0px 0px #18181B;`                |
+| `shadow-[0px_8px_...]`               | `shadow-brutal-xl`          | `0px 8px 0px 0px #18181B;`                |
+| `drop-shadow-[0_1.5px_0_...]`        | `drop-shadow-brutal-xs`     | `filter: drop-shadow(0 1.5px 0 #18181B);` |
+| `drop-shadow-[0_2px_0_...]`          | `drop-shadow-brutal-sm`     | `filter: drop-shadow(0 2px 0 #18181B);`   |
+| `drop-shadow-[0_3px_0_...]`          | `drop-shadow-brutal`        | `filter: drop-shadow(0 3px 0 #18181B);`   |
+| `drop-shadow-[0_4px_0_...]`          | `drop-shadow-brutal-lg`     | `filter: drop-shadow(0 4px 0 #18181B);`   |
+| `bg-[#DEF2E0]`                       | `bg-canvas`                 | Sage Mint Canvas                          |
+| `text-[#18181B]`, `border-[#18181B]` | `text-ink`, `border-ink`    | Deep Ink                                  |
+| `bg-[#FF6B57]`                       | `bg-coral`                  | Warm Coral                                |
+| `bg-[#FDE047]`                       | `bg-yellow`                 | Buttercup Yellow                          |
+| `bg-[#EBE6FF]`                       | `bg-lavender`               | Soft Lavender                             |
+| `bg-[#BAE6FD]`                       | `bg-sky`                    | Sky Mist                                  |
+| `bg-[#86EFAC]`                       | `bg-mint`                   | Fresh Mint                                |
+| `rounded-[9999px]`                   | `rounded-full`              | Full radius (squircle target)             |
+| `bg-[repeating-linear...]`           | `bg-striped-rail`           | 315° diagonal hatching rail               |
 
 9. **Always use the 3-column architectural framework with striped rails**: Wrap page content using the 3-column architectural grid with flanking vertical striped rails (`bg-striped-rail border-x border-ink/15 hidden md:block`).
 10. **Always verify mobile responsiveness and prevent horizontal scroll**: Enforce `w-full overflow-x-clip` on root wrappers, specify explicit `grid-cols-1` on mobile grid containers, and ensure child columns use `min-w-0 w-full` to avoid unintended horizontal scrollbars.
@@ -69,6 +73,8 @@
 15. **Direct Module Imports Over Barrel Files (Anti-Barrel Policy)**: Do NOT obsessively create barrel files (`index.ts`) in every directory. Never create nested or multi-tier barrels (e.g. `sections/index.ts` re-exporting `hero/index.ts`). Always prefer direct imports (`@/components/custom/cursor`, `@/components/sections/hero/hero-section`, `@/components/page-layout/grid-section`, `@/components/ui/button`, `@/components/neu-icons/diamond-star`). Direct imports eliminate circular dependency hazards, prevent bundle size bloat, and maximize Turbopack/Next.js HMR compilation speed (Vercel `bundle-barrel-imports` performance guidance). A barrel file is only acceptable for cohesive packages with 5+ tightly-coupled public modules forming an external public API (such as `@/components/neu-icons`), and must never use wildcard `export *`.
 16. **Editorial Blueprint Section Headers**: For portfolio sections, use `GridSection`'s `figure` and `figureMeta?: string | string[]` props (e.g. `figure="FIG. 02 // IDENTITY & BACKGROUND"`, `figureMeta={["SPECIALIZATION", "CRAFT & SYSTEMS"]}`) to maintain consistent architectural blueprint kicker labels above section titles.
 17. **Feature-Colocated Brand SVGs (Simple Icons Pattern)**: When integrating external brand or technology icons (e.g. Simple Icons for React, Next.js, TypeScript, Tailwind), colocate them in a dedicated file inside their feature directory (e.g. `@/components/sections/about/about-icons.tsx`) instead of installing heavy external icon packages. Standardize with `viewBox="0 0 24 24"`, scalable attributes, accessible `<title>`, and `fill="currentColor"`.
+18. **SVG Silhouette Shadows vs Box Shadows**: Never apply `shadow-brutal*` (`box-shadow`) directly to `<svg>` icons or transparent graphics. Browsers cast `box-shadow` on the element's rectangular bounding box, producing a flat black line/bar under the SVG. Always use `drop-shadow-brutal*` (`filter: drop-shadow`), which hugs the vector silhouette and alpha channel. `GridMarker` automatically adapts `shadow-brutal*` to `drop-shadow-brutal*` for SVG neu-icon variants.
+19. **Architectural Grid Line Markers (`GridMarker` & `GridSection`)**: Corner junction markers on section divider borders are managed by `@/components/page-layout/grid-marker.tsx`. `GridSection` defaults to `"squircle"` (10px squircle box with progressive enhancement fallback: `rounded-xs corner-squircle supports-[corner-shape:squircle]:rounded-full`). Supports dynamic Neu-Icons (`marker="diamond-star"`, `"rounded-cross"`, `"sunburst-flower"`, etc.), custom `ReactElement` overrides, `markerClassName`, and toggle props `showMarker` (defaults to `true`) and `showTopMarker` (defaults to `false`).
 
 ---
 

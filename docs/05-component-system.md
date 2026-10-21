@@ -167,7 +167,16 @@ The layout incorporates a 3-column structural grid framework with decorative str
   - **Direct Action**: Text-only `Let's Talk` CTA button smoothly scrolling to `#contact`. Redundant "Contact" link removed from navigation items.
   - **Mobile Dropdown & Accessible Focus**: Compact floating squircle dropdown card attached beneath the island dock with touch-friendly navigation links and full-width CTA. Mobile hamburger toggle enforces visible keyboard focus (`focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink`).
 
-- **`GridSection` (`components/page-layout/grid-section.tsx`)**: Reusable section container with `border-b border-ink/15`, corner intersection crosshairs (`+`) rendered on the outer rail joints, optional section headers (`title`, `number`), and editorial blueprint figure headers via `figure` and `figureMeta?: string | string[]` props (e.g. `figure="FIG. 02 // IDENTITY & BACKGROUND"` with metadata pills).
+- **`GridMarker` (`components/page-layout/grid-marker.tsx`)**:
+  - **Architectural Junction Anchor**: Renders at grid line corners and section divider intersections with transform-based precision centering (`-translate-x-1/2 translate-y-1/2`).
+  - **Squircle Box Default with Progressive Fallback**: Defaults to `"squircle"` (`size-2.5 rounded-xs corner-squircle supports-[corner-shape:squircle]:rounded-full border border-ink/40 bg-surface shadow-xs`), providing a clean CAD terminal cap that upgrades v2's box with G2 continuous curvature.
+  - **Dynamic Neu-Icons Selection**: Supports 10 handcrafted vector Neu-Icons (`diamond-star`, `cross-star`, `rounded-cross`, `propeller-star`, `trefoil-cloud`, `sunburst-flower`, etc.) as well as custom `ReactElement` overrides.
+  - **Auto-Adaptive Silhouette Drop Shadows**: Automatically maps `shadow-brutal*` to `drop-shadow-brutal*` on SVG icons to cast zero-blur contour shadows following vector paths instead of rectangular bounding boxes.
+
+- **`GridSection` (`components/page-layout/grid-section.tsx`)**:
+  - Reusable architectural section container bounded by `border-b border-ink/15` (`px-4 py-16 md:px-8 lg:px-12`).
+  - **Streamlined Marker Props**: Accepts `marker?: GridMarkerVariant | ReactElement` (defaults to `"squircle"`), `markerClassName?: string`, `showMarker?: boolean` (defaults to `true`), and `showTopMarker?: boolean` (defaults to `false`).
+  - **Editorial Blueprint Headers**: Supports `figure`, `figureMeta?: string | string[]`, `number`, `title`, and `description` to render technical blueprint section kickers.
 
 ---
 

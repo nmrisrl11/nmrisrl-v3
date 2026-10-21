@@ -16,6 +16,12 @@ const customTwMerge = extendTailwindMerge({
 				"shadow-brutal-lg",
 				"shadow-brutal-xl",
 			],
+			"drop-shadow": [
+				"drop-shadow-brutal-xs",
+				"drop-shadow-brutal-sm",
+				"drop-shadow-brutal",
+				"drop-shadow-brutal-lg",
+			],
 		},
 	},
 });
