@@ -25,7 +25,8 @@ export function ScallopRosetteIcon({
 			aria-hidden={hasAccessibleName ? undefined : "true"}
 			role={hasAccessibleName ? "img" : undefined}
 			className={cn(
-				"inline-block shrink-0 fill-current select-none",
+				"inline-block shrink-0 select-none",
+				fill === "currentColor" && "fill-current",
 				size === 24 && !width && !height && "size-6",
 				className,
 			)}

@@ -218,8 +218,8 @@ export interface NeuIconProps extends ComponentProps<"svg"> {
 }
 ```
 
-- **Default Styling**: Applies `className={cn("inline-block shrink-0 fill-current select-none", size === 24 && !width && !height && "size-6", className)}`.
-- **Color Inheritance**: Built with `fill="currentColor"` so icons automatically adapt to active parent text colors (`text-ink`, `text-coral`, `text-yellow`, `text-surface`) or accept explicit Tailwind utility overrides (`fill-coral`, `stroke-ink`).
+- **Default Styling**: Applies `className={cn("inline-block shrink-0 select-none", fill === "currentColor" && "fill-current", size === 24 && !width && !height && "size-6", className)}`.
+- **Color Inheritance**: Built with `fill="currentColor"` by default, conditionally injecting `fill-current` so icons automatically inherit active text colors (`text-ink`, `text-coral`, `text-yellow`) while allowing non-current fill values (`fill="none"`, `fill="#FF6B57"`) to pass through without CSS class collisions. Explicit Tailwind utility overrides (`fill-coral`, `stroke-ink`) on `className` remain fully functional.
 - **Flexible Sizing**: Sizing can be controlled via the `size` prop (`size={32}`), HTML attributes (`width`, `height`), or standard Tailwind size classes (`className="size-8"`).
 - **Accessibility Safeguard**: Automatically assigns `aria-hidden="true"` by default for purely decorative accents, or dynamically switches to `role="img"` if `aria-label` or `aria-labelledby` is passed.
 
