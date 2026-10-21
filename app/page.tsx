@@ -1,5 +1,6 @@
-import { GridSection, PageLayout } from "@/components/page-layout";
-import { HeroSection } from "@/components/sections";
+import { GridSection } from "@/components/page-layout/grid-section";
+import { PageLayout } from "@/components/page-layout/page-layout";
+import { HeroSection } from "@/components/sections/hero/hero-section";
 import { Badge } from "@/components/ui/badge";
 
 export default function Home() {

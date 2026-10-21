@@ -1,7 +1,8 @@
-import "./globals.css";
 import { fontBody, fontDisplay, fontHeading, fontMono } from "@/app/fonts";
+import { CustomCursor } from "@/components/custom/cursor";
 import type { Metadata } from "next";
 import Script from "next/script";
+import "./globals.css";
 
 export const metadata: Metadata = {
 	title: {
@@ -32,7 +33,10 @@ export default function RootLayout({
 				)}
 			</head>
 
-			<body className="antialiased selection:bg-yellow selection:text-ink">{children}</body>
+			<body className="antialiased selection:bg-yellow selection:text-ink">
+				<CustomCursor clickEffectShadow={false} />
+				{children}
+			</body>
 		</html>
 	);
 }

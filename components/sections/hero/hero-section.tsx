@@ -1,5 +1,5 @@
-import { InteractiveAvatar } from "@/components/avatar";
-import { GridSection } from "@/components/page-layout";
+import { InteractiveAvatar } from "@/components/avatar/interactive-avatar";
+import { GridSection } from "@/components/page-layout/grid-section";
 import { Button } from "@/components/ui/button";
 import { BauhausAccent } from "./bauhaus-accent";
 import { GitCommandBadge } from "./git-command-badge";

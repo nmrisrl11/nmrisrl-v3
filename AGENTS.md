@@ -51,7 +51,8 @@ Or use the pre-built utilities: `squircle-btn`, `squircle-card`, `squircle-badge
 
 ### 📌 Architecture & Component System
 
-- Always place reusable primitives in `@/components/ui/*`.
+- **`@/components/ui/*` is STRICTLY RESERVED for registry-backed primitives & styled wrappers**: Only place registry-backed primitives and their local styled wrappers installed or scaffolded from Base UI and shadcn registries (`button`, `badge`, `card`, `dialog`, `tooltip`) in this folder. Keep it pristine.
+- **`@/components/custom/*` for App-Specific Interactive Features**: Decouple and place all bespoke, app-specific UI features, interactive controllers, and experience enhancements (e.g., `CustomCursor`, `Click` effect, future SFX managers, custom widgets) in `@/components/custom/*` (or dedicated feature directories like `@/components/avatar/`, `@/components/sections/`, `@/components/page-layout/`). **NEVER pollute `@/components/ui/*` with app-specific custom code.**
 - Always use `@base-ui/react` for headless accessible components. Do NOT install `@radix-ui/*`.
 - **Buttons & Floating Elements**: Use outset **`ring-2 ring-ink shadow-brutal`** (not `border-brutal`) to eliminate sub-pixel anti-aliasing gaps and corner-shape desync. Pair with `focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink`. Never combine with `focus-visible:outline-none`, which suppresses keyboard focus rings.
 - **Structural Dividers & Rails**: Keep standard `border-subtle`, `border-brutal` (2px), and `border-thick` for directional lines (`border-x`, `border-t`, `border-b`).
@@ -61,6 +62,14 @@ Or use the pre-built utilities: `squircle-btn`, `squircle-card`, `squircle-badge
 - **Text Zoom & Reflow**: Metric chips and side-by-side cards must support 200% text zoom by stacking vertically at narrow widths (`flex-col md:flex-row md:items-center`) to prevent content clipping (WCAG 1.4.4 / 1.4.10).
 - **Avatar Stage & Floating Accents Anchor Pattern**: When anchoring floating badges or visual accents around the avatar, wrap the avatar and badges in a tight inner stage wrapper (`relative w-full max-w-65 sm:max-w-85 md:max-w-95 lg:max-w-100`) rather than the outer layout column. This guarantees absolute coordinates anchor directly to the avatar silhouette across all viewports (desktop, tablet, mobile) and prevents badges from drifting across full-width columns.
 - **Tailwind Merge**: All custom brutal tokens are registered in `customTwMerge` via `extendTailwindMerge` in `@/lib/utils`. Never append `!` (e.g. `border-brutal!`) to force class retention.
+- **Strict Anti-Barrel Policy (Direct Module Imports)**: Do NOT obsessively create barrel files (`index.ts`) in every directory. Never create multi-tier or nested barrels (e.g. `sections/index.ts` re-exporting `hero/index.ts`). Always use direct imports:
+  - ✅ `import { CustomCursor } from "@/components/custom/cursor";`
+  - ✅ `import { HeroSection } from "@/components/sections/hero/hero-section";`
+  - ✅ `import { GridSection } from "@/components/page-layout/grid-section";`
+  - ✅ `import { Button } from "@/components/ui/button";`
+  - ❌ `import { ... } from "@/components/custom";` (superfluous barrel for 2 files)
+  - ❌ `import { ... } from "@/components/sections";` (nested barrel-in-barrel)
+    Direct imports eliminate circular dependency hazards, prevent bundle size bloat, and maximize Turbopack/Next.js HMR compilation speed (Vercel `bundle-barrel-imports` best practice). A barrel file is only acceptable for folders with 5+ tightly-coupled public modules forming an external public API, and must never use wildcard `export *`.
 - Consult installed agent skills in `.agents/skills/` (`migrate-radix-to-base`, `shadcn`, `vercel-react-best-practices`, `web-design-guidelines`, `frontend-a11y`, `frontend-design`).
 - Always run `npm run lint` (`oxlint`) and `npm run format` (`oxfmt`) before ending your turn.
 - **NEVER run `git commit` or `git push` autonomously.** Always wait for explicit user instruction or ask before committing/pushing.

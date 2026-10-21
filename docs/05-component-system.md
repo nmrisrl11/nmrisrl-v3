@@ -123,7 +123,34 @@ All core components live inside `components/ui/`:
 
 ---
 
-## 5. Layout & Architectural Grid System (`components/page-layout/`)
+## 5. App-Specific & Experience Primitives (`components/custom/`)
+
+> **Architectural Boundary**: `@/components/ui/*` is strictly reserved for registry-backed primitives and their local styled wrappers installed or scaffolded from Base UI and shadcn registries (such as `button`, `card`, `badge`, `dialog`, `tooltip`). All bespoke application components, interactive controllers, and micro-experience features reside in `@/components/custom/*` to keep the UI directory clean and registry-compatible.
+
+### A. Custom Cursor (`components/custom/cursor.tsx`)
+
+- **Inspired by**: [Animate UI Cursor Primitive](https://animate-ui.com/docs/primitives/animate-ui/cursor).
+- **Styling**: Coral body (`#FF6B57`), Chalk White outline (`#FFFFFF`, 2.5px), and 2px zero-blur brutal ink shadow (`drop-shadow(0px 2px 0px rgba(24, 24, 27, 0.95))`).
+- **Precision Alignment**: Arrow hotspot locked to exact `(1.5px, 3px)` tip coordinates, preventing pointer click-target desynchronization.
+- **Haptic Micro-interactions**: Smooth click scaling (`scale: 0.88` on press), clickable hover reactions (`scale: 1.15` and subtle tilt over buttons/links), and text caret transparency (hides over text fields).
+- **Platform Safety**: Excludes touch-only devices via `(hover: hover) and (pointer: fine)` query; honors `prefers-reduced-motion`.
+
+### B. Click Effect Primitive (`components/custom/click.tsx`)
+
+- **Inspired by**: [Animate UI Click Primitive](https://animate-ui.com/docs/primitives/animate-ui/click).
+- **5 Configurable Variants**:
+  - `burst` (Default): Directional speed-lines erupting in the 180°–270° quadrant behind the arrow tip with brutal ink drop shadows.
+  - `particles`: 360° radiating circular confetti with white borders (supports `multiColor` brand palette).
+  - `crosshair`: Architectural 4-tick crosshair expanding outward matching `GridSection` `[+]` indicators.
+  - `ring`: Tactile expanding shockwave ring.
+  - `ripple`: Soft expanding radial wash.
+- **Immediate Tactile Physics**: Defaults to `trigger="pointerdown"` for instant 0ms haptic response on mouse press.
+- **Toggleable 3D Drop Shadow**: Includes `showShadow?: boolean` on `<Click />` (and `clickEffectShadow?: boolean` on `<CustomCursor />`) to easily switch between 3D neubrutalist drop shadows or flat, clean vectors.
+- **Future Customization & SFX Hook**: Equipped with `onEffectTrigger?: (item) => void` callback ready for audio sound effects (SFX) and user preference switchers.
+
+---
+
+## 6. Layout & Architectural Grid System (`components/page-layout/`)
 
 The layout incorporates a 3-column structural grid framework with decorative striped gutter rails inspired by `tailwindcss.com`:
 
@@ -144,7 +171,7 @@ The layout incorporates a 3-column structural grid framework with decorative str
 
 ---
 
-## 6. Hero Section & Marquee System (`components/sections/hero/`)
+## 7. Hero Section & Marquee System (`components/sections/hero/`)
 
 - **`HeroSection` (`components/sections/hero/hero-section.tsx`)**:
   - Natural content-driven height (`flex flex-col justify-between px-0! py-0`) avoiding excessive vertical empty space while maintaining visual balance.
