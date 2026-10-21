@@ -67,6 +67,8 @@
 13. **Always anchor avatar floating badges to an inner stage wrapper**: When anchoring floating badges or visual accents around the avatar, wrap the avatar and badges in a tight inner stage wrapper (`relative w-full max-w-65 sm:max-w-85 md:max-w-95 lg:max-w-100`) rather than the outer layout column. This guarantees absolute coordinates anchor directly to the avatar silhouette across all viewports (desktop, tablet, mobile) and prevents badges from drifting across full-width columns.
 14. **Strict Component Directory Boundaries (`components/ui/`, `components/custom/`, `components/neu-icons/`)**: `@/components/ui/*` is STRICTLY RESERVED for registry-backed primitives and their local styled wrappers installed or scaffolded from Base UI and shadcn registries (`button`, `badge`, `card`, `dialog`, `tooltip`). Keep this directory pristine. All app-specific custom components, bespoke interactive features, and micro-experience controllers (e.g. `CustomCursor`, `Click`, future SFX managers, custom widgets) MUST be decoupled and placed in `@/components/custom/*`. Dedicated bespoke SVG icon accents live in `@/components/neu-icons/*`. NEVER pollute `@/components/ui/*` with bespoke app code.
 15. **Direct Module Imports Over Barrel Files (Anti-Barrel Policy)**: Do NOT obsessively create barrel files (`index.ts`) in every directory. Never create nested or multi-tier barrels (e.g. `sections/index.ts` re-exporting `hero/index.ts`). Always prefer direct imports (`@/components/custom/cursor`, `@/components/sections/hero/hero-section`, `@/components/page-layout/grid-section`, `@/components/ui/button`, `@/components/neu-icons/diamond-star`). Direct imports eliminate circular dependency hazards, prevent bundle size bloat, and maximize Turbopack/Next.js HMR compilation speed (Vercel `bundle-barrel-imports` performance guidance). A barrel file is only acceptable for cohesive packages with 5+ tightly-coupled public modules forming an external public API (such as `@/components/neu-icons`), and must never use wildcard `export *`.
+16. **Editorial Blueprint Section Headers**: For portfolio sections, use `GridSection`'s `figure` and `figureMeta?: string | string[]` props (e.g. `figure="FIG. 02 // IDENTITY & BACKGROUND"`, `figureMeta={["SPECIALIZATION", "CRAFT & SYSTEMS"]}`) to maintain consistent architectural blueprint kicker labels above section titles.
+17. **Feature-Colocated Brand SVGs (Simple Icons Pattern)**: When integrating external brand or technology icons (e.g. Simple Icons for React, Next.js, TypeScript, Tailwind), colocate them in a dedicated file inside their feature directory (e.g. `@/components/sections/about/about-icons.tsx`) instead of installing heavy external icon packages. Standardize with `viewBox="0 0 24 24"`, scalable attributes, accessible `<title>`, and `fill="currentColor"`.
 
 ---
 
@@ -84,7 +86,7 @@ components/
 ├── neu-icons/        # Bespoke Soft Neubrutalism SVG accent icons (propeller-star, rounded-cross, etc.)
 ├── avatar/           # Avatar video player & mouse-tracking controller (interactive-avatar, use-avatar-gaze)
 ├── page-layout/      # 3-column architectural layout & rails (navbar, grid-section, page-layout)
-└── sections/         # Page sections (hero, projects, experience, contact)
+└── sections/         # Modular page sections (hero, about, projects, experience, contact)
 docs/                 # Modular design system & architecture blueprints
 lib/
 └── utils.ts          # cn() class merging utility (clsx + tailwind-merge)

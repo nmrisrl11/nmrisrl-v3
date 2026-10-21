@@ -15,6 +15,7 @@
 - **Continuous Squircles**: Continuous-curvature corners powered by `@toolwind/corner-shape` (`corner-shape: squircle`) with a reliable 3-layer progressive enhancement fallback for all modern browsers.
 - **Interactive Avatar Engine**: State-driven video player reacting to cursor tracking, viewport gaze, idle intervals, and gesture interactions.
 - **Custom Cursor & Tactile Click Engine**: Coral (`#FF6B57`) and Chalk White SVG pointer with instant 0ms haptic response, 5 selectable click effect styles (`burst`, `particles`, `crosshair`, `ring`, `ripple`), toggleable 3D brutal drop shadows, and audio SFX integration hooks.
+- **Soft Neubrutalist Bento Grid**: High-contrast 6-card modular bento grid for the About Me section, showcasing specialization, engineering metrics, architectural methodologies (Clean Architecture, DDD), innovation radar, and personal passions with official Simple Icons and custom neu-icons.
 
 ---
 
@@ -64,7 +65,9 @@ nmrisrl-v3/
 │   ├── custom/           # App-specific interactive features (CustomCursor, Click effect)
 │   ├── neu-icons/        # 10 bespoke Soft Neubrutalism SVG accent icons (PropellerStar, RoundedCross, etc.)
 │   ├── page-layout/      # Architectural 3-column grid layout (Navbar, GridSection, PageLayout)
-│   ├── sections/         # Portfolio sections (Hero with RotatingSeal, BauhausAccent, NpmDevBadge, GitCommandBadge, dual-track Marquee)
+│   ├── sections/         # Modular portfolio sections
+│   │   ├── hero/         # Hero section (RotatingSeal with CrossStar stamp, BauhausAccent, command badges, marquee)
+│   │   └── about/        # About section (6-card Neubrutalist Bento Grid, official Simple Icons)
 │   └── ui/               # Registry-backed Base UI primitives and styled wrappers (Button, Card, Badge, Dialog, Tooltip)
 ├── constants/            # Modular personal data & tech stack taxonomies
 │   ├── data.ts           # Bio, social links, and contact info

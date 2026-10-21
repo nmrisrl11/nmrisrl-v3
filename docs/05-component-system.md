@@ -167,7 +167,7 @@ The layout incorporates a 3-column structural grid framework with decorative str
   - **Direct Action**: Text-only `Let's Talk` CTA button smoothly scrolling to `#contact`. Redundant "Contact" link removed from navigation items.
   - **Mobile Dropdown & Accessible Focus**: Compact floating squircle dropdown card attached beneath the island dock with touch-friendly navigation links and full-width CTA. Mobile hamburger toggle enforces visible keyboard focus (`focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink`).
 
-- **`GridSection` (`components/page-layout/grid-section.tsx`)**: Reusable section container with `border-b border-ink/15`, numbered section headers (`02 // About Me`), and corner intersection crosshairs (`+`) rendered on the joints.
+- **`GridSection` (`components/page-layout/grid-section.tsx`)**: Reusable section container with `border-b border-ink/15`, corner intersection crosshairs (`+`) rendered on the outer rail joints, optional section headers (`title`, `number`), and editorial blueprint figure headers via `figure` and `figureMeta?: string | string[]` props (e.g. `figure="FIG. 02 // IDENTITY & BACKGROUND"` with metadata pills).
 
 ---
 
@@ -178,7 +178,7 @@ The layout incorporates a 3-column structural grid framework with decorative str
   - **Avatar Stage & Floating Accents Anchor Pattern**:
     - The character avatar and all its floating graphic accents are wrapped inside a dedicated inner stage wrapper (`relative w-full max-w-65 sm:max-w-85 md:max-w-95 lg:max-w-100`).
     - This architecture ensures all absolute positions (`-left-3`, `-right-3`, `bottom-12`) anchor directly to the avatar's silhouette across all viewports (desktop, tablet, mobile), preventing badges from drifting across full-width columns on smaller screens.
-    - **`RotatingSeal` (`components/sections/hero/rotating-seal.tsx`)**: Circular rotating SVG badge (`Crafted with care • 2026 • Nomer Israel • Frontend •`) with center star chip, positioned at the top-left of the avatar stage (`-top-6 -left-3 lg:-top-8 lg:-left-6`, honors `motion-reduce:animate-none`).
+    - **`RotatingSeal` (`components/sections/hero/rotating-seal.tsx`)**: Circular rotating SVG badge (`Crafted with care • 2026 • Nomer Israel • Frontend •`) with center `CrossStarIcon` stamp from `@/components/neu-icons` (`size-5.5 text-ink`), positioned at the top-left of the avatar stage (`-top-6 -left-3 lg:-top-8 lg:-left-6`, honors `motion-reduce:animate-none`).
     - **`BauhausAccent` (`components/sections/hero/bauhaus-accent.tsx`)**: Bauhaus geometric accent pill (`● ▲ ■ SYS.V3 // CRAFT`) at the avatar's bottom-left waistline (`bottom-20 -left-3 lg:bottom-24 lg:-left-4`, `-rotate-2`).
     - **`GitCommandBadge` (`components/sections/hero/git-command-badge.tsx`)**: Neubrutalist git command pill (`>_ git commit -m "feat"`) stepped down beneath Bauhaus on the lower waist/pants (`bottom-6 left-2 lg:bottom-8 lg:left-4`, `-rotate-1`, customizable via `command` prop).
     - **`NpmDevBadge` (`components/sections/hero/npm-dev-badge.tsx`)**: Neubrutalist developer command pill (`>_ npm run dev`) framing the lower-right wrist/pocket of the avatar (`-right-2 bottom-12 lg:-right-3 lg:bottom-14`, `rotate-2`).
@@ -188,7 +188,6 @@ The layout incorporates a 3-column structural grid framework with decorative str
     - **Availability Kicker**: `[ 🟢 AVAILABLE FOR WORK ]` squircle pill with pulsing mint indicator (equipped with `motion-reduce:animate-none`).
     - **Headline**: `Plus Jakarta Sans` headline with responsive sizing (`text-3xl sm:text-5xl`) and yellow highlight box (`beyond the code.`).
     - **Dual Action CTAs**: Clean `[ Explore Projects ]` (default coral) and `[ Get in Touch ]` (secondary white) buttons.
-    - **Relocated Metrics with 200% Zoom Reflow**: Metric cards (`7+ Years`, `20+ Shipped`, `99% Web Performance`) are housed under `02 // About Me` in `app/page.tsx`, utilizing responsive flex stacking (`flex-col md:flex-row md:items-center`) to reflow vertically at narrow widths and prevent text clipping at 200% zoom.
 
 - **`MarqueeTechStack` (`components/sections/hero/marquee-tech-stack.tsx`)**:
   - Dual-track infinite counter-translating marquee powered by `motion/react`.
@@ -198,7 +197,28 @@ The layout incorporates a 3-column structural grid framework with decorative str
 
 ---
 
-## 8. Neubrutalist Accent Icon Library (`components/neu-icons/`)
+## 8. About Section Bento Grid Architecture (`components/sections/about/`)
+
+The About section showcases professional identity, core specialization, engineering metrics, architectural mindset, and personal interests structured into a high-contrast Soft Neubrutalist Bento Grid:
+
+- **`AboutSection` (`components/sections/about/about-section.tsx`)**:
+  - **Blueprint Header**: Rendered with `figure="FIG. 02 // IDENTITY & BACKGROUND"` and `figureMeta={["SPECIALIZATION", "CRAFT & SYSTEMS"]}`.
+  - **12-Column Responsive Bento Layout**: `grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-12`.
+  - **Code-Split Modular Subcomponents**: Subdivided into 6 focused card components for maintainability:
+    1. **`SpecializationCard` (`md:col-span-2 lg:col-span-7`)**: Large anchor card highlighting React ecosystem expertise, type safety, and micro-interactions. Features 4 branded tech pills (`React`, `Next.js`, `TypeScript`, `Tailwind CSS`) powered by official Simple Icons.
+    2. **`ExperienceCard` (`md:col-span-2 lg:col-span-5`)**: High-contrast engineering metric (`7+ Years Crafting UI`), designer-intuition narrative, interactive hover lift, and a Scallop Rosette seal stamp chip.
+    3. **`ArchitectureCard` (`md:col-span-1 lg:col-span-6`)**: Architectural methodologies (Feature-Sliced Design, Clean Architecture, Domain-Driven Design) accented with `DoubleCapsuleIcon`.
+    4. **`InnovationCard` (`md:col-span-1 lg:col-span-6`)**: Active radar tracking modern frontend advancements (Web Standards, Modern Tooling, Emerging Trends) with a pulsing trend indicator and `SlantedLoopIcon`.
+    5. **`NorthStarCard` (`md:col-span-2 lg:col-span-5`)**: Engineering standards and core values (Purpose, Mastery, Freedom) accented with `PropellerStarIcon`.
+    6. **`InterestsCard` (`md:col-span-2 lg:col-span-7`)**: Personal pursuits (Distance Running routine, Game Development interest, 2D Character Art admiration) with Lucide icons (`Footprints`, `Gamepad2`, `Palette`) and `TrefoilCloudIcon`.
+
+- **`AboutIcons` (`components/sections/about/about-icons.tsx`)**:
+  - Official brand SVG icons (`ReactIcon`, `NextjsIcon`, `TypeScriptIcon`, `TailwindIcon`) sourced directly from Simple Icons (`simpleicons.org`).
+  - Standard `24x24` viewBox, `fill="currentColor"` cascade, and accessible `title` tags.
+
+---
+
+## 9. Neubrutalist Accent Icon Library (`components/neu-icons/`)
 
 A dedicated set of 10 bespoke Soft Neubrutalism SVG accent icons designed to be used purposefully across cards, badges, section headers, and micro-accents without visual overuse.
 

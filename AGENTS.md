@@ -71,6 +71,8 @@ Or use the pre-built utilities: `squircle-btn`, `squircle-card`, `squircle-badge
   - ❌ `import { ... } from "@/components/custom";` (superfluous barrel for 2 files)
   - ❌ `import { ... } from "@/components/sections";` (nested barrel-in-barrel)
     Direct imports eliminate circular dependency hazards, prevent bundle size bloat, and maximize Turbopack/Next.js HMR compilation speed (Vercel `bundle-barrel-imports` best practice). A barrel file is only acceptable for folders with 5+ tightly-coupled public modules forming an external public API, and must never use wildcard `export *`.
+- **Editorial Blueprint Section Headers**: For portfolio sections, use `GridSection`'s `figure` and `figureMeta?: string | string[]` props (e.g. `figure="FIG. 02 // IDENTITY & BACKGROUND"`, `figureMeta={["SPECIALIZATION", "CRAFT & SYSTEMS"]}`) to maintain consistent architectural blueprint kicker labels above section titles.
+- **Feature-Colocated Brand SVGs (Simple Icons Pattern)**: When integrating external brand or technology icons (e.g. Simple Icons for React, Next.js, TypeScript), colocate them in a dedicated file inside their feature directory (e.g. `@/components/sections/about/about-icons.tsx`) instead of installing heavy external icon packages. Standardize with `viewBox="0 0 24 24"`, scalable attributes, accessible `<title>`, and `fill="currentColor"`.
 - Consult installed agent skills in `.agents/skills/` (`migrate-radix-to-base`, `shadcn`, `vercel-react-best-practices`, `web-design-guidelines`, `frontend-a11y`, `frontend-design`).
 - Always run `npm run lint` (`oxlint`) and `npm run format` (`oxfmt`) before ending your turn.
 - **NEVER run `git commit` or `git push` autonomously.** Always wait for explicit user instruction or ask before committing/pushing.

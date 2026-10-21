@@ -1,3 +1,4 @@
+import { CrossStarIcon } from "@/components/neu-icons";
 import { cn } from "@/lib/utils";
 
 interface RotatingSealProps {
@@ -39,11 +40,9 @@ export function RotatingSeal({ className }: RotatingSealProps) {
 				</text>
 			</svg>
 
-			{/* Center Yellow Pastel Chip with Solid Filled Geometric Star */}
+			{/* Center Yellow Pastel Chip with Neubrutalist Cross Star Stamp */}
 			<div className="absolute inset-0 m-auto flex size-11 items-center justify-center rounded-full border-subtle border-ink bg-yellow shadow-brutal-xs">
-				<svg viewBox="0 0 24 24" className="size-5 fill-ink" aria-hidden="true">
-					<path d="M12 1.5L14.7 8.9L22.5 12L14.7 15.1L12 22.5L9.3 15.1L1.5 12L9.3 8.9L12 1.5Z" />
-				</svg>
+				<CrossStarIcon size={22} className="size-5.5 text-ink" />
 			</div>
 		</div>
 	);

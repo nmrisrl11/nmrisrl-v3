@@ -47,6 +47,6 @@ Rather than harsh, razor-sharp 90° corners that clash with the organic curved g
 
 ## 3. Brand Voice & Character
 
-- **Identity**: Nomer Israel — Senior Front-end Developer & Creative Technologist.
+- **Identity**: Nomer Israel — Front-end Developer.
 - **Tone**: Confident, playful, craft-obsessed, highly technical, yet warm and approachable.
 - **Mascot / Avatar**: A stylized 3D cartoon avatar in a navy jacket with dynamic facial expressions (waving, looking around, thumbs-up, fingerheart, and deep focus coding).
