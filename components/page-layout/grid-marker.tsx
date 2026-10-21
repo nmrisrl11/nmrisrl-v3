@@ -11,7 +11,7 @@ import {
 	TrefoilCloudIcon,
 } from "@/components/neu-icons";
 import { cn } from "@/lib/utils";
-import type { ComponentProps, ReactNode } from "react";
+import { cloneElement, isValidElement, type ComponentProps, type ReactNode } from "react";
 
 export type GridMarkerVariant =
 	| "squircle"
@@ -71,14 +71,25 @@ export function GridMarker({
 	// Auto-map shadow-brutal to drop-shadow-brutal so shadows contour to the icon's silhouette.
 	const resolvedClassName =
 		isSvgVariant && className
-			? className.replace(/\bshadow-brutal(-xs|-sm|-lg|-xl)?\b/g, (_match, suffix) => {
-					return suffix === "-xl" ? "drop-shadow-brutal-lg" : `drop-shadow-brutal${suffix ?? ""}`;
-				})
+			? className.replace(
+					/(?<![\w-])shadow-brutal(-xs|-sm|-lg|-xl)?(?![\w-])/g,
+					(_match, suffix) => {
+						return suffix === "-xl" ? "drop-shadow-brutal-lg" : `drop-shadow-brutal${suffix ?? ""}`;
+					},
+				)
 			: className;
 
 	const renderContent = () => {
 		if (children) {
-			return children;
+			if (!className) {
+				return children;
+			}
+			if (isValidElement<{ className?: string }>(children)) {
+				return cloneElement(children, {
+					className: cn(children.props.className, className),
+				});
+			}
+			return <span className={className}>{children}</span>;
 		}
 
 		switch (variant) {
@@ -88,7 +99,7 @@ export function GridMarker({
 					<span
 						aria-hidden="true"
 						className={cn(
-							"inline-block size-2.5 rounded-xs border border-ink/40 bg-surface shadow-xs corner-squircle supports-[corner-shape:squircle]:rounded-full",
+							"inline-block size-2.5 rounded-xs border border-ink/40 bg-surface shadow-brutal-xs corner-squircle supports-[corner-shape:squircle]:rounded-full",
 							className,
 						)}
 					/>
