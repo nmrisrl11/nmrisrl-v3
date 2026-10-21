@@ -115,6 +115,23 @@
 	}
 }
 
+/* Zero-Blur Neubrutalist Silhouette Drop Shadows (For SVGs and Icons) */
+@utility drop-shadow-brutal-xs {
+	filter: drop-shadow(0 1.5px 0 var(--color-ink));
+}
+
+@utility drop-shadow-brutal-sm {
+	filter: drop-shadow(0 2px 0 var(--color-ink));
+}
+
+@utility drop-shadow-brutal {
+	filter: drop-shadow(0 3px 0 var(--color-ink));
+}
+
+@utility drop-shadow-brutal-lg {
+	filter: drop-shadow(0 4px 0 var(--color-ink));
+}
+
 @layer base {
 	html {
 		scroll-padding-top: 5.5rem;

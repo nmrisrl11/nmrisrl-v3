@@ -79,7 +79,7 @@ export default function Home() {
 				number="06"
 				title="Get in Touch"
 				description="Available for select consulting, contracts, or full-time opportunities."
-				showBottomCrosshairs={false}
+				showMarker={false}
 				className="border-b-0 pb-20"
 			>
 				<div className="squircle-card bg-surface p-6">

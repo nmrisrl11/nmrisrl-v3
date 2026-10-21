@@ -70,6 +70,17 @@ flowchart LR
 | `--shadow-brutal-lg` | `shadow-brutal-lg` | `0px 6px 0px 0px #18181B` | Button hover elevation, modal frames         |
 | `--shadow-brutal-xl` | `shadow-brutal-xl` | `0px 8px 0px 0px #18181B` | Hero callouts, elevated overlay dialogs      |
 
+### Zero-Blur Silhouette Drop Shadows for SVGs & Icons
+
+Unlike HTML cards and buttons where `box-shadow` applies to the element's outer rectangle, transparent SVG icons require CSS `filter: drop-shadow(...)` to cast zero-blur shadows directly hugging the vector silhouette and alpha channel.
+
+| Silhouette Shadow Token | Tailwind Utility        | CSS Filter Value                          | Use Case                                  |
+| ----------------------- | ----------------------- | ----------------------------------------- | ----------------------------------------- |
+| —                       | `drop-shadow-brutal-xs` | `filter: drop-shadow(0 1.5px 0 #18181B);` | Micro SVG icons (12px–14px), small badges |
+| —                       | `drop-shadow-brutal-sm` | `filter: drop-shadow(0 2px 0 #18181B);`   | Mid-size SVG icons, tech chips            |
+| —                       | `drop-shadow-brutal`    | `filter: drop-shadow(0 3px 0 #18181B);`   | Standard SVG badges, Neu-Icons            |
+| —                       | `drop-shadow-brutal-lg` | `filter: drop-shadow(0 4px 0 #18181B);`   | Large accent icons, decorative stamps     |
+
 ---
 
 ## 4. Tailwind CSS v4 `@theme` Block

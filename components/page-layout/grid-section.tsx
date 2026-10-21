@@ -1,5 +1,6 @@
+import { GridMarker, type GridMarkerVariant } from "@/components/page-layout/grid-marker";
 import { cn } from "@/lib/utils";
-import type { ReactNode } from "react";
+import type { ReactElement, ReactNode } from "react";
 
 interface GridSectionProps {
 	id?: string;
@@ -10,8 +11,47 @@ interface GridSectionProps {
 	description?: string;
 	children: ReactNode;
 	className?: string;
-	showBottomCrosshairs?: boolean;
-	showTopCrosshairs?: boolean;
+	/** Marker variant ('squircle' | 'diamond-star' etc.) or custom ReactElement (defaults to 'squircle') */
+	marker?: GridMarkerVariant | ReactElement;
+	/** Optional class string applied to the corner markers */
+	markerClassName?: string;
+	/** Whether to display markers at bottom corner intersections (defaults to true) */
+	showMarker?: boolean;
+	/** Whether to display markers at top corner intersections (defaults to false) */
+	showTopMarker?: boolean;
+}
+
+function CornerMarkers({
+	marker,
+	position,
+	className,
+}: {
+	marker: GridMarkerVariant | ReactElement;
+	position: "top" | "bottom";
+	className?: string;
+}) {
+	const leftPos = position === "top" ? "top-left" : "bottom-left";
+	const rightPos = position === "top" ? "top-right" : "bottom-right";
+
+	if (typeof marker === "string") {
+		return (
+			<>
+				<GridMarker variant={marker} position={leftPos} className={className} />
+				<GridMarker variant={marker} position={rightPos} className={className} />
+			</>
+		);
+	}
+
+	return (
+		<>
+			<GridMarker position={leftPos} className={className}>
+				{marker}
+			</GridMarker>
+			<GridMarker position={rightPos} className={className}>
+				{marker}
+			</GridMarker>
+		</>
+	);
 }
 
 export function GridSection({
@@ -23,30 +63,19 @@ export function GridSection({
 	description,
 	children,
 	className,
-	showBottomCrosshairs = true,
-	showTopCrosshairs = false,
+	marker = "squircle",
+	markerClassName,
+	showMarker = true,
+	showTopMarker = false,
 }: GridSectionProps) {
 	return (
 		<section
 			id={id}
 			className={cn("relative border-b border-ink/15 px-4 py-16 md:px-8 lg:px-12", className)}
 		>
-			{/* Top Intersection Corner Crosshairs */}
-			{showTopCrosshairs && (
-				<>
-					<span
-						aria-hidden="true"
-						className="pointer-events-none absolute -top-2 -left-2 z-10 inline-flex size-4 items-center justify-center font-mono text-xs leading-none font-bold text-ink/40 select-none"
-					>
-						+
-					</span>
-					<span
-						aria-hidden="true"
-						className="pointer-events-none absolute -top-2 -right-2 z-10 inline-flex size-4 items-center justify-center font-mono text-xs leading-none font-bold text-ink/40 select-none"
-					>
-						+
-					</span>
-				</>
+			{/* Top Intersection Corner Markers */}
+			{showTopMarker && (
+				<CornerMarkers marker={marker} position="top" className={markerClassName} />
 			)}
 
 			{/* Section Header (if title, number, or figure provided) */}
@@ -98,22 +127,9 @@ export function GridSection({
 			{/* Content */}
 			{children}
 
-			{/* Bottom Intersection Corner Crosshairs */}
-			{showBottomCrosshairs && (
-				<>
-					<span
-						aria-hidden="true"
-						className="pointer-events-none absolute -bottom-2 -left-2 z-10 inline-flex size-4 items-center justify-center font-mono text-xs leading-none font-bold text-ink/40 select-none"
-					>
-						+
-					</span>
-					<span
-						aria-hidden="true"
-						className="pointer-events-none absolute -right-2 -bottom-2 z-10 inline-flex size-4 items-center justify-center font-mono text-xs leading-none font-bold text-ink/40 select-none"
-					>
-						+
-					</span>
-				</>
+			{/* Bottom Intersection Corner Markers */}
+			{showMarker && (
+				<CornerMarkers marker={marker} position="bottom" className={markerClassName} />
 			)}
 		</section>
 	);

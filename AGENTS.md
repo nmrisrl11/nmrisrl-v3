@@ -17,31 +17,35 @@ Writing arbitrary square bracket syntax (e.g. `border-b-[2.5px]`, `shadow-[4px_4
 
 ### 📌 Mandatory Canonical Lookup Table
 
-| ❌ NEVER WRITE (Arbitrary) | ✅ ALWAYS WRITE (Canonical) | Underlying CSS / Value        |
-| -------------------------- | --------------------------- | ----------------------------- |
-| `border-[2px]`             | `border-brutal`             | `border-width: 2px;`          |
-| `border-b-[2px]`           | `border-b-brutal`           | `border-bottom-width: 2px;`   |
-| `border-t-[2px]`           | `border-t-brutal`           | `border-top-width: 2px;`      |
-| `border-x-[2px]`           | `border-x-brutal`           | `border-left/right: 2px;`     |
-| `border-[1.5px]`           | `border-subtle`             | `border-width: 1.5px;`        |
-| `border-b-[1.5px]`         | `border-b-subtle`           | `border-bottom-width: 1.5px;` |
-| `border-[3px]`             | `border-thick`              | `border-width: 3px;`          |
-| `border-b-[3px]`           | `border-b-thick`            | `border-bottom-width: 3px;`   |
-| `shadow-[0px_2px_...]`     | `shadow-brutal-xs`          | `0px 2px 0px 0px #18181B;`    |
-| `shadow-[0px_3px_...]`     | `shadow-brutal-sm`          | `0px 3px 0px 0px #18181B;`    |
-| `shadow-[0px_4px_...]`     | `shadow-brutal`             | `0px 4px 0px 0px #18181B;`    |
-| `shadow-[0px_6px_...]`     | `shadow-brutal-lg`          | `0px 6px 0px 0px #18181B;`    |
-| `shadow-[0px_8px_...]`     | `shadow-brutal-xl`          | `0px 8px 0px 0px #18181B;`    |
-| `bg-[#DEF2E0]`             | `bg-canvas`                 | Sage Mint Canvas              |
-| `text-[#18181B]`           | `text-ink`                  | Deep Ink Text                 |
-| `border-[#18181B]`         | `border-ink`                | Deep Ink Border               |
-| `bg-[#FF6B57]`             | `bg-coral`                  | Warm Coral                    |
-| `bg-[#FDE047]`             | `bg-yellow`                 | Buttercup Yellow              |
-| `bg-[#EBE6FF]`             | `bg-lavender`               | Soft Lavender                 |
-| `bg-[#BAE6FD]`             | `bg-sky`                    | Sky Mist                      |
-| `bg-[#86EFAC]`             | `bg-mint`                   | Fresh Mint                    |
-| `rounded-[9999px]`         | `rounded-full`              | Full radius (squircle target) |
-| `bg-[repeating-linear...]` | `bg-striped-rail`           | 315° diagonal hatching rail   |
+| ❌ NEVER WRITE (Arbitrary)    | ✅ ALWAYS WRITE (Canonical) | Underlying CSS / Value                    |
+| ----------------------------- | --------------------------- | ----------------------------------------- |
+| `border-[2px]`                | `border-brutal`             | `border-width: 2px;`                      |
+| `border-b-[2px]`              | `border-b-brutal`           | `border-bottom-width: 2px;`               |
+| `border-t-[2px]`              | `border-t-brutal`           | `border-top-width: 2px;`                  |
+| `border-x-[2px]`              | `border-x-brutal`           | `border-left/right: 2px;`                 |
+| `border-[1.5px]`              | `border-subtle`             | `border-width: 1.5px;`                    |
+| `border-b-[1.5px]`            | `border-b-subtle`           | `border-bottom-width: 1.5px;`             |
+| `border-[3px]`                | `border-thick`              | `border-width: 3px;`                      |
+| `border-b-[3px]`              | `border-b-thick`            | `border-bottom-width: 3px;`               |
+| `shadow-[0px_2px_...]`        | `shadow-brutal-xs`          | `0px 2px 0px 0px #18181B;`                |
+| `shadow-[0px_3px_...]`        | `shadow-brutal-sm`          | `0px 3px 0px 0px #18181B;`                |
+| `shadow-[0px_4px_...]`        | `shadow-brutal`             | `0px 4px 0px 0px #18181B;`                |
+| `shadow-[0px_6px_...]`        | `shadow-brutal-lg`          | `0px 6px 0px 0px #18181B;`                |
+| `shadow-[0px_8px_...]`        | `shadow-brutal-xl`          | `0px 8px 0px 0px #18181B;`                |
+| `drop-shadow-[0_1.5px_0_...]` | `drop-shadow-brutal-xs`     | `filter: drop-shadow(0 1.5px 0 #18181B);` |
+| `drop-shadow-[0_2px_0_...]`   | `drop-shadow-brutal-sm`     | `filter: drop-shadow(0 2px 0 #18181B);`   |
+| `drop-shadow-[0_3px_0_...]`   | `drop-shadow-brutal`        | `filter: drop-shadow(0 3px 0 #18181B);`   |
+| `drop-shadow-[0_4px_0_...]`   | `drop-shadow-brutal-lg`     | `filter: drop-shadow(0 4px 0 #18181B);`   |
+| `bg-[#DEF2E0]`                | `bg-canvas`                 | Sage Mint Canvas                          |
+| `text-[#18181B]`              | `text-ink`                  | Deep Ink Text                             |
+| `border-[#18181B]`            | `border-ink`                | Deep Ink Border                           |
+| `bg-[#FF6B57]`                | `bg-coral`                  | Warm Coral                                |
+| `bg-[#FDE047]`                | `bg-yellow`                 | Buttercup Yellow                          |
+| `bg-[#EBE6FF]`                | `bg-lavender`               | Soft Lavender                             |
+| `bg-[#BAE6FD]`                | `bg-sky`                    | Sky Mist                                  |
+| `bg-[#86EFAC]`                | `bg-mint`                   | Fresh Mint                                |
+| `rounded-[9999px]`            | `rounded-full`              | Full radius (squircle target)             |
+| `bg-[repeating-linear...]`    | `bg-striped-rail`           | 315° diagonal hatching rail               |
 
 ### 📌 Squircle Class Pattern
 
@@ -56,6 +60,8 @@ Or use the pre-built utilities: `squircle-btn`, `squircle-card`, `squircle-badge
 - **`@/components/neu-icons/*` for Bespoke Neubrutalist SVG Accents**: Dedicated library of 10 handcrafted Soft Neubrutalism SVG accent icons. Features shared `NeuIconProps`, default `size-6 inline-block shrink-0 fill-current select-none`, `size` shorthand, and accessible defaults. Supports direct imports (`@/components/neu-icons/diamond-star`) and explicit named exports via `index.ts`.
 - Always use `@base-ui/react` for headless accessible components. Do NOT install `@radix-ui/*`.
 - **Buttons & Floating Elements**: Use outset **`ring-2 ring-ink shadow-brutal`** (not `border-brutal`) to eliminate sub-pixel anti-aliasing gaps and corner-shape desync. Pair with `focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink`. Never combine with `focus-visible:outline-none`, which suppresses keyboard focus rings.
+- **SVG Silhouette Shadows vs Box Shadows**: Never apply `shadow-brutal*` (`box-shadow`) directly to `<svg>` icons or transparent graphics. Browsers cast `box-shadow` on the element's rectangular bounding box, producing a flat black line/bar under the SVG. Always use `drop-shadow-brutal*` (`filter: drop-shadow`), which hugs the vector silhouette and alpha channel. `GridMarker` automatically adapts `shadow-brutal*` to `drop-shadow-brutal*` for SVG neu-icon variants using boundary-safe negative lookarounds (`(?<![\w-])shadow-brutal*`).
+- **Architectural Grid Line Markers (`GridMarker` & `GridSection`)**: Corner junction markers on section divider borders are managed by `@/components/page-layout/grid-marker.tsx`. `GridSection` defaults to `"squircle"` (10px squircle box with progressive enhancement fallback: `rounded-xs corner-squircle supports-[corner-shape:squircle]:rounded-full` paired with `shadow-brutal-xs`). Supports dynamic Neu-Icons (`marker="diamond-star"`, `"rounded-cross"`, `"sunburst-flower"`, etc.), custom `ReactElement` overrides (which safely receive `markerClassName` via `cloneElement` without disturbing corner coordinates), `markerClassName`, and toggle props `showMarker` (defaults to `true`) and `showTopMarker` (defaults to `false`).
 - **Structural Dividers & Rails**: Keep standard `border-subtle`, `border-brutal` (2px), and `border-thick` for directional lines (`border-x`, `border-t`, `border-b`).
 - **3-Column Architectural Grid**: Wrap main content with flanking vertical striped rails (`bg-striped-rail border-x border-ink/15`). Keep rails `hidden md:block` so mobile viewports have full width.
 - **Mobile Responsiveness & Overflow Prevention**: Always enforce `w-full overflow-x-clip` on root wrappers, specify explicit `grid-cols-1` on mobile grid containers, and ensure child columns use `min-w-0 w-full` to avoid unintended horizontal scrollbars.

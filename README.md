@@ -64,7 +64,7 @@ nmrisrl-v3/
 │   ├── avatar/           # Interactive avatar video player & spring gaze tracker (InteractiveAvatar, useAvatarGaze)
 │   ├── custom/           # App-specific interactive features (CustomCursor, Click effect)
 │   ├── neu-icons/        # 10 bespoke Soft Neubrutalism SVG accent icons (PropellerStar, RoundedCross, etc.)
-│   ├── page-layout/      # Architectural 3-column grid layout (Navbar, GridSection, PageLayout)
+│   ├── page-layout/      # Architectural 3-column grid layout (Navbar, GridSection, GridMarker, PageLayout)
 │   ├── sections/         # Modular portfolio sections
 │   │   ├── hero/         # Hero section (RotatingSeal with CrossStar stamp, BauhausAccent, command badges, marquee)
 │   │   └── about/        # About section (6-card Neubrutalist Bento Grid, official Simple Icons)
@@ -114,6 +114,7 @@ nmrisrl-v3/
 - `shadow-brutal` $\rightarrow$ `0px 4px 0 0 #18181B` (Buttons, cards default, navbar dock)
 - `shadow-brutal-lg` $\rightarrow$ `0px 6px 0 0 #18181B` (Button hover elevation, modals)
 - `shadow-brutal-xl` $\rightarrow$ `0px 8px 0 0 #18181B` (Hero cards, floating containers)
+- `drop-shadow-brutal-xs/sm/default/lg` $\rightarrow$ `filter: drop-shadow(...)` (Zero-blur silhouette shadows for SVGs and icons)
 
 ### 3. Typography Hierarchy
 
