@@ -1,0 +1,11 @@
+export { CrossStarIcon } from "@/components/neu-icons/cross-star";
+export { DiamondStarIcon } from "@/components/neu-icons/diamond-star";
+export { DonutRingIcon } from "@/components/neu-icons/donut-ring";
+export { DoubleCapsuleIcon } from "@/components/neu-icons/double-capsule";
+export { PropellerStarIcon } from "@/components/neu-icons/propeller-star";
+export { RoundedCrossIcon } from "@/components/neu-icons/rounded-cross";
+export { ScallopRosetteIcon } from "@/components/neu-icons/scallop-rosette";
+export { SlantedLoopIcon } from "@/components/neu-icons/slanted-loop";
+export { SunburstFlowerIcon } from "@/components/neu-icons/sunburst-flower";
+export { TrefoilCloudIcon } from "@/components/neu-icons/trefoil-cloud";
+export type { NeuIconProps } from "@/components/neu-icons/types";
