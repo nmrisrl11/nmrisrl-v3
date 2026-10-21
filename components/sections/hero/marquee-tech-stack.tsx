@@ -1,9 +1,11 @@
 "use client";
 
+import { DiamondStarIcon } from "@/components/neu-icons";
+import { GridMarker, type GridMarkerVariant } from "@/components/page-layout/grid-marker";
 import { ProfileCoreTech } from "@/constants/stack-and-skills-data";
 import { motion } from "motion/react";
 import Image from "next/image";
-import type { ReactNode } from "react";
+import type { ReactElement, ReactNode } from "react";
 
 interface TechItemProps {
 	label: string;
@@ -27,12 +29,7 @@ function TechItem({ label, icon }: TechItemProps) {
 			<span className="font-heading text-xs font-bold tracking-wider whitespace-nowrap text-ink uppercase">
 				{label}
 			</span>
-			<span
-				aria-hidden="true"
-				className="ml-3 font-mono text-[10px] text-ink/25 select-none md:ml-4"
-			>
-				✦
-			</span>
+			<DiamondStarIcon size={10} className="ml-3 size-2.5 text-ink/30 select-none md:ml-4" />
 		</div>
 	);
 }
@@ -56,17 +53,50 @@ function TranslateWrapper({ children, reverse = false, duration = 32 }: Translat
 	);
 }
 
-export function MarqueeTechStack() {
+interface MarqueeTechStackProps {
+	/** Visual marker variant or custom ReactElement override (defaults to 'squircle') */
+	marker?: GridMarkerVariant | ReactElement;
+	/** Optional class string applied to the corner markers */
+	markerClassName?: string;
+	/** Whether to display markers at top corner intersections (defaults to true) */
+	showMarkers?: boolean;
+}
+
+export function MarqueeTechStack({
+	marker = "squircle",
+	markerClassName,
+	showMarkers = true,
+}: MarqueeTechStackProps = {}) {
 	const reversedCoreTech = [...ProfileCoreTech].reverse();
 
 	return (
 		<div
 			aria-hidden="true"
-			className="relative w-full overflow-hidden border-t border-ink/20 bg-surface select-none"
+			className="relative w-full border-t border-ink/20 bg-surface select-none"
 		>
 			{/* Left & Right Soft Edge Gradient Masks */}
 			<div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-linear-to-r from-surface to-transparent md:w-20" />
 			<div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-linear-to-l from-surface to-transparent md:w-20" />
+
+			{/* Top Left & Top Right Intersection Corner Markers (z-20 / rendered above gradient masks) */}
+			{showMarkers && (
+				<>
+					<GridMarker
+						variant={typeof marker === "string" ? marker : undefined}
+						position="top-left"
+						className={markerClassName}
+					>
+						{typeof marker !== "string" ? marker : undefined}
+					</GridMarker>
+					<GridMarker
+						variant={typeof marker === "string" ? marker : undefined}
+						position="top-right"
+						className={markerClassName}
+					>
+						{typeof marker !== "string" ? marker : undefined}
+					</GridMarker>
+				</>
+			)}
 
 			{/* Top Track (Translates Left) */}
 			<div className="relative flex overflow-hidden border-b border-ink/15">

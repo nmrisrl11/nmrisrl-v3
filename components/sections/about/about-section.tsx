@@ -276,7 +276,7 @@ function NorthStarCard() {
 			{/* Highlighter Sticker */}
 			<div className="pt-2">
 				<div className="inline-flex -rotate-1 items-center gap-2 rounded-lg border-subtle border-ink bg-yellow px-3.5 py-2 font-mono text-xs font-black tracking-wide text-ink shadow-brutal-xs corner-squircle supports-[corner-shape:squircle]:rounded-xl">
-					<span className="text-coral">✦</span>
+					<DiamondStarIcon size={12} className="size-3 text-coral" />
 					<span>PURPOSE // MASTERY // FREEDOM</span>
 				</div>
 			</div>
