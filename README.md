@@ -14,6 +14,7 @@
 - **Pastel Palette**: Warm Coral, Buttercup Yellow, Soft Lavender, Sky Mist, and Fresh Mint.
 - **Continuous Squircles**: Continuous-curvature corners powered by `@toolwind/corner-shape` (`corner-shape: squircle`) with a reliable 3-layer progressive enhancement fallback for all modern browsers.
 - **Interactive Avatar Engine**: State-driven video player reacting to cursor tracking, viewport gaze, idle intervals, and gesture interactions.
+- **Custom Cursor & Tactile Click Engine**: Coral (`#FF6B57`) and Chalk White SVG pointer with instant 0ms haptic response, 5 selectable click effect styles (`burst`, `particles`, `crosshair`, `ring`, `ripple`), toggleable 3D brutal drop shadows, and audio SFX integration hooks.
 
 ---
 
@@ -60,9 +61,10 @@ nmrisrl-v3/
 │   └── page.tsx          # Interactive preview: Avatar engine + Base UI components
 ├── components/
 │   ├── avatar/           # Interactive avatar video player & spring gaze tracker (InteractiveAvatar, useAvatarGaze)
+│   ├── custom/           # App-specific interactive features (CustomCursor, Click effect)
 │   ├── page-layout/      # Architectural 3-column grid layout (Navbar, GridSection, PageLayout)
 │   ├── sections/         # Portfolio sections (Hero with RotatingSeal, BauhausAccent, NpmDevBadge, GitCommandBadge, dual-track Marquee)
-│   └── ui/               # Reusable Base UI atomic primitives (Button, Card, Badge, Dialog, Tooltip)
+│   └── ui/               # Strictly Base UI & shadcn registry primitives (Button, Card, Badge, Dialog, Tooltip)
 ├── constants/            # Modular personal data & tech stack taxonomies
 │   ├── data.ts           # Bio, social links, and contact info
 │   └── stack-and-skills-data.ts # ProfileCoreTech & StackAndSkillsData
@@ -223,7 +225,13 @@ When developing in this repository, **always use canonical Tailwind classes** in
 | `text-[#18181B]`, `border-[#18181B]` | `text-ink`, `border-ink`    | Deep Ink                    |
 | `bg-[repeating-linear...]`           | `bg-striped-rail`           | 315° diagonal hatching rail |
 
-See [`AGENTS.md`](file:///C:/Users/NOMER%20ISRAEL/OneDrive/Desktop/Projects/nmrisrl-v3/AGENTS.md) for the full lookup table and rules.
+See [`AGENTS.md`](./AGENTS.md) for the full lookup table and rules.
+
+### Key Architectural Rules
+
+- **`@/components/ui/*` Pristine Registry Boundary**: Strictly reserved for unstyled/headless Base UI and shadcn primitives (`button`, `badge`, `card`, `dialog`, `tooltip`). Never place bespoke app code in this directory.
+- **`@/components/custom/*` for Bespoke Interactive Features**: Decouple and place custom experience primitives (`CustomCursor`, `Click` effect, future audio SFX managers) in this dedicated folder.
+- **Strict Anti-Barrel Policy (Direct Module Imports)**: Always import directly from individual component files (e.g. `import { CustomCursor } from "@/components/custom/cursor";`, `import { HeroSection } from "@/components/sections/hero/hero-section";`). Avoid intermediate `index.ts` barrel files to eliminate circular dependency hazards, prevent bundle bloat, and maximize Turbopack HMR compilation speeds.
 
 ---
 

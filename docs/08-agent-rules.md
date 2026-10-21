@@ -65,6 +65,8 @@
 11. **Always provide motion-reduction variants on animations**: All CSS keyframe animations (such as `animate-spin`, `animate-pulse`) MUST include `motion-reduce:animate-none` to honor `prefers-reduced-motion` preferences (WCAG 2.2.2 / 2.3.3).
 12. **Always support 200% zoom reflow on multi-column card metrics**: Metric stat cards must use responsive flex stacking (`flex-col items-start gap-1.5 md:flex-row md:items-center md:gap-4`) to stack vertically on narrow widths, preventing text clipping and horizontal truncation during high zoom (WCAG 1.4.4 / 1.4.10).
 13. **Always anchor avatar floating badges to an inner stage wrapper**: When anchoring floating badges or visual accents around the avatar, wrap the avatar and badges in a tight inner stage wrapper (`relative w-full max-w-65 sm:max-w-85 md:max-w-95 lg:max-w-100`) rather than the outer layout column. This guarantees absolute coordinates anchor directly to the avatar silhouette across all viewports (desktop, tablet, mobile) and prevents badges from drifting across full-width columns.
+14. **Strict Component Directory Boundaries (`components/ui/` vs `components/custom/`)**: `@/components/ui/*` is STRICTLY RESERVED for headless/unstyled primitives installed or scaffolded from shadcn and its official registries (`button`, `badge`, `card`, `dialog`, `tooltip`). Keep this directory pristine. All app-specific custom components, bespoke interactive features, and micro-experience controllers (e.g. `CustomCursor`, `Click`, future SFX managers, custom widgets) MUST be decoupled and placed in `@/components/custom/*` (or dedicated feature folders like `@/components/avatar/`, `@/components/sections/`, `@/components/page-layout/`). NEVER pollute `@/components/ui/*` with bespoke app code.
+15. **Direct Module Imports Over Barrel Files (Anti-Barrel Policy)**: Do NOT obsessively create barrel files (`index.ts`) in every directory. Never create nested or multi-tier barrels (e.g. `sections/index.ts` re-exporting `hero/index.ts`). Always prefer direct imports (`@/components/custom/cursor`, `@/components/sections/hero/hero-section`, `@/components/page-layout/grid-section`, `@/components/ui/button`). Direct imports eliminate circular dependency hazards, prevent bundle size bloat, and maximize Turbopack/Next.js HMR compilation speed (Vercel `bundle-barrel-imports` performance guidance). A barrel file is only acceptable for cohesive packages with 5+ tightly-coupled public modules forming an external public API, and must never use wildcard `export *`.
 
 ---
 
@@ -77,10 +79,11 @@ app/
 ├── layout.tsx        # Root HTML wrapper, metadata, and font classes
 └── page.tsx          # Homepage view composition
 components/
-├── ui/               # Reusable atomic Base UI components (dialog, tooltip, button)
-├── avatar/           # Avatar video player & mouse-tracking controller
-├── sections/         # Page sections (hero, projects, experience, contact)
-└── icons/            # SVG icons or Lucide re-exports
+├── ui/               # Strictly Base UI & shadcn registry primitives (dialog, tooltip, button, card, badge)
+├── custom/           # Bespoke app-specific features & interactive controllers (cursor, click)
+├── avatar/           # Avatar video player & mouse-tracking controller (interactive-avatar, use-avatar-gaze)
+├── page-layout/      # 3-column architectural layout & rails (navbar, grid-section, page-layout)
+└── sections/         # Page sections (hero, projects, experience, contact)
 docs/                 # Modular design system & architecture blueprints
 lib/
 └── utils.ts          # cn() class merging utility (clsx + tailwind-merge)
