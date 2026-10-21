@@ -125,7 +125,7 @@ All core components live inside `components/ui/`:
 
 ## 5. App-Specific & Experience Primitives (`components/custom/`)
 
-> **Architectural Boundary**: `@/components/ui/*` is strictly reserved for unstyled/headless primitives installed from shadcn and its official registries. All bespoke application components, interactive controllers, and micro-experience features reside in `@/components/custom/*` to keep the UI directory clean and registry-compatible.
+> **Architectural Boundary**: `@/components/ui/*` is strictly reserved for registry-backed primitives and their local styled wrappers installed or scaffolded from Base UI and shadcn registries (such as `button`, `card`, `badge`, `dialog`, `tooltip`). All bespoke application components, interactive controllers, and micro-experience features reside in `@/components/custom/*` to keep the UI directory clean and registry-compatible.
 
 ### A. Custom Cursor (`components/custom/cursor.tsx`)
 

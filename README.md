@@ -64,7 +64,7 @@ nmrisrl-v3/
 │   ├── custom/           # App-specific interactive features (CustomCursor, Click effect)
 │   ├── page-layout/      # Architectural 3-column grid layout (Navbar, GridSection, PageLayout)
 │   ├── sections/         # Portfolio sections (Hero with RotatingSeal, BauhausAccent, NpmDevBadge, GitCommandBadge, dual-track Marquee)
-│   └── ui/               # Strictly Base UI & shadcn registry primitives (Button, Card, Badge, Dialog, Tooltip)
+│   └── ui/               # Registry-backed Base UI primitives and styled wrappers (Button, Card, Badge, Dialog, Tooltip)
 ├── constants/            # Modular personal data & tech stack taxonomies
 │   ├── data.ts           # Bio, social links, and contact info
 │   └── stack-and-skills-data.ts # ProfileCoreTech & StackAndSkillsData
@@ -229,7 +229,7 @@ See [`AGENTS.md`](./AGENTS.md) for the full lookup table and rules.
 
 ### Key Architectural Rules
 
-- **`@/components/ui/*` Pristine Registry Boundary**: Strictly reserved for unstyled/headless Base UI and shadcn primitives (`button`, `badge`, `card`, `dialog`, `tooltip`). Never place bespoke app code in this directory.
+- **`@/components/ui/*` Pristine Registry Boundary**: Strictly reserved for registry-backed primitives and their local styled wrappers installed or scaffolded from Base UI and shadcn registries (`button`, `badge`, `card`, `dialog`, `tooltip`). Never place bespoke app code in this directory.
 - **`@/components/custom/*` for Bespoke Interactive Features**: Decouple and place custom experience primitives (`CustomCursor`, `Click` effect, future audio SFX managers) in this dedicated folder.
 - **Strict Anti-Barrel Policy (Direct Module Imports)**: Always import directly from individual component files (e.g. `import { CustomCursor } from "@/components/custom/cursor";`, `import { HeroSection } from "@/components/sections/hero/hero-section";`). Avoid intermediate `index.ts` barrel files to eliminate circular dependency hazards, prevent bundle bloat, and maximize Turbopack HMR compilation speeds.
 

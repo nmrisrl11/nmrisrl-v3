@@ -51,7 +51,7 @@ Or use the pre-built utilities: `squircle-btn`, `squircle-card`, `squircle-badge
 
 ### 📌 Architecture & Component System
 
-- **`@/components/ui/*` is STRICTLY RESERVED for shadcn & Base UI registry primitives**: Only place unstyled/headless primitives installed or scaffolded from shadcn and its official registries (`button`, `badge`, `card`, `dialog`, `tooltip`) in this folder. Keep it pristine.
+- **`@/components/ui/*` is STRICTLY RESERVED for registry-backed primitives & styled wrappers**: Only place registry-backed primitives and their local styled wrappers installed or scaffolded from Base UI and shadcn registries (`button`, `badge`, `card`, `dialog`, `tooltip`) in this folder. Keep it pristine.
 - **`@/components/custom/*` for App-Specific Interactive Features**: Decouple and place all bespoke, app-specific UI features, interactive controllers, and experience enhancements (e.g., `CustomCursor`, `Click` effect, future SFX managers, custom widgets) in `@/components/custom/*` (or dedicated feature directories like `@/components/avatar/`, `@/components/sections/`, `@/components/page-layout/`). **NEVER pollute `@/components/ui/*` with app-specific custom code.**
 - Always use `@base-ui/react` for headless accessible components. Do NOT install `@radix-ui/*`.
 - **Buttons & Floating Elements**: Use outset **`ring-2 ring-ink shadow-brutal`** (not `border-brutal`) to eliminate sub-pixel anti-aliasing gaps and corner-shape desync. Pair with `focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink`. Never combine with `focus-visible:outline-none`, which suppresses keyboard focus rings.

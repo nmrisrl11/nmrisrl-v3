@@ -14,6 +14,7 @@ interface CursorContextType {
 	isText: boolean;
 	global: boolean;
 	containerRef: React.RefObject<HTMLDivElement | null>;
+	parentRef: React.RefObject<HTMLElement | null>;
 }
 
 const CursorContext = React.createContext<CursorContextType | null>(null);
@@ -67,6 +68,7 @@ export function CursorProvider({ children, global = true }: CursorProviderProps)
 	const [isHovered, setIsHovered] = React.useState(false);
 	const [isText, setIsText] = React.useState(false);
 	const containerRef = React.useRef<HTMLDivElement | null>(null);
+	const parentRef = React.useRef<HTMLElement | null>(null);
 
 	const isDesktop = React.useSyncExternalStore(
 		subscribeHoverMedia,
@@ -84,13 +86,19 @@ export function CursorProvider({ children, global = true }: CursorProviderProps)
 			style.id = styleId;
 			style.textContent = `
 				html.nmr-cursor-active,
-				html.nmr-cursor-active *:not(input):not(textarea):not([contenteditable="true"]):not([data-cursor="text"]) {
+				html.nmr-cursor-active *:not(input):not(textarea):not([contenteditable="true"]):not([data-cursor="text"]),
+				.nmr-cursor-scoped-active,
+				.nmr-cursor-scoped-active *:not(input):not(textarea):not([contenteditable="true"]):not([data-cursor="text"]) {
 					cursor: none !important;
 				}
 				html.nmr-cursor-active input,
 				html.nmr-cursor-active textarea,
 				html.nmr-cursor-active [contenteditable="true"],
-				html.nmr-cursor-active [data-cursor="text"] {
+				html.nmr-cursor-active [data-cursor="text"],
+				.nmr-cursor-scoped-active input,
+				.nmr-cursor-scoped-active textarea,
+				.nmr-cursor-scoped-active [contenteditable="true"],
+				.nmr-cursor-scoped-active [data-cursor="text"] {
 					cursor: text !important;
 				}
 			`;
@@ -117,8 +125,8 @@ export function CursorProvider({ children, global = true }: CursorProviderProps)
 			let clientX = e.clientX;
 			let clientY = e.clientY;
 
-			if (!global && containerRef.current) {
-				const parent = containerRef.current.parentElement;
+			if (!global) {
+				const parent = containerRef.current?.parentElement ?? parentRef.current;
 				if (parent) {
 					const rect = parent.getBoundingClientRect();
 					clientX -= rect.left;
@@ -175,17 +183,19 @@ export function CursorProvider({ children, global = true }: CursorProviderProps)
 			document.documentElement.addEventListener("pointerleave", handlePointerLeave);
 			window.addEventListener("blur", handlePointerLeave);
 			document.addEventListener("visibilitychange", handleVisibilityChange);
-		} else if (containerRef.current?.parentElement) {
-			const parent = containerRef.current.parentElement;
-			cleanupTarget = parent;
-			if (getComputedStyle(parent).position === "static") {
-				parent.style.position = "relative";
-			}
+		} else {
+			const parent = containerRef.current?.parentElement ?? parentRef.current;
+			if (parent) {
+				cleanupTarget = parent;
+				if (getComputedStyle(parent).position === "static") {
+					parent.style.position = "relative";
+				}
 
-			parent.addEventListener("pointermove", handlePointerMove, { passive: true });
-			parent.addEventListener("pointerdown", handlePointerDown, { passive: true });
-			parent.addEventListener("pointerup", handlePointerUp, { passive: true });
-			parent.addEventListener("pointerleave", handlePointerLeave);
+				parent.addEventListener("pointermove", handlePointerMove, { passive: true });
+				parent.addEventListener("pointerdown", handlePointerDown, { passive: true });
+				parent.addEventListener("pointerup", handlePointerUp, { passive: true });
+				parent.addEventListener("pointerleave", handlePointerLeave);
+			}
 		}
 
 		return () => {
@@ -206,18 +216,34 @@ export function CursorProvider({ children, global = true }: CursorProviderProps)
 		};
 	}, [global, isDesktop, cursorX, cursorY]);
 
-	// Toggle cursor: none class on document root
+	// Toggle cursor: none on document root (global) or parent container (scoped)
 	React.useEffect(() => {
-		if (typeof window === "undefined" || !global || !isDesktop) return;
+		if (typeof window === "undefined" || !isDesktop) return;
+
+		if (global) {
+			if (active && !isText) {
+				document.documentElement.classList.add("nmr-cursor-active");
+			} else {
+				document.documentElement.classList.remove("nmr-cursor-active");
+			}
+
+			return () => {
+				document.documentElement.classList.remove("nmr-cursor-active");
+			};
+		}
+
+		// Scoped mode: hide native cursor on parent container when active
+		const parent = containerRef.current?.parentElement ?? parentRef.current;
+		if (!parent) return;
 
 		if (active && !isText) {
-			document.documentElement.classList.add("nmr-cursor-active");
+			parent.classList.add("nmr-cursor-scoped-active");
 		} else {
-			document.documentElement.classList.remove("nmr-cursor-active");
+			parent.classList.remove("nmr-cursor-scoped-active");
 		}
 
 		return () => {
-			document.documentElement.classList.remove("nmr-cursor-active");
+			parent.classList.remove("nmr-cursor-scoped-active");
 		};
 	}, [active, isText, global, isDesktop]);
 
@@ -232,8 +258,29 @@ export function CursorProvider({ children, global = true }: CursorProviderProps)
 				isText,
 				global,
 				containerRef,
+				parentRef,
 			}}
 		>
+			<div
+				ref={(node) => {
+					containerRef.current = node;
+					if (node?.parentElement) {
+						parentRef.current = node.parentElement;
+					}
+				}}
+				style={{
+					position: "absolute",
+					width: 0,
+					height: 0,
+					padding: 0,
+					margin: 0,
+					border: 0,
+					overflow: "hidden",
+					pointerEvents: "none",
+					opacity: 0,
+				}}
+				aria-hidden="true"
+			/>
 			{children}
 		</CursorContext.Provider>
 	);
@@ -378,7 +425,7 @@ export function CustomCursor({
 		<CursorProvider global={global}>
 			<Cursor {...cursorProps} />
 			{clickEffect !== "none" && (
-				<Click
+				<CustomCursorClick
 					variant={clickEffect}
 					color={clickEffectColor}
 					multiColor={clickEffectMultiColor}
@@ -387,6 +434,35 @@ export function CustomCursor({
 				/>
 			)}
 		</CursorProvider>
+	);
+}
+
+interface CustomCursorClickProps {
+	variant: ClickVariant;
+	color: string;
+	multiColor: boolean;
+	showShadow: boolean;
+	onEffectTrigger?: (item: { x: number; y: number; variant: ClickVariant }) => void;
+}
+
+function CustomCursorClick({
+	variant,
+	color,
+	multiColor,
+	showShadow,
+	onEffectTrigger,
+}: CustomCursorClickProps) {
+	const { global, parentRef } = useCursor();
+
+	return (
+		<Click
+			variant={variant}
+			color={color}
+			multiColor={multiColor}
+			showShadow={showShadow}
+			onEffectTrigger={onEffectTrigger}
+			scope={!global ? parentRef : undefined}
+		/>
 	);
 }
 
