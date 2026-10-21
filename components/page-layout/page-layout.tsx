@@ -17,7 +17,7 @@ export function PageLayout({ children }: PageLayoutProps) {
 				/>
 
 				{/* Center Main Architectural Stage */}
-				<div className="relative col-start-1 min-h-dvh w-full min-w-0 border-x border-ink/15 md:col-start-2 md:border-x-0">
+				<div className="relative z-10 col-start-1 min-h-dvh w-full min-w-0 border-x border-ink/15 md:col-start-2 md:border-x-0">
 					{/* Sticky Top Navbar */}
 					<Navbar />
 

@@ -1,4 +1,5 @@
 import { InteractiveAvatar } from "@/components/avatar/interactive-avatar";
+import { DiamondStarIcon } from "@/components/neu-icons";
 import { GridSection } from "@/components/page-layout/grid-section";
 import { Button } from "@/components/ui/button";
 import { BauhausAccent } from "./bauhaus-accent";
@@ -45,7 +46,7 @@ export function HeroSection() {
 				<div className="order-1 my-auto flex flex-col justify-center gap-5 py-6 text-center lg:order-2 lg:col-span-7 lg:py-10 lg:text-left">
 					{/* Architectural Grid Coordinates & Blueprint Markers */}
 					<div className="flex flex-wrap items-center justify-center gap-1.5 font-mono text-[10px] font-bold tracking-wider text-ink/60 uppercase select-none sm:gap-2 sm:text-[11px] sm:tracking-widest lg:justify-start">
-						<span className="text-coral">✦</span>
+						<DiamondStarIcon size={12} className="size-3 text-coral" />
 						<span>FIG. 01 // OVERVIEW</span>
 						<span className="text-ink/25">•</span>
 						<span>14°35&apos;N 120°58&apos;E</span>

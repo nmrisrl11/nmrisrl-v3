@@ -99,7 +99,7 @@ export function GridMarker({
 					<span
 						aria-hidden="true"
 						className={cn(
-							"inline-block size-2.5 rounded-xs border border-ink/40 bg-surface shadow-brutal-xs corner-squircle supports-[corner-shape:squircle]:rounded-full",
+							"inline-block size-2.5 rounded-xs border border-ink/40 bg-surface corner-squircle supports-[corner-shape:squircle]:rounded-full",
 							className,
 						)}
 					/>
@@ -177,7 +177,7 @@ export function GridMarker({
 		<div
 			aria-hidden="true"
 			className={cn(
-				"pointer-events-none z-10 flex items-center justify-center select-none",
+				"pointer-events-none z-20 hidden items-center justify-center select-none md:flex",
 				position && "absolute",
 				positionClass,
 			)}

@@ -1,3 +1,4 @@
+import { DiamondStarIcon } from "@/components/neu-icons";
 import { GridMarker, type GridMarkerVariant } from "@/components/page-layout/grid-marker";
 import { cn } from "@/lib/utils";
 import type { ReactElement, ReactNode } from "react";
@@ -83,7 +84,7 @@ export function GridSection({
 				<header className="mb-8">
 					{figure && (
 						<div className="mb-2 flex flex-wrap items-center gap-1.5 font-mono text-[10px] font-bold tracking-wider text-ink/60 uppercase select-none sm:gap-2 sm:text-[11px] sm:tracking-widest">
-							<span className="text-coral">✦</span>
+							<DiamondStarIcon size={12} className="size-3 text-coral" />
 							<span>{figure}</span>
 							{figureMeta &&
 								(Array.isArray(figureMeta) ? (

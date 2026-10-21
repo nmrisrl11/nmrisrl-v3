@@ -236,8 +236,8 @@ See [`AGENTS.md`](./AGENTS.md) for the full lookup table and rules.
 
 - **`@/components/ui/*` Pristine Registry Boundary**: Strictly reserved for registry-backed primitives and their local styled wrappers installed or scaffolded from Base UI and shadcn registries (`button`, `badge`, `card`, `dialog`, `tooltip`). Never place bespoke app code in this directory.
 - **`@/components/custom/*` for Bespoke Interactive Features**: Decouple and place custom experience primitives (`CustomCursor`, `Click` effect, future audio SFX managers) in this dedicated folder.
-- **`@/components/neu-icons/*` for Bespoke Neubrutalist SVG Accents**: Dedicated collection of 10 handcrafted Soft Neubrutalism SVG accent icons with shared `NeuIconProps`, size/fill cascade, and accessible defaults. Supports both direct module imports and explicit named exports via `index.ts`.
-- **Strict Anti-Barrel Policy (Direct Module Imports)**: Always import directly from individual component files (e.g. `import { CustomCursor } from "@/components/custom/cursor";`, `import { HeroSection } from "@/components/sections/hero/hero-section";`). Avoid intermediate `index.ts` barrel files to eliminate circular dependency hazards, prevent bundle bloat, and maximize Turbopack HMR compilation speeds.
+- **`@/components/neu-icons/*` for Bespoke Neubrutalist SVG Accents**: Dedicated collection of 10 handcrafted Soft Neubrutalism SVG accent icons with shared `NeuIconProps`, size/fill cascade, and accessible defaults. Always imported via the `@/components/neu-icons` barrel file.
+- **Strict Barrel File & Module Import Protocol**: If a module collection provides an established barrel file (like `@/components/neu-icons`), always import through the barrel file using explicit named imports (`import { ... } from "@/components/neu-icons"`). For components without a barrel file, always use direct module imports (`@/components/ui/button`, `@/components/custom/cursor`, `@/components/page-layout/grid-section`, `@/components/sections/hero/hero-section`). Do not create superfluous or nested barrel files.
 
 ---
 

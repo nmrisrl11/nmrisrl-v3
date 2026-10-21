@@ -169,7 +169,8 @@ The layout incorporates a 3-column structural grid framework with decorative str
 
 - **`GridMarker` (`components/page-layout/grid-marker.tsx`)**:
   - **Architectural Junction Anchor**: Renders at grid line corners and section divider intersections with transform-based precision centering (`-translate-x-1/2 translate-y-1/2`).
-  - **Squircle Box Default with Progressive Fallback**: Defaults to `"squircle"` (`size-2.5 rounded-xs corner-squircle supports-[corner-shape:squircle]:rounded-full border border-ink/40 bg-surface shadow-brutal-xs`), providing a clean CAD terminal cap that upgrades v2's box with G2 continuous curvature.
+  - **Responsive Visibility & Layering**: Styled with `hidden md:flex z-20 select-none` to display exclusively when flanking architectural striped rails are active (`md:block`), eliminating 5px negative-offset mobile overflow while stacking cleanly above flanking rails and marquee masks. PageLayout applies `relative z-10` to the Center Main Stage to ensure markers stay above Column 3's gutter rail.
+  - **Squircle Box Default with Progressive Fallback**: Defaults to `"squircle"` (`size-2.5 rounded-xs corner-squircle supports-[corner-shape:squircle]:rounded-full border border-ink/40 bg-surface`), providing a clean CAD terminal cap that upgrades v2's box with G2 continuous curvature.
   - **Dynamic Neu-Icons Selection**: Supports 10 handcrafted vector Neu-Icons (`diamond-star`, `cross-star`, `rounded-cross`, `propeller-star`, `trefoil-cloud`, `sunburst-flower`, etc.) as well as custom `ReactElement` overrides.
   - **Auto-Adaptive Silhouette Drop Shadows**: Automatically maps `shadow-brutal*` to `drop-shadow-brutal*` on SVG icons via boundary-safe negative lookaround regex (`(?<![\w-])shadow-brutal*`) to preserve existing drop shadows while preventing box-shadow bounding artifacts.
   - **Custom Element Styling**: Custom `ReactElement` markers receive `markerClassName` via `cloneElement` class merging (or a wrapper `<span>`) while preserving existing absolute corner positioning.
@@ -177,7 +178,7 @@ The layout incorporates a 3-column structural grid framework with decorative str
 - **`GridSection` (`components/page-layout/grid-section.tsx`)**:
   - Reusable architectural section container bounded by `border-b border-ink/15` (`px-4 py-16 md:px-8 lg:px-12`).
   - **Streamlined Marker Props**: Accepts `marker?: GridMarkerVariant | ReactElement` (defaults to `"squircle"`), `markerClassName?: string`, `showMarker?: boolean` (defaults to `true`), and `showTopMarker?: boolean` (defaults to `false`).
-  - **Editorial Blueprint Headers**: Supports `figure`, `figureMeta?: string | string[]`, `number`, `title`, and `description` to render technical blueprint section kickers.
+  - **Editorial Blueprint Headers**: Supports `figure`, `figureMeta?: string | string[]`, `number`, `title`, and `description` to render technical blueprint section kickers, accented by `DiamondStarIcon` (`text-coral`).
 
 ---
 
@@ -194,7 +195,7 @@ The layout incorporates a 3-column structural grid framework with decorative str
     - **`NpmDevBadge` (`components/sections/hero/npm-dev-badge.tsx`)**: Neubrutalist developer command pill (`>_ npm run dev`) framing the lower-right wrist/pocket of the avatar (`-right-2 bottom-12 lg:-right-3 lg:bottom-14`, `rotate-2`).
     - **Mobile Safeguard**: Floating badges use `hidden sm:inline-flex` (`hidden sm:flex` for RotatingSeal) to ensure clean rendering without overflow or clutter on mobile devices (`< sm`).
   - **Editorial Hero Typography**:
-    - **Blueprint Coordinates**: `✦ FIG. 01 // OVERVIEW • 14°35'N 120°58'E • MNL, PH` with responsive wrapping.
+    - **Blueprint Coordinates**: Rendered with `DiamondStarIcon` (`size-3 text-coral`) followed by `FIG. 01 // OVERVIEW • 14°35'N 120°58'E • MNL, PH` with responsive wrapping.
     - **Availability Kicker**: `[ 🟢 AVAILABLE FOR WORK ]` squircle pill with pulsing mint indicator (equipped with `motion-reduce:animate-none`).
     - **Headline**: `Plus Jakarta Sans` headline with responsive sizing (`text-3xl sm:text-5xl`) and yellow highlight box (`beyond the code.`).
     - **Dual Action CTAs**: Clean `[ Explore Projects ]` (default coral) and `[ Get in Touch ]` (secondary white) buttons.
@@ -203,7 +204,8 @@ The layout incorporates a 3-column structural grid framework with decorative str
   - Dual-track infinite counter-translating marquee powered by `motion/react`.
   - Top track translates Left; bottom track translates Right (reverse).
   - Populated strictly from [`ProfileCoreTech`](file:///C:/Users/NOMER%20ISRAEL/OneDrive/Desktop/Projects/nmrisrl-v3/constants/stack-and-skills-data.ts) in `constants/stack-and-skills-data.ts`.
-  - Contained inside the grid rails (`w-full overflow-hidden`) with refined borders (`border-t border-ink/20`, `border-b border-ink/15`) and edge fade masks (`bg-linear-to-r`).
+  - Individual tech items separated by vector `DiamondStarIcon` neu-icons (`size-2.5 text-ink/30`), with corner `GridMarker` junction boxes framing the top borders.
+  - Edge fade masks (`bg-linear-to-r`) with track-level clipping (`overflow-hidden`).
 
 ---
 
@@ -219,7 +221,7 @@ The About section showcases professional identity, core specialization, engineer
     2. **`ExperienceCard` (`md:col-span-2 lg:col-span-5`)**: High-contrast engineering metric (`7+ Years Crafting UI`), designer-intuition narrative, interactive hover lift, and a Scallop Rosette seal stamp chip.
     3. **`ArchitectureCard` (`md:col-span-1 lg:col-span-6`)**: Architectural methodologies (Feature-Sliced Design, Clean Architecture, Domain-Driven Design) accented with `DoubleCapsuleIcon`.
     4. **`InnovationCard` (`md:col-span-1 lg:col-span-6`)**: Active radar tracking modern frontend advancements (Web Standards, Modern Tooling, Emerging Trends) with a pulsing trend indicator and `SlantedLoopIcon`.
-    5. **`NorthStarCard` (`md:col-span-2 lg:col-span-5`)**: Engineering standards and core values (Purpose, Mastery, Freedom) accented with `PropellerStarIcon`.
+    5. **`NorthStarCard` (`md:col-span-2 lg:col-span-5`)**: Engineering standards and core values (Purpose, Mastery, Freedom) accented with `PropellerStarIcon` and a tilted highlighter sticker with `DiamondStarIcon` (`text-coral`).
     6. **`InterestsCard` (`md:col-span-2 lg:col-span-7`)**: Personal pursuits (Distance Running routine, Game Development interest, 2D Character Art admiration) with Lucide icons (`Footprints`, `Gamepad2`, `Palette`) and `TrefoilCloudIcon`.
 
 - **`AboutIcons` (`components/sections/about/about-icons.tsx`)**:
@@ -270,12 +272,9 @@ export interface NeuIconProps extends ComponentProps<"svg"> {
 
 ### C. Import Patterns
 
-Both direct module imports and explicit package imports are supported:
+Always import neu-icons through the official barrel file (`@/components/neu-icons`) using explicit named exports:
 
 ```tsx
-// Direct module import (fastest Turbopack HMR compilation)
-import { DiamondStarIcon } from "@/components/neu-icons/diamond-star";
-
-// Package import (explicit named exports from components/neu-icons/index.ts)
-import { DiamondStarIcon, PropellerStarIcon } from "@/components/neu-icons";
+// Standard barrel import (components/neu-icons/index.ts)
+import { CrossStarIcon, DiamondStarIcon, PropellerStarIcon } from "@/components/neu-icons";
 ```
