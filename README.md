@@ -54,6 +54,7 @@ nmrisrl-v3/
 │   │   └── web-design-guidelines/
 │   └── workflows/        # Markdown agent workflows
 │       ├── load-project-context.md       # Start/resume feature workflow
+│       ├── commit-and-push.md            # Stage, conventional commit (grouped), and push workflow
 │       ├── summarize-git-changes.md      # Commit-ready changelog generator
 │       └── sync-project-documentation.md # Closing feature & doc sync workflow
 ├── app/
@@ -156,6 +157,7 @@ This codebase is purpose-built for autonomous AI pair programming.
 ### Workflows ([`.agents/workflows/`](file:///C:/Users/NOMER%20ISRAEL/OneDrive/Desktop/Projects/nmrisrl-v3/.agents/workflows/))
 
 - **`load-project-context.md`**: Run at the start of any new feature or coding turn to load all tokens, guardrails, and component rules.
+- **`commit-and-push.md`**: Run to stage, format a conventional commit grouped by responsibilities, commit, and push to the target branch.
 - **`sync-project-documentation.md`**: Run at the end of feature development to audit and sync `docs/` and `AGENTS.md` with recent code changes.
 - **`summarize-git-changes.md`**: Run before committing to generate a clean, grouped Conventional Commit changelog.
 

@@ -310,7 +310,7 @@ export const metadata: Metadata = {
 - **Standardized CTAs**:
   - Utilizes `@/components/ui/button` (`variant="default"` coral for _"Take Me Home"_ and `variant="secondary"` white for _"Go Back"_).
 - **Navigation Waypoint Bento Grid**:
-  - 4-card bento grid (_"Looking for something specific?"_) providing fast escape vectors to `#overview`, `#about`, `#projects`, and `#contact`.
+  - 4-card bento grid (_"Looking for something specific?"_) providing fast escape vectors to `/`, `/#about`, `/#skills`, and `/#contact`.
   - Backed by the cross-route hash navigation logic in `Navbar` (`router.push('/' + href)` when anchor targets aren't mounted in the active DOM).
 - **Intentional Avatar Absence**:
   - The 3D avatar was intentionally omitted from the 404 page following user review to eliminate visual clutter, optimize route transitions, and keep the user focused on fast recovery.
