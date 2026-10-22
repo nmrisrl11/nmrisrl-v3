@@ -1,60 +1,11 @@
 "use client";
 
 import { Data } from "@/constants/data";
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useRoughNotation } from "@/hooks/use-rough-notation";
 import { RoughNotation, RoughNotationGroup } from "react-rough-notation";
 
-function subscribeReducedMotion(callback: () => void) {
-	if (typeof window === "undefined") return () => {};
-	const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-	mediaQuery.addEventListener("change", callback);
-	return () => mediaQuery.removeEventListener("change", callback);
-}
-
-function getReducedMotionSnapshot() {
-	if (typeof window === "undefined") return false;
-	return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-}
-
-function getReducedMotionServerSnapshot() {
-	return false;
-}
-
 export function HeroNarrative() {
-	const [showAnnotations, setShowAnnotations] = useState(false);
-	const reducedMotion = useSyncExternalStore(
-		subscribeReducedMotion,
-		getReducedMotionSnapshot,
-		getReducedMotionServerSnapshot,
-	);
-
-	useEffect(() => {
-		let active = true;
-
-		// Ensure custom fonts have loaded before measuring text bounding rects
-		if (typeof document !== "undefined" && document.fonts) {
-			document.fonts.ready.then(() => {
-				if (active) {
-					// Small tick to ensure layout and line wrapping have settled
-					setTimeout(() => {
-						if (active) setShowAnnotations(true);
-					}, 250);
-				}
-			});
-		} else {
-			const timer = setTimeout(() => {
-				if (active) setShowAnnotations(true);
-			}, 350);
-			return () => {
-				active = false;
-				clearTimeout(timer);
-			};
-		}
-
-		return () => {
-			active = false;
-		};
-	}, []);
+	const { ready: showAnnotations, reducedMotion } = useRoughNotation(250);
 
 	return (
 		<p className="max-w-xl font-body text-base leading-relaxed font-medium text-balance text-ink/80 sm:text-lg">
