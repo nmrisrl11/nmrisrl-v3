@@ -78,6 +78,9 @@
 17. **Feature-Colocated Brand SVGs (Simple Icons Pattern)**: When integrating external brand or technology icons (e.g. Simple Icons for React, Next.js, TypeScript, Tailwind), colocate them in a dedicated file inside their feature directory (e.g. `@/components/sections/about/about-icons.tsx`) instead of installing heavy external icon packages. Standardize with `viewBox="0 0 24 24"`, scalable attributes, accessible `<title>`, and `fill="currentColor"`.
 18. **SVG Silhouette Shadows vs Box Shadows**: Never apply `shadow-brutal*` (`box-shadow`) directly to `<svg>` icons or transparent graphics. Browsers cast `box-shadow` on the element's rectangular bounding box, producing a flat black line/bar under the SVG. Always use `drop-shadow-brutal*` (`filter: drop-shadow`), which hugs the vector silhouette and alpha channel. `GridMarker` automatically adapts `shadow-brutal*` to `drop-shadow-brutal*` for SVG neu-icon variants using boundary-safe negative lookarounds (`(?<![\w-])shadow-brutal*`).
 19. **Architectural Grid Line Markers (`GridMarker` & `GridSection`)**: Corner junction markers on section divider borders are managed by `@/components/page-layout/grid-marker.tsx`. `GridSection` defaults to `"squircle"` (10px squircle box with progressive enhancement fallback: `rounded-xs corner-squircle supports-[corner-shape:squircle]:rounded-full border border-ink/40 bg-surface`). Supports dynamic Neu-Icons (`marker="diamond-star"`, `"rounded-cross"`, `"sunburst-flower"`, etc.), custom `ReactElement` overrides (which safely receive `markerClassName` via `cloneElement` without disturbing corner coordinates), `markerClassName`, and toggle props `showMarker` (defaults to `true`) and `showTopMarker` (defaults to `false`). Markers use `hidden md:flex` and `z-20` (paired with `relative z-10` on the center main stage in `PageLayout`) to display exclusively when flanking rails exist and stack cleanly above rails and marquee gradients without mobile viewport clipping.
+20. **Centralized Personal & Domain Metadata (`@/constants/data`)**: Never hardcode developer name (`Nomer Israel`), role, bio, domain URLs (`cleanUrl`, `fullUrl`), contact email, or social links directly across pages, sections, or metadata. Always import and reference the `Data` constant from `@/constants/data`.
+21. **Reuse Existing Primitives (`@/components/ui/*`)**: Never construct ad-hoc raw `<button>` or container elements with manual brutal rings/borders/shadows when `@/components/ui/button`, `@/components/ui/card`, etc. exist. Always utilize the established component primitives with appropriate `variant`, `size`, and `shape`.
+22. **Cross-Route Hash Navigation**: When handling internal anchor navigation (`#section`), check whether the target anchor exists in the active DOM (`document.querySelector(href)`). If the anchor is missing (such as when triggered on a 404 or future sub-route), fall back to root navigation (`router.push('/' + href)`).
 
 ---
 
@@ -88,6 +91,7 @@ app/
 ├── fonts.ts          # Google Fonts loading & variable definitions
 ├── globals.css       # Tailwind v4 @theme, @utility, and resets
 ├── layout.tsx        # Root HTML wrapper, metadata, and font classes
+├── not-found.tsx     # Custom 404 route exception boundary & navigation waypoint
 └── page.tsx          # Homepage view composition
 components/
 ├── ui/               # Registry-backed Base UI primitives and styled wrappers (button, card, badge, dialog, tooltip)
@@ -95,7 +99,8 @@ components/
 ├── neu-icons/        # Bespoke Soft Neubrutalism SVG accent icons (propeller-star, rounded-cross, etc.)
 ├── avatar/           # Avatar video player & mouse-tracking controller (interactive-avatar, use-avatar-gaze)
 ├── page-layout/      # 3-column architectural layout & rails (navbar, grid-section, page-layout)
-└── sections/         # Modular page sections (hero, about, projects, experience, contact)
+└── sections/         # Modular page sections (hero, about, not-found, projects, experience, contact)
+constants/            # Modular personal data & tech stack taxonomies (data.ts, stack-and-skills-data.ts)
 docs/                 # Modular design system & architecture blueprints
 lib/
 └── utils.ts          # cn() class merging utility (clsx + tailwind-merge)

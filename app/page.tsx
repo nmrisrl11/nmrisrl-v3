@@ -3,6 +3,7 @@ import { PageLayout } from "@/components/page-layout/page-layout";
 import { AboutSection } from "@/components/sections/about/about-section";
 import { HeroSection } from "@/components/sections/hero/hero-section";
 import { Badge } from "@/components/ui/badge";
+import { Data } from "@/constants/data";
 
 export default function Home() {
 	return (
@@ -84,7 +85,14 @@ export default function Home() {
 			>
 				<div className="squircle-card bg-surface p-6">
 					<p className="font-body text-base text-ink/80">
-						Let&apos;s build something exceptional together. Reach out via email or social links.
+						Let&apos;s build something exceptional together. Reach out via email at{" "}
+						<a
+							href={`mailto:${Data.emailAddress}`}
+							className="font-bold text-coral underline decoration-2 underline-offset-4 hover:text-ink"
+						>
+							{Data.emailAddress}
+						</a>{" "}
+						or connect on social links.
 					</p>
 				</div>
 			</GridSection>

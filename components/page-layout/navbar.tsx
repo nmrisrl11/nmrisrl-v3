@@ -1,13 +1,16 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Data } from "@/constants/data";
 import { cn } from "@/lib/utils";
 import { MenuIcon, XIcon } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { NAV_ITEMS } from "./nav-items";
 
 export function Navbar() {
+	const router = useRouter();
 	const [isOpen, setIsOpen] = useState(false);
 	const [isScrolled, setIsScrolled] = useState(false);
 
@@ -30,6 +33,8 @@ export function Navbar() {
 			const isReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 			element.scrollIntoView({ behavior: isReducedMotion ? "auto" : "smooth", block: "start" });
 			window.history.pushState(null, "", href);
+		} else {
+			router.push(`/${href}`);
 		}
 	};
 
@@ -47,9 +52,9 @@ export function Navbar() {
 					href="/"
 					className="group inline-flex items-center gap-1.5 font-display text-lg font-black tracking-tight text-ink transition-transform active:scale-95 sm:text-xl"
 				>
-					<span>nmrisrl</span>
+					<span>{Data.cleanUrl.split(".")[0]}</span>
 					<span className="inline-flex -rotate-3 items-center rounded-md border-subtle border-ink bg-coral px-1.5 py-0.5 font-mono text-xs font-black tracking-normal text-white shadow-brutal-xs transition-transform duration-150 corner-squircle group-hover:rotate-0 supports-[corner-shape:squircle]:rounded-full">
-						.dev
+						.{Data.cleanUrl.split(".")[1]}
 					</span>
 				</Link>
 

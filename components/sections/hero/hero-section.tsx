@@ -2,6 +2,7 @@ import { InteractiveAvatar } from "@/components/avatar/interactive-avatar";
 import { DiamondStarIcon } from "@/components/neu-icons";
 import { GridSection } from "@/components/page-layout/grid-section";
 import { Button } from "@/components/ui/button";
+import { Data } from "@/constants/data";
 import { BauhausAccent } from "./bauhaus-accent";
 import { GitCommandBadge } from "./git-command-badge";
 import { MarqueeTechStack } from "./marquee-tech-stack";
@@ -72,8 +73,8 @@ export function HeroSection() {
 
 					{/* Narrative Subtitle */}
 					<p className="max-w-xl font-body text-base leading-relaxed font-medium text-balance text-ink/80 sm:text-lg">
-						Hi, I&apos;m Nomer — a front-end developer and engineer turning complex ideas into fast,
-						accessible, and delightful web applications.
+						Hi, I&apos;m {Data.firstName} — a {Data.position.toLowerCase()} turning complex ideas
+						into fast, accessible, and delightful web applications.
 					</p>
 
 					{/* Action Buttons (Dual CTAs) */}
