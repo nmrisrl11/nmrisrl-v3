@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { MenuIcon, XIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { RoughNotation } from "react-rough-notation";
 import { NAV_ITEMS } from "./nav-items";
 
@@ -19,6 +19,7 @@ export function Navbar() {
 	// Always initialize to null on both server and client to prevent SSR hydration mismatch
 	const [activeSection, setActiveSection] = useState<string | null>(null);
 	const [hoveredHref, setHoveredHref] = useState<string | null>(null);
+	const scrollSuppressionUntil = useRef(0);
 
 	const { ready: notationReady, reducedMotion } = useRoughNotation();
 
@@ -36,12 +37,30 @@ export function Navbar() {
 			}
 		}
 
+		const syncHash = (newHash: string | null) => {
+			if (typeof window === "undefined") return;
+			const currentHash = window.location.hash;
+			if (newHash) {
+				if (currentHash !== newHash) {
+					window.history.replaceState(null, "", newHash);
+				}
+			} else if (currentHash) {
+				window.history.replaceState(null, "", window.location.pathname + window.location.search);
+			}
+		};
+
 		const handleScroll = () => {
 			setIsScrolled(window.scrollY > 20);
+
+			// If smooth scrolling was initiated by a click, suppress scroll-spy active-section overrides
+			if (Date.now() < scrollSuppressionUntil.current) {
+				return;
+			}
 
 			// Near top of page: in hero section, clear active section
 			if (window.scrollY < 180) {
 				setActiveSection(null);
+				syncHash(null);
 				return;
 			}
 
@@ -50,6 +69,7 @@ export function Navbar() {
 				window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 60;
 			if (isBottom) {
 				setActiveSection("#contact");
+				syncHash("#contact");
 				return;
 			}
 
@@ -70,6 +90,7 @@ export function Navbar() {
 
 			if (currentSection) {
 				setActiveSection(currentSection);
+				syncHash(currentSection);
 			}
 		};
 
@@ -78,19 +99,25 @@ export function Navbar() {
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
 
-	const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-		e.preventDefault();
-		setIsOpen(false);
-		setActiveSection(href);
-		const targetId = href.replace("#", "");
-		const element = document.getElementById(targetId);
-		if (element) {
-			element.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
-			window.history.pushState(null, "", href);
-		} else {
-			router.push(`/${href}`);
-		}
-	};
+	const handleScrollTo = useCallback(
+		(e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+			e.preventDefault();
+			setIsOpen(false);
+			setActiveSection(href);
+			if (!reducedMotion) {
+				scrollSuppressionUntil.current = Date.now() + 800;
+			}
+			const targetId = href.replace("#", "");
+			const element = document.getElementById(targetId);
+			if (element) {
+				element.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+				window.history.pushState(null, "", href);
+			} else {
+				router.push(`/${href}`);
+			}
+		},
+		[reducedMotion, router],
+	);
 
 	return (
 		<header className="pointer-events-none sticky top-0 z-50 flex w-full justify-center px-3 py-3 sm:px-6 sm:py-4">
@@ -128,6 +155,7 @@ export function Navbar() {
 								onMouseLeave={() => setHoveredHref(null)}
 								onFocus={() => setHoveredHref(item.href)}
 								onBlur={() => setHoveredHref(null)}
+								aria-current={isActive ? "location" : undefined}
 								className={cn(
 									"group relative rounded-lg px-3 py-1.5 font-body text-sm font-bold transition-all duration-150 corner-squircle focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink supports-[corner-shape:squircle]:rounded-full",
 									isActive
@@ -216,6 +244,7 @@ export function Navbar() {
 												onClick={(e) => handleScrollTo(e, item.href)}
 												onMouseEnter={() => setHoveredHref(item.href)}
 												onMouseLeave={() => setHoveredHref(null)}
+												aria-current={isActive ? "location" : undefined}
 												className={cn(
 													"group flex items-center justify-between rounded-xl px-4 py-2.5 font-body text-base font-bold transition-all duration-150 corner-squircle focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink supports-[corner-shape:squircle]:rounded-2xl",
 													isActive
