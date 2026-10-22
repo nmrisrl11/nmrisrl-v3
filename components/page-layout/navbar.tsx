@@ -1,22 +1,76 @@
 "use client";
 
+import { DiamondStarIcon } from "@/components/neu-icons";
 import { Button } from "@/components/ui/button";
 import { Data } from "@/constants/data";
+import { useRoughNotation } from "@/hooks/use-rough-notation";
 import { cn } from "@/lib/utils";
 import { MenuIcon, XIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { RoughNotation } from "react-rough-notation";
 import { NAV_ITEMS } from "./nav-items";
 
 export function Navbar() {
 	const router = useRouter();
 	const [isOpen, setIsOpen] = useState(false);
 	const [isScrolled, setIsScrolled] = useState(false);
+	// Always initialize to null on both server and client to prevent SSR hydration mismatch
+	const [activeSection, setActiveSection] = useState<string | null>(null);
+	const [hoveredHref, setHoveredHref] = useState<string | null>(null);
 
+	const { ready: notationReady, reducedMotion } = useRoughNotation();
+
+	// Scroll spy for dynamic active section tracking & scrolled state
 	useEffect(() => {
+		const sectionIds = ["about", "experience", "skills", "projects", "contact"];
+
+		// Sync initial active state from URL hash on client mount
+		if (window.location.hash) {
+			const hash = window.location.hash;
+			if (sectionIds.includes(hash.replace("#", ""))) {
+				queueMicrotask(() => {
+					setActiveSection(hash);
+				});
+			}
+		}
+
 		const handleScroll = () => {
 			setIsScrolled(window.scrollY > 20);
+
+			// Near top of page: in hero section, clear active section
+			if (window.scrollY < 180) {
+				setActiveSection(null);
+				return;
+			}
+
+			// Near bottom of document: snap to contact
+			const isBottom =
+				window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 60;
+			if (isBottom) {
+				setActiveSection("#contact");
+				return;
+			}
+
+			// Reading attention line at ~35% of the viewport height
+			const targetY = window.innerHeight * 0.35;
+			let currentSection: string | null = null;
+
+			for (const id of sectionIds) {
+				const el = document.getElementById(id);
+				if (el) {
+					const rect = el.getBoundingClientRect();
+					if (rect.top <= targetY && rect.bottom >= targetY) {
+						currentSection = `#${id}`;
+						break;
+					}
+				}
+			}
+
+			if (currentSection) {
+				setActiveSection(currentSection);
+			}
 		};
 
 		handleScroll();
@@ -27,11 +81,11 @@ export function Navbar() {
 	const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
 		e.preventDefault();
 		setIsOpen(false);
+		setActiveSection(href);
 		const targetId = href.replace("#", "");
 		const element = document.getElementById(targetId);
 		if (element) {
-			const isReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-			element.scrollIntoView({ behavior: isReducedMotion ? "auto" : "smooth", block: "start" });
+			element.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
 			window.history.pushState(null, "", href);
 		} else {
 			router.push(`/${href}`);
@@ -50,6 +104,7 @@ export function Navbar() {
 				{/* Brand Logo (Left) */}
 				<Link
 					href="/"
+					onClick={() => setActiveSection(null)}
 					className="group inline-flex items-center gap-1.5 font-display text-lg font-black tracking-tight text-ink transition-transform active:scale-95 sm:text-xl"
 				>
 					<span>{Data.cleanUrl.split(".")[0]}</span>
@@ -60,16 +115,60 @@ export function Navbar() {
 
 				{/* Navigation Items (Center - Desktop) */}
 				<nav className="hidden items-center gap-1 md:flex" aria-label="Main navigation">
-					{NAV_ITEMS.map((item) => (
-						<a
-							key={item.href}
-							href={item.href}
-							onClick={(e) => handleScrollTo(e, item.href)}
-							className="rounded-lg px-3 py-1.5 font-body text-sm font-bold text-ink/75 transition-all duration-150 corner-squircle hover:-translate-y-0.5 hover:bg-canvas hover:text-ink hover:shadow-brutal-xs hover:ring-2 hover:ring-ink active:translate-y-0.5 supports-[corner-shape:squircle]:rounded-full"
-						>
-							{item.label}
-						</a>
-					))}
+					{NAV_ITEMS.map((item) => {
+						const isActive = activeSection === item.href;
+						const isHovered = hoveredHref === item.href;
+
+						return (
+							<a
+								key={item.href}
+								href={item.href}
+								onClick={(e) => handleScrollTo(e, item.href)}
+								onMouseEnter={() => setHoveredHref(item.href)}
+								onMouseLeave={() => setHoveredHref(null)}
+								onFocus={() => setHoveredHref(item.href)}
+								onBlur={() => setHoveredHref(null)}
+								className={cn(
+									"group relative rounded-lg px-3 py-1.5 font-body text-sm font-bold transition-all duration-150 corner-squircle focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink supports-[corner-shape:squircle]:rounded-full",
+									isActive
+										? "text-ink"
+										: "text-ink/75 hover:-translate-y-0.5 hover:text-ink active:translate-y-0.5",
+								)}
+							>
+								<span className="relative inline-block">
+									{isActive ? (
+										<RoughNotation
+											key={`highlight-${item.href}`}
+											type="highlight"
+											show={notationReady}
+											color="color-mix(in srgb, var(--color-yellow) 75%, transparent)"
+											multiline={true}
+											iterations={1}
+											padding={[2, 6]}
+											animate={!reducedMotion}
+											animationDuration={400}
+										>
+											{item.label}
+										</RoughNotation>
+									) : (
+										<RoughNotation
+											key={`underline-${item.href}`}
+											type="underline"
+											show={isHovered && notationReady}
+											color="var(--color-coral)"
+											strokeWidth={2.5}
+											iterations={2}
+											padding={[0, 2, 2, 2]}
+											animate={!reducedMotion}
+											animationDuration={250}
+										>
+											{item.label}
+										</RoughNotation>
+									)}
+								</span>
+							</a>
+						);
+					})}
 				</nav>
 
 				{/* CTA Button (Right - Desktop) & Hamburger (Mobile) */}
@@ -79,7 +178,10 @@ export function Navbar() {
 						size="sm"
 						shape="squircle"
 						asChild
-						className="hidden shadow-brutal-xs hover:shadow-brutal md:inline-flex"
+						className={cn(
+							"hidden shadow-brutal-xs hover:shadow-brutal md:inline-flex",
+							activeSection === "#contact" && "shadow-brutal ring-2 ring-coral ring-offset-2",
+						)}
 					>
 						<a href="#contact" onClick={(e) => handleScrollTo(e, "#contact")}>
 							Let&apos;s Talk
@@ -103,17 +205,71 @@ export function Navbar() {
 					<div className="absolute inset-x-0 top-full mt-2 rounded-2xl bg-surface/98 p-4 shadow-brutal ring-2 ring-ink backdrop-blur-md corner-squircle supports-[corner-shape:squircle]:rounded-3xl md:hidden">
 						<nav aria-label="Mobile navigation">
 							<ul className="flex flex-col gap-1.5">
-								{NAV_ITEMS.map((item) => (
-									<li key={item.href}>
-										<a
-											href={item.href}
-											onClick={(e) => handleScrollTo(e, item.href)}
-											className="block rounded-xl px-3.5 py-2.5 font-body text-base font-bold text-ink transition-colors hover:bg-canvas active:bg-canvas-subtle"
-										>
-											{item.label}
-										</a>
-									</li>
-								))}
+								{NAV_ITEMS.map((item) => {
+									const isActive = activeSection === item.href;
+									const isHovered = hoveredHref === item.href;
+
+									return (
+										<li key={item.href}>
+											<a
+												href={item.href}
+												onClick={(e) => handleScrollTo(e, item.href)}
+												onMouseEnter={() => setHoveredHref(item.href)}
+												onMouseLeave={() => setHoveredHref(null)}
+												className={cn(
+													"group flex items-center justify-between rounded-xl px-4 py-2.5 font-body text-base font-bold transition-all duration-150 corner-squircle focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink supports-[corner-shape:squircle]:rounded-2xl",
+													isActive
+														? "bg-canvas text-ink shadow-brutal-xs ring-2 ring-ink"
+														: "text-ink/75 hover:bg-canvas/50 hover:text-ink active:bg-canvas-subtle",
+												)}
+											>
+												<span className="relative inline-block">
+													{isActive ? (
+														<RoughNotation
+															key={`mobile-highlight-${item.href}`}
+															type="highlight"
+															show={notationReady}
+															color="color-mix(in srgb, var(--color-yellow) 75%, transparent)"
+															multiline={true}
+															iterations={1}
+															padding={[2, 6]}
+															animate={!reducedMotion}
+															animationDuration={400}
+														>
+															{item.label}
+														</RoughNotation>
+													) : (
+														<RoughNotation
+															key={`mobile-underline-${item.href}`}
+															type="underline"
+															show={isHovered && notationReady}
+															color="var(--color-coral)"
+															strokeWidth={2}
+															iterations={2}
+															padding={[0, 2, 2, 2]}
+															animate={!reducedMotion}
+															animationDuration={250}
+														>
+															{item.label}
+														</RoughNotation>
+													)}
+												</span>
+
+												{isActive ? (
+													<DiamondStarIcon
+														className="size-4 text-coral motion-safe:animate-spin"
+														style={{ animationDuration: "12s" }}
+													/>
+												) : (
+													<span
+														aria-hidden="true"
+														className="size-1.5 rounded-full bg-ink/20 transition-all duration-150 group-hover:scale-125 group-hover:bg-coral"
+													/>
+												)}
+											</a>
+										</li>
+									);
+								})}
 							</ul>
 							<div className="mt-3 border-t border-ink/15 pt-3">
 								<Button
