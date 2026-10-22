@@ -16,6 +16,7 @@
 - **Interactive Avatar Engine**: State-driven video player reacting to cursor tracking, viewport gaze, idle intervals, and gesture interactions.
 - **Custom Cursor & Tactile Click Engine**: Coral (`#FF6B57`) and Chalk White SVG pointer with instant 0ms haptic response, 5 selectable click effect styles (`burst`, `particles`, `crosshair`, `ring`, `ripple`), toggleable 3D brutal drop shadows, and audio SFX integration hooks.
 - **Soft Neubrutalist Bento Grid**: High-contrast 6-card modular bento grid for the About Me section, showcasing specialization, engineering metrics, architectural methodologies (Clean Architecture, DDD), innovation radar, and personal passions with official Simple Icons and custom neu-icons.
+- **Playful Custom 404 Route Exception Page**: Dedicated not-found boundary (`app/not-found.tsx` & `components/sections/not-found/`) featuring an interactive macOS window showing the missing path, a developer excuse shuffler with `PropellerStarIcon`, and a 4-card waypoint escape bento grid.
 
 ---
 
@@ -53,12 +54,14 @@ nmrisrl-v3/
 │   │   └── web-design-guidelines/
 │   └── workflows/        # Markdown agent workflows
 │       ├── load-project-context.md       # Start/resume feature workflow
+│       ├── commit-and-push.md            # Stage, conventional commit (grouped), and push workflow
 │       ├── summarize-git-changes.md      # Commit-ready changelog generator
 │       └── sync-project-documentation.md # Closing feature & doc sync workflow
 ├── app/
 │   ├── fonts.ts          # Plus Jakarta Sans, Space Grotesk, DM Sans, JetBrains Mono loaders
 │   ├── globals.css       # Tailwind v4 @theme, squircle @utility, brutal tokens
 │   ├── layout.tsx        # Root HTML wrapper, metadata, font variable bindings
+│   ├── not-found.tsx     # Custom 404 route exception boundary & navigation waypoint
 │   └── page.tsx          # Interactive preview: Avatar engine + Base UI components
 ├── components/
 │   ├── avatar/           # Interactive avatar video player & spring gaze tracker (InteractiveAvatar, useAvatarGaze)
@@ -67,10 +70,11 @@ nmrisrl-v3/
 │   ├── page-layout/      # Architectural 3-column grid layout (Navbar, GridSection, GridMarker, PageLayout)
 │   ├── sections/         # Modular portfolio sections
 │   │   ├── hero/         # Hero section (RotatingSeal with CrossStar stamp, BauhausAccent, command badges, marquee)
-│   │   └── about/        # About section (6-card Neubrutalist Bento Grid, official Simple Icons)
+│   │   ├── about/        # About section (6-card Neubrutalist Bento Grid, official Simple Icons)
+│   │   └── not-found/    # Custom 404 hero section & escape vector bento
 │   └── ui/               # Registry-backed Base UI primitives and styled wrappers (Button, Card, Badge, Dialog, Tooltip)
 ├── constants/            # Modular personal data & tech stack taxonomies
-│   ├── data.ts           # Bio, social links, and contact info
+│   ├── data.ts           # Centralized personal profile, bio, URLs, email, and social links
 │   └── stack-and-skills-data.ts # ProfileCoreTech & StackAndSkillsData
 ├── docs/                 # Modular design system & architecture blueprints (8 chapters)
 │   ├── README.md
@@ -153,6 +157,7 @@ This codebase is purpose-built for autonomous AI pair programming.
 ### Workflows ([`.agents/workflows/`](file:///C:/Users/NOMER%20ISRAEL/OneDrive/Desktop/Projects/nmrisrl-v3/.agents/workflows/))
 
 - **`load-project-context.md`**: Run at the start of any new feature or coding turn to load all tokens, guardrails, and component rules.
+- **`commit-and-push.md`**: Run to stage, format a conventional commit grouped by responsibilities, commit, and push to the target branch.
 - **`sync-project-documentation.md`**: Run at the end of feature development to audit and sync `docs/` and `AGENTS.md` with recent code changes.
 - **`summarize-git-changes.md`**: Run before committing to generate a clean, grouped Conventional Commit changelog.
 
@@ -238,6 +243,8 @@ See [`AGENTS.md`](./AGENTS.md) for the full lookup table and rules.
 - **`@/components/custom/*` for Bespoke Interactive Features**: Decouple and place custom experience primitives (`CustomCursor`, `Click` effect, future audio SFX managers) in this dedicated folder.
 - **`@/components/neu-icons/*` for Bespoke Neubrutalist SVG Accents**: Dedicated collection of 10 handcrafted Soft Neubrutalism SVG accent icons with shared `NeuIconProps`, size/fill cascade, and accessible defaults. Always imported via the `@/components/neu-icons` barrel file.
 - **Strict Barrel File & Module Import Protocol**: If a module collection provides an established barrel file (like `@/components/neu-icons`), always import through the barrel file using explicit named imports (`import { ... } from "@/components/neu-icons"`). For components without a barrel file, always use direct module imports (`@/components/ui/button`, `@/components/custom/cursor`, `@/components/page-layout/grid-section`, `@/components/sections/hero/hero-section`). Do not create superfluous or nested barrel files.
+- **Component Reuse over Reinvention (`@/components/ui/*`)**: Never build ad-hoc raw HTML elements (e.g. `<button>` styled with manual brutal rings/borders/shadows) when established primitives exist in `@/components/ui/` (`Button`, `Card`, `Badge`, `Dialog`, `Tooltip`). Always utilize the existing primitives with appropriate `variant`, `size`, and `shape`.
+- **Centralized Personal & Domain Metadata (`@/constants/data`)**: All personal info, name, bio, URLs (`cleanUrl`, `fullUrl`), contact email, and social links are strictly managed in `@/constants/data`. Never hardcode developer personal details across components.
 
 ---
 

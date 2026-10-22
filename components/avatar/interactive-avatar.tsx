@@ -1,5 +1,6 @@
 "use client";
 
+import { Data } from "@/constants/data";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { useRef } from "react";
@@ -33,7 +34,7 @@ export function InteractiveAvatar({ className }: InteractiveAvatarProps) {
 			{/* Permanent Default Base Poster (Resting idle pose shown when unfocused, idle, or between interactions) */}
 			<Image
 				src="/avatar/avatar-idle.webp"
-				alt="Nomer Israel Avatar Character"
+				alt={`${Data.fullName} Avatar Character`}
 				fill
 				priority
 				sizes="(max-width: 640px) 260px, (max-width: 768px) 340px, (max-width: 1024px) 380px, 400px"

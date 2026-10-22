@@ -1,4 +1,5 @@
 import { CrossStarIcon } from "@/components/neu-icons";
+import { Data } from "@/constants/data";
 import { cn } from "@/lib/utils";
 
 interface RotatingSealProps {
@@ -35,7 +36,7 @@ export function RotatingSeal({ className }: RotatingSealProps) {
 						textLength="232.5"
 						lengthAdjust="spacing"
 					>
-						{"NOMER ISRAEL ✦ FRONTEND ✦ CRAFTED WITH CARE ✦ 2026 ✦\u00A0"}
+						{`${Data.fullName.toUpperCase()} ✦ FRONTEND ✦ CRAFTED WITH CARE ✦ 2026 ✦\u00A0`}
 					</textPath>
 				</text>
 			</svg>

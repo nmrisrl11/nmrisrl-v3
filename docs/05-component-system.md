@@ -278,3 +278,39 @@ Always import neu-icons through the official barrel file (`@/components/neu-icon
 // Standard barrel import (components/neu-icons/index.ts)
 import { CrossStarIcon, DiamondStarIcon, PropellerStarIcon } from "@/components/neu-icons";
 ```
+
+---
+
+## 10. Route Exception Architecture (`app/not-found.tsx` & `components/sections/not-found/`)
+
+The 404 Route Exception view catches non-existent routes and provides a high-contrast Soft Neubrutalist landing experience that prevents dead ends and guides visitors back to core portfolio sections:
+
+### A. Root Route Boundary (`app/not-found.tsx`)
+
+- Wrapped cleanly in `<PageLayout>` to preserve the 3-column architectural framework and global navigation dock.
+- Exports custom route metadata referencing `Data.fullName` from `@/constants/data`:
+
+```tsx
+export const metadata: Metadata = {
+	title: `404 // Page Not Found • ${Data.fullName}`,
+	description: `The page you're looking for doesn't exist or has moved. Return to ${Data.fullName}'s portfolio.`,
+};
+```
+
+### B. Not Found Section (`components/sections/not-found/not-found-section.tsx`)
+
+- **Centered Blueprint Header**: Uses `GridSection` with `figure="FIG. 404 // ROUTE EXCEPTION"` and `figureMeta={["NOT FOUND", "DETOUR ACTIVE"]}` with centered alignment (`headerClassName="items-center text-center"`).
+- **Brutal Graphic**: Large pop `404` typographic anchor with coral squircle badge, a spinning `CrossStarIcon` (with `motion-reduce:animate-none`), and an `OOPS!` pill tag.
+- **Human-Centric Copywriting**: Replaces abrasive technical error dumps with friendly, reassuring language:
+  - Title: _"Uh oh! This page doesn't exist."_
+  - Body: _"The route you followed might have been moved, deleted, or mistyped. Let's get you back on track."_
+- **Interactive macOS Terminal Card**:
+  - Displays the requested path (`window.location.pathname`) with robust flex wrap and truncation protection (`min-w-0 truncate`) to prevent long URL overflow across all viewports.
+  - Interactive Developer Excuse generator: Shuffles through playful reasons with a `<Button variant="secondary" size="sm" shape="squircle">` featuring `PropellerStarIcon` (rotating 180° on button hover).
+- **Standardized CTAs**:
+  - Utilizes `@/components/ui/button` (`variant="default"` coral for _"Take Me Home"_ and `variant="secondary"` white for _"Go Back"_).
+- **Navigation Waypoint Bento Grid**:
+  - 4-card bento grid (_"Looking for something specific?"_) providing fast escape vectors to `/`, `/#about`, `/#skills`, and `/#contact`.
+  - Backed by the cross-route hash navigation logic in `Navbar` (`router.push('/' + href)` when anchor targets aren't mounted in the active DOM).
+- **Intentional Avatar Absence**:
+  - The 3D avatar was intentionally omitted from the 404 page following user review to eliminate visual clutter, optimize route transitions, and keep the user focused on fast recovery.

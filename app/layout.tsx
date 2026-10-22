@@ -1,16 +1,16 @@
 import { fontBody, fontDisplay, fontHeading, fontMono } from "@/app/fonts";
 import { CustomCursor } from "@/components/custom/cursor";
+import { Data } from "@/constants/data";
 import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
 	title: {
-		default: "Nomer Israel — Front-end Developer",
-		template: "%s | Nomer Israel",
+		default: `${Data.fullName} — ${Data.position}`,
+		template: `%s | ${Data.fullName}`,
 	},
-	description:
-		"Front-end Developer with a passion for modern web technologies, accessible design systems, and delightful interactions.",
+	description: Data.description,
 };
 
 export default function RootLayout({

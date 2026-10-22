@@ -7,6 +7,7 @@ import {
 	TrefoilCloudIcon,
 } from "@/components/neu-icons";
 import { GridSection } from "@/components/page-layout/grid-section";
+import { Data } from "@/constants/data";
 import { Footprints, Gamepad2, Palette } from "lucide-react";
 import { NextjsIcon, ReactIcon, TailwindIcon, TypeScriptIcon } from "./about-icons";
 
@@ -17,7 +18,7 @@ export function AboutSection() {
 			figure="FIG. 02 // IDENTITY & BACKGROUND"
 			figureMeta={["SPECIALIZATION", "CRAFT & SYSTEMS"]}
 			title="About Me"
-			description="Front-end developer crafting tactile, high-performance web applications and modular design systems."
+			description={`${Data.position} crafting tactile, high-performance web applications and modular design systems.`}
 		>
 			<div className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-12">
 				<SpecializationCard />
@@ -52,7 +53,7 @@ function SpecializationCard() {
 			{/* Copywriting */}
 			<div className="my-5 flex flex-col gap-3">
 				<h3 className="font-heading text-xl font-black tracking-tight text-ink sm:text-2xl">
-					Front-end developer building polished, accessible web apps.
+					{Data.position} building polished, accessible web apps.
 				</h3>
 				<p className="font-body text-sm leading-relaxed text-ink/80 sm:text-base">
 					Deeply rooted in the React ecosystem with hands-on architectural experience. I translate

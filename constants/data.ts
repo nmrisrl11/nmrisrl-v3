@@ -4,7 +4,9 @@ export interface TechStackItem {
 }
 
 export const Data = {
-	name: "Nomer Israel",
+	fullName: "Nomer Israel",
+	firstName: "Nomer",
+	lastName: "Israel",
 	initialName: "NI",
 	position: "Front-end Developer",
 	location: "Manila, Philippines",
@@ -19,7 +21,8 @@ export const Data = {
 		"🎯 Goals: To be in a position where I don’t have to worry about prices before making a purchase.",
 		"🎮 Interests: Running, game development, and 2D character design.",
 	],
-	url: "https://www.nmrisrl.dev",
+	fullUrl: "https://www.nmrisrl.dev",
+	cleanUrl: "nmrisrl.dev",
 	emailAddress: "hello@nmrisrl.dev",
 	socialLinks: {
 		github: "https://github.com/nmrisrl11",
