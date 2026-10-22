@@ -69,18 +69,18 @@ const generateId = () => {
 
 /** Neubrutalist palette colors for multi-color confetti effects */
 const NEUBRUTAL_PALETTE = [
-	"#FF6B57", // Coral
-	"#FDE047", // Yellow
-	"#18181B", // Deep Ink
-	"#86EFAC", // Mint
-	"#BAE6FD", // Sky
-	"#EBE6FF", // Lavender
+	"var(--color-coral)", // Coral
+	"var(--color-yellow)", // Yellow
+	"var(--color-ink)", // Deep Ink
+	"var(--color-mint)", // Mint
+	"var(--color-sky)", // Sky
+	"var(--color-lavender)", // Lavender
 ];
 
 export function Click({
 	children,
 	variant = "burst",
-	color = "#FF6B57",
+	color = "var(--color-coral)",
 	multiColor = false,
 	size = 80,
 	duration = 400,
@@ -248,7 +248,9 @@ function BurstEffect({ item }: { item: ClickItem }) {
 				display: "block",
 				overflow: "visible",
 				pointerEvents: "none",
-				filter: item.showShadow ? "drop-shadow(0px 1.5px 0px rgba(24, 24, 27, 0.8))" : undefined,
+				filter: item.showShadow
+					? "drop-shadow(0px 1.5px 0px color-mix(in srgb, var(--color-ink) 80%, transparent))"
+					: undefined,
 			}}
 			viewBox={`0 0 ${box} ${box}`}
 		>
@@ -330,7 +332,9 @@ function ParticlesEffect({ item }: { item: ClickItem }) {
 				display: "block",
 				overflow: "visible",
 				pointerEvents: "none",
-				filter: item.showShadow ? "drop-shadow(0px 1px 0px rgba(24, 24, 27, 0.9))" : undefined,
+				filter: item.showShadow
+					? "drop-shadow(0px 1px 0px color-mix(in srgb, var(--color-ink) 90%, transparent))"
+					: undefined,
 			}}
 			viewBox={`0 0 ${box} ${box}`}
 		>
@@ -350,7 +354,7 @@ function ParticlesEffect({ item }: { item: ClickItem }) {
 						cy={cy}
 						r={r0}
 						fill={particleColor}
-						stroke="#FFFFFF"
+						stroke="var(--color-surface, #FFFFFF)"
 						strokeWidth={1}
 						initial={{ scale: 0, opacity: 0 }}
 						animate={{
@@ -408,7 +412,9 @@ function CrosshairEffect({ item }: { item: ClickItem }) {
 				overflow: "visible",
 				pointerEvents: "none",
 				rotate: "-25deg",
-				filter: item.showShadow ? "drop-shadow(0px 1px 0px rgba(24, 24, 27, 0.8))" : undefined,
+				filter: item.showShadow
+					? "drop-shadow(0px 1px 0px color-mix(in srgb, var(--color-ink) 80%, transparent))"
+					: undefined,
 			}}
 			viewBox={`0 0 ${box} ${box}`}
 		>
@@ -472,7 +478,9 @@ function RingEffect({ item }: { item: ClickItem }) {
 				display: "block",
 				overflow: "visible",
 				pointerEvents: "none",
-				filter: item.showShadow ? "drop-shadow(0px 1.5px 0px rgba(24, 24, 27, 0.7))" : undefined,
+				filter: item.showShadow
+					? "drop-shadow(0px 1.5px 0px color-mix(in srgb, var(--color-ink) 70%, transparent))"
+					: undefined,
 			}}
 			viewBox={`0 0 ${rEnd} ${rEnd}`}
 		>
@@ -514,7 +522,9 @@ function RippleEffect({ item }: { item: ClickItem }) {
 				borderRadius: "9999px",
 				backgroundColor: item.color,
 				pointerEvents: "none",
-				boxShadow: item.showShadow ? "0 2px 0 0 rgba(24, 24, 27, 0.4)" : undefined,
+				boxShadow: item.showShadow
+					? "0 2px 0 0 color-mix(in srgb, var(--color-ink) 40%, transparent)"
+					: undefined,
 			}}
 		/>
 	);

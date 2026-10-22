@@ -17,6 +17,7 @@
 4. **Never re-install ESLint or Prettier**: This repository is strictly managed by the Rust-based **OXC** toolchain (`oxlint` + `oxfmt`).
 5. **Never install `@radix-ui/react-*` directly**: This repository exclusively uses `@base-ui/react` headless primitives integrated with `components.json`.
 6. **Never write arbitrary bracket syntax `[...]` when a theme token exists**: The IDE triggers `tailwindcss(suggestCanonicalClasses)` warnings. E.g., never write `border-b-[2px]`, write `border-b-brutal`; never write `shadow-[0px_4px_...]`, write `shadow-brutal`.
+7. **Never hardcode theme hex or rgba color strings in component props, defaults, or SVG styles**: Always reference `var(--color-*)` (e.g. `var(--color-coral)` instead of `#FF6B57`). When transparency is required in JavaScript props, inline styles, or SVG filters, use `color-mix(in srgb, var(--color-<name>) <opacity>%, transparent)` instead of raw `rgba(...)`.
 
 ### ✅ ALWAYS:
 
@@ -81,6 +82,11 @@
 20. **Centralized Personal & Domain Metadata (`@/constants/data`)**: Never hardcode developer name (`Nomer Israel`), role, bio, domain URLs (`cleanUrl`, `fullUrl`), contact email, or social links directly across pages, sections, or metadata. Always import and reference the `Data` constant from `@/constants/data`.
 21. **Reuse Existing Primitives (`@/components/ui/*`)**: Never construct ad-hoc raw `<button>` or container elements with manual brutal rings/borders/shadows when `@/components/ui/button`, `@/components/ui/card`, etc. exist. Always utilize the established component primitives with appropriate `variant`, `size`, and `shape`.
 22. **Cross-Route Hash Navigation**: When handling internal anchor navigation (`#section`), check whether the target anchor exists in the active DOM (`document.querySelector(href)`). If the anchor is missing (such as when triggered on a 404 or future sub-route), fall back to root navigation (`router.push('/' + href)`).
+23. **Hand-Drawn Vector Annotations (`rough-notation` & `react-rough-notation`)**:
+    - **Font-Ready Layout Sync**: Always wait for custom web fonts (`document.fonts.ready`) before triggering annotation groups (`<RoughNotationGroup show={...}>`). Measuring before fonts finish loading causes inaccurate bounding boxes and visual jitter.
+    - **Motion Reduction (WCAG 2.3.3)**: Always honor `prefers-reduced-motion: reduce`. Use `useSyncExternalStore` to subscribe to `window.matchMedia("(prefers-reduced-motion: reduce)")` without triggering cascading render warnings, and pass `animate={!reducedMotion}` to all `<RoughNotation>` components.
+    - **Responsive Multiline Support**: Set `multiline={true}` on annotations applied to inline phrases (e.g. roles, descriptions) that might wrap across multiple lines on smaller viewports.
+24. **Proper Theme Variable Usage with Opacity**: For inline styles, SVG stroke/fill attributes, or library props (`RoughNotation`, `motion`, `CustomCursor`, `Click`), always use `var(--color-*)` for solid tokens, and `color-mix(in srgb, var(--color-<name>) <opacity>%, transparent)` for partial opacity.
 
 ---
 

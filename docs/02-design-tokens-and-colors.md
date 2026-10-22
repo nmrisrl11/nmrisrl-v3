@@ -156,3 +156,40 @@ Inspired by `tailwindcss.com`, this utility generates a viewport-locked 315° di
 	);
 }
 ```
+
+---
+
+## 6. Proper Usage of Theme Variables with Opacity (`color-mix()`)
+
+To preserve theme integrity and eliminate color drift as the codebase expands, **never hardcode hex codes or raw rgba values** (such as `#FF6B57` or `rgba(253, 224, 71, 0.75)`) inside component props, SVGs, or dynamic CSS styles.
+
+### A. Inside Tailwind Utility Classes
+
+Use Tailwind v4's native slash-opacity modifier, which compiles to `color-mix()` automatically:
+
+```html
+<div class="border-coral/50 bg-yellow/75 text-ink/80" />
+```
+
+### B. In Component Props, SVG Attributes & Dynamic Styles
+
+When passing colors into JavaScript components (e.g., `<RoughNotation>`, `motion` controllers, canvas renderers) or SVG stroke/filter attributes where utility classes cannot be used:
+
+- **Solid Colors**: Reference the CSS variable directly:
+
+  ```tsx
+  color = "var(--color-coral)";
+  borderColor = "var(--color-surface, #FFFFFF)";
+  ```
+
+- **Colors with Opacity / Alpha Channels**: Use native CSS `color-mix()` with `in srgb`:
+  ```tsx
+  // 75% opacity Buttercup Yellow highlighter
+  color = "color-mix(in srgb, var(--color-yellow) 75%, transparent)";
+
+  // 95% opacity Deep Ink zero-blur drop shadow filter
+  filter = "drop-shadow(0px 2px 0px color-mix(in srgb, var(--color-ink) 95%, transparent))";
+
+  // 40% opacity Deep Ink box shadow
+  boxShadow = "0 2px 0 0 color-mix(in srgb, var(--color-ink) 40%, transparent)";
+  ```

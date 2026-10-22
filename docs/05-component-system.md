@@ -198,6 +198,13 @@ The layout incorporates a 3-column structural grid framework with decorative str
     - **Blueprint Coordinates**: Rendered with `DiamondStarIcon` (`size-3 text-coral`) followed by `FIG. 01 // OVERVIEW • 14°35'N 120°58'E • MNL, PH` with responsive wrapping.
     - **Availability Kicker**: `[ 🟢 AVAILABLE FOR WORK ]` squircle pill with pulsing mint indicator (equipped with `motion-reduce:animate-none`).
     - **Headline**: `Plus Jakarta Sans` headline with responsive sizing (`text-3xl sm:text-5xl`) and yellow highlight box (`beyond the code.`).
+    - **Narrative Subtitle (`HeroNarrative` in `components/sections/hero/hero-narrative.tsx`)**:
+      - Hand-drawn vector annotations powered by `react-rough-notation` and `rough-notation`.
+      - **Sequenced Annotation Group (`RoughNotationGroup`)**:
+        - **Name Underline** (`type="underline"`): Warm Coral sketch line (`#FF6B57`) under `Data.firstName` with `strokeWidth={2.5}` and `iterations={2}`.
+        - **Role Highlighter** (`type="highlight"`): Buttercup Yellow highlighter (`rgba(253, 224, 71, 0.75)`) over `Data.position.toLowerCase()` with `multiline={true}` to support line wrapping on narrow viewports.
+      - **Font-Ready Measurement**: Waits for `document.fonts.ready` before triggering the annotation group, preventing bounding box calculation discrepancies with custom web typography (`DM Sans`).
+      - **Accessibility & Motion Reduction (WCAG 2.3.3)**: Integrated with `useSyncExternalStore` listening to `(prefers-reduced-motion: reduce)` to disable drawing animations (`animate={!reducedMotion}`) for users requesting reduced motion without cascading re-render warnings.
     - **Dual Action CTAs**: Clean `[ Explore Projects ]` (default coral) and `[ Get in Touch ]` (secondary white) buttons.
 
 - **`MarqueeTechStack` (`components/sections/hero/marquee-tech-stack.tsx`)**:
