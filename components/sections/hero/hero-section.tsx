@@ -2,9 +2,9 @@ import { InteractiveAvatar } from "@/components/avatar/interactive-avatar";
 import { DiamondStarIcon } from "@/components/neu-icons";
 import { GridSection } from "@/components/page-layout/grid-section";
 import { Button } from "@/components/ui/button";
-import { Data } from "@/constants/data";
 import { BauhausAccent } from "./bauhaus-accent";
 import { GitCommandBadge } from "./git-command-badge";
+import { HeroNarrative } from "./hero-narrative";
 import { MarqueeTechStack } from "./marquee-tech-stack";
 import { NpmDevBadge } from "./npm-dev-badge";
 import { RotatingSeal } from "./rotating-seal";
@@ -72,10 +72,7 @@ export function HeroSection() {
 					</h1>
 
 					{/* Narrative Subtitle */}
-					<p className="max-w-xl font-body text-base leading-relaxed font-medium text-balance text-ink/80 sm:text-lg">
-						Hi, I&apos;m {Data.firstName} — a {Data.position.toLowerCase()} turning complex ideas
-						into fast, accessible, and delightful web applications.
-					</p>
+					<HeroNarrative />
 
 					{/* Action Buttons (Dual CTAs) */}
 					<div className="flex flex-wrap items-center justify-center gap-3.5 pt-1 lg:justify-start">

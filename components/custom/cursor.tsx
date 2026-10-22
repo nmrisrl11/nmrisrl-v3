@@ -301,8 +301,8 @@ export interface CursorProps extends Omit<HTMLMotionProps<"div">, "children"> {
 
 export function Cursor({
 	className,
-	color = "#FF6B57",
-	borderColor = "#FFFFFF",
+	color = "var(--color-coral)",
+	borderColor = "var(--color-surface, #FFFFFF)",
 	strokeWidth = 2.5,
 	showShadow = true,
 	children,
@@ -368,7 +368,9 @@ export function Cursor({
 							fill="none"
 							xmlns="http://www.w3.org/2000/svg"
 							style={{
-								filter: showShadow ? "drop-shadow(0px 2px 0px rgba(24, 24, 27, 0.95))" : undefined,
+								filter: showShadow
+									? "drop-shadow(0px 2px 0px color-mix(in srgb, var(--color-ink) 95%, transparent))"
+									: undefined,
 							}}
 						>
 							<path
@@ -392,7 +394,7 @@ export interface CustomCursorProps extends CursorProps {
 	global?: boolean;
 	/** Click effect animation style ('burst' | 'particles' | 'crosshair' | 'ring' | 'ripple' | 'none', defaults to 'burst') */
 	clickEffect?: ClickVariant | "none";
-	/** Click effect accent color (defaults to Coral #FF6B57) */
+	/** Click effect accent color (defaults to Coral var(--color-coral)) */
 	clickEffectColor?: string;
 	/** Whether the click effect uses the multi-color soft neubrutalist palette (defaults to false) */
 	clickEffectMultiColor?: boolean;
@@ -411,7 +413,7 @@ export interface CustomCursorProps extends CursorProps {
 export function CustomCursor({
 	global = true,
 	clickEffect = "burst",
-	clickEffectColor = "#FF6B57",
+	clickEffectColor = "var(--color-coral)",
 	clickEffectMultiColor = false,
 	clickEffectShadow = true,
 	onEffectTrigger,

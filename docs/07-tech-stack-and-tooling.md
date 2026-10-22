@@ -2,18 +2,19 @@
 
 ## 1. Core Production Stack
 
-| Technology         | Version                               | Purpose                                                                                  |
-| ------------------ | ------------------------------------- | ---------------------------------------------------------------------------------------- |
-| **Next.js**        | `^16.4.2`                             | React framework with App Router, Turbopack, and Server Components                        |
-| **React**          | `^19.3.0`                             | Latest React runtime with native Actions and Hooks                                       |
-| **TypeScript**     | `^5`                                  | Strict static typing across all components, APIs, and data models                        |
-| **Tailwind CSS**   | `^4.0.0`                              | High-performance CSS-first utility engine using `@theme` and `@utility`                  |
-| **PostCSS Plugin** | `^4.0.0` (`@tailwindcss/postcss`)     | Standard PostCSS integration via `postcss.config.mjs` for reliable HMR updates           |
-| **Base UI**        | `^1.9.0` (`@base-ui/react`)           | Headless unstyled accessible primitives from the MUI team                                |
-| **Corner Shape**   | `^0.0.8-3` (`@toolwind/corner-shape`) | First-class utilities for CSS `corner-shape: squircle`                                   |
-| **Motion**         | `^14.3.0` (`motion`)                  | Spring physics, layout animations, and gesture tracking                                  |
-| **Tailwind Merge** | `^3.0.0` (`tailwind-merge`)           | Intelligent class merging extended with custom brutal tokens (`lib/utils.ts`)            |
-| **Icons**          | `^1.59.0` (`lucide-react`) + Local    | Crisp UI icons (`lucide-react`) + 10 bespoke Soft Neubrutalism SVG accents (`neu-icons`) |
+| Technology                 | Version                                                         | Purpose                                                                                  |
+| -------------------------- | --------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| **Next.js**                | `^16.4.2`                                                       | React framework with App Router, Turbopack, and Server Components                        |
+| **React**                  | `^19.3.0`                                                       | Latest React runtime with native Actions and Hooks                                       |
+| **TypeScript**             | `^5`                                                            | Strict static typing across all components, APIs, and data models                        |
+| **Tailwind CSS**           | `^4.0.0`                                                        | High-performance CSS-first utility engine using `@theme` and `@utility`                  |
+| **PostCSS Plugin**         | `^4.0.0` (`@tailwindcss/postcss`)                               | Standard PostCSS integration via `postcss.config.mjs` for reliable HMR updates           |
+| **Base UI**                | `^1.9.0` (`@base-ui/react`)                                     | Headless unstyled accessible primitives from the MUI team                                |
+| **Corner Shape**           | `^0.0.8-3` (`@toolwind/corner-shape`)                           | First-class utilities for CSS `corner-shape: squircle`                                   |
+| **Motion**                 | `^14.3.0` (`motion`)                                            | Spring physics, layout animations, and gesture tracking                                  |
+| **Tailwind Merge**         | `^3.0.0` (`tailwind-merge`)                                     | Intelligent class merging extended with custom brutal tokens (`lib/utils.ts`)            |
+| **Hand-Drawn Annotations** | `^0.5.1` / `^1.0.8` (`rough-notation` + `react-rough-notation`) | Hand-drawn vector sketch annotations (`underline`, `highlight`) with layout sync         |
+| **Icons**                  | `^1.59.0` (`lucide-react`) + Local                              | Crisp UI icons (`lucide-react`) + 10 bespoke Soft Neubrutalism SVG accents (`neu-icons`) |
 
 ---
 

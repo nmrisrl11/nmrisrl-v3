@@ -15,6 +15,7 @@
 - **Continuous Squircles**: Continuous-curvature corners powered by `@toolwind/corner-shape` (`corner-shape: squircle`) with a reliable 3-layer progressive enhancement fallback for all modern browsers.
 - **Interactive Avatar Engine**: State-driven video player reacting to cursor tracking, viewport gaze, idle intervals, and gesture interactions.
 - **Custom Cursor & Tactile Click Engine**: Coral (`#FF6B57`) and Chalk White SVG pointer with instant 0ms haptic response, 5 selectable click effect styles (`burst`, `particles`, `crosshair`, `ring`, `ripple`), toggleable 3D brutal drop shadows, and audio SFX integration hooks.
+- **Hand-Drawn Vector Annotations**: Dynamic sketchy underlines and highlighter accents powered by [Rough Notation](https://roughnotation.com/) (`react-rough-notation`), featuring font-ready layout synchronization and full WCAG 2.3.3 motion reduction support.
 - **Soft Neubrutalist Bento Grid**: High-contrast 6-card modular bento grid for the About Me section, showcasing specialization, engineering metrics, architectural methodologies (Clean Architecture, DDD), innovation radar, and personal passions with official Simple Icons and custom neu-icons.
 - **Playful Custom 404 Route Exception Page**: Dedicated not-found boundary (`app/not-found.tsx` & `components/sections/not-found/`) featuring an interactive macOS window showing the missing path, a developer excuse shuffler with `PropellerStarIcon`, and a 4-card waypoint escape bento grid.
 
@@ -22,21 +23,22 @@
 
 ## 🚀 Tech Stack
 
-| Layer                     | Technology                                                                     | Version               | Purpose                                                                       |
-| :------------------------ | :----------------------------------------------------------------------------- | :-------------------- | :---------------------------------------------------------------------------- |
-| **Framework**             | [Next.js](https://nextjs.org/) (App Router)                                    | `^16.4.2`             | Turbopack, React Server Components, Partial Prerendering                      |
-| **Runtime**               | [React](https://react.dev/)                                                    | `^19.3.0`             | Actions, Server Components, and native hooks                                  |
-| **Language**              | [TypeScript](https://www.typescriptlang.org/)                                  | `^5.0.0`              | Strict static typing across components, models, and tokens                    |
-| **Styling**               | [Tailwind CSS v4](https://tailwindcss.com/)                                    | `^4.0.0`              | CSS-first `@theme` and `@utility` engine with canonical token enforcement     |
-| **PostCSS Plugin**        | [@tailwindcss/postcss](https://www.npmjs.com/package/@tailwindcss/postcss)     | `^4.0.0`              | Standard PostCSS integration via `postcss.config.mjs` for reliable HMR        |
-| **Component Primitives**  | [Base UI](https://base-ui.com/)                                                | `^1.9.0`              | Unstyled headless primitives from MUI (`@base-ui/react`), replacing Radix UI  |
-| **Component Scaffolding** | [shadcn/ui](https://ui.shadcn.com/)                                            | Base UI Preset        | Atomic component structure mapped to Base UI (`components.json`)              |
-| **Corner Geometry**       | [@toolwind/corner-shape](https://www.npmjs.com/package/@toolwind/corner-shape) | `^0.0.8-3`            | CSS `corner-shape: squircle` utilities and fallback classes                   |
-| **Animations**            | [Motion](https://motion.dev/)                                                  | `^14.3.0`             | Spring physics, layout animations, and gesture tracking                       |
-| **Tailwind Merge**        | [tailwind-merge](https://www.npmjs.com/package/tailwind-merge)                 | `^3.0.0`              | Intelligent class merging extended with custom brutal tokens (`lib/utils.ts`) |
-| **Icons**                 | [Lucide React](https://lucide.dev/) + [Neu Icons](./components/neu-icons)      | `^1.59.0` / Local     | Crisp UI icons (`lucide-react`) + 10 bespoke Soft Neubrutalism SVG accents    |
-| **Diagnostics**           | [React Scan](https://react-scan.com/)                                          | Auto (unpkg)          | Real-time React 19 render & performance profiling (development-only)          |
-| **Linter & Formatter**    | [OXC](https://oxc.rs/) (`oxlint` + `oxfmt`)                                    | `^1.88.0` / `^0.73.0` | Ultra-fast Rust-based static analysis replacing ESLint & Prettier             |
+| Layer                      | Technology                                                                                                          | Version               | Purpose                                                                              |
+| :------------------------- | :------------------------------------------------------------------------------------------------------------------ | :-------------------- | :----------------------------------------------------------------------------------- |
+| **Framework**              | [Next.js](https://nextjs.org/) (App Router)                                                                         | `^16.4.2`             | Turbopack, React Server Components, Partial Prerendering                             |
+| **Runtime**                | [React](https://react.dev/)                                                                                         | `^19.3.0`             | Actions, Server Components, and native hooks                                         |
+| **Language**               | [TypeScript](https://www.typescriptlang.org/)                                                                       | `^5.0.0`              | Strict static typing across components, models, and tokens                           |
+| **Styling**                | [Tailwind CSS v4](https://tailwindcss.com/)                                                                         | `^4.0.0`              | CSS-first `@theme` and `@utility` engine with canonical token enforcement            |
+| **PostCSS Plugin**         | [@tailwindcss/postcss](https://www.npmjs.com/package/@tailwindcss/postcss)                                          | `^4.0.0`              | Standard PostCSS integration via `postcss.config.mjs` for reliable HMR               |
+| **Component Primitives**   | [Base UI](https://base-ui.com/)                                                                                     | `^1.9.0`              | Unstyled headless primitives from MUI (`@base-ui/react`), replacing Radix UI         |
+| **Component Scaffolding**  | [shadcn/ui](https://ui.shadcn.com/)                                                                                 | Base UI Preset        | Atomic component structure mapped to Base UI (`components.json`)                     |
+| **Corner Geometry**        | [@toolwind/corner-shape](https://www.npmjs.com/package/@toolwind/corner-shape)                                      | `^0.0.8-3`            | CSS `corner-shape: squircle` utilities and fallback classes                          |
+| **Animations**             | [Motion](https://motion.dev/)                                                                                       | `^14.3.0`             | Spring physics, layout animations, and gesture tracking                              |
+| **Tailwind Merge**         | [tailwind-merge](https://www.npmjs.com/package/tailwind-merge)                                                      | `^3.0.0`              | Intelligent class merging extended with custom brutal tokens (`lib/utils.ts`)        |
+| **Hand-Drawn Annotations** | [Rough Notation](https://roughnotation.com/) + [React Wrapper](https://github.com/linkstrifer/react-rough-notation) | `^0.5.1` / `^1.0.8`   | Hand-drawn vector annotations (`underline`, `highlight`) with layout synchronization |
+| **Icons**                  | [Lucide React](https://lucide.dev/) + [Neu Icons](./components/neu-icons)                                           | `^1.59.0` / Local     | Crisp UI icons (`lucide-react`) + 10 bespoke Soft Neubrutalism SVG accents           |
+| **Diagnostics**            | [React Scan](https://react-scan.com/)                                                                               | Auto (unpkg)          | Real-time React 19 render & performance profiling (development-only)                 |
+| **Linter & Formatter**     | [OXC](https://oxc.rs/) (`oxlint` + `oxfmt`)                                                                         | `^1.88.0` / `^0.73.0` | Ultra-fast Rust-based static analysis replacing ESLint & Prettier                    |
 
 ---
 
@@ -69,7 +71,7 @@ nmrisrl-v3/
 │   ├── neu-icons/        # 10 bespoke Soft Neubrutalism SVG accent icons (PropellerStar, RoundedCross, etc.)
 │   ├── page-layout/      # Architectural 3-column grid layout (Navbar, GridSection, GridMarker, PageLayout)
 │   ├── sections/         # Modular portfolio sections
-│   │   ├── hero/         # Hero section (RotatingSeal with CrossStar stamp, BauhausAccent, command badges, marquee)
+│   │   ├── hero/         # Hero section (RotatingSeal, BauhausAccent, HeroNarrative with Rough Notation, badges, marquee)
 │   │   ├── about/        # About section (6-card Neubrutalist Bento Grid, official Simple Icons)
 │   │   └── not-found/    # Custom 404 hero section & escape vector bento
 │   └── ui/               # Registry-backed Base UI primitives and styled wrappers (Button, Card, Badge, Dialog, Tooltip)
