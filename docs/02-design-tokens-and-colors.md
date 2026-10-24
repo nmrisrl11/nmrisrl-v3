@@ -111,6 +111,9 @@ Defined in `app/globals.css`:
 	--border-width-subtle: 1.5px;
 	--border-width-brutal: 2px;
 	--border-width-thick: 3px;
+
+	--text-2xs: 0.625rem;
+	--text-2xs--line-height: 0.875rem;
 }
 ```
 

@@ -58,19 +58,21 @@ flowchart TD
   - Tech stack pills (`React`, `Next.js`, `TypeScript`)
   - Date stamps (`2023 — Present`)
   - Commit counters, code snippets, and status badges
+  - Architectural blueprint micro labels and coordinate kickers (`text-2xs`)
 
 ---
 
 ## 3. Typographic Scale
 
-| Level             | Font Family         | Size (Mobile)      | Size (Desktop)     | Weight | Tracking  |
-| ----------------- | ------------------- | ------------------ | ------------------ | ------ | --------- |
-| **Hero Title**    | `Plus Jakarta Sans` | `2.5rem (40px)`    | `4.5rem (72px)`    | 800    | `-0.03em` |
-| **Section H2**    | `Space Grotesk`     | `1.75rem (28px)`   | `2.5rem (40px)`    | 700    | `-0.02em` |
-| **Card H3**       | `Space Grotesk`     | `1.25rem (20px)`   | `1.5rem (24px)`    | 700    | `-0.01em` |
-| **Body Lead**     | `DM Sans`           | `1.125rem (18px)`  | `1.25rem (20px)`   | 400    | `0`       |
-| **Body Base**     | `DM Sans`           | `0.9375rem (15px)` | `1rem (16px)`      | 400    | `0`       |
-| **Badge / Label** | `JetBrains Mono`    | `0.75rem (12px)`   | `0.8125rem (13px)` | 500    | `+0.02em` |
+| Level             | Font Family         | Size (Mobile)      | Size (Desktop)     | Weight | Tracking  | Tailwind Class          |
+| ----------------- | ------------------- | ------------------ | ------------------ | ------ | --------- | ----------------------- |
+| **Hero Title**    | `Plus Jakarta Sans` | `2.5rem (40px)`    | `4.5rem (72px)`    | 800    | `-0.03em` | `text-4xl` / `text-7xl` |
+| **Section H2**    | `Space Grotesk`     | `1.75rem (28px)`   | `2.5rem (40px)`    | 700    | `-0.02em` | `text-2xl` / `text-4xl` |
+| **Card H3**       | `Space Grotesk`     | `1.25rem (20px)`   | `1.5rem (24px)`    | 700    | `-0.01em` | `text-xl` / `text-2xl`  |
+| **Body Lead**     | `DM Sans`           | `1.125rem (18px)`  | `1.25rem (20px)`   | 400    | `0`       | `text-lg` / `text-xl`   |
+| **Body Base**     | `DM Sans`           | `0.9375rem (15px)` | `1rem (16px)`      | 400    | `0`       | `text-sm` / `text-base` |
+| **Badge / Label** | `JetBrains Mono`    | `0.75rem (12px)`   | `0.8125rem (13px)` | 500    | `+0.02em` | `text-xs`               |
+| **Micro Label**   | `JetBrains Mono`    | `0.625rem (10px)`  | `0.625rem (10px)`  | 700    | `+0.05em` | `text-2xs`              |
 
 ---
 

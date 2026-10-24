@@ -7,7 +7,7 @@ interface GridSectionProps {
 	id?: string;
 	number?: string;
 	figure?: string;
-	figureMeta?: string | string[];
+	figureMeta?: string | readonly string[];
 	title?: string;
 	description?: string;
 	children: ReactNode;
