@@ -103,17 +103,52 @@ export function ExperienceHologram() {
               .beacon-blink-anim {
                 animation: none !important;
               }
+
+              .holo-floating {
+                transform: translate3d(0, 0, 0) !important;
+              }
+
+              .ring-rise-1,
+              .ring-rise-2,
+              .ring-rise-3,
+              .scanline-anim {
+                opacity: 0 !important;
+                display: none !important;
+              }
+
+              .beam-anim {
+                opacity: 0.72 !important;
+              }
+
+              .beacon-blink-anim {
+                opacity: 1 !important;
+              }
+
+              .ray-sweep-front {
+                transform: rotate(0deg) !important;
+              }
+
+              .ray-scale-left,
+              .ray-scale-right {
+                transform: scaleY(1) !important;
+              }
+
+              .ray-dot-left,
+              .ray-dot-right {
+                transform: translate3d(0, 0, 0) !important;
+              }
             }
 
             @keyframes holo-float {
               0%, 100% {
-                transform: translate3d(380px, 186px, 0);
+                transform: translate3d(0, -4px, 0);
               }
               50% {
-                transform: translate3d(380px, 194px, 0);
+                transform: translate3d(0, 4px, 0);
               }
             }
             .holo-floating {
+              transform: translate3d(0, 0, 0);
               animation: holo-float 4.2s ease-in-out infinite;
               will-change: transform;
             }
@@ -409,183 +444,192 @@ export function ExperienceHologram() {
 				</g>
 
 				{/* 3. Upright Front-Facing Holographic HUD Screen */}
-				<g id="holo-screen" className="holo-glow holo-floating">
-					{/* Solid Neubrutalist Holo-Drop Depth */}
-					<rect
-						x="-106"
-						y="-71"
-						width="216"
-						height="146"
-						rx="14"
-						fill="var(--color-ink, #18181b)"
-						opacity="0.22"
-					/>
-
-					{/* Main Clean Translucent Glass Screen */}
-					<rect
-						x="-110"
-						y="-75"
-						width="216"
-						height="146"
-						rx="14"
-						fill="var(--color-surface-muted, #f3f8f5)"
-						fillOpacity="0.95"
-						stroke="var(--color-ink, #18181b)"
-						strokeWidth="2.2"
-					/>
-
-					{/* Top Telemetry Header Bar */}
-					<rect x="-102" y="-67" width="200" height="20" rx="5" fill="var(--color-ink, #18181b)" />
-					<circle
-						id="holo-rec-dot"
-						className="beacon-blink-anim"
-						cx="-90"
-						cy="-57"
-						r="3"
-						fill="var(--color-mint, #86efac)"
-					/>
-
-					{/* Header Text in Pure Crisp White with Lucide Chevrons Right Icon */}
-					<g transform="translate(-80, -57)">
-						<text
-							x="0"
-							y="3.2"
-							fontFamily="monospace"
-							fontSize="7.5"
-							fontWeight="900"
-							fill="#ffffff"
-							letterSpacing="0.6"
-						>
-							CRAFT TIMELINE // {Data.careerStartYear}
-						</text>
-
-						{/* Lucide Chevrons Right Icon in Pure Crisp White */}
-						<g
-							transform="translate(110, -6) scale(0.5)"
-							stroke="#ffffff"
-							strokeWidth="2.8"
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							fill="none"
-						>
-							<path d="m6 17 5-5-5-5" />
-							<path d="m13 17 5-5-5-5" />
-						</g>
-
-						<text
-							x="126"
-							y="3.2"
-							fontFamily="monospace"
-							fontSize="7.5"
-							fontWeight="900"
-							fill="#ffffff"
-							letterSpacing="0.6"
-						>
-							{currentYear}
-						</text>
-					</g>
-
-					{/* Center Hero Stat: Tactile Years Squircle Badge */}
-					<g id="hero-stat-badge" transform="translate(0, -7)">
+				<g id="holo-screen" transform="translate(380, 190)">
+					<g className="holo-glow holo-floating">
+						{/* Solid Neubrutalist Holo-Drop Depth */}
 						<rect
-							x="-82"
-							y="-22"
-							width="164"
-							height="44"
-							rx="10"
+							x="-106"
+							y="-71"
+							width="216"
+							height="146"
+							rx="14"
 							fill="var(--color-ink, #18181b)"
+							opacity="0.22"
 						/>
+
+						{/* Main Clean Translucent Glass Screen */}
 						<rect
-							x="-84"
-							y="-24"
-							width="164"
-							height="44"
-							rx="10"
-							fill="var(--color-yellow, #fde047)"
+							x="-110"
+							y="-75"
+							width="216"
+							height="146"
+							rx="14"
+							fill="var(--color-surface-muted, #f3f8f5)"
+							fillOpacity="0.95"
 							stroke="var(--color-ink, #18181b)"
-							strokeWidth="2"
+							strokeWidth="2.2"
 						/>
 
-						<text
-							x="-26"
-							y="9"
-							fontFamily="ui-sans-serif, system-ui, sans-serif"
-							fontSize="36"
-							fontWeight="900"
-							fill="var(--color-ink, #18181b)"
-							textAnchor="middle"
-							letterSpacing="-1.5"
-						>
-							{elapsedYears}
-							<tspan fill="var(--color-coral, #ff6b57)" fontWeight="900">
-								+
-							</tspan>
-						</text>
-
-						<text
-							x="2"
-							y="-4"
-							fontFamily="monospace"
-							fontSize="10"
-							fontWeight="900"
-							fill="var(--color-ink, #18181b)"
-							textAnchor="start"
-							letterSpacing="0.5"
-						>
-							YEARS
-						</text>
-						<text
-							x="2"
-							y="9"
-							fontFamily="monospace"
-							fontSize="9"
-							fontWeight="900"
-							fill="var(--color-ink-muted, #52525b)"
-							textAnchor="start"
-							letterSpacing="0.5"
-						>
-							CRAFTING UI
-						</text>
-					</g>
-
-					{/* Bottom Dynamic Experience Stream Ticker */}
-					<g id="experience-ticker" transform="translate(0, 43)">
+						{/* Top Telemetry Header Bar */}
 						<rect
 							x="-102"
-							y="-13"
+							y="-67"
 							width="200"
-							height="26"
-							rx="6"
+							height="20"
+							rx="5"
 							fill="var(--color-ink, #18181b)"
 						/>
-
-						<text
-							ref={tickerRef}
-							x="0"
-							y="3.5"
-							fontFamily="monospace"
-							fontSize="8.8"
-							fontWeight="900"
-							fill="#ffffff"
-							textAnchor="middle"
-							letterSpacing="0.6"
-							className="ticker-fade"
-						>
-							{EXPERIENCES[0]}
-						</text>
-					</g>
-
-					{/* Sweeping Laser Scanline */}
-					<g style={{ pointerEvents: "none" }}>
-						<rect
-							id="screen-scanline"
-							className="scanline-anim"
-							x="-106"
-							y="-75"
-							width="208"
-							height="16"
-							fill="url(#holo-scan-strip)"
+						<circle
+							id="holo-rec-dot"
+							className="beacon-blink-anim"
+							cx="-90"
+							cy="-57"
+							r="3"
+							fill="var(--color-mint, #86efac)"
 						/>
+
+						{/* Header Text in Pure Crisp White with Lucide Chevrons Right Icon */}
+						<g transform="translate(-80, -57)">
+							<text
+								x="0"
+								y="3.2"
+								fontFamily="monospace"
+								fontSize="7.5"
+								fontWeight="900"
+								fill="#ffffff"
+								letterSpacing="0.6"
+							>
+								CRAFT TIMELINE // {Data.careerStartYear}
+							</text>
+
+							{/* Lucide Chevrons Right Icon in Pure Crisp White */}
+							<g
+								transform="translate(110, -6) scale(0.5)"
+								stroke="#ffffff"
+								strokeWidth="2.8"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								fill="none"
+							>
+								<path d="m6 17 5-5-5-5" />
+								<path d="m13 17 5-5-5-5" />
+							</g>
+
+							<text
+								x="126"
+								y="3.2"
+								fontFamily="monospace"
+								fontSize="7.5"
+								fontWeight="900"
+								fill="#ffffff"
+								letterSpacing="0.6"
+							>
+								{currentYear}
+							</text>
+						</g>
+
+						{/* Center Hero Stat: Tactile Years Squircle Badge */}
+						<g id="hero-stat-badge" transform="translate(0, -7)">
+							<rect
+								x="-82"
+								y="-22"
+								width="164"
+								height="44"
+								rx="10"
+								fill="var(--color-ink, #18181b)"
+							/>
+							<rect
+								x="-84"
+								y="-24"
+								width="164"
+								height="44"
+								rx="10"
+								fill="var(--color-yellow, #fde047)"
+								stroke="var(--color-ink, #18181b)"
+								strokeWidth="2"
+							/>
+
+							<text
+								x="-26"
+								y="9"
+								fontFamily="ui-sans-serif, system-ui, sans-serif"
+								fontSize="36"
+								fontWeight="900"
+								fill="var(--color-ink, #18181b)"
+								textAnchor="middle"
+								letterSpacing="-1.5"
+							>
+								{elapsedYears}
+								<tspan fill="var(--color-coral, #ff6b57)" fontWeight="900">
+									+
+								</tspan>
+							</text>
+
+							<text
+								x="2"
+								y="-4"
+								fontFamily="monospace"
+								fontSize="10"
+								fontWeight="900"
+								fill="var(--color-ink, #18181b)"
+								textAnchor="start"
+								letterSpacing="0.5"
+							>
+								YEARS
+							</text>
+							<text
+								x="2"
+								y="9"
+								fontFamily="monospace"
+								fontSize="9"
+								fontWeight="900"
+								fill="var(--color-ink-muted, #52525b)"
+								textAnchor="start"
+								letterSpacing="0.5"
+							>
+								CRAFTING UI
+							</text>
+						</g>
+
+						{/* Bottom Dynamic Experience Stream Ticker */}
+						<g id="experience-ticker" transform="translate(0, 43)">
+							<rect
+								x="-102"
+								y="-13"
+								width="200"
+								height="26"
+								rx="6"
+								fill="var(--color-ink, #18181b)"
+							/>
+
+							<text
+								ref={tickerRef}
+								x="0"
+								y="3.5"
+								fontFamily="monospace"
+								fontSize="8.8"
+								fontWeight="900"
+								fill="#ffffff"
+								textAnchor="middle"
+								letterSpacing="0.6"
+								className="ticker-fade"
+							>
+								{EXPERIENCES[0]}
+							</text>
+						</g>
+
+						{/* Sweeping Laser Scanline */}
+						<g style={{ pointerEvents: "none" }}>
+							<rect
+								id="screen-scanline"
+								className="scanline-anim"
+								x="-106"
+								y="-75"
+								width="208"
+								height="16"
+								fill="url(#holo-scan-strip)"
+							/>
+						</g>
 					</g>
 				</g>
 			</svg>

@@ -84,6 +84,17 @@ export function TechStackReactor() {
               .flow-line-3 {
                 animation: none !important;
               }
+
+              /* Soften static resting shadows when reduced motion is enabled */
+              .shadow-pulse-ts,
+              .shadow-pulse-next,
+              .shadow-pulse-tailwind {
+                opacity: 0.14 !important;
+              }
+
+              .shadow-pulse-react {
+                opacity: 0 !important;
+              }
             }
 
             @keyframes float-badge-react {
