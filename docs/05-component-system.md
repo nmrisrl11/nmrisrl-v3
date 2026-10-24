@@ -165,7 +165,9 @@ The layout incorporates a 3-column structural grid framework with decorative str
   - **Squircle Card Shell**: Built on `bg-surface/95 shadow-brutal ring-2 ring-ink backdrop-blur-md corner-squircle` with dynamic height scaling (`h-14 max-w-4xl` default, `h-12 max-w-3xl` scrolled).
   - **Brand Badge**: `nmrisrl` logo with a rotated Warm Coral `.dev` squircle chip (`bg-coral text-white border-subtle shadow-brutal-xs`).
   - **Direct Action**: Text-only `Let's Talk` CTA button smoothly scrolling to `#contact`. Redundant "Contact" link removed from navigation items.
-  - **Mobile Dropdown & Accessible Focus**: Compact floating squircle dropdown card attached beneath the island dock with touch-friendly navigation links and full-width CTA. Mobile hamburger toggle enforces visible keyboard focus (`focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink`).
+  - **Dynamic Scroll Spy & URL Hash Sync**: Active section detection at ~35% viewport reading attention line with automatic `window.history.replaceState` URL hash synchronization, hero section clearing (<180px), bottom-of-page snapping to `#contact`, and smooth scroll suppression (`scrollSuppressionUntil`) to eliminate flicker during click-to-scroll transitions.
+  - **Hand-Drawn Active & Hover Annotations**: Active navigation item highlighted with a `RoughNotation` Buttercup Yellow highlight chip; hover state underlined with a Warm Coral sketch line via `useRoughNotation`.
+  - **Mobile Dropdown & Accessible Focus**: Compact floating squircle dropdown card attached beneath the island dock with touch-friendly navigation links, `aria-current={isActive ? "page" : undefined}` on active items, and full-width CTA. Mobile hamburger toggle enforces visible keyboard focus (`focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink`).
 
 - **`GridMarker` (`components/page-layout/grid-marker.tsx`)**:
   - **Architectural Junction Anchor**: Renders at grid line corners and section divider intersections with transform-based precision centering (`-translate-x-1/2 translate-y-1/2`).
@@ -218,22 +220,34 @@ The layout incorporates a 3-column structural grid framework with decorative str
 
 ## 8. About Section Bento Grid Architecture (`components/sections/about/`)
 
-The About section showcases professional identity, core specialization, engineering metrics, architectural mindset, and personal interests structured into a high-contrast Soft Neubrutalist Bento Grid:
+The About section showcases professional identity, core specialization, engineering metrics, architectural mindset, and personal interests structured into a high-contrast Soft Neubrutalist Bento Grid.
+
+### A. Modular Decomposition Pattern
+
+To maintain clean code separation and prevent monolithic files, the 6 bento cards are decomposed into dedicated sub-packages (`bento-01/` through `bento-06/`). Each card couples structured blueprint metadata with a rich, interactive 3D visual model/assembly:
 
 - **`AboutSection` (`components/sections/about/about-section.tsx`)**:
   - **Blueprint Header**: Rendered with `figure="FIG. 02 // IDENTITY & BACKGROUND"` and `figureMeta={["SPECIALIZATION", "CRAFT & SYSTEMS"]}`.
   - **12-Column Responsive Bento Layout**: `grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-12`.
-  - **Code-Split Modular Subcomponents**: Subdivided into 6 focused card components for maintainability:
-    1. **`SpecializationCard` (`md:col-span-2 lg:col-span-7`)**: Large anchor card highlighting React ecosystem expertise, type safety, and micro-interactions. Features 4 branded tech pills (`React`, `Next.js`, `TypeScript`, `Tailwind CSS`) powered by official Simple Icons.
-    2. **`ExperienceCard` (`md:col-span-2 lg:col-span-5`)**: High-contrast engineering metric (`7+ Years Crafting UI`), designer-intuition narrative, interactive hover lift, and a Scallop Rosette seal stamp chip.
-    3. **`ArchitectureCard` (`md:col-span-1 lg:col-span-6`)**: Architectural methodologies (Feature-Sliced Design, Clean Architecture, Domain-Driven Design) accented with `DoubleCapsuleIcon`.
-    4. **`InnovationCard` (`md:col-span-1 lg:col-span-6`)**: Active radar tracking modern frontend advancements (Web Standards, Modern Tooling, Emerging Trends) with a pulsing trend indicator and `SlantedLoopIcon`.
-    5. **`NorthStarCard` (`md:col-span-2 lg:col-span-5`)**: Engineering standards and core values (Purpose, Mastery, Freedom) accented with `PropellerStarIcon` and a tilted highlighter sticker with `DiamondStarIcon` (`text-coral`).
-    6. **`InterestsCard` (`md:col-span-2 lg:col-span-7`)**: Personal pursuits (Distance Running routine, Game Development interest, 2D Character Art admiration) with Lucide icons (`Footprints`, `Gamepad2`, `Palette`) and `TrefoilCloudIcon`.
+  - **Card Manifest**:
+    1. **`SpecializationCard` (`bento-01/specialization.tsx`, `md:col-span-2 lg:col-span-7`)**:
+       - Hosts **`TechStackReactor` (`bento-01/tech-stack-reactor.tsx`)**: Centered 3D levitation reactor with rotating orbital energy rings and floating tech pills (`React`, `Next.js`, `TypeScript`, `Tailwind CSS`) powered by official Simple Icons.
+       - Highlights core frontend ecosystem depth, robust type contracts, and fluid micro-interactions.
+    2. **`ExperienceCard` (`bento-02/experience.tsx`, `md:col-span-2 lg:col-span-5`)**:
+       - Hosts **`ExperienceHologram` (`bento-02/experience-hologram.tsx`)**: Centered 3D holographic emitter projecting 7+ years of frontend depth, designer intuition, and tactile UI craftsmanship (`EST. 2019`).
+    3. **`ArchitectureCard` (`bento-03/architecture.tsx`, `md:col-span-1 lg:col-span-6`)**:
+       - Hosts **`ArchitectureCartridge` (`bento-03/architecture-cartridge.tsx`)**: Centered 3D animated modular cartridge docking station illustrating clean architecture boundaries, Feature-Sliced Design, and zero-debt maintainability.
+    4. **`InnovationCard` (`bento-04/innovation.tsx`, `md:col-span-1 lg:col-span-6`)**:
+       - Hosts **`TrendRadar` (`bento-04/trend-radar.tsx`)**: Centered 3D animated orbital radar actively tracking emerging web standards, modern tooling, and frontend trends on the horizon.
+    5. **`PhilosophyCard` (`bento-05/philosophy.tsx`, `md:col-span-2 lg:col-span-5`)**:
+       - Hosts **`DroneAssembly` (`bento-05/drone-assembly.tsx`)**: Centered 3D animated robotic drone construction assembly model symbolizing precision craft, engineering ownership, and undeniable value creation.
+    6. **`InterestsCard` (`bento-06/interests.tsx`, `md:col-span-2 lg:col-span-7`)**:
+       - Hosts **`CreativeLab` (`bento-06/creative-lab.tsx`)**: Centered 3D animated specimen laboratory illustrating off-duty grounding pursuits: distance road running, indie game development, and 2D character art appreciation.
 
-- **`AboutIcons` (`components/sections/about/about-icons.tsx`)**:
-  - Official brand SVG icons (`ReactIcon`, `NextjsIcon`, `TypeScriptIcon`, `TailwindIcon`) sourced directly from Simple Icons (`simpleicons.org`).
-  - Standard `24x24` viewBox, `fill="currentColor"` cascade, and accessible `title` tags.
+### B. Feature-Colocated Brand SVGs (`components/sections/about/about-icons.tsx`)
+
+- Official brand SVG icons (`ReactIcon`, `NextjsIcon`, `TypeScriptIcon`, `TailwindIcon`) sourced directly from Simple Icons (`simpleicons.org`).
+- Standard `24x24` viewBox, `fill="currentColor"` cascade, and accessible `<title>` tags.
 
 ---
 
@@ -321,3 +335,31 @@ export const metadata: Metadata = {
   - Backed by the cross-route hash navigation logic in `Navbar` (`router.push('/' + href)` when anchor targets aren't mounted in the active DOM).
 - **Intentional Avatar Absence**:
   - The 3D avatar was intentionally omitted from the 404 page following user review to eliminate visual clutter, optimize route transitions, and keep the user focused on fast recovery.
+
+---
+
+## 11. Custom Hooks Architecture (`hooks/`)
+
+Reusable application hooks are encapsulated in `hooks/` to eliminate duplicate state management, ensure layout synchronization, and guarantee accessibility compliance:
+
+### `useRoughNotation` (`hooks/use-rough-notation.ts`)
+
+- **Purpose**: Combined hook providing font-ready layout synchronization and reactive reduced motion preferences for hand-drawn annotations across the application (used in `Navbar`, `HeroNarrative`, etc.).
+- **Sub-hooks**:
+  - **`useReducedMotion()`**: Subscribes directly to `(prefers-reduced-motion: reduce)` media query using React 18/19's native `useSyncExternalStore`. Eliminates cascading re-render warnings and guarantees immediate reactivity when OS accessibility settings change.
+  - **`useRoughNotationReady(settleDelayMs = 200)`**: Awaits `document.fonts.ready` before marking annotations as ready, with a configurable debounce delay to allow browser typography layout calculation to settle. Prevents visual jitter and bounding box misalignment.
+- **Return Signature**:
+  ```typescript
+  const { ready, reducedMotion } = useRoughNotation();
+  ```
+- **Usage Convention**:
+  ```tsx
+  <RoughNotation
+  	type="highlight"
+  	show={ready && isActive}
+  	animate={!reducedMotion}
+  	color="color-mix(in srgb, var(--color-yellow) 40%, transparent)"
+  >
+  	{children}
+  </RoughNotation>
+  ```

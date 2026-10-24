@@ -83,10 +83,11 @@
 21. **Reuse Existing Primitives (`@/components/ui/*`)**: Never construct ad-hoc raw `<button>` or container elements with manual brutal rings/borders/shadows when `@/components/ui/button`, `@/components/ui/card`, etc. exist. Always utilize the established component primitives with appropriate `variant`, `size`, and `shape`.
 22. **Cross-Route Hash Navigation**: When handling internal anchor navigation (`#section`), check whether the target anchor exists in the active DOM (`document.querySelector(href)`). If the anchor is missing (such as when triggered on a 404 or future sub-route), fall back to root navigation (`router.push('/' + href)`).
 23. **Hand-Drawn Vector Annotations (`rough-notation` & `react-rough-notation`)**:
-    - **Font-Ready Layout Sync**: Always wait for custom web fonts (`document.fonts.ready`) before triggering annotation groups (`<RoughNotationGroup show={...}>`). Measuring before fonts finish loading causes inaccurate bounding boxes and visual jitter.
-    - **Motion Reduction (WCAG 2.3.3)**: Always honor `prefers-reduced-motion: reduce`. Use `useSyncExternalStore` to subscribe to `window.matchMedia("(prefers-reduced-motion: reduce)")` without triggering cascading render warnings, and pass `animate={!reducedMotion}` to all `<RoughNotation>` components.
+    - **Centralized Hook (`@/hooks/use-rough-notation`)**: Always consume `useRoughNotation()` to coordinate annotation rendering across components (`Navbar`, `HeroNarrative`). It automatically handles font-ready layout synchronization (`document.fonts.ready` + debounce) and listens to `(prefers-reduced-motion: reduce)` via `useSyncExternalStore` to avoid cascading render warnings and bounding box discrepancies.
+    - **Motion Reduction (WCAG 2.3.3)**: Always pass `animate={!reducedMotion}` to all `<RoughNotation>` components.
     - **Responsive Multiline Support**: Set `multiline={true}` on annotations applied to inline phrases (e.g. roles, descriptions) that might wrap across multiple lines on smaller viewports.
-24. **Proper Theme Variable Usage with Opacity**: For inline styles, SVG stroke/fill attributes, or library props (`RoughNotation`, `motion`, `CustomCursor`, `Click`), always use `var(--color-*)` for solid tokens, and `color-mix(in srgb, var(--color-<name>) <opacity>%, transparent)` for partial opacity.
+24. **Modular Bento Subcomponent Decomposition (`components/sections/<section>/bento-XX/`)**: When architecting complex interactive sections or Bento grids with rich visual models (e.g. 3D assemblies, interactive SVG engines, canvas simulations), decompose each card into a dedicated subfolder (`bento-01/`, `bento-02/`, etc.) containing the card wrapper (`specialization.tsx`, `philosophy.tsx`) and its co-located visual assembly (`tech-stack-reactor.tsx`, `drone-assembly.tsx`). Keep the main section component (`about-section.tsx`) lightweight and focused on grid layout and blueprint metadata.
+25. **Proper Theme Variable Usage with Opacity**: For inline styles, SVG stroke/fill attributes, or library props (`RoughNotation`, `motion`, `CustomCursor`, `Click`), always use `var(--color-*)` for solid tokens, and `color-mix(in srgb, var(--color-<name>) <opacity>%, transparent)` for partial opacity.
 
 ---
 
@@ -105,9 +106,13 @@ components/
 ├── neu-icons/        # Bespoke Soft Neubrutalism SVG accent icons (propeller-star, rounded-cross, etc.)
 ├── avatar/           # Avatar video player & mouse-tracking controller (interactive-avatar, use-avatar-gaze)
 ├── page-layout/      # 3-column architectural layout & rails (navbar, grid-section, page-layout)
-└── sections/         # Modular page sections (hero, about, not-found, projects, experience, contact)
+└── sections/         # Modular page sections
+    ├── hero/         # Hero section (RotatingSeal, BauhausAccent, HeroNarrative, badges, marquee)
+    ├── about/        # About section (6 decomposed bento-01..06 cards with co-located 3D visual assemblies)
+    └── not-found/    # Custom 404 hero section & escape vector bento
 constants/            # Modular personal data & tech stack taxonomies (data.ts, stack-and-skills-data.ts)
 docs/                 # Modular design system & architecture blueprints
+hooks/                # Shared application hooks (use-rough-notation.ts)
 lib/
 └── utils.ts          # cn() class merging utility (clsx + tailwind-merge)
 public/
