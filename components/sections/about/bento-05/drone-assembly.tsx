@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface DroneAssemblyProps {
 	className?: string;
@@ -34,7 +34,7 @@ export function DroneAssembly({ className }: DroneAssemblyProps) {
 			<svg
 				viewBox="90 55 540 435"
 				fill="none"
-				className={`xs:max-w-[270px] h-auto w-full max-w-[245px] overflow-visible drop-shadow-sm sm:max-w-[295px] md:max-w-[315px] lg:max-w-[330px] ${
+				className={`drone-assembly-svg h-auto w-full max-w-60 overflow-visible drop-shadow-sm sm:max-w-72 md:max-w-80 lg:max-w-84 ${
 					!isVisible ? "drone-paused" : ""
 				}`}
 				role="img"
@@ -242,7 +242,7 @@ export function DroneAssembly({ className }: DroneAssemblyProps) {
             }
 
             @media (prefers-reduced-motion: reduce) {
-              * {
+              .drone-assembly-svg * {
                 animation-duration: 0.01ms !important;
                 animation-iteration-count: 1 !important;
               }

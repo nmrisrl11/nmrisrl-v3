@@ -1,4 +1,4 @@
-import { Data } from "@/constants/data";
+import { About_Data } from "@/constants/data";
 import { TechStackReactor } from "./tech-stack-reactor";
 
 /** 01 // INTRO & REACT ECOSYSTEM (Large Anchor Card) */
@@ -6,12 +6,12 @@ export function SpecializationCard() {
 	return (
 		<div className="relative flex flex-col justify-between overflow-hidden squircle-card bg-surface p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-brutal-lg sm:p-7 md:col-span-2 lg:col-span-7">
 			{/* Blueprint Header */}
-			<div className="flex items-center justify-between gap-2 border-b border-ink/10 pb-4">
+			<div className="flex items-center justify-between gap-2 border-b border-ink/15 pb-4">
 				<div className="inline-flex items-center gap-2 font-mono text-xs font-bold tracking-wide text-ink uppercase">
-					<span>01 // SPECIALIZATION</span>
+					<span>{About_Data.specialization.kicker}</span>
 				</div>
-				<span className="font-mono text-[10px] font-bold tracking-wider text-ink/40">
-					CORE // STACK
+				<span className="font-mono text-2xs font-bold tracking-wider text-ink/40">
+					{About_Data.specialization.tag}
 				</span>
 			</div>
 
@@ -23,12 +23,10 @@ export function SpecializationCard() {
 			{/* Copywriting */}
 			<div className="flex flex-col gap-2.5 pt-2">
 				<h3 className="font-heading text-xl font-black tracking-tight text-ink sm:text-2xl">
-					{Data.position} building polished, accessible web apps.
+					{About_Data.specialization.title}
 				</h3>
 				<p className="font-body text-sm leading-relaxed text-ink/80 sm:text-base">
-					Deeply rooted in the React ecosystem with hands-on architectural experience. I translate
-					ambitious product visions into clean component abstractions, fluid micro-interactions, and
-					robust type-safe codebases engineered for speed and scale.
+					{About_Data.specialization.description}
 				</p>
 			</div>
 		</div>

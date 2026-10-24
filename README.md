@@ -76,7 +76,7 @@ nmrisrl-v3/
 │   │   └── not-found/    # Custom 404 hero section & escape vector bento
 │   └── ui/               # Registry-backed Base UI primitives and styled wrappers (Button, Card, Badge, Dialog, Tooltip)
 ├── constants/            # Modular personal data & tech stack taxonomies
-│   ├── data.ts           # Centralized personal profile, bio, URLs, email, and social links
+│   ├── data.ts           # Centralized personal profile, bio, URLs, email, About_Data, and social links
 │   └── stack-and-skills-data.ts # ProfileCoreTech & StackAndSkillsData
 ├── docs/                 # Modular design system & architecture blueprints (8 chapters)
 │   ├── README.md
@@ -227,16 +227,17 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 
 When developing in this repository, **always use canonical Tailwind classes** instead of arbitrary bracket syntax:
 
-| ❌ NEVER WRITE (Arbitrary)           | ✅ ALWAYS WRITE (Canonical) | CSS Target                  |
-| :----------------------------------- | :-------------------------- | :-------------------------- |
-| `border-[2px]`                       | `border-brutal`             | `border-width: 2px;`        |
-| `border-b-[2px]`                     | `border-b-brutal`           | `border-bottom-width: 2px;` |
-| `border-[1.5px]`                     | `border-subtle`             | `border-width: 1.5px;`      |
-| `shadow-[0px_4px_0_0_#18181B]`       | `shadow-brutal`             | Neubrutalist 3D pop shadow  |
-| `shadow-[0px_2px_0_0_#18181B]`       | `shadow-brutal-xs`          | Active click shadow         |
-| `bg-[#DEF2E0]`                       | `bg-canvas`                 | Sage Mint canvas background |
-| `text-[#18181B]`, `border-[#18181B]` | `text-ink`, `border-ink`    | Deep Ink                    |
-| `bg-[repeating-linear...]`           | `bg-striped-rail`           | 315° diagonal hatching rail |
+| ❌ NEVER WRITE (Arbitrary)           | ✅ ALWAYS WRITE (Canonical) | CSS Target                            |
+| :----------------------------------- | :-------------------------- | :------------------------------------ |
+| `border-[2px]`                       | `border-brutal`             | `border-width: 2px;`                  |
+| `border-b-[2px]`                     | `border-b-brutal`           | `border-bottom-width: 2px;`           |
+| `border-[1.5px]`                     | `border-subtle`             | `border-width: 1.5px;`                |
+| `shadow-[0px_4px_0_0_#18181B]`       | `shadow-brutal`             | Neubrutalist 3D pop shadow            |
+| `shadow-[0px_2px_0_0_#18181B]`       | `shadow-brutal-xs`          | Active click shadow                   |
+| `bg-[#DEF2E0]`                       | `bg-canvas`                 | Sage Mint canvas background           |
+| `text-[#18181B]`, `border-[#18181B]` | `text-ink`, `border-ink`    | Deep Ink                              |
+| `bg-[repeating-linear...]`           | `bg-striped-rail`           | 315° diagonal hatching rail           |
+| `text-[10px]`                        | `text-2xs`                  | 0.625rem / 10px blueprint micro label |
 
 See [`AGENTS.md`](./AGENTS.md) for the full lookup table and rules.
 
@@ -248,7 +249,7 @@ See [`AGENTS.md`](./AGENTS.md) for the full lookup table and rules.
 - **Strict Barrel File & Module Import Protocol**: If a module collection provides an established barrel file (like `@/components/neu-icons`), always import through the barrel file using explicit named imports (`import { ... } from "@/components/neu-icons"`). For components without a barrel file, always use direct module imports (`@/components/ui/button`, `@/components/custom/cursor`, `@/components/page-layout/grid-section`, `@/components/sections/hero/hero-section`). Do not create superfluous or nested barrel files.
 - **Component Reuse over Reinvention (`@/components/ui/*`)**: Never build ad-hoc raw HTML elements (e.g. `<button>` styled with manual brutal rings/borders/shadows) when established primitives exist in `@/components/ui/` (`Button`, `Card`, `Badge`, `Dialog`, `Tooltip`). Always utilize the existing primitives with appropriate `variant`, `size`, and `shape`.
 - **Modular Bento Subcomponent Decomposition (`components/sections/<section>/bento-XX/`)**: Decompose complex bento sections and rich visual assemblies into dedicated numbered subdirectories (`bento-01/`, `bento-02/`, etc.) containing the card wrapper and co-located visual assembly/simulation to maintain clean single-responsibility boundaries.
-- **Centralized Personal & Domain Metadata (`@/constants/data`)**: All personal info, name, bio, URLs (`cleanUrl`, `fullUrl`), contact email, and social links are strictly managed in `@/constants/data`. Never hardcode developer personal details across components.
+- **Centralized Personal & Domain Metadata (`@/constants/data`)**: All personal info, name, bio, URLs (`cleanUrl`, `fullUrl`), contact email, social links, and section blueprint copy are strictly managed in `Data` and `About_Data` from `@/constants/data`. Never hardcode developer personal details across components.
 
 ---
 

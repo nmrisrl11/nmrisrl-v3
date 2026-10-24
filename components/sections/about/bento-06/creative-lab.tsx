@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface CreativeLabProps {
 	className?: string;
@@ -34,7 +34,7 @@ export function CreativeLab({ className }: CreativeLabProps) {
 			<svg
 				viewBox="40 35 720 380"
 				fill="none"
-				className={`xs:max-w-[340px] h-auto w-full max-w-[300px] overflow-visible drop-shadow-sm sm:max-w-[400px] md:max-w-[440px] lg:max-w-[470px] xl:max-w-[500px] ${
+				className={`h-auto w-full max-w-76 overflow-visible drop-shadow-sm sm:max-w-100 md:max-w-110 lg:max-w-120 xl:max-w-lg ${
 					!isVisible ? "lab-paused" : ""
 				}`}
 				role="img"
@@ -216,6 +216,20 @@ export function CreativeLab({ className }: CreativeLabProps) {
 
 						.beacon-light {
 							animation: beacon-blink 1.0s steps(1) infinite;
+						}
+
+						@media (prefers-reduced-motion: reduce) {
+							.ecg-pulse-anim,
+							.pod-float-1,
+							.pod-float-2,
+							.pod-float-3,
+							.ecg-scan-beam,
+							.ecg-node-anim,
+							.conduit-flow,
+							.vector-box-anim,
+							.beacon-light {
+								animation: none !important;
+							}
 						}
 					`}</style>
 				</defs>

@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { Data } from "@/constants/data";
+import { useReducedMotion } from "@/hooks/use-rough-notation";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 
 // SSR-Safe dynamic year calculation (Zero hydration mismatch, zero React 19 purity warnings)
 const emptySubscribe = () => () => {};
@@ -22,11 +24,13 @@ const EXPERIENCES = [
 
 export function ExperienceHologram() {
 	const currentYear = useCurrentYear();
-	const elapsedYears = Math.max(1, currentYear - 2019);
+	const elapsedYears = Math.max(1, currentYear - Data.careerStartYear);
 
 	const containerRef = useRef<HTMLDivElement>(null);
 	const tickerRef = useRef<SVGTextElement>(null);
+	const expIndexRef = useRef(0);
 	const [isVisible, setIsVisible] = useState(false);
+	const reducedMotion = useReducedMotion();
 
 	// Viewport Observer: Pause CSS animations and intervals when off-screen
 	useEffect(() => {
@@ -44,25 +48,25 @@ export function ExperienceHologram() {
 		return () => observer.disconnect();
 	}, []);
 
-	// Low-frequency text ticker: only cycles when visible in viewport
+	// Low-frequency text ticker: only cycles when visible in viewport and reduced motion is false
 	useEffect(() => {
-		if (!isVisible) return;
+		if (!isVisible || reducedMotion) return;
 
-		let expIndex = 0;
 		const ticker = tickerRef.current;
 		const interval = setInterval(() => {
-			expIndex = (expIndex + 1) % EXPERIENCES.length;
+			expIndexRef.current = (expIndexRef.current + 1) % EXPERIENCES.length;
+			const nextIndex = expIndexRef.current;
 			if (ticker) {
 				ticker.style.opacity = "0";
 				setTimeout(() => {
-					ticker.textContent = EXPERIENCES[expIndex];
+					ticker.textContent = EXPERIENCES[nextIndex];
 					ticker.style.opacity = "1";
 				}, 140);
 			}
 		}, 2600);
 
 		return () => clearInterval(interval);
-	}, [isVisible]);
+	}, [isVisible, reducedMotion]);
 
 	return (
 		<div
@@ -71,7 +75,7 @@ export function ExperienceHologram() {
 		>
 			<svg
 				viewBox="120 70 520 480"
-				className={`xs:max-w-[240px] h-auto w-full max-w-[220px] overflow-visible drop-shadow-sm sm:max-w-[265px] md:max-w-[285px] lg:max-w-[290px] ${
+				className={`h-auto w-full max-w-56 overflow-visible drop-shadow-sm sm:max-w-68 md:max-w-72 lg:max-w-76 ${
 					!isVisible ? "hologram-paused" : ""
 				}`}
 				role="img"
@@ -81,6 +85,24 @@ export function ExperienceHologram() {
 					<style>{`
             .hologram-paused * {
               animation-play-state: paused !important;
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+              .holo-floating,
+              .laser-ray-stream,
+              .ray-sweep-front,
+              .ray-scale-left,
+              .ray-dot-left,
+              .ray-scale-right,
+              .ray-dot-right,
+              .beam-anim,
+              .ring-rise-1,
+              .ring-rise-2,
+              .ring-rise-3,
+              .scanline-anim,
+              .beacon-blink-anim {
+                animation: none !important;
+              }
             }
 
             @keyframes holo-float {
@@ -434,7 +456,7 @@ export function ExperienceHologram() {
 							fill="#ffffff"
 							letterSpacing="0.6"
 						>
-							CRAFT TIMELINE // 2019
+							CRAFT TIMELINE // {Data.careerStartYear}
 						</text>
 
 						{/* Lucide Chevrons Right Icon in Pure Crisp White */}

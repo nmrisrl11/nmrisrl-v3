@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // App Color Tokens (Synced with globals.css Neubrutalist system)
 const COLOR_INK = "var(--color-ink, #18181b)";
@@ -49,7 +49,7 @@ export function TechStackReactor() {
 		>
 			<svg
 				viewBox="120 140 520 400"
-				className={`xs:max-w-[280px] h-auto w-full max-w-[250px] overflow-visible drop-shadow-sm sm:max-w-[310px] md:max-w-[340px] lg:max-w-[345px] ${
+				className={`h-auto w-full max-w-64 overflow-visible drop-shadow-sm sm:max-w-76 md:max-w-84 lg:max-w-88 ${
 					!isVisible ? "reactor-paused" : ""
 				}`}
 				role="img"
@@ -64,6 +64,26 @@ export function TechStackReactor() {
             /* Pure Compositor Animations: 0 DOM mutations, 0 layout reflows */
             .reactor-paused * {
               animation-play-state: paused !important;
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+              .badge-react-anim,
+              .badge-ts-anim,
+              .badge-next-anim,
+              .badge-tailwind-anim,
+              .shadow-pulse-react,
+              .shadow-pulse-ts,
+              .shadow-pulse-next,
+              .shadow-pulse-tailwind,
+              .ring-pulse-1,
+              .ring-pulse-2,
+              .ring-pulse-3,
+              .ring-pulse-4,
+              .flow-line-1,
+              .flow-line-2,
+              .flow-line-3 {
+                animation: none !important;
+              }
             }
 
             @keyframes float-badge-react {

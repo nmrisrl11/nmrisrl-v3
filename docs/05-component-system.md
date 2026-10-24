@@ -180,7 +180,7 @@ The layout incorporates a 3-column structural grid framework with decorative str
 - **`GridSection` (`components/page-layout/grid-section.tsx`)**:
   - Reusable architectural section container bounded by `border-b border-ink/15` (`px-4 py-16 md:px-8 lg:px-12`).
   - **Streamlined Marker Props**: Accepts `marker?: GridMarkerVariant | ReactElement` (defaults to `"squircle"`), `markerClassName?: string`, `showMarker?: boolean` (defaults to `true`), and `showTopMarker?: boolean` (defaults to `false`).
-  - **Editorial Blueprint Headers**: Supports `figure`, `figureMeta?: string | string[]`, `number`, `title`, and `description` to render technical blueprint section kickers, accented by `DiamondStarIcon` (`text-coral`).
+  - **Editorial Blueprint Headers**: Supports `figure`, `figureMeta?: string | readonly string[]`, `number`, `title`, and `description` to render technical blueprint section kickers, accented by `DiamondStarIcon` (`text-coral`).
 
 ---
 
@@ -222,13 +222,18 @@ The layout incorporates a 3-column structural grid framework with decorative str
 
 The About section showcases professional identity, core specialization, engineering metrics, architectural mindset, and personal interests structured into a high-contrast Soft Neubrutalist Bento Grid.
 
-### A. Modular Decomposition Pattern
+### A. Centralized Content Architecture (`About_Data`)
+
+All copy, labels, metrics, bullet points, and blueprint headers across the entire About section are centralized in `About_Data` inside `@/constants/data.ts`. This decouples UI presentation from copy and guarantees that developer experience figures, technical specialties, and narrative descriptions can be updated in a single place without modifying component TSX.
+
+### B. Modular Decomposition Pattern
 
 To maintain clean code separation and prevent monolithic files, the 6 bento cards are decomposed into dedicated sub-packages (`bento-01/` through `bento-06/`). Each card couples structured blueprint metadata with a rich, interactive 3D visual model/assembly:
 
 - **`AboutSection` (`components/sections/about/about-section.tsx`)**:
-  - **Blueprint Header**: Rendered with `figure="FIG. 02 // IDENTITY & BACKGROUND"` and `figureMeta={["SPECIALIZATION", "CRAFT & SYSTEMS"]}`.
+  - **Blueprint Header**: Rendered using `About_Data.section.figure` (`"FIG. 02 // IDENTITY & BACKGROUND"`) and `figureMeta={About_Data.section.figureMeta}` (`["SPECIALIZATION", "CRAFT & SYSTEMS"]`).
   - **12-Column Responsive Bento Layout**: `grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-12`.
+  - **Card Header Divider**: Cards enforce a clean bottom divider line via `border-b border-ink/15` (avoiding extra bounding borders).
   - **Card Manifest**:
     1. **`SpecializationCard` (`bento-01/specialization.tsx`, `md:col-span-2 lg:col-span-7`)**:
        - Hosts **`TechStackReactor` (`bento-01/tech-stack-reactor.tsx`)**: Centered 3D levitation reactor with rotating orbital energy rings and floating tech pills (`React`, `Next.js`, `TypeScript`, `Tailwind CSS`) powered by official Simple Icons.
@@ -244,7 +249,7 @@ To maintain clean code separation and prevent monolithic files, the 6 bento card
     6. **`InterestsCard` (`bento-06/interests.tsx`, `md:col-span-2 lg:col-span-7`)**:
        - Hosts **`CreativeLab` (`bento-06/creative-lab.tsx`)**: Centered 3D animated specimen laboratory illustrating off-duty grounding pursuits: distance road running, indie game development, and 2D character art appreciation.
 
-### B. Feature-Colocated Brand SVGs (`components/sections/about/about-icons.tsx`)
+### C. Feature-Colocated Brand SVGs (`components/sections/about/about-icons.tsx`)
 
 - Official brand SVG icons (`ReactIcon`, `NextjsIcon`, `TypeScriptIcon`, `TailwindIcon`) sourced directly from Simple Icons (`simpleicons.org`).
 - Standard `24x24` viewBox, `fill="currentColor"` cascade, and accessible `<title>` tags.
@@ -347,7 +352,7 @@ Reusable application hooks are encapsulated in `hooks/` to eliminate duplicate s
 - **Purpose**: Combined hook providing font-ready layout synchronization and reactive reduced motion preferences for hand-drawn annotations across the application (used in `Navbar`, `HeroNarrative`, etc.).
 - **Sub-hooks**:
   - **`useReducedMotion()`**: Subscribes directly to `(prefers-reduced-motion: reduce)` media query using React 18/19's native `useSyncExternalStore`. Eliminates cascading re-render warnings and guarantees immediate reactivity when OS accessibility settings change.
-  - **`useRoughNotationReady(settleDelayMs = 200)`**: Awaits `document.fonts.ready` before marking annotations as ready, with a configurable debounce delay to allow browser typography layout calculation to settle. Prevents visual jitter and bounding box misalignment.
+  - **`useRoughNotationReady(settleDelayMs = 200)`**: Awaits `document.fonts.ready` before marking annotations as ready, starting a single timeout settle delay (default 200ms) to allow browser typography layout calculations to settle. Prevents visual jitter and bounding box misalignment.
 - **Return Signature**:
   ```typescript
   const { ready, reducedMotion } = useRoughNotation();
