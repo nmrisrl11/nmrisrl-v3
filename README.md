@@ -73,7 +73,7 @@ nmrisrl-v3/
 │   ├── sections/         # Modular portfolio sections
 │   │   ├── hero/         # Hero section (RotatingSeal, BauhausAccent, HeroNarrative with Rough Notation, badges, marquee)
 │   │   ├── about/        # About section (6 decomposed bento-01..06 cards with co-located 3D visual assemblies)
-│   │   └── not-found/    # Custom 404 hero section & escape vector bento
+│   │   └── not-found/    # Custom 404 hero section & 3D isometric repair crew illustration (NotFoundIllustration)
 │   └── ui/               # Registry-backed Base UI primitives and styled wrappers (Button, Card, Badge, Dialog, Tooltip)
 ├── constants/            # Modular personal data & tech stack taxonomies
 │   ├── data.ts           # Centralized personal profile, bio, URLs, email, About_Data, and social links

@@ -113,7 +113,7 @@ components/
 └── sections/         # Modular page sections
     ├── hero/         # Hero section (RotatingSeal, BauhausAccent, HeroNarrative, badges, marquee)
     ├── about/        # About section (6 decomposed bento-01..06 cards with co-located 3D visual assemblies)
-    └── not-found/    # Custom 404 hero section & escape vector bento
+    └── not-found/    # Custom 404 hero section & 3D isometric repair crew illustration (NotFoundIllustration)
 constants/            # Modular personal data & tech stack taxonomies (data.ts, stack-and-skills-data.ts)
 docs/                 # Modular design system & architecture blueprints
 hooks/                # Shared application hooks (use-rough-notation.ts)

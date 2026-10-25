@@ -323,23 +323,24 @@ export const metadata: Metadata = {
 };
 ```
 
-### B. Not Found Section (`components/sections/not-found/not-found-section.tsx`)
+### B. Not Found Section & 3D Visual Assembly (`components/sections/not-found/`)
 
-- **Centered Blueprint Header**: Uses `GridSection` with `figure="FIG. 404 // ROUTE EXCEPTION"` and `figureMeta={["NOT FOUND", "DETOUR ACTIVE"]}` with centered alignment (`headerClassName="items-center text-center"`).
-- **Brutal Graphic**: Large pop `404` typographic anchor with coral squircle badge, a spinning `CrossStarIcon` (with `motion-reduce:animate-none`), and an `OOPS!` pill tag.
+- **Centered Blueprint Header**: Renders an architectural blueprint header with `DiamondStarIcon`: `FIG. 404 // ROUTE DISCONNECTED • NOT FOUND • AUTOMATED REPAIR ACTIVE`.
+- **3D Isometric Model (`NotFoundIllustration`)**:
+  - Bespoke isometric SVG vector assembly (`components/sections/not-found/not-found-illustration.tsx`) illustrating an active conduit repair operation.
+  - **Stationary 404 Sculpture**: Isometric faceted coral block numbers with directional shading (`#ff8573` top, `#ff6b57` left, `#cf4430` right) and brutal borders (`stroke="#18181b"`).
+  - **Severed Conduit & Arc Sparks**: Fractured black cable sheath with exposed copper wiring emitting high-voltage jitter arcs, particle bursts, and dynamic glow flares.
+  - **Autonomous Splicer Crawler Bot**: Ground repair bot equipped with tread wheels, hazard stripes, cable clamp arm, and laser welding manipulator arm with glowing splice flares.
+  - **Patrol Inspector Rover**: Autonomous rover traversing along the conduit path, swiveling its scanning turret and projecting an emerald inspection beam toward the sculpture.
+  - **Autonomous Scanner Drone**: Floating quad-rotor UAV suspended above the severed conduit with counter-rotating rotor discs and animated spotlight beam.
+  - **WCAG 2.3.3 Motion Reduction**: Comprehensive `@media (prefers-reduced-motion: reduce)` overrides disabling all dynamic animations and providing softened, stable resting visual states.
 - **Human-Centric Copywriting**: Replaces abrasive technical error dumps with friendly, reassuring language:
-  - Title: _"Uh oh! This page doesn't exist."_
-  - Body: _"The route you followed might have been moved, deleted, or mistyped. Let's get you back on track."_
-- **Interactive macOS Terminal Card**:
-  - Displays the requested path (`window.location.pathname`) with robust flex wrap and truncation protection (`min-w-0 truncate`) to prevent long URL overflow across all viewports.
-  - Interactive Developer Excuse generator: Shuffles through playful reasons with a `<Button variant="secondary" size="sm" shape="squircle">` featuring `PropellerStarIcon` (rotating 180° on button hover).
+  - Title: _"Connection Severed — Page Not Found"_
+  - Body: _"Looks like the conduit to this page was unplugged or moved. Our autonomous bots and drone are already on site splicing the line — let's get you back on track!"_
 - **Standardized CTAs**:
-  - Utilizes `@/components/ui/button` (`variant="default"` coral for _"Take Me Home"_ and `variant="secondary"` white for _"Go Back"_).
-- **Navigation Waypoint Bento Grid**:
-  - 4-card bento grid (_"Looking for something specific?"_) providing fast escape vectors to `/`, `/#about`, `/#skills`, and `/#contact`.
-  - Backed by the cross-route hash navigation logic in `Navbar` (`router.push('/' + href)` when anchor targets aren't mounted in the active DOM).
+  - Utilizes `@/components/ui/button` (`variant="default"` coral for _"Take Me Home"_ and `variant="secondary"` white for _"Go Back"_ with browser history fallback).
 - **Intentional Avatar Absence**:
-  - The 3D avatar was intentionally omitted from the 404 page following user review to eliminate visual clutter, optimize route transitions, and keep the user focused on fast recovery.
+  - The 3D avatar is intentionally omitted from the 404 page following user review to eliminate visual clutter, optimize route transitions, and keep the user focused on the repair narrative and recovery.
 
 ---
 
