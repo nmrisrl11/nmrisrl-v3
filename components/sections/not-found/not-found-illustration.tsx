@@ -3,9 +3,15 @@
 import { cn } from "@/lib/utils";
 import React from "react";
 
-export function NotFoundIllustration({ className }: { className?: string }) {
+interface NotFoundIllustrationProps {
+	className?: string;
+	paused?: boolean;
+}
+
+export function NotFoundIllustration({ className, paused = false }: NotFoundIllustrationProps) {
 	return (
 		<div
+			data-paused={paused ? "true" : undefined}
 			className={cn(
 				"relative flex w-full items-center justify-center overflow-visible select-none",
 				className,
@@ -25,24 +31,30 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 			>
 				<defs>
 					<linearGradient id="coral-left" x1="0%" y1="0%" x2="100%" y2="100%">
-						<stop offset="0%" stopColor="#ff7b68" />
-						<stop offset="100%" stopColor="#ff6b57" />
+						<stop offset="0%" stopColor="color-mix(in srgb, var(--color-coral) 88%, white)" />
+						<stop offset="100%" stopColor="var(--color-coral)" />
 					</linearGradient>
 
 					<linearGradient id="coral-right" x1="0%" y1="0%" x2="100%" y2="100%">
-						<stop offset="0%" stopColor="#e85945" />
-						<stop offset="100%" stopColor="#cf4430" />
+						<stop
+							offset="0%"
+							stopColor="color-mix(in srgb, var(--color-coral) 85%, var(--color-ink))"
+						/>
+						<stop
+							offset="100%"
+							stopColor="color-mix(in srgb, var(--color-coral) 70%, var(--color-ink))"
+						/>
 					</linearGradient>
 
 					<linearGradient id="coral-top" x1="0%" y1="0%" x2="100%" y2="100%">
-						<stop offset="0%" stopColor="#ffa091" />
-						<stop offset="100%" stopColor="#ff8573" />
+						<stop offset="0%" stopColor="color-mix(in srgb, var(--color-coral) 70%, white)" />
+						<stop offset="100%" stopColor="color-mix(in srgb, var(--color-coral) 82%, white)" />
 					</linearGradient>
 
 					<linearGradient id="cable-sheath" x1="0%" y1="0%" x2="0%" y2="100%">
 						<stop offset="0%" stopColor="#3f3f46" />
 						<stop offset="50%" stopColor="#27272a" />
-						<stop offset="100%" stopColor="#18181b" />
+						<stop offset="100%" stopColor="var(--color-ink)" />
 					</linearGradient>
 
 					<linearGradient id="copper-core" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -52,9 +64,9 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 					</linearGradient>
 
 					<radialGradient id="floor-contact-shadow" cx="50%" cy="50%" r="50%">
-						<stop offset="0%" stopColor="#18181b" stopOpacity="0.30" />
-						<stop offset="60%" stopColor="#18181b" stopOpacity="0.12" />
-						<stop offset="100%" stopColor="#18181b" stopOpacity="0" />
+						<stop offset="0%" stopColor="var(--color-ink)" stopOpacity="0.30" />
+						<stop offset="60%" stopColor="var(--color-ink)" stopOpacity="0.12" />
+						<stop offset="100%" stopColor="var(--color-ink)" stopOpacity="0" />
 					</radialGradient>
 
 					<linearGradient id="scanner-cone-grad" x1="50%" y1="0%" x2="50%" y2="100%">
@@ -82,32 +94,37 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 					</radialGradient>
 
 					<radialGradient id="rotor-disc" cx="50%" cy="50%" r="50%">
-						<stop offset="0%" stopColor="#18181b" stopOpacity="0.55" />
+						<stop offset="0%" stopColor="var(--color-ink)" stopOpacity="0.55" />
 						<stop offset="70%" stopColor="#38bdf8" stopOpacity="0.25" />
-						<stop offset="100%" stopColor="#18181b" stopOpacity="0" />
+						<stop offset="100%" stopColor="var(--color-ink)" stopOpacity="0" />
 					</radialGradient>
 
 					<linearGradient id="green-scan-grad-up" x1="50%" y1="100%" x2="50%" y2="0%">
-						<stop offset="0%" stopColor="#22c55e" stopOpacity="0.85" />
-						<stop offset="50%" stopColor="#22c55e" stopOpacity="0.30" />
-						<stop offset="100%" stopColor="#22c55e" stopOpacity="0.0" />
+						<stop offset="0%" stopColor="var(--color-mint)" stopOpacity="0.85" />
+						<stop offset="50%" stopColor="var(--color-mint)" stopOpacity="0.30" />
+						<stop offset="100%" stopColor="var(--color-mint)" stopOpacity="0.0" />
 					</linearGradient>
 
 					<g id="safety-pylon-def">
-						<ellipse cx="0" cy="3.5" rx="7" ry="2.2" fill="#18181b" opacity="0.22" />
-						<polygon points="-6,2 6,2 8,5 -8,5" fill="#18181b" />
-						<polygon points="0,-16 -6,2 6,2" fill="#fde047" stroke="#18181b" strokeWidth="1.2" />
+						<ellipse cx="0" cy="3.5" rx="7" ry="2.2" fill="var(--color-ink)" opacity="0.22" />
+						<polygon points="-6,2 6,2 8,5 -8,5" fill="var(--color-ink)" />
+						<polygon
+							points="0,-16 -6,2 6,2"
+							fill="var(--color-yellow)"
+							stroke="var(--color-ink)"
+							strokeWidth="1.2"
+						/>
 						<polygon
 							points="-1.5,-8 1.5,-8 3,-3 -3,-3"
 							fill="#ffffff"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="0.8"
 						/>
 						<polygon
 							points="0,-1 1,-4 -1,-4 0,-7"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="0.8"
-							fill="#18181b"
+							fill="var(--color-ink)"
 						/>
 					</g>
 				</defs>
@@ -128,21 +145,21 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 						<polygon
 							points="12,-42 24,-36 24,34 12,28"
 							fill="url(#coral-left)"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="1.8"
 							strokeLinejoin="round"
 						/>
 						<polygon
 							points="24,-36 36,-42 36,28 24,34"
 							fill="url(#coral-right)"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="1.8"
 							strokeLinejoin="round"
 						/>
 						<polygon
 							points="12,-42 24,-48 36,-42 24,-36"
 							fill="url(#coral-top)"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="1.8"
 							strokeLinejoin="round"
 						/>
@@ -150,21 +167,21 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 						<polygon
 							points="-28,4 24,4 24,18 -28,18"
 							fill="url(#coral-left)"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="1.8"
 							strokeLinejoin="round"
 						/>
 						<polygon
 							points="-28,4 -18,-2 34,-2 24,4"
 							fill="url(#coral-top)"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="1.8"
 							strokeLinejoin="round"
 						/>
 						<polygon
 							points="-28,18 24,18 24,24 -28,24"
-							fill="#96281b"
-							stroke="#18181b"
+							fill="color-mix(in srgb, var(--color-coral) 60%, var(--color-ink))"
+							stroke="var(--color-ink)"
 							strokeWidth="1.4"
 							strokeLinejoin="round"
 						/>
@@ -172,19 +189,24 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 						<polygon
 							points="-28,4 -16,4 20,-36 12,-42"
 							fill="url(#coral-left)"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="1.8"
 							strokeLinejoin="round"
 						/>
 						<polygon
 							points="-28,4 -18,-2 10,-38 12,-42"
 							fill="url(#coral-top)"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="1.8"
 							strokeLinejoin="round"
 						/>
 
-						<polygon points="-16,4 12,-34 12,4" fill="#96281b" stroke="#18181b" strokeWidth="1.2" />
+						<polygon
+							points="-16,4 12,-34 12,4"
+							fill="color-mix(in srgb, var(--color-coral) 60%, var(--color-ink))"
+							stroke="var(--color-ink)"
+							strokeWidth="1.2"
+						/>
 
 						<line
 							x1="24"
@@ -199,8 +221,15 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 						<circle cx="24" cy="-26" r="1.6" fill="#ffffff" />
 						<circle cx="24" cy="22" r="1.6" fill="#ffffff" />
 
-						<circle cx="30" cy="25" r="2.8" fill="#18181b" stroke="#3f3f46" strokeWidth="0.8" />
-						<circle cx="30" cy="25" r="1.8" fill="#22c55e" />
+						<circle
+							cx="30"
+							cy="25"
+							r="2.8"
+							fill="var(--color-ink)"
+							stroke="#3f3f46"
+							strokeWidth="0.8"
+						/>
+						<circle cx="30" cy="25" r="1.8" fill="var(--color-mint)" />
 						<circle cx="30" cy="25" r="0.8" fill="#ffffff" />
 
 						<rect
@@ -210,17 +239,17 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 							height="12"
 							rx="1.5"
 							fill="#27272a"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="1.2"
 						/>
-						<circle cx="32" cy="16" r="2.2" fill="#18181b" />
+						<circle cx="32" cy="16" r="2.2" fill="var(--color-ink)" />
 					</g>
 
 					<g id="solid-center-0" transform="translate(330, 172)">
 						<path
 							d="M -36,-12 L -36,14 C -36,36 36,36 36,14 L 36,-12 L 22,-18 L 22,14 C 22,24 -22,24 -22,14 L -22,-18 Z"
 							fill="url(#coral-left)"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="1.8"
 							strokeLinejoin="round"
 						/>
@@ -234,7 +263,7 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 						<path
 							d="M -36,-12 L -36,-18 C -36,-44 36,-44 36,-18 L 36,-12 L 22,-6 L 22,-14 C 22,-32 -22,-32 -22,-14 L -22,-6 Z"
 							fill="url(#coral-left)"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="1.8"
 							strokeLinejoin="round"
 						/>
@@ -242,23 +271,23 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 						<path
 							d="M -36,-18 C -36,-44 36,-44 36,-18 L 22,-14 C 22,-32 -22,-32 -22,-14 Z"
 							fill="url(#coral-top)"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="1.8"
 							strokeLinejoin="round"
 						/>
 
 						<path
 							d="M -22,-14 C -22,-32 22,-32 22,-14 L 22,14 C 22,24 -22,24 -22,14 Z"
-							fill="var(--color-canvas, #def2e0)"
-							stroke="#18181b"
+							fill="var(--color-canvas)"
+							stroke="var(--color-ink)"
 							strokeWidth="1.8"
 							strokeLinejoin="round"
 						/>
 
 						<path
 							d="M -22,-14 C -22,-32 22,-32 22,-14 L 22,-8 C 22,-24 -22,-24 -22,-8 Z"
-							fill="#96281b"
-							stroke="#18181b"
+							fill="color-mix(in srgb, var(--color-coral) 60%, var(--color-ink))"
+							stroke="var(--color-ink)"
 							strokeWidth="1.2"
 						/>
 
@@ -269,7 +298,7 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 							height="12"
 							rx="1.5"
 							fill="#27272a"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="1.2"
 						/>
 
@@ -280,17 +309,17 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 							height="14"
 							rx="2"
 							fill="#27272a"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="1.4"
 						/>
-						<rect x="34" y="11" width="5" height="8" rx="1" fill="#18181b" />
+						<rect x="34" y="11" width="5" height="8" rx="1" fill="var(--color-ink)" />
 					</g>
 
 					<g id="healthy-conduit-left">
 						<path
 							d="M 214,188 C 226,188 236,214 254,214 C 272,214 282,188 294,188"
 							fill="none"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="5.5"
 							strokeLinecap="round"
 						/>
@@ -305,7 +334,7 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 						<path
 							d="M 214,188 C 226,188 236,214 254,214 C 272,214 282,188 294,188"
 							fill="none"
-							stroke="#fde047"
+							stroke="var(--color-yellow)"
 							strokeWidth="1.0"
 							strokeLinecap="round"
 							strokeDasharray="3 4"
@@ -318,10 +347,10 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 							height="12"
 							rx="1.5"
 							fill="#27272a"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="1.2"
 						/>
-						<ellipse cx="216" cy="188" rx="1.5" ry="3.5" fill="#18181b" />
+						<ellipse cx="216" cy="188" rx="1.5" ry="3.5" fill="var(--color-ink)" />
 
 						<rect
 							x="290"
@@ -330,31 +359,31 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 							height="12"
 							rx="1.5"
 							fill="#27272a"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="1.2"
 						/>
-						<ellipse cx="290" cy="188" rx="1.5" ry="3.5" fill="#18181b" />
+						<ellipse cx="290" cy="188" rx="1.5" ry="3.5" fill="var(--color-ink)" />
 					</g>
 
 					<g id="solid-right-4" transform="translate(480, 172)">
 						<polygon
 							points="12,-42 24,-36 24,34 12,28"
 							fill="url(#coral-left)"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="1.8"
 							strokeLinejoin="round"
 						/>
 						<polygon
 							points="24,-36 36,-42 36,28 24,34"
 							fill="url(#coral-right)"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="1.8"
 							strokeLinejoin="round"
 						/>
 						<polygon
 							points="12,-42 24,-48 36,-42 24,-36"
 							fill="url(#coral-top)"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="1.8"
 							strokeLinejoin="round"
 						/>
@@ -362,21 +391,21 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 						<polygon
 							points="-28,4 24,4 24,18 -28,18"
 							fill="url(#coral-left)"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="1.8"
 							strokeLinejoin="round"
 						/>
 						<polygon
 							points="-28,4 -18,-2 34,-2 24,4"
 							fill="url(#coral-top)"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="1.8"
 							strokeLinejoin="round"
 						/>
 						<polygon
 							points="-28,18 24,18 24,24 -28,24"
-							fill="#96281b"
-							stroke="#18181b"
+							fill="color-mix(in srgb, var(--color-coral) 60%, var(--color-ink))"
+							stroke="var(--color-ink)"
 							strokeWidth="1.4"
 							strokeLinejoin="round"
 						/>
@@ -384,19 +413,24 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 						<polygon
 							points="-28,4 -16,4 20,-36 12,-42"
 							fill="url(#coral-left)"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="1.8"
 							strokeLinejoin="round"
 						/>
 						<polygon
 							points="-28,4 -18,-2 10,-38 12,-42"
 							fill="url(#coral-top)"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="1.8"
 							strokeLinejoin="round"
 						/>
 
-						<polygon points="-16,4 12,-34 12,4" fill="#96281b" stroke="#18181b" strokeWidth="1.2" />
+						<polygon
+							points="-16,4 12,-34 12,4"
+							fill="color-mix(in srgb, var(--color-coral) 60%, var(--color-ink))"
+							stroke="var(--color-ink)"
+							strokeWidth="1.2"
+						/>
 
 						<line
 							x1="24"
@@ -418,12 +452,25 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 							height="13"
 							rx="1.8"
 							fill="#27272a"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="1.2"
 						/>
 
-						<circle cx="30" cy="25" r="2.8" fill="#18181b" stroke="#3f3f46" strokeWidth="0.8" />
-						<circle cx="30" cy="25" r="1.8" fill="#ef4444" className="beacon-strobe" />
+						<circle
+							cx="30"
+							cy="25"
+							r="2.8"
+							fill="var(--color-ink)"
+							stroke="#3f3f46"
+							strokeWidth="0.8"
+						/>
+						<circle
+							cx="30"
+							cy="25"
+							r="1.8"
+							fill="var(--color-destructive)"
+							className="beacon-strobe"
+						/>
 						<circle cx="30" cy="25" r="0.8" fill="#ffffff" className="beacon-strobe" />
 					</g>
 				</g>
@@ -432,7 +479,7 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 					<path
 						d="M 366,186 C 376,196 384,214 412,215"
 						fill="none"
-						stroke="#18181b"
+						stroke="var(--color-ink)"
 						strokeWidth="6.0"
 						strokeLinecap="round"
 					/>
@@ -446,7 +493,7 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 					<path
 						d="M 366,186 C 376,196 384,214 412,215"
 						fill="none"
-						stroke="#fde047"
+						stroke="var(--color-yellow)"
 						strokeWidth="1.1"
 						strokeLinecap="round"
 						strokeDasharray="3 4"
@@ -459,7 +506,7 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 						height="8"
 						rx="1"
 						fill="#71717a"
-						stroke="#18181b"
+						stroke="var(--color-ink)"
 						strokeWidth="1.0"
 					/>
 
@@ -494,7 +541,7 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 					<path
 						d="M 432,216 C 438,216 442,204 448,186"
 						fill="none"
-						stroke="#18181b"
+						stroke="var(--color-ink)"
 						strokeWidth="6.0"
 						strokeLinecap="round"
 					/>
@@ -508,7 +555,7 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 					<path
 						d="M 432,216 C 438,216 442,204 448,186"
 						fill="none"
-						stroke="#fde047"
+						stroke="var(--color-yellow)"
 						strokeWidth="1.1"
 						strokeLinecap="round"
 						strokeDasharray="3 4"
@@ -522,7 +569,7 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 							height="10"
 							rx="2"
 							fill="#27272a"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="1.3"
 						/>
 
@@ -532,7 +579,7 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 							width="4"
 							height="2"
 							fill="#f59e0b"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="0.8"
 						/>
 						<rect
@@ -541,7 +588,7 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 							width="4"
 							height="2"
 							fill="#f59e0b"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="0.8"
 						/>
 					</g>
@@ -603,7 +650,7 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 								y1="216"
 								x2="432"
 								y2="224"
-								stroke="#fde047"
+								stroke="var(--color-yellow)"
 								strokeWidth="1.2"
 								strokeLinecap="round"
 							/>
@@ -618,7 +665,7 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 							/>
 							<circle cx="430" cy="204" r="1.0" fill="#ffffff" />
 							<circle cx="414" cy="202" r="0.9" fill="#67e8f9" />
-							<circle cx="432" cy="224" r="1.1" fill="#fde047" />
+							<circle cx="432" cy="224" r="1.1" fill="var(--color-yellow)" />
 						</g>
 					</g>
 				</g>
@@ -630,8 +677,8 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 						width="28"
 						height="7"
 						rx="3"
-						fill="#18181b"
-						stroke="#18181b"
+						fill="var(--color-ink)"
+						stroke="var(--color-ink)"
 						strokeWidth="1.2"
 					/>
 					<circle cx="372" cy="217.5" r="2.0" fill="#71717a" />
@@ -646,14 +693,14 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 						height="16"
 						rx="3"
 						fill="#27272a"
-						stroke="#18181b"
+						stroke="var(--color-ink)"
 						strokeWidth="1.5"
 					/>
 
-					<rect x="372" y="206" width="20" height="4" fill="#fde047" />
-					<line x1="376" y1="206" x2="379" y2="210" stroke="#18181b" strokeWidth="1.0" />
-					<line x1="382" y1="206" x2="385" y2="210" stroke="#18181b" strokeWidth="1.0" />
-					<line x1="388" y1="206" x2="391" y2="210" stroke="#18181b" strokeWidth="1.0" />
+					<rect x="372" y="206" width="20" height="4" fill="var(--color-yellow)" />
+					<line x1="376" y1="206" x2="379" y2="210" stroke="var(--color-ink)" strokeWidth="1.0" />
+					<line x1="382" y1="206" x2="385" y2="210" stroke="var(--color-ink)" strokeWidth="1.0" />
+					<line x1="388" y1="206" x2="391" y2="210" stroke="var(--color-ink)" strokeWidth="1.0" />
 
 					<rect
 						x="376"
@@ -661,8 +708,8 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 						width="12"
 						height="10"
 						rx="2"
-						fill="#18181b"
-						stroke="#18181b"
+						fill="var(--color-ink)"
+						stroke="var(--color-ink)"
 						strokeWidth="1.2"
 					/>
 					<rect x="378" y="191" width="8" height="3" rx="1" fill="#38bdf8" />
@@ -672,7 +719,7 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 						y1="188"
 						x2="382"
 						y2="180"
-						stroke="#18181b"
+						stroke="var(--color-ink)"
 						strokeWidth="1.3"
 						strokeLinecap="round"
 					/>
@@ -685,7 +732,7 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 							y1="204"
 							x2="398"
 							y2="209"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="2.2"
 							strokeLinecap="round"
 						/>
@@ -702,7 +749,7 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 						<path
 							d="M 406,211 L 410,211 L 409,217 L 406,217"
 							fill="none"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="1.4"
 						/>
 					</g>
@@ -713,7 +760,7 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 							y1="200"
 							x2="396"
 							y2="198"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="2.4"
 							strokeLinecap="round"
 						/>
@@ -723,7 +770,7 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 							y1="198"
 							x2="408"
 							y2="210"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="2.0"
 							strokeLinecap="round"
 						/>
@@ -731,7 +778,7 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 						<polygon
 							points="408,208 413,212 409,214"
 							fill="#38bdf8"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="1.0"
 						/>
 
@@ -762,11 +809,19 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 						width="4.5"
 						height="6.5"
 						rx="1.8"
-						fill="#18181b"
-						stroke="#18181b"
+						fill="var(--color-ink)"
+						stroke="var(--color-ink)"
 						strokeWidth="1.0"
 					/>
-					<rect x="4.5" y="0" width="4.5" height="6.5" rx="1.8" fill="#18181b" strokeWidth="1.0" />
+					<rect
+						x="4.5"
+						y="0"
+						width="4.5"
+						height="6.5"
+						rx="1.8"
+						fill="var(--color-ink)"
+						strokeWidth="1.0"
+					/>
 					<circle cx="-6.8" cy="3.2" r="1.1" fill="#71717a" />
 					<circle cx="6.8" cy="3.2" r="1.1" fill="#71717a" />
 
@@ -777,10 +832,10 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 						height="8.5"
 						rx="2"
 						fill="#27272a"
-						stroke="#18181b"
+						stroke="var(--color-ink)"
 						strokeWidth="1.3"
 					/>
-					<rect x="-8" y="-3.5" width="16" height="2.2" fill="#fde047" />
+					<rect x="-8" y="-3.5" width="16" height="2.2" fill="var(--color-yellow)" />
 
 					<g className="rover-head-swivel">
 						<rect
@@ -789,22 +844,22 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 							width="8"
 							height="6.5"
 							rx="1.8"
-							fill="#18181b"
-							stroke="#18181b"
+							fill="var(--color-ink)"
+							stroke="var(--color-ink)"
 							strokeWidth="1.1"
 						/>
-						<rect x="-2.5" y="-11" width="5" height="2.2" rx="0.8" fill="#22c55e" />
+						<rect x="-2.5" y="-11" width="5" height="2.2" rx="0.8" fill="var(--color-mint)" />
 
 						<line
 							x1="0"
 							y1="-13"
 							x2="0"
 							y2="-18"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="1.2"
 							strokeLinecap="round"
 						/>
-						<circle cx="0" cy="-18" r="1.5" fill="#22c55e" />
+						<circle cx="0" cy="-18" r="1.5" fill="var(--color-mint)" />
 						<circle cx="0" cy="-18" r="0.7" fill="#ffffff" className="beacon-strobe" />
 
 						<g className="rover-scan-ray">
@@ -828,7 +883,7 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 							y1="0"
 							x2="-40"
 							y2="-5"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="3.2"
 							strokeLinecap="round"
 						/>
@@ -837,7 +892,7 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 							y1="0"
 							x2="40"
 							y2="-5"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="3.2"
 							strokeLinecap="round"
 						/>
@@ -845,38 +900,38 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 						<g transform="translate(-40, -5)">
 							<ellipse cx="0" cy="0" rx="16" ry="6" fill="url(#rotor-disc)" />
 							<g className="rotor-spin-cw">
-								<line x1="-14" y1="0" x2="14" y2="0" stroke="#18181b" strokeWidth="1.5" />
-								<line x1="0" y1="-5" x2="0" y2="5" stroke="#18181b" strokeWidth="1.5" />
+								<line x1="-14" y1="0" x2="14" y2="0" stroke="var(--color-ink)" strokeWidth="1.5" />
+								<line x1="0" y1="-5" x2="0" y2="5" stroke="var(--color-ink)" strokeWidth="1.5" />
 							</g>
-							<circle cx="0" cy="0" r="2.0" fill="#18181b" />
+							<circle cx="0" cy="0" r="2.0" fill="var(--color-ink)" />
 						</g>
 
 						<g transform="translate(40, -5)">
 							<ellipse cx="0" cy="0" rx="16" ry="6" fill="url(#rotor-disc)" />
 							<g className="rotor-spin-ccw">
-								<line x1="-14" y1="0" x2="14" y2="0" stroke="#18181b" strokeWidth="1.5" />
-								<line x1="0" y1="-5" x2="0" y2="5" stroke="#18181b" strokeWidth="1.5" />
+								<line x1="-14" y1="0" x2="14" y2="0" stroke="var(--color-ink)" strokeWidth="1.5" />
+								<line x1="0" y1="-5" x2="0" y2="5" stroke="var(--color-ink)" strokeWidth="1.5" />
 							</g>
-							<circle cx="0" cy="0" r="2.0" fill="#18181b" />
+							<circle cx="0" cy="0" r="2.0" fill="var(--color-ink)" />
 						</g>
 
 						<polygon
 							points="0,-14 18,-5 18,9 0,16 -18,9 -18,-5"
 							fill="#27272a"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="1.8"
 							strokeLinejoin="round"
 						/>
 
 						<polygon
 							points="0,-10 13,-3 13,6 0,12 -13,6 -13,-3"
-							fill="#fde047"
-							stroke="#18181b"
+							fill="var(--color-yellow)"
+							stroke="var(--color-ink)"
 							strokeWidth="1.2"
 							strokeLinejoin="round"
 						/>
 
-						<circle cx="0" cy="2" r="4.5" fill="#18181b" />
+						<circle cx="0" cy="2" r="4.5" fill="var(--color-ink)" />
 						<circle cx="0" cy="2" r="2.5" fill="#38bdf8" />
 						<circle cx="0" cy="2" r="1.0" fill="#ffffff" />
 
@@ -885,11 +940,18 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 							y1="-14"
 							x2="0"
 							y2="-20"
-							stroke="#18181b"
+							stroke="var(--color-ink)"
 							strokeWidth="1.5"
 							strokeLinecap="round"
 						/>
-						<circle cx="0" cy="-20" r="2.4" fill="#38bdf8" stroke="#18181b" strokeWidth="0.8" />
+						<circle
+							cx="0"
+							cy="-20"
+							r="2.4"
+							fill="#38bdf8"
+							stroke="var(--color-ink)"
+							strokeWidth="0.8"
+						/>
 						<circle cx="0" cy="-20" r="1.1" fill="#ffffff" className="beacon-strobe" />
 					</g>
 				</g>
@@ -1227,6 +1289,7 @@ export function NotFoundIllustration({ className }: { className?: string }) {
 				}
 
 				/* Paused State */
+				[data-paused="true"] *,
 				[data-paused="true"] :global(*) {
 					animation-play-state: paused !important;
 				}
