@@ -95,8 +95,9 @@
 26. **Accessible Modal Dossier & External Media Patterns**:
     - **Dialog Semantics**: Enforce strict dialog accessibility (`role="dialog"`, `aria-modal="true"`, `aria-labelledby`).
     - **Scroll Lock**: Implement body scroll locking on modal mount (`document.body.style.overflow = "hidden"`) and restore previous overflow on unmount.
+    - **Focus Management & Containment**: Move focus into the dialog upon opening (`requestAnimationFrame`), contain keyboard focus within modal boundaries (`Tab`/`Shift+Tab`), prevent outside focus escape (`focusin`), and restore focus to the triggering card (`experience-card-${id}`) or active element on close.
     - **Keyboard Navigation**: Support `Escape` for exit and `ArrowLeft`/`ArrowRight` for directional item transitions.
-    - **Stationary Controls**: Anchor close buttons and identity headers stationary in the viewport, allowing only the item body to scroll.
+    - **Responsive Viewport Height & Overflow Architecture**: Adapt modals for short or zoomed displays (`height < 44rem`) via `dossier-modal` (`calc(100dvh - 1.5rem)` with `overflow-y: auto`) and `dossier-content` (`min-height: 14rem` with `overflow-y: visible`) to avoid double scrollbars and prevent content crushing, while preserving stationary pinned controls at taller viewport heights.
     - **External CDN Optimization**: Centralize external brand asset URLs in `constants/` (e.g., `constants/company-logos.ts`) and configure corresponding domains under `images.remotePatterns` in `next.config.ts` (e.g., `res.cloudinary.com`).
 
 ---

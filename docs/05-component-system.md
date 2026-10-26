@@ -393,12 +393,19 @@ The Work Experience section presents the developer's professional chronology (`F
 
 - **Dialog Anatomy & Trapping**: Full accessible dialog semantics (`role="dialog"`, `aria-modal="true"`, `aria-labelledby="dossier-company-name"`).
 - **Body Scroll Lock**: Automatically locks `document.body.style.overflow = "hidden"` while mounted, restoring previous overflow state on unmount.
+- **Focus Management & Containment**:
+  - **Initial Focus**: Automatically directs keyboard focus to the stationary close button (`closeButtonRef`) upon modal mount via `requestAnimationFrame`.
+  - **Focus Trap**: Traps keyboard navigation inside the dialog via `Tab` / `Shift+Tab` across focusable children, backed by a document-level `focusin` listener to prevent focus escaping to background elements.
+  - **Focus Restoration**: Tracks the trigger element and current role ID (`currentItemIdRef`), restoring focus directly to the matching `ExperienceCard` (`experience-card-${id}`) or initial trigger upon unmount.
 - **Keyboard Navigation**:
   - `Escape`: Closes modal.
   - `ArrowLeft`: Navigates to previous chronological role.
   - `ArrowRight`: Navigates to next chronological role.
 - **Directional Slide Physics**: Content slides directionally with Framer Motion variants (`enter`, `center`, `exit`), respecting `useReducedMotion()`.
-- **Stationary Architecture**: Top-right close button and top identity banner remain stationary, while the deliverables and tech stack body scroll smoothly inside `min-h-0 flex-1 overflow-y-auto`.
+- **Responsive Viewport Height & Overflow Architecture**:
+  - Integrates `@utility dossier-modal` and `@utility dossier-content` from `app/globals.css`.
+  - **Short / Zoomed Viewports (`height < 44rem`)**: Container expands to `max-height: calc(100dvh - 1.5rem)` with `overflow-y: auto`, body enforces `min-height: 14rem` with `overflow-y: visible`, and the backdrop overlay wrapper provides `overflow-y-auto` so the full dossier scrolls seamlessly without content crushing.
+  - **Taller Viewports (`height >= 44rem`)**: Preserves stationary pinned identity headers and bottom navigation docks (`max-height: 85vh` / `88vh`, `overflow-y: hidden`), confining vertical scroll to the inner body (`min-height: 0; overflow-y: auto`).
 - **Domain-Categorized Tech Badges**: Dynamically maps skill tags to Soft Neubrutalism color variants (`sky` for frontend/TS, `coral` for backend/DevOps, `lavender` for styling/CSS, `mint` for databases/caching, `yellow` for architecture/paradigms).
 - **Stationary Bottom Navigation Dock**: Pinned footer featuring `@/components/ui/button` controls for previous/next role navigation alongside a progress counter (`ROLE X OF Y`).
 

@@ -1,8 +1,8 @@
 "use client";
 
+import { CrossStarIcon, DiamondStarIcon } from "@/components/neu-icons";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { CrossStarIcon, DiamondStarIcon } from "@/components/neu-icons";
 import { parseExperienceTask, type WorkExperienceItem } from "@/constants/work-experience-data";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
@@ -85,26 +85,108 @@ export function ExperienceDossierModal({
 }: ExperienceDossierModalProps) {
 	const shouldReduceMotion = useReducedMotion();
 	const modalRef = useRef<HTMLDivElement>(null);
+	const closeButtonRef = useRef<HTMLButtonElement>(null);
+	const triggerRef = useRef<HTMLElement | null>(null);
+	const currentItemIdRef = useRef(item.id);
 
-	// Lock body scroll and listen for keyboard navigation / escape
+	// Synchronize latest active item id to ref for unmount focus restoration
+	useEffect(() => {
+		currentItemIdRef.current = item.id;
+	}, [item.id]);
+
+	// Capture trigger on mount and restore focus on unmount
+	useEffect(() => {
+		triggerRef.current = document.activeElement as HTMLElement | null;
+
+		// Move focus into the dialog on open
+		const focusTimer = requestAnimationFrame(() => {
+			closeButtonRef.current?.focus();
+		});
+
+		return () => {
+			cancelAnimationFrame(focusTimer);
+			const activeCard =
+				document.getElementById(`experience-card-${currentItemIdRef.current}`) ||
+				triggerRef.current;
+			activeCard?.focus();
+		};
+	}, []);
+
+	// Lock body scroll and manage keyboard navigation / focus trap / escape
 	useEffect(() => {
 		const originalOverflow = document.body.style.overflow;
 		document.body.style.overflow = "hidden";
 
 		const handleKeyDown = (e: globalThis.KeyboardEvent) => {
 			if (e.key === "Escape") {
+				e.preventDefault();
 				onClose();
-			} else if (e.key === "ArrowLeft" && currentIndex > 0) {
+				return;
+			}
+
+			if (e.key === "ArrowLeft" && currentIndex > 0) {
 				onNavigate(currentIndex - 1);
-			} else if (e.key === "ArrowRight" && currentIndex < totalCount - 1) {
+				return;
+			}
+
+			if (e.key === "ArrowRight" && currentIndex < totalCount - 1) {
 				onNavigate(currentIndex + 1);
+				return;
+			}
+
+			// Focus trap inside the modal dialog
+			if (e.key === "Tab") {
+				if (!modalRef.current) return;
+
+				const focusable = modalRef.current.querySelectorAll<HTMLElement>(
+					'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+				);
+
+				if (focusable.length === 0) {
+					e.preventDefault();
+					return;
+				}
+
+				const first = focusable[0];
+				const last = focusable[focusable.length - 1];
+
+				if (e.shiftKey) {
+					if (
+						document.activeElement === first ||
+						!modalRef.current.contains(document.activeElement)
+					) {
+						e.preventDefault();
+						last.focus();
+					}
+				} else {
+					if (
+						document.activeElement === last ||
+						!modalRef.current.contains(document.activeElement)
+					) {
+						e.preventDefault();
+						first.focus();
+					}
+				}
+			}
+		};
+
+		// Prevent focus from escaping to outside elements while modal is active
+		const handleFocusIn = (e: FocusEvent) => {
+			if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
+				if (closeButtonRef.current) {
+					closeButtonRef.current.focus();
+				} else {
+					modalRef.current.focus();
+				}
 			}
 		};
 
 		window.addEventListener("keydown", handleKeyDown);
+		document.addEventListener("focusin", handleFocusIn);
 		return () => {
 			document.body.style.overflow = originalOverflow;
 			window.removeEventListener("keydown", handleKeyDown);
+			document.removeEventListener("focusin", handleFocusIn);
 		};
 	}, [currentIndex, totalCount, onClose, onNavigate]);
 
@@ -137,6 +219,7 @@ export function ExperienceDossierModal({
 		<motion.div
 			ref={modalRef}
 			role="dialog"
+			tabIndex={-1}
 			aria-modal="true"
 			aria-labelledby="dossier-company-name"
 			onClick={(e) => e.stopPropagation()}
@@ -159,10 +242,11 @@ export function ExperienceDossierModal({
 				duration: shouldReduceMotion ? 0.1 : 0.2,
 				ease: "easeOut",
 			}}
-			className="relative isolate flex max-h-[85vh] w-full max-w-2xl transform-gpu flex-col overflow-hidden rounded-2xl border-brutal border-ink bg-surface text-ink shadow-brutal-xl sm:max-h-[88vh] sm:rounded-3xl"
+			className="relative isolate my-auto flex dossier-modal w-full max-w-2xl transform-gpu flex-col rounded-2xl border-brutal border-ink bg-surface text-ink shadow-brutal-xl focus:outline-none sm:rounded-3xl"
 		>
 			{/* Close Button - Anchored to top-right corner, stays stationary across role navigation */}
 			<button
+				ref={closeButtonRef}
 				type="button"
 				onClick={onClose}
 				aria-label="Close dossier"
@@ -172,7 +256,7 @@ export function ExperienceDossierModal({
 			</button>
 
 			{/* Sliding Content Container - Handles Directional Next/Prev Role Transition */}
-			<div className="relative flex min-h-0 flex-1 flex-col overflow-hidden rounded-t-2xl sm:rounded-t-3xl">
+			<div className="relative flex min-h-0 flex-1 flex-col rounded-t-2xl sm:rounded-t-3xl [@media(min-height:44rem)]:overflow-hidden">
 				<AnimatePresence mode="wait" custom={direction} initial={false}>
 					<motion.div
 						key={item.id}
@@ -181,7 +265,7 @@ export function ExperienceDossierModal({
 						initial="enter"
 						animate="center"
 						exit="exit"
-						className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-t-2xl sm:rounded-t-3xl"
+						className="flex min-h-0 flex-1 flex-col rounded-t-2xl sm:rounded-t-3xl [@media(min-height:44rem)]:overflow-hidden"
 					>
 						{/* Pinned Top Identity Block - Stays stationary, never scrolls */}
 						<div className="shrink-0 rounded-t-2xl border-b border-ink/15 bg-canvas-subtle p-4 sm:rounded-t-3xl sm:p-5">
@@ -230,8 +314,8 @@ export function ExperienceDossierModal({
 							</div>
 						</div>
 
-						{/* Scrollable Modal Body - Only this section scrolls vertically */}
-						<div className="min-h-0 flex-1 space-y-6 overflow-y-auto p-5 sm:p-6">
+						{/* Scrollable Modal Body - Only this section scrolls vertically at taller viewports */}
+						<div className="dossier-content min-h-0 flex-1 space-y-6 p-5 sm:p-6">
 							{/* Deliverables & Impact */}
 							<div className="space-y-3">
 								<div className="flex items-center gap-2 border-b border-ink/15 pb-2 font-mono text-2xs font-bold tracking-wider text-ink/70 uppercase">

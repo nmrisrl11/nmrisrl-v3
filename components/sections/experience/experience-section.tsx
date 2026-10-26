@@ -64,7 +64,7 @@ export function ExperienceSection() {
 			<AnimatePresence>
 				{activeItem && (
 					<div
-						className="fixed inset-0 z-50 grid place-items-center p-3 sm:p-5 md:p-8"
+						className="fixed inset-0 z-50 grid place-items-center overflow-y-auto p-3 sm:p-5 md:p-8"
 						onClick={handleClose}
 					>
 						<ExperienceDossierModal

@@ -119,6 +119,31 @@
 	}
 }
 
+/* Dossier Modal Responsive Viewport Height & Overflow */
+@utility dossier-modal {
+	max-height: calc(100dvh - 1.5rem);
+	overflow-y: auto;
+
+	@media (min-height: 44rem) {
+		max-height: 85vh;
+		overflow-y: hidden;
+	}
+
+	@media (min-width: 40rem) and (min-height: 44rem) {
+		max-height: 88vh;
+	}
+}
+
+@utility dossier-content {
+	min-height: 14rem;
+	overflow-y: visible;
+
+	@media (min-height: 44rem) {
+		min-height: 0;
+		overflow-y: auto;
+	}
+}
+
 /* Zero-Blur Neubrutalist Silhouette Drop Shadows (For SVGs and Icons) */
 @utility drop-shadow-brutal-xs {
 	filter: drop-shadow(0 1.5px 0 var(--color-ink));

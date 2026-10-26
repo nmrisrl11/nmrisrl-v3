@@ -1,7 +1,7 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import type { WorkExperienceItem } from "@/constants/work-experience-data";
+import { cn } from "@/lib/utils";
 import { ArrowUpRight } from "lucide-react";
 import type { KeyboardEvent } from "react";
 import { ExperienceLogo } from "./experience-logo";
@@ -22,6 +22,7 @@ export function ExperienceCard({ item, onSelect }: ExperienceCardProps) {
 
 	return (
 		<div
+			id={`experience-card-${item.id}`}
 			role="button"
 			tabIndex={0}
 			onClick={onSelect}

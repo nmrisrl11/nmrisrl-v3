@@ -95,9 +95,10 @@ Or use the pre-built utilities: `squircle-btn`, `squircle-card`, `squircle-badge
 - **Accessible Modal Dossier & External Media Patterns**:
   1. **Strict Dialog Semantics**: Always provide `role="dialog"`, `aria-modal="true"`, and `aria-labelledby` referencing the modal title/heading.
   2. **Body Scroll Lock**: Implement body scroll locking on mount (`document.body.style.overflow = "hidden"`) and restore previous overflow state upon unmount.
-  3. **Directional Keyboard Navigation**: Listen for `Escape` to close, and `ArrowLeft`/`ArrowRight` to navigate sequential items or roles.
-  4. **Stationary Viewport Controls**: Keep the close button and identity banner stationary while allowing the content body to scroll vertically (`min-h-0 flex-1 overflow-y-auto`).
-  5. **External CDN Media**: Centralize external brand and logo assets in `constants/` (e.g., `constants/company-logos.ts`) and configure allowed domains under `images.remotePatterns` in `next.config.ts` (e.g., `res.cloudinary.com`).
+  3. **Focus Management & Containment**: Move focus into the dialog upon open (`requestAnimationFrame`), contain keyboard navigation within the modal boundaries (`Tab`/`Shift+Tab`), guard against outside focus leakage (`focusin`), and restore focus to the triggering card (`experience-card-${id}`) or active element on close.
+  4. **Directional Keyboard Navigation**: Listen for `Escape` to close, and `ArrowLeft`/`ArrowRight` to navigate sequential items or roles.
+  5. **Responsive Viewport Height & Overflow Architecture**: Adapt modals for short or zoomed displays (`height < 44rem`) via `dossier-modal` (`calc(100dvh - 1.5rem)` with `overflow-y: auto`) and `dossier-content` (`min-height: 14rem` with `overflow-y: visible`) to avoid double scrollbars and prevent content crushing, while preserving stationary pinned controls at taller viewport heights.
+  6. **External CDN Media**: Centralize external brand and logo assets in `constants/` (e.g., `constants/company-logos.ts`) and configure allowed domains under `images.remotePatterns` in `next.config.ts` (e.g., `res.cloudinary.com`).
 - Consult installed agent skills in `.agents/skills/` (`migrate-radix-to-base`, `shadcn`, `vercel-react-best-practices`, `web-design-guidelines`, `frontend-a11y`, `frontend-design`).
 - Always run `npm run lint` (`oxlint`) and `npm run format` (`oxfmt`) before ending your turn.
 - **NEVER run `git commit` or `git push` autonomously.** Always wait for explicit user instruction or ask before committing/pushing.
