@@ -17,6 +17,7 @@
 - **Custom Cursor & Tactile Click Engine**: Coral (`#FF6B57`) and Chalk White SVG pointer with instant 0ms haptic response, 5 selectable click effect styles (`burst`, `particles`, `crosshair`, `ring`, `ripple`), toggleable 3D brutal drop shadows, and audio SFX integration hooks.
 - **Hand-Drawn Vector Annotations**: Dynamic sketchy underlines and highlighter accents powered by [Rough Notation](https://roughnotation.com/) (`react-rough-notation`), featuring font-ready layout synchronization and full WCAG 2.3.3 motion reduction support.
 - **Soft Neubrutalist Bento Grid**: High-contrast 6-card modular bento grid for the About Me section, decomposed into dedicated `bento-01..06` sub-packages featuring 6 bespoke interactive 3D visual models/assemblies (`TechStackReactor`, `ExperienceHologram`, `ArchitectureCartridge`, `TrendRadar`, `DroneAssembly`, `CreativeLab`) with official Simple Icons and custom neu-icons.
+- **Career Chronology & Deep-Dive Dossier**: High-contrast interactive career timeline (`FIG. 03 // CAREER CHRONOLOGY`) featuring Cloudinary company logo stamps, active role live-pulse badges, and a keyboard-accessible modal dossier with directional slide transitions, domain-categorized tech badges, and stationary controls.
 - **Playful Custom 404 Route Exception Page**: Dedicated not-found boundary (`app/not-found.tsx` & `components/sections/not-found/`) featuring a handcrafted 3D isometric repair crew illustration (`NotFoundIllustration`) with an autonomous crawler splicer bot, patrol rover, and quad-rotor drone repairing a severed conduit, paired with direct Home and Go Back recovery actions.
 
 ---
@@ -73,11 +74,14 @@ nmrisrl-v3/
 │   ├── sections/         # Modular portfolio sections
 │   │   ├── hero/         # Hero section (RotatingSeal, BauhausAccent, HeroNarrative with Rough Notation, badges, marquee)
 │   │   ├── about/        # About section (6 decomposed bento-01..06 cards with co-located 3D visual assemblies)
+│   │   ├── experience/   # Career chronology & deep-dive dossier (ExperienceCard, ExperienceDossierModal, ExperienceLogo, ExperiencePulse)
 │   │   └── not-found/    # Custom 404 hero section & 3D isometric repair crew illustration (NotFoundIllustration)
 │   └── ui/               # Registry-backed Base UI primitives and styled wrappers (Button, Card, Badge, Dialog, Tooltip)
 ├── constants/            # Modular personal data & tech stack taxonomies
-│   ├── data.ts           # Centralized personal profile, bio, URLs, email, About_Data, and social links
-│   └── stack-and-skills-data.ts # ProfileCoreTech & StackAndSkillsData
+│   ├── company-logos.ts  # Cloudinary CDN company logo URLs & banners
+│   ├── data.ts           # Centralized personal profile, bio, URLs, email, About_Data, Experience_Section_Data, and social links
+│   ├── stack-and-skills-data.ts # ProfileCoreTech & StackAndSkillsData
+│   └── work-experience-data.ts  # Career chronology, deliverables, and tech stack taxonomy
 ├── docs/                 # Modular design system & architecture blueprints (8 chapters)
 │   ├── README.md
 │   ├── 01-brand-and-philosophy.md

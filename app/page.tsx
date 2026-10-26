@@ -1,6 +1,7 @@
 import { GridSection } from "@/components/page-layout/grid-section";
 import { PageLayout } from "@/components/page-layout/page-layout";
 import { AboutSection } from "@/components/sections/about/about-section";
+import { ExperienceSection } from "@/components/sections/experience/experience-section";
 import { HeroSection } from "@/components/sections/hero/hero-section";
 import { Badge } from "@/components/ui/badge";
 import { Data } from "@/constants/data";
@@ -15,18 +16,7 @@ export default function Home() {
 			<AboutSection />
 
 			{/* 03 // WORK EXPERIENCE SECTION */}
-			<GridSection
-				id="experience"
-				number="03"
-				title="Work Experience"
-				description="History of roles and impactful products developed across multiple domains."
-			>
-				<div className="squircle-card bg-surface p-6">
-					<p className="font-body text-base text-ink/80">
-						Track record of delivering scalable web applications and developer tools.
-					</p>
-				</div>
-			</GridSection>
+			<ExperienceSection />
 
 			{/* 04 // TECH STACK & SKILLS SECTION */}
 			<GridSection
