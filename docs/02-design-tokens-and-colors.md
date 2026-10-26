@@ -160,6 +160,39 @@ Inspired by `tailwindcss.com`, this utility generates a viewport-locked 315° di
 }
 ```
 
+### C. Dossier Modal Responsive Layout Utilities (`dossier-modal` & `dossier-content`)
+
+Tailored responsive utilities defined in `app/globals.css` ensuring modal dialogs with complex header and footer docks remain fully legible and scrollable on short, landscape, or zoomed displays while maintaining pinned stationary controls on taller screens:
+
+```css
+@utility dossier-modal {
+	max-height: calc(100dvh - 1.5rem);
+	overflow-y: auto;
+
+	@media (min-height: 44rem) {
+		max-height: 85vh;
+		overflow-y: hidden;
+	}
+
+	@media (min-width: 40rem) and (min-height: 44rem) {
+		max-height: 88vh;
+	}
+}
+
+@utility dossier-content {
+	min-height: 14rem;
+	overflow-y: visible;
+
+	@media (min-height: 44rem) {
+		min-height: 0;
+		overflow-y: auto;
+	}
+}
+```
+
+- **Short / Zoomed Viewports (`height < 44rem` / 704px)**: `dossier-modal` expands up to `calc(100dvh - 1.5rem)` with outer scrolling (`overflow-y: auto`), while `dossier-content` sets `overflow-y: visible` with a guaranteed `min-height: 14rem` to eliminate double scrollbars and prevent content crushing between stationary bars.
+- **Taller Viewports (`height >= 44rem`)**: Restores pinned stationary identity banners and bottom docks, confining vertical scroll to the inner body (`min-height: 0; overflow-y: auto`).
+
 ---
 
 ## 6. Proper Usage of Theme Variables with Opacity (`color-mix()`)

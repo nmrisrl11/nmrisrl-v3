@@ -68,3 +68,11 @@ export const About_Data = {
 			"Grounding myself through a consistent running routine, alongside an enduring creative fascination for indie game development and 2D character art that I continue to admire.",
 	},
 } as const;
+
+export const Experience_Section_Data = {
+	figure: "FIG. 03 // CAREER CHRONOLOGY",
+	figureMeta: ["ROLES & PRODUCTION IMPACT", "2018 — PRESENT"],
+	title: "Work Experience",
+	description:
+		"Chronology of engineering roles, architectural contributions, and production systems developed across varied domains.",
+} as const;

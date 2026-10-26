@@ -369,3 +369,48 @@ Reusable application hooks are encapsulated in `hooks/` to eliminate duplicate s
   	{children}
   </RoughNotation>
   ```
+
+---
+
+## 12. Work Experience & Career Dossier Architecture (`components/sections/experience/`)
+
+The Work Experience section presents the developer's professional chronology (`FIG. 03 // CAREER CHRONOLOGY`) via high-contrast interactive timeline cards and a deep-dive inspection modal dossier:
+
+### A. Experience Section (`components/sections/experience/experience-section.tsx`)
+
+- Orchestrates the timeline list using `GridSection` populated with `Experience_Section_Data` from `@/constants/data`.
+- Manages modal visibility (`activeId`), navigation state, and slide transitions (`direction`).
+- Encloses modal backdrop and content in dedicated `AnimatePresence` containers for fluid mount/unmount animations.
+
+### B. Experience Card (`components/sections/experience/experience-card.tsx`)
+
+- **Tactile Neubrutalist Surface**: `rounded-2xl border-brutal border-ink bg-surface shadow-brutal hover:shadow-brutal-lg active:shadow-brutal-xs`.
+- **Identity Block**: Renders the squircle company logo stamp (`ExperienceLogo`), active role pulse indicator (`ExperiencePulse`), role title, and monospace metadata ribbon (`jobType • location • startDate — endDate`).
+- **Interactive Cue**: Includes an interactive launch arrow button (`corner-squircle group-hover:scale-105 group-hover:bg-yellow group-hover:shadow-brutal supports-[corner-shape:squircle]:rounded-full`).
+- **Accessibility**: Full keyboard support (`role="button"`, `tabIndex={0}`, `Enter`/`Space` handlers) and descriptive `aria-label`.
+
+### C. Experience Dossier Modal (`components/sections/experience/experience-dossier-modal.tsx`)
+
+- **Dialog Anatomy & Trapping**: Full accessible dialog semantics (`role="dialog"`, `aria-modal="true"`, `aria-labelledby="dossier-company-name"`).
+- **Body Scroll Lock**: Automatically locks `document.body.style.overflow = "hidden"` while mounted, restoring previous overflow state on unmount.
+- **Focus Management & Containment**:
+  - **Initial Focus**: Automatically directs keyboard focus to the stationary close button (`closeButtonRef`) upon modal mount via `requestAnimationFrame`.
+  - **Focus Trap**: Traps keyboard navigation inside the dialog via `Tab` / `Shift+Tab` across focusable children, backed by a document-level `focusin` listener to prevent focus escaping to background elements.
+  - **Focus Restoration**: Tracks the trigger element and current role ID (`currentItemIdRef`), restoring focus directly to the matching `ExperienceCard` (`experience-card-${id}`) or initial trigger upon unmount.
+- **Keyboard Navigation**:
+  - `Escape`: Closes modal.
+  - `ArrowLeft`: Navigates to previous chronological role.
+  - `ArrowRight`: Navigates to next chronological role.
+- **Directional Slide Physics**: Content slides directionally with Framer Motion variants (`enter`, `center`, `exit`), respecting `useReducedMotion()`.
+- **Responsive Viewport Height & Overflow Architecture**:
+  - Integrates `@utility dossier-modal` and `@utility dossier-content` from `app/globals.css`.
+  - **Short / Zoomed Viewports (`height < 44rem`)**: Container expands to `max-height: calc(100dvh - 1.5rem)` with `overflow-y: auto`, body enforces `min-height: 14rem` with `overflow-y: visible`, and the backdrop overlay wrapper provides `overflow-y-auto` so the full dossier scrolls seamlessly without content crushing.
+  - **Taller Viewports (`height >= 44rem`)**: Preserves stationary pinned identity headers and bottom navigation docks (`max-height: 85vh` / `88vh`, `overflow-y: hidden`), confining vertical scroll to the inner body (`min-height: 0; overflow-y: auto`).
+- **Domain-Categorized Tech Badges**: Dynamically maps skill tags to Soft Neubrutalism color variants (`sky` for frontend/TS, `coral` for backend/DevOps, `lavender` for styling/CSS, `mint` for databases/caching, `yellow` for architecture/paradigms).
+- **Stationary Bottom Navigation Dock**: Pinned footer featuring `@/components/ui/button` controls for previous/next role navigation alongside a progress counter (`ROLE X OF Y`).
+
+### D. Company Logos & Remote Pattern (`constants/company-logos.ts` & `next.config.ts`)
+
+- External company thumbnails and banners are hosted via Cloudinary and centralized in `constants/company-logos.ts`.
+- `next.config.ts` configures `images.remotePatterns` for `res.cloudinary.com` to enable Next.js image optimization.
+- `ExperienceLogo` safely falls back to Lucide icons (e.g. `Code2` for independent projects) when external logos are not applicable.
