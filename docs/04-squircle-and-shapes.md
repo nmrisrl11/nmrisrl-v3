@@ -88,27 +88,55 @@ To prevent repeatedly typing long utility chains, use these custom `@utility` cl
 	@supports (corner-shape: squircle) {
 		border-radius: 9999px;
 	}
+
+	@media (forced-colors: active) {
+		border: 2px solid ButtonText;
+
+		&:hover {
+			border-color: Highlight;
+		}
+	}
 }
 
 @utility squircle-card {
+	--tw-ring-shadow: 0 0 0 2px var(--color-ink);
+	--card-ring: 0 0 0 2px var(--color-ink);
 	border-radius: 1.25rem;
 	corner-shape: squircle;
-	border: 2px solid var(--color-ink);
-	box-shadow: 0 4px 0 0 var(--color-ink);
+	border: none;
+	box-shadow:
+		var(--card-ring),
+		0 4px 0 0 var(--color-ink);
 
 	@supports (corner-shape: squircle) {
 		border-radius: 1.75rem;
 	}
+
+	@media (forced-colors: active) {
+		border: 2px solid CanvasText;
+
+		&:hover {
+			border-color: Highlight;
+		}
+	}
 }
 
 @utility squircle-badge {
+	--tw-ring-shadow: 0 0 0 1.5px var(--color-ink);
+	--badge-ring: 0 0 0 1.5px var(--color-ink);
 	border-radius: 0.375rem;
 	corner-shape: squircle;
-	border: 1.5px solid var(--color-ink);
-	box-shadow: 0 2px 0 0 var(--color-ink);
+	border: none;
+	box-shadow:
+		var(--badge-ring),
+		0 2px 0 0 var(--color-ink);
 
 	@supports (corner-shape: squircle) {
 		border-radius: 9999px;
+	}
+
+	@media (forced-colors: active) {
+		border: 1.5px solid CanvasText;
 	}
 }
 ```

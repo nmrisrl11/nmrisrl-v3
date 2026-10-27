@@ -76,3 +76,11 @@ export const Experience_Section_Data = {
 	description:
 		"Chronology of engineering roles, architectural contributions, and production systems developed across varied domains.",
 } as const;
+
+export const Skills_Section_Data = {
+	figure: "FIG. 04 // TECH STACK & SYSTEM CAPABILITIES",
+	figureMeta: ["PRODUCTION ECOSYSTEM", "60 TECHNOLOGIES"],
+	title: "Tech Stack & Skills",
+	description:
+		"Specialized tooling, high-performance frameworks, and architectural standards engineered for modern production web applications.",
+} as const;

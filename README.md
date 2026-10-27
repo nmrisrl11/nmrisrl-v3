@@ -18,6 +18,7 @@
 - **Hand-Drawn Vector Annotations**: Dynamic sketchy underlines and highlighter accents powered by [Rough Notation](https://roughnotation.com/) (`react-rough-notation`), featuring font-ready layout synchronization and full WCAG 2.3.3 motion reduction support.
 - **Soft Neubrutalist Bento Grid**: High-contrast 6-card modular bento grid for the About Me section, decomposed into dedicated `bento-01..06` sub-packages featuring 6 bespoke interactive 3D visual models/assemblies (`TechStackReactor`, `ExperienceHologram`, `ArchitectureCartridge`, `TrendRadar`, `DroneAssembly`, `CreativeLab`) with official Simple Icons and custom neu-icons.
 - **Career Chronology & Deep-Dive Dossier**: High-contrast interactive career timeline (`FIG. 03 // CAREER CHRONOLOGY`) featuring Cloudinary company logo stamps, active role live-pulse badges, and a keyboard-accessible modal dossier with directional slide transitions, domain-categorized tech badges, and stationary controls.
+- **Tech Stack & System Capabilities Matrix**: High-contrast interactive technical matrix (`FIG. 04 // TECH STACK & SYSTEM CAPABILITIES`) organizing 60+ production technologies across 10 structured domains into a responsive 12-column Bento Grid, equipped with dynamic domain filtering toolbar (`useSkillsFilter`), React 19 concurrent transitions (`useTransition`), zero-shift blueprint skeleton states, and a 3-tier icon resolution pipeline (Bespoke SVG -> Simple Icons CDN -> Neu-Icon Blueprint Glyph).
 - **Playful Custom 404 Route Exception Page**: Dedicated not-found boundary (`app/not-found.tsx` & `components/sections/not-found/`) featuring a handcrafted 3D isometric repair crew illustration (`NotFoundIllustration`) with an autonomous crawler splicer bot, patrol rover, and quad-rotor drone repairing a severed conduit, paired with direct Home and Go Back recovery actions.
 
 ---
@@ -75,12 +76,13 @@ nmrisrl-v3/
 │   │   ├── hero/         # Hero section (RotatingSeal, BauhausAccent, HeroNarrative with Rough Notation, badges, marquee)
 │   │   ├── about/        # About section (6 decomposed bento-01..06 cards with co-located 3D visual assemblies)
 │   │   ├── experience/   # Career chronology & deep-dive dossier (ExperienceCard, ExperienceDossierModal, ExperienceLogo, ExperiencePulse)
+│   │   ├── skills/       # Tech stack & skills matrix (SkillsSection, SkillsCard, SkillsFilter, SkillsSkeleton, TechBadge, skills-icons)
 │   │   └── not-found/    # Custom 404 hero section & 3D isometric repair crew illustration (NotFoundIllustration)
 │   └── ui/               # Registry-backed Base UI primitives and styled wrappers (Button, Card, Badge, Dialog, Tooltip)
 ├── constants/            # Modular personal data & tech stack taxonomies
 │   ├── company-logos.ts  # Cloudinary CDN company logo URLs & banners
-│   ├── data.ts           # Centralized personal profile, bio, URLs, email, About_Data, Experience_Section_Data, and social links
-│   ├── stack-and-skills-data.ts # ProfileCoreTech & StackAndSkillsData
+│   ├── data.ts           # Centralized personal profile, bio, URLs, email, About_Data, Experience_Section_Data, Skills_Section_Data, and social links
+│   ├── stack-and-skills-data.ts # ProfileCoreTech & StackAndSkillsData (10 structured domains)
 │   └── work-experience-data.ts  # Career chronology, deliverables, and tech stack taxonomy
 ├── docs/                 # Modular design system & architecture blueprints (8 chapters)
 │   ├── README.md
@@ -92,7 +94,7 @@ nmrisrl-v3/
 │   ├── 06-avatar-interactive-engine.md
 │   ├── 07-tech-stack-and-tooling.md
 │   └── 08-agent-rules.md
-├── hooks/                # Reusable application hooks (use-rough-notation.ts)
+├── hooks/                # Reusable application hooks (use-rough-notation.ts, use-skills-filter.ts)
 ├── lib/
 │   └── utils.ts          # cn() class merging utility (clsx + tailwind-merge)
 ├── public/
@@ -253,7 +255,9 @@ See [`AGENTS.md`](./AGENTS.md) for the full lookup table and rules.
 - **Strict Barrel File & Module Import Protocol**: If a module collection provides an established barrel file (like `@/components/neu-icons`), always import through the barrel file using explicit named imports (`import { ... } from "@/components/neu-icons"`). For components without a barrel file, always use direct module imports (`@/components/ui/button`, `@/components/custom/cursor`, `@/components/page-layout/grid-section`, `@/components/sections/hero/hero-section`). Do not create superfluous or nested barrel files.
 - **Component Reuse over Reinvention (`@/components/ui/*`)**: Never build ad-hoc raw HTML elements (e.g. `<button>` styled with manual brutal rings/borders/shadows) when established primitives exist in `@/components/ui/` (`Button`, `Card`, `Badge`, `Dialog`, `Tooltip`). Always utilize the existing primitives with appropriate `variant`, `size`, and `shape`.
 - **Modular Bento Subcomponent Decomposition (`components/sections/<section>/bento-XX/`)**: Decompose complex bento sections and rich visual assemblies into dedicated numbered subdirectories (`bento-01/`, `bento-02/`, etc.) containing the card wrapper and co-located visual assembly/simulation to maintain clean single-responsibility boundaries.
-- **Centralized Personal & Domain Metadata (`@/constants/data`)**: All personal info, name, bio, URLs (`cleanUrl`, `fullUrl`), contact email, social links, and section blueprint copy are strictly managed in `Data` and `About_Data` from `@/constants/data`. Never hardcode developer personal details across components.
+- **Centralized Personal & Domain Metadata (`@/constants/data`)**: All personal info, name, bio, URLs (`cleanUrl`, `fullUrl`), contact email, social links, and section blueprint copy are strictly managed in `Data`, `About_Data`, `Experience_Section_Data`, and `Skills_Section_Data` from `@/constants/data`. Never hardcode developer personal details across components.
+- **Technical Matrix & Skills Architecture (`@/components/sections/skills/*`)**: Decouple technical capabilities into `SkillsSection`, `SkillsCard`, `SkillsFilter`, `SkillsSkeleton`, `TechBadge`, and `skills-icons.tsx`. Centralize the 10-domain taxonomy in `constants/stack-and-skills-data.ts`. Manage filter state via `useSkillsFilter` with React 19 concurrent transitions (`useTransition`), and expand dynamic column spans via `getFilteredColSpan`. Enforce the 3-tier icon fallback pipeline in `TechBadge` (Bespoke SVG -> Simple Icons CDN -> Neu-Icon Blueprint Glyph).
+- **Outset Ring Box-Shadow Pattern for Squircles**: Use outset ring box-shadows (`box-shadow: var(--ring), 0 Ypx 0 0 var(--color-ink); border: none;`) across interactive buttons, `squircle-card`, and `squircle-badge` to eliminate sub-pixel anti-aliasing gaps and corner desync, paired with `@media (forced-colors: active)` system-colored borders (`ButtonText`, `CanvasText`) to preserve boundary visibility in high-contrast mode.
 
 ---
 
