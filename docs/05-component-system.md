@@ -445,7 +445,7 @@ The Tech Stack & Skills section presents the developer's complete technical repe
 
 - **Grid Framework**: Rendered via `GridSection` populated by `Skills_Section_Data` from `@/constants/data.ts`.
 - **Filter & Skeleton Integration**: Houses `SkillsFilter` at the top and seamlessly switches between `SkillsSkeleton` and the active Bento Grid based on `isLoading`.
-- **Fluid Layout Transitions**: Wraps cards in `AnimatePresence` with `initial={false}` (preventing SSR flash) and Framer Motion transitions respecting `useReducedMotion()`.
+- **Fluid Layout Transitions**: Wraps cards in `AnimatePresence` with `mode="sync"` (ensuring cards present across filter transitions remain mounted without sequential blocking) and `initial={false}` (preventing SSR flash), respecting `useReducedMotion()`.
 
 ### B. Filter Matrix Bar (`components/sections/skills/skills-filter.tsx`)
 
@@ -462,10 +462,11 @@ The Tech Stack & Skills section presents the developer's complete technical repe
 ### D. Tech Badge & 3-Tier Icon Resolution (`components/sections/skills/tech-badge.tsx`)
 
 - **Atomic Pill Chip**: Styled with `Badge` (`variant="default"`), squircle perimeters, and zero-blur drop shadows.
-- **3-Tier Icon Resolution Pipeline**:
+- **Accessibility Safeguard**: Hides icons from assistive technology (`aria-hidden="true"` on bespoke SVGs and neu-icons, empty `alt=""` on CDN images) so screen readers cleanly announce only the visible text label without duplication.
+- **3-Tier Icon Resolution Pipeline with Error Resilience**:
   1. **Bespoke Handcrafted SVG Icon**: Matches item label against `BESPOKE_SKILL_ICONS` from `skills-icons.tsx` for specialized tools lacking standard brand icons.
-  2. **Simple Icons CDN**: Dynamically loads official vector assets from `https://cdn.simpleicons.org/${item.icon}` via `next/image` with lazy loading and async decoding.
-  3. **Monospace Blueprint Glyph**: Renders `RoundedCrossIcon` rotated 45° (`text-coral`) from `@/components/neu-icons` for conceptual or methodology items without vector branding.
+  2. **Simple Icons CDN with Error Fallback**: Dynamically loads official vector assets from `https://cdn.simpleicons.org/${item.icon}` via `next/image` with lazy loading and async decoding. If the remote image fails to load, `onError` automatically falls back to `RoundedCrossIcon`.
+  3. **Monospace Blueprint Glyph**: Renders `RoundedCrossIcon` rotated 45° (`text-coral`) from `@/components/neu-icons` for conceptual or methodology items without vector branding or upon remote image error.
 
 ### E. Bespoke Skill Icons Library (`components/sections/skills/skills-icons.tsx`)
 

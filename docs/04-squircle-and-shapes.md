@@ -88,6 +88,14 @@ To prevent repeatedly typing long utility chains, use these custom `@utility` cl
 	@supports (corner-shape: squircle) {
 		border-radius: 9999px;
 	}
+
+	@media (forced-colors: active) {
+		border: 2px solid ButtonText;
+
+		&:hover {
+			border-color: Highlight;
+		}
+	}
 }
 
 @utility squircle-card {
@@ -103,6 +111,14 @@ To prevent repeatedly typing long utility chains, use these custom `@utility` cl
 	@supports (corner-shape: squircle) {
 		border-radius: 1.75rem;
 	}
+
+	@media (forced-colors: active) {
+		border: 2px solid CanvasText;
+
+		&:hover {
+			border-color: Highlight;
+		}
+	}
 }
 
 @utility squircle-badge {
@@ -117,6 +133,10 @@ To prevent repeatedly typing long utility chains, use these custom `@utility` cl
 
 	@supports (corner-shape: squircle) {
 		border-radius: 9999px;
+	}
+
+	@media (forced-colors: active) {
+		border: 1.5px solid CanvasText;
 	}
 }
 ```

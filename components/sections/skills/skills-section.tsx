@@ -54,7 +54,7 @@ export function SkillsSection({ isLoading = false }: SkillsSectionProps) {
 					)}
 				>
 					{/* initial={false} ensures SSR HTML renders at opacity: 1, eliminating the blank initial load flash */}
-					<AnimatePresence initial={false} mode="wait">
+					<AnimatePresence initial={false} mode="sync">
 						{visibleCategories.map((category) => {
 							const colSpan = getFilteredColSpan(
 								activeFilter,
