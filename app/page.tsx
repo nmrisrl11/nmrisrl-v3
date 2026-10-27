@@ -3,7 +3,7 @@ import { PageLayout } from "@/components/page-layout/page-layout";
 import { AboutSection } from "@/components/sections/about/about-section";
 import { ExperienceSection } from "@/components/sections/experience/experience-section";
 import { HeroSection } from "@/components/sections/hero/hero-section";
-import { Badge } from "@/components/ui/badge";
+import { SkillsSection } from "@/components/sections/skills/skills-section";
 import { Data } from "@/constants/data";
 
 export default function Home() {
@@ -19,36 +19,7 @@ export default function Home() {
 			<ExperienceSection />
 
 			{/* 04 // TECH STACK & SKILLS SECTION */}
-			<GridSection
-				id="skills"
-				number="04"
-				title="Tech Stack & Skills"
-				description="Technologies, frameworks, and tools powering production applications."
-			>
-				<div className="flex flex-wrap gap-2.5">
-					<Badge variant="yellow" className="text-sm">
-						Next.js 16
-					</Badge>
-					<Badge variant="lavender" className="text-sm">
-						React 19
-					</Badge>
-					<Badge variant="sky" className="text-sm">
-						TypeScript
-					</Badge>
-					<Badge variant="mint" className="text-sm">
-						Tailwind CSS v4
-					</Badge>
-					<Badge variant="coral" className="text-sm">
-						Base UI
-					</Badge>
-					<Badge variant="default" className="text-sm">
-						Motion
-					</Badge>
-					<Badge variant="outline" className="text-sm">
-						OXC Toolchain
-					</Badge>
-				</div>
-			</GridSection>
+			<SkillsSection />
 
 			{/* 05 // HIGHLIGHTS OF MY WORK (PROJECTS) */}
 			<GridSection

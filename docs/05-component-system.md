@@ -370,6 +370,26 @@ Reusable application hooks are encapsulated in `hooks/` to eliminate duplicate s
   </RoughNotation>
   ```
 
+### `useSkillsFilter` (`hooks/use-skills-filter.ts`)
+
+- **Purpose**: Reusable state management and filtering hook powering the dynamic technical capabilities matrix in `SkillsSection`.
+- **Key Capabilities**:
+  - **Concurrent Transitions (`useTransition`)**: Wraps filter state updates in `startTransition`, exposing `isPending` to render subtle feedback (`opacity-70`, `COMPILING_MATRIX...`) during rapid category toggles without locking the main thread.
+  - **Active Presets (`SKILL_FILTERS`)**: Pre-configured domain slices (`ALL`, `FRONTEND & UI`, `BACKEND & CLOUD`, `AI & AGENTS`, `ARCHITECTURE & QA`, `DESIGN & CREATIVE`) mapping to 10 distinct taxonomy IDs.
+  - **Dynamic Bento Column Spanning (`getFilteredColSpan`)**: Intelligently expands card column spans (`lg:col-span-12` when 1 visible, `lg:col-span-6` when 2 visible, `lg:col-span-4` when 3 visible) to eliminate visual gaps when subsets are filtered.
+  - **Real-Time Unit Counting**: Computes both active category domain count and total cumulative technology unit count (`visibleUnits`).
+- **Return Signature**:
+  ```typescript
+  const {
+  	activeFilter,
+  	setActiveFilter,
+  	visibleCategories,
+  	visibleUnits,
+  	totalDomains,
+  	isPending,
+  } = useSkillsFilter();
+  ```
+
 ---
 
 ## 12. Work Experience & Career Dossier Architecture (`components/sections/experience/`)
@@ -384,7 +404,7 @@ The Work Experience section presents the developer's professional chronology (`F
 
 ### B. Experience Card (`components/sections/experience/experience-card.tsx`)
 
-- **Tactile Neubrutalist Surface**: `rounded-2xl border-brutal border-ink bg-surface shadow-brutal hover:shadow-brutal-lg active:shadow-brutal-xs`.
+- **Tactile Neubrutalist Surface**: Built on `squircle-card bg-surface p-4 sm:p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-brutal-lg`, utilizing the continuous superellipse utility with perimeter ring box-shadows.
 - **Identity Block**: Renders the squircle company logo stamp (`ExperienceLogo`), active role pulse indicator (`ExperiencePulse`), role title, and monospace metadata ribbon (`jobType • location • startDate — endDate`).
 - **Interactive Cue**: Includes an interactive launch arrow button (`corner-squircle group-hover:scale-105 group-hover:bg-yellow group-hover:shadow-brutal supports-[corner-shape:squircle]:rounded-full`).
 - **Accessibility**: Full keyboard support (`role="button"`, `tabIndex={0}`, `Enter`/`Space` handlers) and descriptive `aria-label`.
@@ -414,3 +434,45 @@ The Work Experience section presents the developer's professional chronology (`F
 - External company thumbnails and banners are hosted via Cloudinary and centralized in `constants/company-logos.ts`.
 - `next.config.ts` configures `images.remotePatterns` for `res.cloudinary.com` to enable Next.js image optimization.
 - `ExperienceLogo` safely falls back to Lucide icons (e.g. `Code2` for independent projects) when external logos are not applicable.
+
+---
+
+## 13. Tech Stack & System Capabilities Matrix Architecture (`components/sections/skills/`)
+
+The Tech Stack & Skills section presents the developer's complete technical repertoire (`FIG. 04 // TECH STACK & SYSTEM CAPABILITIES`) across 60+ production technologies grouped into 10 structured engineering domains.
+
+### A. Skills Section (`components/sections/skills/skills-section.tsx`)
+
+- **Grid Framework**: Rendered via `GridSection` populated by `Skills_Section_Data` from `@/constants/data.ts`.
+- **Filter & Skeleton Integration**: Houses `SkillsFilter` at the top and seamlessly switches between `SkillsSkeleton` and the active Bento Grid based on `isLoading`.
+- **Fluid Layout Transitions**: Wraps cards in `AnimatePresence` with `initial={false}` (preventing SSR flash) and Framer Motion transitions respecting `useReducedMotion()`.
+
+### B. Filter Matrix Bar (`components/sections/skills/skills-filter.tsx`)
+
+- **Micro Blueprint Eyebrow**: Displays `FIG. 04.A // FILTER_MATRIX` alongside real-time domain and unit count status (`X/10 DOMAINS [Y UNITS]`) or `COMPILING_MATRIX...` during pending concurrent transitions.
+- **Domain Filter Toolbar**: Features accessible `role="toolbar"` with squircle buttons (`shape="squircle"`) for instant domain toggling, displaying dynamic count badges per filter preset.
+
+### C. Skills Bento Card (`components/sections/skills/skills-card.tsx`)
+
+- **Card Architecture**: Built on `squircle-card bg-surface p-4 sm:p-5 lg:p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-brutal-lg`.
+- **Blueprint Eyebrow**: Monospace kicker ribbon featuring `DiamondStarIcon` (`size-3 text-coral`), category kicker (e.g., `01 // CORE TECHNOLOGIES`), and domain tag (e.g., `RUNTIME & SPECS`).
+- **Badge Cluster**: Organizes technology items into a dense, flex-wrapped cluster of atomic `TechBadge` components.
+- **Specification Footer**: Bottom CAD-inspired spec ribbon displaying `SPEC // category.id` and technology unit count.
+
+### D. Tech Badge & 3-Tier Icon Resolution (`components/sections/skills/tech-badge.tsx`)
+
+- **Atomic Pill Chip**: Styled with `Badge` (`variant="default"`), squircle perimeters, and zero-blur drop shadows.
+- **3-Tier Icon Resolution Pipeline**:
+  1. **Bespoke Handcrafted SVG Icon**: Matches item label against `BESPOKE_SKILL_ICONS` from `skills-icons.tsx` for specialized tools lacking standard brand icons.
+  2. **Simple Icons CDN**: Dynamically loads official vector assets from `https://cdn.simpleicons.org/${item.icon}` via `next/image` with lazy loading and async decoding.
+  3. **Monospace Blueprint Glyph**: Renders `RoundedCrossIcon` rotated 45° (`text-coral`) from `@/components/neu-icons` for conceptual or methodology items without vector branding.
+
+### E. Bespoke Skill Icons Library (`components/sections/skills/skills-icons.tsx`)
+
+- Over 30 handcrafted, scalable SVG vector icons specifically designed for technologies without official Simple Icons coverage (including TanStack, Zustand, MobX, RxJS, Valibot, BullMQ, Kafka, Storybook, Lighthouse, FSD, DDD, CQRS, Antigravity, Claude, Copilot, v0, Bolt.new, Adobe Creative Suite).
+- Standardized with `viewBox="0 0 24 24"`, scalable dimensions, and accessible `<title>` elements.
+
+### F. Loading Skeleton (`components/sections/skills/skills-skeleton.tsx`)
+
+- Blueprint wireframe skeleton featuring pulsing header lines, card titles, squircle badge placeholders, and spec ribbons.
+- Accessible loading state marked with `role="status"` and `aria-label="Loading technical specification matrix"`.

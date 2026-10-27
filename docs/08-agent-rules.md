@@ -24,7 +24,7 @@
 1. **Always use Base UI (`@base-ui/react`)**: When building dialogs, tooltips, popovers, tabs, or accordions, use `@base-ui/react` primitives.
 2. **Always follow `components.json` layout**: Atomic primitives belong in `@/components/ui/*` and use `cn()` class merging.
 3. **Always include interactive click feedback**: Buttons and interactive controls must translate vertically on active press (`active:translate-y-0.5`) with shadow reduction.
-4. **Always use outset ring for clickable buttons and floating pills**: Use `ring-2 ring-ink shadow-brutal` instead of `border-brutal` on buttons and floating navigation docks to eliminate sub-pixel anti-aliasing gaps and corner-shape desync. Pair with `focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink`. Never combine with `focus-visible:outline-none`, which suppresses keyboard focus rings.
+4. **Always use outset ring for clickable buttons, floating pills, and squircle utilities**: Use `ring-2 ring-ink shadow-brutal` instead of `border-brutal` on buttons and floating navigation docks to eliminate sub-pixel anti-aliasing gaps and corner-shape desync. For squircle cards and badges, use the pre-built `@utility squircle-card` and `@utility squircle-badge`, which apply outset `--card-ring` / `--badge-ring` compound box-shadows with `border: none`. Pair with `focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink`. Never combine with `focus-visible:outline-none`, which suppresses keyboard focus rings.
 5. **Always register custom tokens in `extendTailwindMerge`**: When introducing new custom theme tokens used with `cn()`, ensure they are added to `customTwMerge` in `@/lib/utils` so `tailwind-merge` does not drop them. Never use `!` (e.g. `border-brutal!`) to bypass class stripping.
 6. **Always use font variables correctly**:
    - Hero name & high-impact statements: `font-display` (`Plus Jakarta Sans`)
@@ -99,6 +99,11 @@
     - **Keyboard Navigation**: Support `Escape` for exit and `ArrowLeft`/`ArrowRight` for directional item transitions.
     - **Responsive Viewport Height & Overflow Architecture**: Adapt modals for short or zoomed displays (`height < 44rem`) via `dossier-modal` (`calc(100dvh - 1.5rem)` with `overflow-y: auto`) and `dossier-content` (`min-height: 14rem` with `overflow-y: visible`) to avoid double scrollbars and prevent content crushing, while preserving stationary pinned controls at taller viewport heights.
     - **External CDN Optimization**: Centralize external brand asset URLs in `constants/` (e.g., `constants/company-logos.ts`) and configure corresponding domains under `images.remotePatterns` in `next.config.ts` (e.g., `res.cloudinary.com`).
+27. **Technical Matrix & Skills Architecture (`components/sections/skills/`)**:
+    - **Centralized Taxonomy**: Centralize technology taxonomy, domain categories, kickers, tags, and column spans in `constants/stack-and-skills-data.ts`. Centralize blueprint headers in `Skills_Section_Data` in `constants/data.ts`.
+    - **Concurrent Transitions**: Wrap filter changes in `useSkillsFilter` (`hooks/use-skills-filter.ts`) using React 19's `useTransition` to maintain instant UI responsiveness during filter toggles without locking the main thread.
+    - **Dynamic Bento Expansion**: Use `getFilteredColSpan` to expand column spans (`lg:col-span-12`, `lg:col-span-6`, `lg:col-span-4`) when subsets are displayed, preventing visual holes in the 12-column grid.
+    - **3-Tier Icon Resolution**: Standardize icon resolution in `TechBadge` via the 3-tier cascade: 1) bespoke handcrafted SVG (`BESPOKE_SKILL_ICONS` in `skills-icons.tsx`), 2) Simple Icons CDN (`cdn.simpleicons.org`), 3) monospace blueprint glyph (`RoundedCrossIcon` rotated 45° from `@/components/neu-icons`).
 
 ---
 
@@ -121,10 +126,11 @@ components/
     ├── hero/         # Hero section (RotatingSeal, BauhausAccent, HeroNarrative, badges, marquee)
     ├── about/        # About section (6 decomposed bento-01..06 cards with co-located 3D visual assemblies)
     ├── experience/   # Work experience section (ExperienceCard, ExperienceDossierModal, ExperienceLogo, ExperiencePulse)
+    ├── skills/       # Tech stack & skills matrix (SkillsSection, SkillsCard, SkillsFilter, SkillsSkeleton, TechBadge, skills-icons)
     └── not-found/    # Custom 404 hero section & 3D isometric repair crew illustration (NotFoundIllustration)
 constants/            # Modular personal data & tech stack taxonomies (data.ts, company-logos.ts, work-experience-data.ts, stack-and-skills-data.ts)
 docs/                 # Modular design system & architecture blueprints
-hooks/                # Shared application hooks (use-rough-notation.ts)
+hooks/                # Shared application hooks (use-rough-notation.ts, use-skills-filter.ts)
 lib/
 └── utils.ts          # cn() class merging utility (clsx + tailwind-merge)
 public/

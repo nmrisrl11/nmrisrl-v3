@@ -28,8 +28,8 @@ export function ExperienceCard({ item, onSelect }: ExperienceCardProps) {
 			onClick={onSelect}
 			onKeyDown={handleKeyDown}
 			className={cn(
-				"group relative flex w-full cursor-pointer items-center justify-between gap-4 rounded-2xl border-brutal border-ink bg-surface p-4 shadow-brutal transition-shadow duration-200 sm:p-6",
-				"hover:shadow-brutal-lg active:shadow-brutal-xs",
+				"group relative flex w-full cursor-pointer items-center justify-between gap-4 squircle-card bg-surface p-4 sm:p-6",
+				"transition-all duration-200 hover:-translate-y-1 hover:shadow-brutal-lg",
 				"focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink",
 			)}
 			aria-label={`View details for ${item.position} at ${item.companyName}`}
