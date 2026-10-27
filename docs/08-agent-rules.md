@@ -104,6 +104,10 @@
     - **Concurrent Transitions & Grid Sync**: Wrap filter changes in `useSkillsFilter` (`hooks/use-skills-filter.ts`) using React 19's `useTransition` to maintain instant UI responsiveness during filter toggles without locking the main thread. Render cards inside `<AnimatePresence mode="sync">` so shared cards across filter domains remain mounted without sequential blocking.
     - **Dynamic Bento Expansion**: Use `getFilteredColSpan` to expand column spans (`lg:col-span-12`, `lg:col-span-6`, `lg:col-span-4`) when subsets are displayed, preventing visual holes in the 12-column grid.
     - **3-Tier Icon Resolution & Error Fallback**: Standardize icon resolution in `TechBadge` via the 3-tier cascade: 1) bespoke handcrafted SVG (`BESPOKE_SKILL_ICONS` with `aria-hidden="true"`), 2) Simple Icons CDN (`cdn.simpleicons.org` with `alt=""` and `onError` fallback to `RoundedCrossIcon`), 3) monospace blueprint glyph (`RoundedCrossIcon` rotated 45° from `@/components/neu-icons`).
+28. **Avatar Interactive State & Priority Hierarchy (`avatarStore`)**:
+    - **Centralized Store**: All contextual character gestures (`coding`, `thumbsup`, `fingerheart`, `thinking`, `wave`) must be triggered through `avatarStore` (`components/avatar/avatar-store.ts`).
+    - **Strict Priority Enforcement**: Adhere to the `ActionPriority` hierarchy (`idle` < `hover` < `click`). Background hover interactions (e.g. CTA buttons, navigational links) MUST use `priority: "hover"` with debouncing (`80ms`) to prevent rapid jitter. Explicit tactile user clicks (e.g. interactive badges, avatar direct click) MUST use `priority: "click"` with a safety duration (e.g. `3000ms`). Hover interactions must never interrupt or preempt an active `click` action.
+    - **Accessible Interactive Triggers**: Any visual badge or graphic accent wired to trigger avatar gestures (such as `RotatingSeal`, `BauhausAccent`, `GitCommandBadge`, `NpmDevBadge`) must be implemented as a semantic `<button>` with an accessible `aria-label`, visible keyboard focus states (`focus-visible:outline-2`), and active press translation (`active:translate-y-0.5`).
 
 ---
 
@@ -120,10 +124,10 @@ components/
 ├── ui/               # Registry-backed Base UI primitives and styled wrappers (button, card, badge, dialog, tooltip)
 ├── custom/           # Bespoke app-specific features & interactive controllers (cursor, click)
 ├── neu-icons/        # Bespoke Soft Neubrutalism SVG accent icons (propeller-star, rounded-cross, etc.)
-├── avatar/           # Avatar video player & mouse-tracking controller (interactive-avatar, use-avatar-gaze)
+├── avatar/           # Avatar video player, mouse tracking & action store (interactive-avatar, use-avatar-gaze, avatar-store)
 ├── page-layout/      # 3-column architectural layout & rails (navbar, grid-section, page-layout)
 └── sections/         # Modular page sections
-    ├── hero/         # Hero section (RotatingSeal, BauhausAccent, HeroNarrative, badges, marquee)
+    ├── hero/         # Hero section (HeroCtaButtons, RotatingSeal, BauhausAccent, HeroNarrative, badges, marquee)
     ├── about/        # About section (6 decomposed bento-01..06 cards with co-located 3D visual assemblies)
     ├── experience/   # Work experience section (ExperienceCard, ExperienceDossierModal, ExperienceLogo, ExperiencePulse)
     ├── skills/       # Tech stack & skills matrix (SkillsSection, SkillsCard, SkillsFilter, SkillsSkeleton, TechBadge, skills-icons)

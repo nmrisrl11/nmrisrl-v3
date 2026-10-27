@@ -13,7 +13,7 @@
 - **Deep Ink Accents**: Sharp `#18181B` typography, brutalist outlines (`2px`), and crisp, zero-blur 3D vertical drop shadows (`0px 4px 0 0 #18181B`).
 - **Pastel Palette**: Warm Coral, Buttercup Yellow, Soft Lavender, Sky Mist, and Fresh Mint.
 - **Continuous Squircles**: Continuous-curvature corners powered by `@toolwind/corner-shape` (`corner-shape: squircle`) with a reliable 3-layer progressive enhancement fallback for all modern browsers.
-- **Interactive Avatar Engine**: State-driven video player reacting to cursor tracking, viewport gaze, idle intervals, and gesture interactions.
+- **Interactive Avatar Engine**: Hybrid state-machine video player reacting to cursor tracking, viewport gaze, idle intervals, and contextual tactile gestures (`coding`, `thumbsup`, `fingerheart`, `thinking`, `wave`) triggered by interactive hero badges, CTA hovers, and direct avatar clicks via `avatarStore` with strict priority handling.
 - **Custom Cursor & Tactile Click Engine**: Coral (`#FF6B57`) and Chalk White SVG pointer with instant 0ms haptic response, 5 selectable click effect styles (`burst`, `particles`, `crosshair`, `ring`, `ripple`), toggleable 3D brutal drop shadows, and audio SFX integration hooks.
 - **Hand-Drawn Vector Annotations**: Dynamic sketchy underlines and highlighter accents powered by [Rough Notation](https://roughnotation.com/) (`react-rough-notation`), featuring font-ready layout synchronization and full WCAG 2.3.3 motion reduction support.
 - **Soft Neubrutalist Bento Grid**: High-contrast 6-card modular bento grid for the About Me section, decomposed into dedicated `bento-01..06` sub-packages featuring 6 bespoke interactive 3D visual models/assemblies (`TechStackReactor`, `ExperienceHologram`, `ArchitectureCartridge`, `TrendRadar`, `DroneAssembly`, `CreativeLab`) with official Simple Icons and custom neu-icons.
@@ -68,12 +68,12 @@ nmrisrl-v3/
 │   ├── not-found.tsx     # Custom 404 route exception boundary & navigation waypoint
 │   └── page.tsx          # Interactive preview: Avatar engine + Base UI components
 ├── components/
-│   ├── avatar/           # Interactive avatar video player & spring gaze tracker (InteractiveAvatar, useAvatarGaze)
+│   ├── avatar/           # Interactive avatar video player, gaze tracker & action store (InteractiveAvatar, useAvatarGaze, avatarStore)
 │   ├── custom/           # App-specific interactive features (CustomCursor, Click effect)
 │   ├── neu-icons/        # 10 bespoke Soft Neubrutalism SVG accent icons (PropellerStar, RoundedCross, etc.)
 │   ├── page-layout/      # Architectural 3-column grid layout (Navbar, GridSection, GridMarker, PageLayout)
 │   ├── sections/         # Modular portfolio sections
-│   │   ├── hero/         # Hero section (RotatingSeal, BauhausAccent, HeroNarrative with Rough Notation, badges, marquee)
+│   │   ├── hero/         # Hero section (HeroCtaButtons, RotatingSeal, BauhausAccent, HeroNarrative with Rough Notation, badges, marquee)
 │   │   ├── about/        # About section (6 decomposed bento-01..06 cards with co-located 3D visual assemblies)
 │   │   ├── experience/   # Career chronology & deep-dive dossier (ExperienceCard, ExperienceDossierModal, ExperienceLogo, ExperiencePulse)
 │   │   ├── skills/       # Tech stack & skills matrix (SkillsSection, SkillsCard, SkillsFilter, SkillsSkeleton, TechBadge, skills-icons)

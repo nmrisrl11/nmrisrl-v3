@@ -1,9 +1,9 @@
 import { InteractiveAvatar } from "@/components/avatar/interactive-avatar";
 import { DiamondStarIcon } from "@/components/neu-icons";
 import { GridSection } from "@/components/page-layout/grid-section";
-import { Button } from "@/components/ui/button";
 import { BauhausAccent } from "./bauhaus-accent";
 import { GitCommandBadge } from "./git-command-badge";
+import { HeroCtaButtons } from "./hero-cta-buttons";
 import { HeroNarrative } from "./hero-narrative";
 import { MarqueeTechStack } from "./marquee-tech-stack";
 import { NpmDevBadge } from "./npm-dev-badge";
@@ -74,30 +74,8 @@ export function HeroSection() {
 					{/* Narrative Subtitle */}
 					<HeroNarrative />
 
-					{/* Action Buttons (Dual CTAs) */}
-					<div className="flex flex-wrap items-center justify-center gap-3.5 pt-1 lg:justify-start">
-						<Button
-							variant="default"
-							size="default"
-							shape="squircle"
-							asChild
-							className="shadow-brutal hover:shadow-brutal-lg"
-						>
-							<a href="#projects">Explore Projects</a>
-						</Button>
-
-						<Button
-							variant="secondary"
-							size="default"
-							shape="squircle"
-							asChild
-							className="shadow-brutal hover:shadow-brutal-lg"
-						>
-							<a href="#contact">
-								<span>Get in Touch</span>
-							</a>
-						</Button>
-					</div>
+					{/* Action Buttons (Dual CTAs with Contextual Avatar Reactions) */}
+					<HeroCtaButtons />
 				</div>
 			</div>
 

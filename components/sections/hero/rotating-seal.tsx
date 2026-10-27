@@ -1,3 +1,6 @@
+"use client";
+
+import { avatarStore } from "@/components/avatar/avatar-store";
 import { CrossStarIcon } from "@/components/neu-icons";
 import { Data } from "@/constants/data";
 import { cn } from "@/lib/utils";
@@ -7,12 +10,21 @@ interface RotatingSealProps {
 }
 
 export function RotatingSeal({ className }: RotatingSealProps) {
+	const handleClick = () => {
+		avatarStore.requestAction("thumbsup", {
+			priority: "click",
+			source: "seal-badge",
+		});
+	};
+
 	return (
-		<div
-			aria-hidden="true"
+		<button
+			type="button"
+			onClick={handleClick}
+			aria-label="Seal of verification - click to interact with Nomer's avatar"
 			className={cn(
-				"relative flex size-24 items-center justify-center select-none sm:size-28",
-				"transition-transform duration-300 hover:scale-105",
+				"relative flex size-24 cursor-pointer items-center justify-center select-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink sm:size-28",
+				"transition-transform duration-300 hover:scale-105 active:scale-95",
 				className,
 			)}
 		>
@@ -45,6 +57,6 @@ export function RotatingSeal({ className }: RotatingSealProps) {
 			<div className="absolute inset-0 m-auto flex size-11 items-center justify-center rounded-full border-subtle border-ink bg-yellow shadow-brutal-xs">
 				<CrossStarIcon size={22} className="size-5.5 text-ink" />
 			</div>
-		</div>
+		</button>
 	);
 }
