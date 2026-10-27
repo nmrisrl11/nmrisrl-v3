@@ -13,8 +13,8 @@ All avatar assets are stored in `public/avatar/`. They are encoded in **WebM (VP
 | **`look-right.webm`**         | Gaze directed right           | Spring scrub (2.2s cap)      | Cursor over hero headline / content                                                                   |
 | **`look-up.webm`**            | Gaze directed upwards         | Spring scrub (2.2s cap)      | Cursor in upper zone / navbar tabs                                                                    |
 | **`look-down.webm`**          | Gaze directed downwards       | Spring scrub (3.8s cap)      | Cursor past waist or on marquee fold                                                                  |
-| **`avatar-thinking.webm`**    | Pensive chin tap              | Play once $\rightarrow$ idle | Project card inspection                                                                               |
-| **`avatar-coding.webm`**      | Typing on mechanical keyboard | Play once $\rightarrow$ idle | Hero "Explore Projects" CTA hover, Bauhaus Accent click, Git Command badge click, NPM Dev badge click |
+| **`avatar-thinking.webm`**    | Pensive chin tap              | Looping video                | Project card inspection, idle timeout inside window                                                   |
+| **`avatar-coding.webm`**      | Typing on mechanical keyboard | Looping video                | Hero "Explore Projects" CTA hover, Bauhaus Accent click, Git Command badge click, NPM Dev badge click |
 | **`avatar-thumbsup.webm`**    | Confident thumbs up           | Play once $\rightarrow$ idle | Hero "Get in Touch" CTA hover, Rotating Seal badge click, Contact form message sent                   |
 | **`avatar-fingerheart.webm`** | K-pop finger heart + wink     | Play once $\rightarrow$ idle | Interactive Avatar direct click (or Enter/Space keyboard trigger), Footer / Tip jar Easter egg        |
 
@@ -44,7 +44,7 @@ stateDiagram-v2
         Thinking: Pensive chin tap
         Wave: Greeting wave
     }
-    ActionState --> RestingIdle: Clip ended / safety timeout / releaseAction
+    ActionState --> RestingIdle: Clip ended / clearAction
 ```
 
 ### Action Priority Hierarchy & Preemption
@@ -59,9 +59,9 @@ Actions are queued or rejected based on their `ActionPriority`:
 
 1. An incoming action with **strictly lower priority** than the active action is rejected (e.g. hovering over "Explore Projects" (`hover`) will NOT interrupt an active `fingerheart` or `thumbsup` triggered by a direct click (`click`)).
 2. An incoming action with **greater or equal priority** preempts the active action immediately.
-3. When `releaseAction(source)` is invoked, it only clears the active action if the provided source matches the active action's source, preventing mismatched race conditions across fast hover movements.
+3. When `clearAction(sourceOrAction)` is invoked, it only clears the active action if the provided filter matches the active action or requester source, preventing mismatched race conditions across fast hover movements.
 4. Non-looping clips (`thumbsup`, `fingerheart`, `wave`) self-clean by attaching an `ended` event listener to their `<video>` element, automatically returning the engine to `idle`.
-5. Manual action triggers support an optional fallback safety timeout (default `3000ms`) to ensure the avatar always resets even if playback is interrupted.
+5. Tactile badge triggers (`RotatingSeal`, `BauhausAccent`, `GitCommandBadge`, `NpmDevBadge`) schedule bounded releases (3000ms–3500ms) to ensure the avatar resets to idle even if playback is interrupted or the component unmounts.
 
 ---
 
@@ -104,8 +104,8 @@ const solveSpring = (
 All clips share identical camera framing, lighting, and `#DEF2E0` Sage Mint canvas background. Layering and crossfading are coordinated to eliminate visual flashes or blinking:
 
 ```text
-Layer 4 (Top):    Contextual Action Videos (/avatar/avatar-*.webm) [zIndex: 4, fades in 0 -> 1 over 240ms]
-Layer 3:          Initial Welcome Wave Video (/avatar/avatar-wave.webm) [zIndex: 3, auto-plays once, dissolves out]
+Layer 4 (Top):    Initial Welcome Wave Video (/avatar/avatar-wave.webm) [zIndex: 5, auto-plays once, dissolves out on completion or action trigger]
+Layer 3:          Contextual Action Videos (/avatar/avatar-*.webm) [zIndex: 4, fades in 0 -> 1 over 240ms]
 Layer 2:          Incoming Directional Video (zIndex: 2, fades in 0 -> 1 over 220ms, spring scrubs currentTime)
 Layer 1:          Outgoing Directional Video (zIndex: 1, stays 100% opaque underneath until incoming is solid)
 Layer 0 (Base):   Resting Idle Poster (/avatar/avatar-idle.webp) [Permanent high-res base]

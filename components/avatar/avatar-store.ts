@@ -17,6 +17,12 @@ const initialState: AvatarState = {
 	requestId: 0,
 };
 
+const PRIORITY_RANK: Record<ActionPriority, number> = {
+	idle: 0,
+	hover: 1,
+	click: 2,
+};
+
 let state: AvatarState = { ...initialState };
 
 type Listener = () => void;
@@ -44,12 +50,16 @@ export const avatarStore = {
 		const priority = options?.priority ?? "hover";
 		const source = options?.source ?? null;
 
-		// A 'click' gesture action is protected and cannot be preempted by 'idle' or 'hover'
-		if (state.activeAction !== "idle" && state.priority === "click" && priority !== "click") {
+		// Lower priority actions cannot preempt an active higher priority action
+		if (state.activeAction !== "idle" && PRIORITY_RANK[priority] < PRIORITY_RANK[state.priority]) {
 			return;
 		}
 
-		if (state.activeAction === action && state.priority === priority) {
+		if (
+			state.activeAction === action &&
+			state.priority === priority &&
+			state.requestedBy === source
+		) {
 			return;
 		}
 

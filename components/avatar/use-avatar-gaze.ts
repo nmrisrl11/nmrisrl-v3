@@ -76,6 +76,7 @@ export function useAvatarGaze({
 		const clearActiveEndedListener = () => {
 			if (activeEndedListener) {
 				activeEndedListener.vid.removeEventListener("ended", activeEndedListener.handler);
+				activeEndedListener.vid.removeEventListener("error", activeEndedListener.handler);
 				activeEndedListener = null;
 			}
 		};
@@ -218,12 +219,18 @@ export function useAvatarGaze({
 				waveVideo.style.zIndex = "-1";
 
 				// Option A: Mobile devices without mouse cursor -> loop avatar-idle.webm naturally
-				if (!supportsHover && !isReducedMotion && idleVideo) {
+				if (!supportsHover && !isReducedMotion && idleVideo && activeActionRef.current === "idle") {
 					idleVideo.currentTime = 0;
 					idleVideo.play().catch(() => {});
 					idleVideo.style.transitionDuration = "380ms";
 					idleVideo.style.opacity = "1";
-				} else if (supportsHover && !pointer.active && !isReducedMotion && idleVideo) {
+				} else if (
+					supportsHover &&
+					!pointer.active &&
+					!isReducedMotion &&
+					idleVideo &&
+					activeActionRef.current === "idle"
+				) {
 					// Option B: Desktop on load when cursor has not entered the window yet
 					idleVideo.currentTime = 0;
 					idleVideo.play().catch(() => {});
@@ -323,14 +330,26 @@ export function useAvatarGaze({
 		let currentActionVideo: HTMLVideoElement | null = null;
 		let outgoingActionVideo: HTMLVideoElement | null = null;
 		let actionCleanupTimer: number | null = null;
+		let pendingActionCleanup: (() => void) | null = null;
 
 		const handleActionChange = (nextAction: AvatarAction) => {
 			if (nextAction === activeActionRef.current) return;
 			activeActionRef.current = nextAction;
 
-			if (actionCleanupTimer) {
-				window.clearTimeout(actionCleanupTimer);
-				actionCleanupTimer = null;
+			// If switching to an active non-wave action while initial wave is still playing,
+			// complete the wave immediately so the wave video dissolves and action videos render clearly
+			if (nextAction !== "idle" && nextAction !== "wave" && isWavePlayingRef.current) {
+				completeWave();
+			}
+
+			// Run any pending outgoing video cleanup immediately before replacing it
+			if (pendingActionCleanup) {
+				if (actionCleanupTimer) {
+					window.clearTimeout(actionCleanupTimer);
+					actionCleanupTimer = null;
+				}
+				pendingActionCleanup();
+				pendingActionCleanup = null;
 			}
 
 			clearActiveEndedListener();
@@ -346,27 +365,34 @@ export function useAvatarGaze({
 				incomingVid.style.zIndex = "4";
 				incomingVid.style.transitionDuration = "240ms";
 				incomingVid.style.opacity = "1";
-				incomingVid.play().catch(() => {});
 
 				// Handle non-looping clips (thumbsup, fingerheart, wave)
 				const clipDef = ACTION_CLIPS[nextAction];
+				const guardedRelease = () => {
+					clearActiveEndedListener();
+					if (avatarStore.getState().activeAction === nextAction) {
+						avatarStore.clearAction(nextAction);
+					}
+				};
+
 				if (clipDef && !clipDef.loop) {
-					const onEnded = () => {
-						clearActiveEndedListener();
-						if (avatarStore.getState().activeAction === nextAction) {
-							avatarStore.clearAction(nextAction);
-						}
-					};
-					incomingVid.addEventListener("ended", onEnded, { once: true });
-					activeEndedListener = { vid: incomingVid, handler: onEnded };
+					incomingVid.addEventListener("ended", guardedRelease, { once: true });
+					incomingVid.addEventListener("error", guardedRelease, { once: true });
+					activeEndedListener = { vid: incomingVid, handler: guardedRelease };
 				}
+
+				incomingVid.play().catch(() => {
+					if (clipDef && !clipDef.loop) {
+						guardedRelease();
+					}
+				});
 
 				// If there was another action playing, crossfade out of it
 				if (currentActionVideo && currentActionVideo !== incomingVid) {
 					outgoingActionVideo = currentActionVideo;
 					outgoingActionVideo.style.zIndex = "3"; // stay underneath incoming action during crossfade
 
-					actionCleanupTimer = window.setTimeout(() => {
+					const cleanup = () => {
 						if (outgoingActionVideo) {
 							outgoingActionVideo.style.transitionDuration = "0ms";
 							outgoingActionVideo.style.opacity = "0";
@@ -375,7 +401,12 @@ export function useAvatarGaze({
 							outgoingActionVideo.currentTime = 0;
 							outgoingActionVideo = null;
 						}
-					}, 240);
+						pendingActionCleanup = null;
+						actionCleanupTimer = null;
+					};
+
+					pendingActionCleanup = cleanup;
+					actionCleanupTimer = window.setTimeout(cleanup, 240);
 				}
 
 				currentActionVideo = incomingVid;
@@ -388,11 +419,16 @@ export function useAvatarGaze({
 					vidToHide.style.transitionDuration = "240ms";
 					vidToHide.style.opacity = "0";
 
-					actionCleanupTimer = window.setTimeout(() => {
+					const cleanup = () => {
 						vidToHide.style.zIndex = "0";
 						vidToHide.pause();
 						vidToHide.currentTime = 0;
-					}, 240);
+						pendingActionCleanup = null;
+						actionCleanupTimer = null;
+					};
+
+					pendingActionCleanup = cleanup;
+					actionCleanupTimer = window.setTimeout(cleanup, 240);
 				}
 
 				// On mobile or when pointer is outside window, ensure idle video is smoothly active
@@ -565,6 +601,10 @@ export function useAvatarGaze({
 			if (idleLeaveTimer) window.clearTimeout(idleLeaveTimer);
 			if (idlePauseTimer) window.clearTimeout(idlePauseTimer);
 			if (actionCleanupTimer) window.clearTimeout(actionCleanupTimer);
+			if (pendingActionCleanup) {
+				pendingActionCleanup();
+				pendingActionCleanup = null;
+			}
 			if (waveCleanupTimer) window.clearTimeout(waveCleanupTimer);
 			window.clearTimeout(safetyTimer);
 			window.removeEventListener("pointermove", onPointerMove);

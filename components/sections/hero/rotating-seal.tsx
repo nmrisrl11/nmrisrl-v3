@@ -4,18 +4,37 @@ import { avatarStore } from "@/components/avatar/avatar-store";
 import { CrossStarIcon } from "@/components/neu-icons";
 import { Data } from "@/constants/data";
 import { cn } from "@/lib/utils";
+import { useEffect, useRef } from "react";
 
 interface RotatingSealProps {
 	className?: string;
 }
 
 export function RotatingSeal({ className }: RotatingSealProps) {
+	const timerRef = useRef<number | null>(null);
+
 	const handleClick = () => {
+		if (timerRef.current) {
+			window.clearTimeout(timerRef.current);
+		}
 		avatarStore.requestAction("thumbsup", {
 			priority: "click",
 			source: "seal-badge",
 		});
+		timerRef.current = window.setTimeout(() => {
+			avatarStore.clearAction("seal-badge");
+			timerRef.current = null;
+		}, 3500);
 	};
+
+	useEffect(() => {
+		return () => {
+			if (timerRef.current) {
+				window.clearTimeout(timerRef.current);
+			}
+			avatarStore.clearAction("seal-badge");
+		};
+	}, []);
 
 	return (
 		<button
